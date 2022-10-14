@@ -6,4 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class TestController {
 @Autowired
 private JdbcTemplate jdbcTemplate;
+
+public String ring() {
+	int no;
+}
 }
