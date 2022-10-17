@@ -5,5 +5,5 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class TestController {
 @Autowired
-private JdbcTemplate jdbcTemplate;
+private JdbcTemplate jdbcTemplate;    
 }
