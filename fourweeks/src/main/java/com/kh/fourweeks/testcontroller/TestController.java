@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class TestController {
 
+@Autowired
+private JdbcTemplate jdbcTemplate;    
 
- 
 }
