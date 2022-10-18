@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .divider1{
+            border: 0px;
+            border-bottom: 4px solid #f0ecf2;
+            width: 200px;
+        }
+        .divider2{
+            border: 0px;
+            border-bottom: 4px solid #6c7aef;
+            color:#6c7aef;
+            width: 200px;
+        }
+        .text1{
+            color:#6c7aef;
+            font-size: 16px;
+        }
+        .text2{
+            color:#6c7aef;
+            font-size: 16px;
+        }
+        .text3{
+            color:#6c7aef;
+            font-size: 16px;
+        }
+
+        .circle{
+            border: 1px solid #6c7aef;
+            background-color: transparent;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            /* padding-bottom: 20px; */
+            position: relative;
+            text-align: center;
+            color: #6c7aef;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+        }
+        .bar-container{ /* 밑바탕 */
+            width: 100%;
+            background-color: #e5e6e9;
+            border-radius: 30px;
+        }
+        .bar2{/* 위에 */
+            height: 20px;
+            background-color: #6c7aef;
+            border-radius: 30px;
+        }
+  
+    </style>
+    </head>
+    <body>
+        <div class="row continer-600">
+            <div class="row">
+                <h1>DIVIDER</h1>
+            </div>
+        </div>
+        <h2>divider1</h2>
+        <hr class="divider1">
+        <h2>divider2</h2>
+        <hr class="divider2">
+
+
+        <div class="row">
+            <h1>TEXT LINK</h1>
+        </div>
+        <h2 class="text1">Text Link</h2>
+        <h2 class="text2">Text Link</h2>
+        <h2 class="text3">Text Link</h2>
+        <div class="circle">&gt;</div>
+
+        <div class="row">
+            <h1>PROGRESS BAR</h1>
+        </div>
+        <div class="bar-container">
+            <div id="progress-bar" class="bar">bar</div>
+        </div>
+            <div id="progress-bar" class="bar2">bar</div>
+            <!-- 이거는 한개만 따로 뺴논거고 위에가 진짜 바~  
+                퍼센테이지는 계산에 따라 유동적으로 변함 ~ 
+            -->
+    </body>
+    </html>

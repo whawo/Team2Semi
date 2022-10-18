@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px dotted gray;
+        }
+        .dropdown{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 150px;
+            height: auto;
+            font-size: 16px;
+            padding: 5px; /* 이거 글씨 전체가 왼쪽에서 조금씩 떨어지는 거 */
+
+            border-right: none;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+        /*  t선택시 색상과 굵기 선택이 되어야하는데 무엇으로 해야하나    */
+        .dropdown.dropdown-check:checked{
+            font-weight: bold;
+            color: transparent;
+        }
+        .dropdown.dropdown-check:hover{
+            color: transparent;
+        }
+        .search-bar{
+            display: flex;
+            flex-direction: row;
+        }
+        .search-bar > select > input{
+            flex-grow: 1;
+        }
+        .search-box{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 100%;
+            height: 60px;
+            font-size: 16px;
+
+            border-left: none;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+
+        /*  둘이 높이가 안맞음 ... ㅠㅠ  */
+        .search-box > select > input{
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="row">
+        <h1>Search Bar</h1>
+    </div>
+    <div class="row search-bar">
+        <select class="dropdown dropdown-check">
+            <option selected="selected" value="1">전체</option>
+            <option>모집중</option>
+            <option>모집중</option>
+            <option>모집중</option>
+        </select>
+        <input class="search-box" type="text" placeholder="현재 참가중인 어쩌고">
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forms</title>
+    <style>
+        div{
+            border: none
+        }
+        .container-1200 { 
+            width:1200px; margin:0 auto; 
+        }
+        .mt-10 { margin-top: 10px;}
+        .mt-40 { margin-top: 40px;}
+
+        .dropdown{
+            border:2px solid #6c7aef;
+            
+            border-radius: 0.5em;
+            width: 150px;
+            height: 60px;
+            float: left;
+            margin: 0;
+        }
+        /*  t선택시 색상과 굵기 선택이 되어야하는데 무엇으로 해야하나    */
+        .dropdown.dropdown-check:checked{
+            font-weight: bold;
+            color: #6c7aef;
+        }
+        .search-box{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 300px;
+            height: 60px;
+            font-size: 16px;
+        }
+        
+        /*  둘이 높이가 안맞음 ... ㅠㅠ  */
+        .search-box > select > input{
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+        #search{
+            border: 5px solid yellowgreen;
+        }
+        option{
+            font-size: 30px;
+            line-height: 5;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container-1200">
+            <div class="row mt-40">
+                <h1> test search-bar</h1>
+            </div>
+            <div id="search">
+                <div class="search-bar">
+                    <select class="dropdown dropdown-check">
+                        <option selected="selected" value="1">전체</option>
+                        <option>모집중</option>
+                        <option>모집중</option>
+                        <option>모집중</option>
+                    </select>
+                    <input class="search-box" type="text" placeholder="현재 참가중인 어쩌고">
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+
+
+    <!-- 보류  -->

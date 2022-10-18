@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .chk{
+            accent-color: #ebebed;
+        }
+
+        /* 라벨 꾸미기  */
+        label{
+            width: 24px;
+            height: 24px;
+            border: 3px solid #ebebed;
+            border-radius: 2px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* 라벨을 클릭했을때의 스타일  */
+        input[type="checkbox"]:checked + label{
+            border-color: #6c7aef;
+        }
+
+        /* 체크박스 보이지 않음  */
+        input[type="checkbox"]{
+            display: none;
+        }
+
+        input[id="check"]:checked + label::after{
+            content: '✓';
+        }
+    </style>
+</head>
+<body>
+    <!-- label은 for과 id로 연결 해주어야한다.  -->
+    <input type="checkbox" class="chk" id="check">
+    <label for="check"></label>
+</body>
+</html>
