@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        /*  마지막은 홈페이지와 같이 연동 시키는 DB구현만.. */
+        /*  번호를 눌러야 번호가 나오고 네모안에는 번호가 안나옴 !!!  */
+        ul.page{
+            list-style: none;  /*li 점 없애기*/
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            color: #6c7aef;
+            text-align: center;
+            
+        }
+        ul.page > li{
+            display: inline-block; /*일렬로 정렬*/
+            border: 1px solid transparent; /*투명한 네모 상자 */
+            border-radius: 30%;
+            padding: 0.5em; /*사이 간격*/
+            line-height: 1.7em; /*글자 표시 높이*/
+            margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
+            min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
+            text-align: center; /*상자안에 글자 중앙에 */
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+        }
+        /* 번호에 커서대면 나타내는 표시  */
+        ul.page > li:hover,
+        ul.page > li > a:hover{
+            border-color: #6c7aef; /*커서 대면 상자표시*/
+            background-color: #6c7aef;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+       
+        ul.page > li > a {
+            display:block;
+            width: 100%;
+            color: #6c7aef;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <h1>pagination</h1>
+    </div>
+    <div class="row">
+        <ul class="page">
+            <li><a href="#">&lt;</a></li>
+            <li><a href="#">1</a></li>
+            <li class="on"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">&gt;</a></li>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
