@@ -63,4 +63,22 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		Object[] param = {userNick};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+	
+	@Override
+	public boolean updateLoginTime(String userId) {
+		String sql = "update "
+						+ "chal_user "
+					+ "set "
+						+ "login_date = sysdate "
+					+ "where "
+						+ "user_id = ?";
+		Object[] param = {userId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	
+	
+	
+	
+	
 }
