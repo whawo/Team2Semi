@@ -95,7 +95,7 @@ create table chal(
 chal_no number primary key,
 user_id references chal_user(user_id) on delete set null,
 chal_title varchar2(120) not null,
-chal_content varchar2(1500) not null,
+chal_content varchar2(1500) null,
 chal_person number(2) default 1 not null check(chal_person <= 10),
 chal_topic references chal_topic(chal_topic) on delete set null,
 start_date date not null
