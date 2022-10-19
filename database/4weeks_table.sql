@@ -2,6 +2,7 @@
 -- 첨부파일 관련 테이블
 -------------------------------------------------------------------
 -- 사진첨부(attachment) 시퀀스, 테이블 생성
+drop sequence attachment_seq;
 create sequence attachment_seq;
 
 drop table attachment;
@@ -35,7 +36,7 @@ create table confirm_img (
 attachment_no references attachment(attachment_no) on delete cascade not null,
 confirm_no references chal_confirm(confirm_no) on delete cascade not null,
 user_id references chal_user(user_id) on delete cascade not null,
-primary key(attachment_no, confirm_no, confirm_no)
+primary key(attachment_no, confirm_no, user_id)
 );
 
 -- 어드민 공지글 이미지(notice_img) 테이블 생성
@@ -141,12 +142,12 @@ create sequence confirm_seq;
 drop table chal_confirm;
 create table chal_confirm(
 confirm_no number not null unique,
-chal_no number references chal(chal_idx) on delete set null,
+chal_no number references chal(chal_no) on delete set null,
 confirm_title varchar2(120) not null,
 confirm_content varchar2(1500) not null,
 confirm_date date default sysdate not null,
 modified_date date,
-constraints confirm_pk primary key(confirm_idx, chal_idx)
+constraints confirm_pk primary key(confirm_no, chal_no)
 );
 
 -- 인증글 좋아요(confirm_like) 테이블 생성
@@ -159,6 +160,7 @@ primary key(user_id, confirm_no)
 );
 
 -- 댓글(reply) 시퀀스, 테이블 생성
+drop sequence reply_seq;
 create sequence reply_seq;
 
 drop table reply;
@@ -178,10 +180,8 @@ reply_blind char(1) check(reply_blind = 'Y')
 -- 어드민 유저(chal_admin) 테이블 생성
 drop table chal_admin;
 create table chal_admin(
-admin_id varchar2(20) primary key
-    check(regexp_like(admin_id, '^[a-z0-9]{6,20}$')),
-admin_pw varchar2(16) not null
-	check(regexp_like(user_pw, '^(?=.*[!@#$])(?=.*[a-z]))(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$'),
+admin_id varchar2(20) primary key check(regexp_like(admin_id, '^[a-z0-9]{6,20}$')),
+admin_pw varchar2(16) not null check(regexp_like(admin_pw, '^(?=.*[!@#$])(?=.*[a-z]))(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$')),
 admin_add date default sysdate not null,
 admin_login date
 );
@@ -192,7 +192,7 @@ create sequence notice_seq;
 drop table notice;
 create table notice(
 notice_no number primary key,
-admin_id references chal_admin(admin_id) on delete cascade set null,
+admin_id references chal_admin(admin_id) on delete set null,
 notice_title varchar2(120) not null,
 notice_content varchar2(4000) null,
 notice_time date default sysdate not null,
