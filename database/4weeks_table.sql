@@ -118,11 +118,11 @@ insert into chal_topic(chal_topic) values('취미');
 insert into chal_topic(chal_topic) values('학습');
 insert into chal_topic(chal_topic) values('환경');
 insert into chal_topic(chal_topic) values('그외');
-
+commit;
 -------------------------------------------------------------------
 -- 챌린지 참가 관련 테이블
 -------------------------------------------------------------------
--- 챌린지 참가자(chal_participant) 시퀀스, 테이블 생성
+-- 챌린지 참가자(participant) 시퀀스, 테이블 생성
 create sequence participant_seq;
 
 drop table participant;
@@ -181,7 +181,7 @@ reply_blind char(1) check(reply_blind = 'Y')
 drop table chal_admin;
 create table chal_admin(
 admin_id varchar2(20) primary key check(regexp_like(admin_id, '^[a-z0-9]{6,20}$')),
-admin_pw varchar2(16) not null check(regexp_like(admin_pw, '^(?=.*[!@#$])(?=.*[a-z]))(?=.*[0-9])[a-zA-Z0-9!@#$]{8,16}$')),
+admin_pw varchar2(16) not null check(regexp_like(admin_pw, '^[a-zA-Z0-9!@#$]{8,16}$')),
 admin_add date default sysdate not null,
 admin_login date
 );
