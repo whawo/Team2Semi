@@ -22,11 +22,11 @@ public class ChalDaoImpl implements ChalDao {
 	public void insert(ChalDto chalDto) {
 		String sql = "insert into chal("
 				+ "chal_no, user_id, chal_title, "
-				+ "chal_content, chal_topic, start_date) "
-				+ "values(?, ?, ?, ?, ?, ?)";
+				+ "chal_content, how_confirm, chal_topic, start_date) "
+				+ "values(chal_seq.nextval, ?, ?, ?, ?, ?, ?)";
 		Object[] param = {	chalDto.getChalNo(),
-							chalDto.getChalNo(), chalDto.getUserId(),
-							chalDto.getChalTitle(), chalDto.getChalContent(), 
+							chalDto.getUserId(), chalDto.getChalTitle(), 
+							chalDto.getChalContent(), chalDto.getHowConfirm(), 
 							chalDto.getChalTopic(), chalDto.getStartDate()};
 		
 		jdbcTemplate.update(sql, param);

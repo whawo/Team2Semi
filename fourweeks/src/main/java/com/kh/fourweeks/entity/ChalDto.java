@@ -13,6 +13,7 @@ public class ChalDto {
 	private String userId;
 	private String chalTitle;
 	private String chalContent;
+	private String howConfirm;
 	private int chalPerson;
 	private String chalTopic;
 	private Date startDate;
