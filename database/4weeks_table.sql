@@ -40,7 +40,7 @@ primary key(attachment_no, confirm_no, user_id)
 );
 
 -- 어드민 공지글 이미지(notice_img) 테이블 생성
-drop table_notice_img;
+drop table notice_img;
 create table notice_img(
 attachment_no references attachment(attachment_no) on delete cascade not null,
 notice_no references notice(notice_no) on delete cascade not null,
