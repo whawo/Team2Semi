@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalDto;
+import com.kh.fourweeks.entity.ParticipantDto;
 
 @Repository
 public class ChalDaoImpl implements ChalDao {
@@ -29,6 +30,17 @@ public class ChalDaoImpl implements ChalDao {
 							chalDto.getChalContent(), chalDto.getHowConfirm(), 
 							chalDto.getChalTopic(), chalDto.getStartDate()};
 		
+		jdbcTemplate.update(sql, param);
+	}
+
+	@Override
+	public void addParticipant(ParticipantDto partDto) {
+		String sql = "insert into participant(participant_no, chal_no, user_id) values(participant_seq.nextval, ?, ?)";
+		Object[] param = {
+							partDto.getParticipantNo(),
+							partDto.getChalNo(),
+							partDto.getUserId()
+							};
 		jdbcTemplate.update(sql, param);
 	}
 }
