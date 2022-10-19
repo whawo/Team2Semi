@@ -14,20 +14,20 @@
 		내가 개설한 챌린지에 자동으로 참가하게 됩니다.
 	</div>
 	
-	<form action="create" method="post">
+	<form action="create" method="post" enctype="multipart/form-data">
 		<div>
 			<div>
 				1. 어떤 주제와 관련이 있나요?
 			</div>
 			<div>			
-				<input type="radio" name="chalTopic" value="운동" checked>
-				<input type="radio" name="chalTopic" value="식습관">
-				<input type="radio" name="chalTopic" value="생활">
-				<input type="radio" name="chalTopic" value="정서">
-				<input type="radio" name="chalTopic" value="취미">
-				<input type="radio" name="chalTopic" value="학습">
-				<input type="radio" name="chalTopic" value="환경">
-				<input type="radio" name="chalTopic" value="그 외">
+				<label><input type="radio" name="chalTopic" value="운동" checked>운동</label>
+				<label><input type="radio" name="chalTopic" value="식습관">식습관</label>
+				<label><input type="radio" name="chalTopic" value="생활">생활</label>
+				<label><input type="radio" name="chalTopic" value="정서">정서</label>
+				<label><input type="radio" name="chalTopic" value="취미">취미</label>
+				<label><input type="radio" name="chalTopic" value="학습">학습</label>
+				<label><input type="radio" name="chalTopic" value="환경">환경</label>
+				<label><input type="radio" name="chalTopic" value="그 외">그 외</label>
 			</div>
 		
 			<div>
@@ -39,6 +39,7 @@
 			<div>
 				<input type="text" name="chalTitle" placeholder="예) 아침 6시에 일어나기" required>
 				<span><!-- 글자 수 --></span>
+				<!-- helper text -->
 				<span>제목을 입력해주세요.</span>
 				<span>40자까지만 입력할 수 있어요.</span>
 			</div>
@@ -56,6 +57,7 @@
 					required>
 				</textarea>
 				<span><!-- 글자 수 --></span>
+				<!-- helper text -->
 				<span>인증 방법을 입력해주세요.</span>
 				<span>300자까지만 입력할 수 있어요.</span>
 			</div>
@@ -86,6 +88,7 @@
 			<div>
 				<input type="checkbox" id="ck-recruit" required>
 				<label for="ck-recruit">확인했어요!</label>
+				<!-- helper text -->
 				<span>확인 후 체크해주세요.</span>
 			</div>
 			
@@ -96,8 +99,10 @@
 				노출 위치에 따라  섬네일이 축소/확대되어 적용됩니다. 등록하지 않는 경우, 랜덤으로 기본 이미지가 적용됩니다.
 			</div>
 			<div>
-				<!-- 파일 이미지 -->
-				<button type="button">사진 변경</button>
+				<input name="chalImg" type="file" accept="jpg, png"><br><br>
+				<!-- 썸네일 미리보기(js) -->
+				<img>
+				<!--  선택한 파일 취소하기(js) -->
 				<button type="button">삭제</button>
 			</div>
 			
@@ -114,6 +119,7 @@
 					required>
 				</textarea>
 				<span><!-- 글자 수 --></span>
+				<!-- helper text -->
 				<span>500자까지만 입력할 수 있어요.</span>
 			</div>
 			
