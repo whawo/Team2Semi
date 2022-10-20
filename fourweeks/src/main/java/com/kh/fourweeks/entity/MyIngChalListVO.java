@@ -1,18 +1,13 @@
 package com.kh.fourweeks.entity;
-import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ChalDto {
-  private int chalNo;
+public class MyIngChalListVO {
 	private String userId;
+	private int chalNo;
 	private String chalTitle;
-	private String chalContent;
-	private String howConfirm;
-	private int chalPerson;
-	private String chalTopic;
-	private Date startDate;
 }
