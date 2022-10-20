@@ -36,7 +36,7 @@
 			<button>참가하기</button>
 			<li>챌린지 리더 : ${chalDto.getUserId()}</li>
 			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
-			<li>챌린지 인증방법 : ${chalDto.getChalContent()}</li>
+			<li>챌린지 인증방법 : ${chalDto.getHowConfirm()}</li>
 		</ul>
 	</div>
 </div>
