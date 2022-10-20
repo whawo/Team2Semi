@@ -12,7 +12,7 @@
         		<div class="float-right"><span>© 4weeks. 2022. We root for our users!</span></div>
 			</div>
 		</footer>
-		
+		</div>
 	</main>
-	</body>
+</body>
 </html>
