@@ -1,8 +1,10 @@
 package com.kh.fourweeks.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,17 @@ public class ChalController {
 	
 	@Autowired
 	private ChalService chalService;
+	
+	//윈도우
+	//private final File dir = new File("D:/upload");
+		
+	//맥
+	private final File dir = new File("/Users/jionylee/upload");
+	
+	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
+	public void prepare() {
+		dir.mkdirs();
+	}
 	
 	@GetMapping("/create")
 	public String create() {
