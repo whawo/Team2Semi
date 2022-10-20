@@ -23,6 +23,7 @@ import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalDetailVO;
 
 @Controller
 @RequestMapping("/chal")
@@ -75,6 +76,9 @@ public class ChalController {
 	public String detail(@ModelAttribute ChalDto chalDto,
 			Model model) {
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
+		
+		System.out.println(model);
 		return "chal/detail";
 	}
 }

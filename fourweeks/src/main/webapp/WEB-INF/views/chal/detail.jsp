@@ -27,16 +27,16 @@
 	<div class="row left">
 		<!-- list 태그 -->
 		<ul class="list">
-			<li>챌린지 번호 : ${chalDto.getChalNo()}</li>
-			<li>개설자 : ${chalDto.getUserId()}</li>
 			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
-			<li>챌린지 내용 : ${chalDto.getChalContent()}</li>
-			<li>챌린지 인증방법 : ${chalDto.getChalContent()}</li>
-			<li>참가 인원: ${chalDto.getChalPerson()}</li>
 			<li>챌린지 주제 : ${chalDto.getChalTopic()}</li>
-			<li>챌린지 시작일: ${chalDto.getStartDate()}</li>
-			<li>챌린지 시작일: ${chalDto.getStartDate()}</li>
-			<li>챌린지 시작일: ${chalDto.getStartDate()}</li>
+			<li>참가 인원: ${chalDto.getChalPerson()}명/10명</li>
+			<li>챌린지 시작일: ${chalDto.getStartDate()} ${chalVO.getDDay()}일뒤 시작<br>~${chalVO.endDate}
+			</li>
+			
+			<button>참가하기</button>
+			<li>챌린지 리더 : ${chalDto.getUserId()}</li>
+			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
+			<li>챌린지 인증방법 : ${chalDto.getChalContent()}</li>
 		</ul>
 	</div>
 </div>
