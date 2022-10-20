@@ -10,4 +10,5 @@ public class ConfirmAbleChalListVO {
 	private String userId;
 	private int chalNo;
 	private String chalTitle;
+	private String howConfirm;
 }
