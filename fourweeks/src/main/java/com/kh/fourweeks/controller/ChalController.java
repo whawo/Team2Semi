@@ -83,18 +83,19 @@ public class ChalController {
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
 		
-		System.out.println(model);
 		return "chal/detail";
 	}
 	
 	@GetMapping("/confirm")
-	public String confirm() {
+	public String confirm(Model model,
+			HttpSession session) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("chalList", confirmDao.selectList(memberId));
 		return "chal/confirm";
 	}
 	
 	@PostMapping("/confirm")
 	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
-			@ModelAttribute ChalDto chalDto,
 			RedirectAttributes attr,
 			HttpSession session) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
