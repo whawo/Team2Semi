@@ -43,4 +43,12 @@ public class ChalDaoImpl implements ChalDao {
 							};
 		jdbcTemplate.update(sql, param);
 	}
+
+	@Override
+	public void connectAttachment(int chalNo, int attachmentNo) {
+		String sql = "insert into chal_img(chal_no, attachment_no) values(?, ?)";
+		Object[] param = {chalNo, attachmentNo};
+		
+		jdbcTemplate.update(sql, param);
+	}
 }
