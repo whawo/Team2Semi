@@ -64,7 +64,7 @@
                <c:when test="${login}">
                	  <li class="float-left"><span>4weeks</span></li>
                   <li class="float-left"><a href="/">전체 챌린지</a></li>
-                  <li class="float-left"><a href="#">챌린지 개설</a></li>
+                  <li class="float-left"><a href="chal/create">챌린지 개설</a></li>
                   <li class="float-left"><a href="#">챌린지 인증</a></li>
                   <li class="float-left"><a href="#">문의하기</a></li>
                   <li class="float-right"><a href="#">${user_img} ${loginId}</a>
@@ -73,7 +73,7 @@
                            <li class="float-right"><a href="/admin/home">관리자페이지</a></li>
                         </c:if>
                         	<li class="float-right"><a href="/member/mypage">마이페이지</a></li>
-                        	<li class="float-right"><a href="/member/logout">로그아웃</a></li>
+                        	<li class="float-right"><a href="/logout">로그아웃</a></li>
                      </ul>
                     </li>
                </c:when>
@@ -84,10 +84,10 @@
                   <li class="float-left"><a href="/login">챌린지 인증</a></li>
                   <li class="float-left"><a href="/login">문의하기</a></li>
                  <li class="float-right">
-                	<a href="#" class="navbtn" id="navbutton1">회원가입</a>
+                	<a href="/join" class="navbtn" id="navbutton1">회원가입</a>
             	</li>
                  <li class="float-right">
-                	<a href="#" class="navbtn" id="navbutton2">로그인</a>
+                	<a href="/login" class="navbtn" id="navbutton2">로그인</a>
             	</li>
                   </ul>
                </c:otherwise>
