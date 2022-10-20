@@ -28,7 +28,7 @@ public class ChalDaoImpl implements ChalDao {
 		String sql = "insert into chal("
 				+ "chal_no, user_id, chal_title, "
 				+ "chal_content, how_confirm, chal_topic, start_date) "
-				+ "values(?, ?, ?, ?, ?, ?, to_date(?, 'YYYY-MM-DD HH24:MI:SS'))";
+				+ "values(?, ?, ?, ?, ?, ?, ?)";
 		Object[] param = {	chalDto.getChalNo(),
 							chalDto.getUserId(), chalDto.getChalTitle(), 
 							chalDto.getChalContent(), chalDto.getHowConfirm(), 
