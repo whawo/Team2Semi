@@ -19,17 +19,21 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
+import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
+import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.service.ChalService;
-import com.kh.fourweeks.vo.ChalDetailVO;
 
 @Controller
 @RequestMapping("/chal")
 public class ChalController {
 	@Autowired
 	private ChalDao chalDao;
+	
+	@Autowired
+	private ChalConfirmDao confirmDao;
 	
 	@Autowired
 	private ChalService chalService;
@@ -81,4 +85,27 @@ public class ChalController {
 		System.out.println(model);
 		return "chal/detail";
 	}
+	
+	@GetMapping("/confirm")
+	public String confirm() {
+		return "chal/confirm";
+	}
+	
+	@PostMapping("/confirm")
+	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
+			@ModelAttribute ChalDto chalDto,
+			RedirectAttributes attr,
+			HttpSession session) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		confirmDto.setUserId(memberId);
+		
+		int confirmNo = confirmDao.sequence();
+		confirmDto.setConfirmNo(confirmNo);
+		
+		confirmDao.write(confirmDto);
+		
+		attr.addAttribute("confirmNo", confirmNo);
+		return "redirect:/confirm/detail";
+	}
+	
 }
