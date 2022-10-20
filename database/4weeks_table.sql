@@ -143,11 +143,12 @@ drop table chal_confirm;
 create table chal_confirm(
 confirm_no number not null unique,
 chal_no number references chal(chal_no) on delete set null,
+user_id references chal_user(user_id) on delete set null,
 confirm_title varchar2(120) not null,
 confirm_content varchar2(1500) not null,
 confirm_date date default sysdate not null,
 modified_date date,
-constraints confirm_pk primary key(confirm_no, chal_no)
+constraints confirm_pk primary key(confirm_no, chal_no, user_id)
 );
 
 -- 인증글 좋아요(confirm_like) 테이블 생성
