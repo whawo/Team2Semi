@@ -1,4 +1,4 @@
-package com.kh.fourweeks.entity;
+package com.kh.fourweeks.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
