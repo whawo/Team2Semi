@@ -7,6 +7,8 @@
 <title>챌린지 개설</title>
 </head>
 <body>
+<!-- 확인용 -->
+${loginId}
 	<div>
 		원하는 챌린지를 직접 개설해보세요.
 	</div>
@@ -37,7 +39,7 @@
 				타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.
 			</div>
 			<div>
-				<input type="text" name="chalTitle" placeholder="예) 아침 6시에 일어나기" required>
+				<input type="text" name="chalTitle" placeholder="예) 아침 6시에 일어나기" required autocomplete="off">
 				<span><!-- 글자 수 --></span>
 				<!-- helper text -->
 				<span>제목을 입력해주세요.</span>
@@ -51,11 +53,7 @@
 				타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.
 			</div>
 			<div>
-				<textarea name="howConfirm" 
-					placeholder="예) 매일 깃 커밋하기 - 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" 
-					rows="10" 
-					required>
-				</textarea>
+				<textarea name="howConfirm" placeholder="예) 매일 깃 커밋하기 - 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" rows="10" required autocomplete="off"></textarea>
 				<span><!-- 글자 수 --></span>
 				<!-- helper text -->
 				<span>인증 방법을 입력해주세요.</span>
@@ -99,7 +97,7 @@
 				노출 위치에 따라  섬네일이 축소/확대되어 적용됩니다. 등록하지 않는 경우, 랜덤으로 기본 이미지가 적용됩니다.
 			</div>
 			<div>
-				<input name="chalImg" type="file" accept="jpg, png"><br><br>
+				<input type="file" name="attachment" accept="jpg, png"><br><br>
 				<!-- 썸네일 미리보기(js) -->
 				<img>
 				<!--  선택한 파일 취소하기(js) -->
@@ -113,11 +111,7 @@
 				다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.
 			</div>
 			<div>
-				<textarea name="chalContent" 
-					placeholder="예) 어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" 
-					rows="10" 
-					required>
-				</textarea>
+				<textarea name="chalContent" placeholder="예) 어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" rows="10" required autocomplete="off"></textarea>
 				<span><!-- 글자 수 --></span>
 				<!-- helper text -->
 				<span>500자까지만 입력할 수 있어요.</span>

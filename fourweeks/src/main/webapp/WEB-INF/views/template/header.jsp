@@ -91,4 +91,7 @@
             </c:choose>
          </ul>
       </nav>
-      <div align="center" style="min-height:200px"> 
+
+      <di align="center" style="min-height:400px"> 
+
+

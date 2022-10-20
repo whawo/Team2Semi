@@ -16,8 +16,8 @@ import com.kh.fourweeks.repository.ChalUserDao;
 @Controller
 public class ChalUserController {
 
-@Autowired
-private ChalUserDao chalUserDao;
+	@Autowired
+	private ChalUserDao chalUserDao;
 	
 	@GetMapping("/join")
 	public String join() {
