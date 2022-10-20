@@ -35,6 +35,7 @@
 			<li>참가 인원: ${chalDto.getChalPerson()}</li>
 			<li>챌린지 주제 : ${chalDto.getChalTopic()}</li>
 			<li>챌린지 시작일: ${chalDto.getStartDate()}</li>
+			<li>챌린지 시작일: ${chalDto.getStartDate()}</li>
 		</ul>
 	</div>
 </div>
