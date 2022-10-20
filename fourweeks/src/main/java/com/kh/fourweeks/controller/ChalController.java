@@ -76,7 +76,8 @@ public class ChalController {
 		return "redirect:detail";
 	}
 	
-	@GetMapping("/detail")//상세 조회(단일)
+	//상세 조회(단일)
+	@GetMapping("/detail")
 	public String detail(@ModelAttribute ChalDto chalDto,
 			Model model) {
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
