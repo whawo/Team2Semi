@@ -24,7 +24,7 @@ public class ChalDaoImpl implements ChalDao {
 		String sql = "insert into chal("
 				+ "chal_no, user_id, chal_title, "
 				+ "chal_content, how_confirm, chal_topic, start_date) "
-				+ "values(chal_seq.nextval, ?, ?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?, to_date(?, 'YYYY-MM-DD HH24:MI:SS'))";
 		Object[] param = {	chalDto.getChalNo(),
 							chalDto.getUserId(), chalDto.getChalTitle(), 
 							chalDto.getChalContent(), chalDto.getHowConfirm(), 
@@ -37,10 +37,17 @@ public class ChalDaoImpl implements ChalDao {
 	public void addParticipant(ParticipantDto partDto) {
 		String sql = "insert into participant(participant_no, chal_no, user_id) values(participant_seq.nextval, ?, ?)";
 		Object[] param = {
-							partDto.getParticipantNo(),
 							partDto.getChalNo(),
-							partDto.getUserId()
-							};
+							partDto.getUserId()};
+		
+		jdbcTemplate.update(sql, param);
+	}
+
+	@Override
+	public void connectAttachment(int chalNo, int attachmentNo) {
+		String sql = "insert into chal_img(chal_no, attachment_no) values(?, ?)";
+		Object[] param = {chalNo, attachmentNo};
+		
 		jdbcTemplate.update(sql, param);
 	}
 }
