@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class ChalConfirmDto {
 	private int confirmNo;
 	private int chalNo;
+	private String userId;
 	private String confirmTitle;
 	private String confirmContent;
 	private Date confirmDate;
