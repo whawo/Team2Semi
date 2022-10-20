@@ -1,7 +1,14 @@
 package com.kh.fourweeks.repository;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 @Repository
@@ -48,7 +55,6 @@ public class ChalDaoImpl implements ChalDao {
 		jdbcTemplate.update(sql, param);
 	}
   	private RowMapper<ChalDto> mapper = new RowMapper<ChalDto>() {
-
 		@Override
 		public ChalDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return ChalDto.builder()
@@ -64,11 +70,10 @@ public class ChalDaoImpl implements ChalDao {
 		}
 	};
 	
+	
 	private ResultSetExtractor<ChalDto> extractor = new ResultSetExtractor<ChalDto>() {
-		
 		@Override
 		public ChalDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-			
 			if(rs.next()) {
 				return ChalDto.builder()
 						.chalNo(rs.getInt("chal_no"))
@@ -90,7 +95,6 @@ public class ChalDaoImpl implements ChalDao {
 	public ChalDto selectOne(int chalNo) {
 		String sql = "select * from chal where chal_no = ?";
 		Object[] param = {chalNo};
- 		
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 }
