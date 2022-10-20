@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class MyIngChalListVO {
+public class ConfirmAbleChalListVO {
 	private String userId;
 	private int chalNo;
 	private String chalTitle;
