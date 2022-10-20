@@ -16,7 +16,7 @@ public class AttachmentDaoImpl implements AttachmentDao{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public int attach_seq() {
+	public int sequence() {
 		String sql = "select attachment_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}

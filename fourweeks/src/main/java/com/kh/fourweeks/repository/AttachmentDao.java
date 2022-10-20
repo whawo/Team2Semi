@@ -5,7 +5,7 @@ import java.util.List;
 import com.kh.fourweeks.entity.AttachmentDto;
 
 public interface AttachmentDao {
-	int attach_seq();
+	int sequence();
 	void insert(AttachmentDto attachementDto);
 	List<AttachmentDto> selectList();
 	AttachmentDto selectOne(int attachmentNo);
