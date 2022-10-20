@@ -25,7 +25,7 @@ public class ChalServiceImpl implements ChalService {
 		//private final File dir = new File("D:/upload");
 		
 	//맥
-	private final File dir = new File("/Users/upload");
+	private final File dir = new File("/Users/jionylee/upload");
 
 	@Override
 	public int create(ChalDto chalDto, List<MultipartFile> attachment) throws IllegalStateException, IOException {

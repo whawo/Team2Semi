@@ -25,7 +25,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 	//private final File dir = new File("D:/upload");
 	
 	//맥
-	private final File dir = new File("/Users/upload");
+	private final File dir = new File("/Users/jionylee/upload");
 	
 	@Override
 	public ResponseEntity<ByteArrayResource> load(int attachmentNo) throws IOException {

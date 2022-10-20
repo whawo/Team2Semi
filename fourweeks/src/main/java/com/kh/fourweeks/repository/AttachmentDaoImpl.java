@@ -26,7 +26,7 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		String sql = "insert into attachment("
 				+ "attachment_no, attachment_name, "
 				+ "attachment_type, attachment_size) "
-				+ "values(?,?,?,?,?)";
+				+ "values(?,?,?,?)";
 		Object[] param = {attachmentDto.getAttachmentNo(),
 				attachmentDto.getAttachmentName(),
 				attachmentDto.getAttachmentType(),
