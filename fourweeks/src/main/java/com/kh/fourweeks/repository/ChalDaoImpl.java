@@ -1,7 +1,14 @@
 package com.kh.fourweeks.repository;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 @Repository
@@ -90,7 +97,6 @@ public class ChalDaoImpl implements ChalDao {
 	public ChalDto selectOne(int chalNo) {
 		String sql = "select * from chal where chal_no = ?";
 		Object[] param = {chalNo};
- 		
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 }
