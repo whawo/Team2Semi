@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>4WEEKS</title>
-	</head>
-	<body>
-		<p>메인</p>
-				
-		<!-- 
-			<a href="/join">회원가입</a>
-			- 테스트 링크 
-		-->
-	</body>
-</html>
+<%-- 템플릿 페이지인 header.jsp를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
+
+<div align="center" style="min-height:1200px"> 
+	
+</div>
+
+
+<%-- 템플릿 페이지인 footer.jsp를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
