@@ -1,6 +1,7 @@
 package com.kh.fourweeks.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
+import com.kh.fourweeks.vo.ChalDetailVO;
 @Repository
 public class ChalDaoImpl implements ChalDao {
 	@Autowired
@@ -97,4 +99,46 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+	
+	
+	
+	private RowMapper<ChalDetailVO> detailMapper = new RowMapper<ChalDetailVO>() {
+		@Override
+		public ChalDetailVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return ChalDetailVO.builder()
+					.endDate(rs.getString("end_date"))
+					.dDay(rs.getString("d_day"))
+					.chalNo(rs.getInt("chal_no"))
+					.build();
+		}
+	};
+	
+	private ResultSetExtractor<ChalDetailVO> detailExtractor = new ResultSetExtractor<ChalDetailVO>() {
+		
+		@Override
+		public ChalDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return  ChalDetailVO.builder()
+						.endDate(rs.getString("end_date"))
+						.dDay(rs.getString("d_day"))
+						.chalNo(rs.getInt("chal_no"))
+						.build();
+			}else {
+				return null;
+			}
+			
+		}
+	};
+
+	@Override
+	public ChalDetailVO selectEndDday(int chalNo) {
+		String sql ="select chal_no, ceil(start_date-sysdate) d_day,"
+				+ " to_char(start_date +28+ 23/24 + 59/(24*60) "
+				+ "+ 59/(24*60*60), 'yyyy-mm-dd')"
+				+ " end_date from chal where chal_no = ?";
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, detailExtractor, param);
+	}
+	
+	
 }

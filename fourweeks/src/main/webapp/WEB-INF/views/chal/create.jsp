@@ -68,7 +68,7 @@ ${loginId}
 			</div>
 			<div>
 				<!-- datepicker -->
-				<input type="text" name="startDate">
+				<input type="text" name="startDate" required>
 			</div>
 			<div>
 				<span>챌린지 예상 종료일 </span>
@@ -111,7 +111,7 @@ ${loginId}
 				다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.
 			</div>
 			<div>
-				<textarea name="chalContent" placeholder="예) 어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" rows="10" required autocomplete="off"></textarea>
+				<textarea name="chalContent" placeholder="예) 어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" rows="10" autocomplete="off"></textarea>
 				<span><!-- 글자 수 --></span>
 				<!-- helper text -->
 				<span>500자까지만 입력할 수 있어요.</span>
