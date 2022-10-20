@@ -3,24 +3,28 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원가" name="title"/>
 </jsp:include>
-    <link rel="stylesheet" type="text/css" href="basic.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    <style>
+	<link rel="stylesheet" type="text/css" href="basic.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+  <style>
 
 /* 
 		디자인 수정해야할 것 : 
-		- 맨 마지막 계정이 있으신가요? 로그인 버튼 누르면 굵은 글씨체 ㅇ
+		- 맨 마지막 계정이 있으신가요? 로그인 버튼 누르면 굵은 글씨체
 		- 맨 마지막 문장과 글자 사이 간격 띄우기 ㅇ
-		- 로그인에 밑줄 들어가야함 (맨 마지막 부)  ㅇ
+		- 로그인에 밑줄 들어가야함 (맨 마지막 부) 
 		- p와 input 사이 간격을 조금 더 넓히고 글자 크기 조금 더 키우기 ㅇ
 		- 각 input간 사이 간격 넓히기 ㅇ
-		- 나머지 디자인 수정하지 말 것 ㅇㅇㅇㅇ
+		- 나머지 디자인 수정하지 말 것 
 
         email-drop-box에서 높이가 내가 보는 것과 실제로 홈페이지에 나온게 달라서 윈도우에서 확인 해야
-		
+		0
+
 		연동?? 수정해야할 것: 
 		- 각 name 만들어 논 것과 수정할 것 
 		- 이메일 셀렉창 선택시 @가 포함된 상태로 인식이 되어야함    
@@ -40,10 +44,13 @@
         color:#6c7aef;
         cursor: pointer;
     }
+
     .a-hover:hover{
         font-weight: bold;
         text-decoration-line: underline;
     }
+
+
     /* 사이사이 폭 조절  */
     .row{
         margin: 20px 0;
@@ -122,7 +129,6 @@
     } */
     .fail-message,
     .NNNNN-message{
-        
         color: #eb6f7f
     }
 
@@ -140,6 +146,7 @@
     }
  
     </style>
+
    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
    <script type="text/javascript">
         function checkId(){
@@ -155,6 +162,8 @@
             }else{
                 input.classList.add("fail");
                 return false;
+            }else{
+                input.classList.add("fail");
             }
         }
 
@@ -171,11 +180,18 @@
             }else{
                 input.classList.add("fail");
                 return false;
+
+            input.classList.remove("success", "fail");
+            if(judge){
+                input.classList.add("success");
+            }else{
+                input.classList.add("fail");
             }
         }
 
         function checkPw(){
             var input = document.querySelector("input[name=userPw]");
+
             var userPw = input.value;
             var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;
             var judge = regex.test(userPw);
@@ -187,6 +203,7 @@
                 input.classList.add("fail");
             }
         }
+
 
         
         function checkPasswordRe(){
@@ -204,6 +221,7 @@
 
         function checkEmail(){
             var input = document.querySelector("input[name=userEmail]");
+
             var userEmail = input.value;
             var regex =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
             var judge = regex.test(userEmail);
@@ -217,7 +235,12 @@
         }
         
         $(function(){
-            
+        var inputState = {
+            userIdValid:false,
+            userNickValid:false
+        }
+        
+        $(function(){
             $(".join-btn").click(function(){
                 $.ajax({
                     url:"http://localhost:8888/rest/join",
@@ -227,16 +250,12 @@
                     }
                 })
             });
-            
-            var inputState = {
-                userIdValid:false,
-                userNickValid:false,
-    
-            }
+
 
             $("input[name=userId]").blur(function(){
                 var userId = $(this).val();
                 if(!userId) return;
+                
                 $(this).removeClass("fail NNNNN NNNNY");
                 if(checkId()){
                     var that = this;
@@ -251,7 +270,7 @@
                                 inputState.userIdValid = true;
     
                             }else if(result == "NNNNN"){
-                                //$("input=[name=userId]").find(".overlap-message").text("이미 사용중인 아이디 입니다.");
+                                //$("input=[name=userId]").find(".overlap-message").text("이미 사용중인 아이디입니다.");
                                 $(that).addClass("NNNNN");
                                 inputState.userIdValid = false;
                             }
@@ -302,46 +321,46 @@
 
         <form action="" method="post" autocomplete="off">
 
-            <div class="row">
-                <label>아이디</label>
-                <input type="text" name="userId" class="input short-text-box stbox" id="text-box1" onblur="checkId();" autocomplete="off">
-                <span class="fail-message">6~20자 이내 영문 소문자, 숫자를 입력해주세요.</span>
-                <span class="NNNNN-message">이미 사용중인 아이디 입니다.</span>
-            </div>
+        <div class="row">
+            <label>아이디</label>
+            <input type="text" name="userId" class="input short-text-box stbox" id="text-box1" onblur="checkId();" autocomplete="off">
+            <span class="fail-message">6~20자 이내 영문 소문자, 숫자를 입력해주세요.</span>
+            <span class="NNNNN-message">이미 사용중인 아이디 입니다.</span>
+        </div>
 
-            <div class="row">
-                <label>닉네임</label>
-                <input type="text" name="userNick" class="input short-text-box stbox" onblur="checkNick();" autocomplete="off">
-                <span class="fail-message">4~10자 한글/영문/숫자로 입력해주세요.</span>
-                <span class="NNNNN-message">이미 사용중인 닉네임 입니다.</span>
-            </div>
+        <div class="row">
+            <label>닉네임</label>
+            <input type="text" name="userNick" class="input short-text-box stbox" onblur="checkNick();" autocomplete="off">
+            <span class="fail-message">4~10자 한글/영문/숫자로 입력해주세요.</span>
+            <span class="NNNNN-message">이미 사용중인 닉네임 입니다.</span>
+        </div>
 
-            <div class="row">
-                <label>비밀번호</label>
-                <input type="password" name="userPw" class="input short-text-box stbox" onblur="checkPw();" autocomplete="off"> 
-                <span class="fail-message">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
-            </div>
+        <div class="row">
+            <label>비밀번호</label>
+            <input type="password" name="userPw" class="input short-text-box stbox" onblur="checkPw();" autocomplete="off"> 
+            <span class="fail-message">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
+        </div>
 
-            <div class="row">
-                <label>비밀번호 재확인</label>
-                <input type="password" id="password-check" class="input short-text-box stbox" onblur="checkPasswordRe();" autocomplete="off">
-                <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
-            </div>
+        <div class="row">
+            <label>비밀번호 재확인</label>
+            <input type="password" id="password-check" class="input short-text-box stbox" onblur="checkPasswordRe();" autocomplete="off">
+            <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
+        </div>
 
-            <div class="row">
-                <label>본인 확인 이메일
-                    <p class="join-p3">아이디/비밀번호 찾기에 사용됩니다.</p>
-                </label>
-                <li class="li-1">
-                    <input type="email" name="userEmail" class="input short-text-box email-box" onblur="checkEmail();" autocomplete="off">
-                    <span class="fail-message">이메일을 다시 입력해주세요.</span>
-                </li>
-            </div>
+        <div class="row">
+          <label>본인 확인 이메일
+              <p class="join-p3">아이디/비밀번호 찾기에 사용됩니다.</p>
+          </label>
+          <li class="li-1">
+                  <input type="email" name="userEmail" class="input short-text-box email-box" onblur="checkEmail();" autocomplete="off">
+                  <span class="fail-message">이메일을 다시 입력해주세요.</span>
+              </li>
+          </div>
 
-            <div class="row">
-                <p class="join-p4">위 내용의 개인정보를 제공함에 동의합니다.</p>
-                <button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
-            </div>
+          <div class="row">
+              <p class="join-p4">위 내용의 개인정보를 제공함에 동의합니다.</p>
+              <button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
+          </div>
                 <p class="join-p5">이미 4weeks 계정이 있으신가요? <a href="#" class="a-hover">로그인</a>  </p> 
         </form>
     </div>

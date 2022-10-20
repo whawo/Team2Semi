@@ -17,9 +17,6 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
-    /* div, ul, li {
-        border : 1px dotted black;
-    } */
     a {
         color : #6c7aef;
         text-decoration-line: none;
@@ -47,7 +44,7 @@
     padding: 0.75em;/*글자 크기의 0.75배*/
     cursor: pointer;
     display: inline-block;
-    text-align: center;
+    text-align:center;
     text-decoration: none;
     border-radius: 0.5em;
     width: 130px;
@@ -62,7 +59,7 @@
          <ul class="row dropdown-menu float-container">
             <c:choose>
                <c:when test="${login}">
-               	  <li class="float-left"><span>4weeks</span></li>
+               	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
                   <li class="float-left"><a href="/">전체 챌린지</a></li>
                   <li class="float-left"><a href="chal/create">챌린지 개설</a></li>
                   <li class="float-left"><a href="#">챌린지 인증</a></li>
@@ -72,13 +69,13 @@
                         <c:if test="${login && admin}">
                            <li class="float-right"><a href="/admin/home">관리자페이지</a></li>
                         </c:if>
-                        	<li class="float-right"><a href="/member/mypage">마이페이지</a></li>
+                        	<li class="float-right"><a href="/member/mypage" >마이페이지</a></li>
                         	<li class="float-right"><a href="/logout">로그아웃</a></li>
                      </ul>
                     </li>
                </c:when>
                <c:otherwise>
-               	  <li class="float-left"><span>4weeks</span></li>
+               	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
                   <li class="float-left"><a href="/">전체 챌린지</a></li>
                   <li class="float-left"><a href="/login">챌린지 개설</a></li>
                   <li class="float-left"><a href="/login">챌린지 인증</a></li>
@@ -94,4 +91,7 @@
             </c:choose>
          </ul>
       </nav>
-      <div align="center" style="min-height:400px"> 
+
+      <di align="center" style="min-height:400px"> 
+
+
