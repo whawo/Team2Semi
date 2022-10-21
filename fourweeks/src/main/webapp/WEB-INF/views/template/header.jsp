@@ -64,7 +64,7 @@
                <c:when test="${login}">
 
                	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
-                  <li class="float-left"><a href="/">전체 챌린지</a></li>
+                  <li class="float-left"><a href="/chal/list">전체 챌린지</a></li>
                   <li class="float-left"><a href="/chal/create">챌린지 개설</a></li>
                   <li class="float-left"><a href="/chal/confirm">챌린지 인증</a></li>
                   <li class="float-left"><a href="#">문의하기</a></li>
@@ -78,7 +78,7 @@
                <c:otherwise>
 
                	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
-                  <li class="float-left"><a href="#">전체 챌린지</a></li>
+                  <li class="float-left"><a href="/chal/list">전체 챌린지</a></li>
                   <li class="float-left"><a href="/login">챌린지 개설</a></li>
                   <li class="float-left"><a href="/login">챌린지 인증</a></li>
                   <li class="float-left"><a href="#">문의하기</a></li>

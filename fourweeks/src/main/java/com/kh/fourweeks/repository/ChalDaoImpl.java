@@ -114,7 +114,6 @@ public class ChalDaoImpl implements ChalDao {
 //					.build();
 //		}
 //	};
-	
 	private ResultSetExtractor<ChalDetailVO> detailExtractor = new ResultSetExtractor<ChalDetailVO>() {
 		
 		@Override
@@ -142,7 +141,100 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}
 	
-	// 시작
+
+	// 어떤 조회 기능인지 판정하는 메소드 재정의
+	@Override
+	public List<ChalListVO> selectList(ChalListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		} else {
+			return list(vo);
+		} 
+	}
+	
+	// 모집중 페이지 전체조회: 시작임박일 순, 임박일이 동일하다면 최신 개설순
+	@Override
+	public List<ChalListVO> list(ChalListSearchVO vo) {
+		String sql = "select * from("
+				+ "select rownum rn, TMP.* from("
+					+ "select * from ("
+						+ "select TMP.* from ("
+							+ "select "
+								+ "chal_no, "
+								+ "chal_title, "
+								+ "chal_person, "
+								+ "ceil(start_date-sysdate) d_day, "
+								+ "to_char(start_date +27 +23/24 +59/(24*60) +59/(24*60*60), 'yyyy-mm-dd day') end_date, "
+								+ "chal_topic "
+							+ "from "
+								+ "chal "
+							+ "order by "
+								+ "d_day asc, "
+								+ "chal_no desc"
+							+ ") TMP"
+						+ ") where d_day > 0 and chal_person < 11"
+					+ ") TMP"
+				+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, listMapper, param);
+	}
+	
+	// 모집중 페이지 검색조회: 시작임박일 순, 임박일이 동일하다면 최신 개설순
+	@Override
+	public List<ChalListVO> search(ChalListSearchVO vo) {
+		String sql = "select * from("
+						+ "select rownum rn, TMP.* from("
+							+ "select * from ("
+								+ "select TMP.* from ("
+									+ "select "
+										+ "chal_no, "
+										+ "chal_title, "
+										+ "chal_person, "
+										+ "ceil(start_date-sysdate) d_day, "
+										+ "to_char(start_date +28+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date, "
+										+ "chal_topic "
+									+ "from "
+										+ "chal "
+										+ "where instr(#1, ?) > 0 order by d_day asc, chal_no desc"
+									+ ")TMP"
+										+ ") where d_day > 0 and chal_person < 11"
+									+ ")TMP"
+										+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, listMapper, param);
+	}
+	
+	
+	
+	
+	// 페이지 카운트 메소드 재정의
+	@Override
+	public int count(ChalListSearchVO vo) {
+		if (vo.isSearch()) {
+			return searchCount(vo);
+		} else {
+			return listCount(vo);
+		}
+	}
+	
+	// 전체 조회일시 페이지 카운트
+	@Override
+	public int listCount(ChalListSearchVO vo) {
+		String sql = "select count(*) from chal";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	// 검색 조회일시 페이지 카운트
+	@Override
+	public int searchCount(ChalListSearchVO vo) {
+		String sql = "select count(*) from chal where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	// 모집중 페이지 로우매퍼
 	private RowMapper<ChalListVO> listMapper = new RowMapper<ChalListVO>() {
 		@Override
 		public ChalListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -158,79 +250,4 @@ public class ChalDaoImpl implements ChalDao {
 		}
 	};
 	
-	@Override
-	public List<ChalListVO> selectList(ChalListSearchVO vo) {
-		if(vo.isSearch()) {
-			return search(vo);
-		} else {
-			return list(vo);
-		} 
-	}
-	
-	// 모집중: 시작임박일 순, 임박일이 동일하다면 최신 개설순
-	@Override
-	public List<ChalListVO> list(ChalListSearchVO vo) {
-		String sql = "select * from("
-				+ "select rownum rn, TMP.* from("
-				+ "select * from ("
-				+ "select TMP.* from ("
-				+ "select "
-				+ "chal_no, chal_title, "
-				+ "chal_person, "
-				+ "ceil(start_date-sysdate) d_day, "
-				+ "to_char(start_date +27 +23/24 +59/(24*60) +59/(24*60*60), 'yyyy-mm-dd day') end_date, "
-				+ "chal_topic "
-				+ "from "
-				+ "chal "
-				+ "order by "
-				+ "d_day asc, chal_no desc"
-				+ ") TMP"
-				+ ") where d_day > 0 and chal_person < 11"
-				+ ") TMP"
-				+ ") where rn between ? and ?";
-		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, listMapper, param);
-	}
-	
-	@Override
-	public List<ChalListVO> search(ChalListSearchVO vo) {
-		String sql = "select * from("
-						+ "select rownum rn, TMP.* from("
-							+ "select * from ("
-								+ "select TMP.* from ("
-								+ "select chal_no, "
-								+ "chal_title, "
-								+ "chal_person, "
-								+ "ceil(start_date-sysdate) d_day, "
-								+ "to_char(start_date +28+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date, "
-								+ "chal_topic from chal where instr(#1, ?) > 0 order by d_day asc, chal_no desc)"
-							+ "TMP) where d_day > 0 and chal_person < 11)"
-							+ "TMP) where rn between ? and ?";
-		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, listMapper, param);
-	}
-	
-	
-	
-	@Override
-	public int count(ChalListSearchVO vo) {
-		if (vo.isSearch()) {
-			return searchCount(vo);
-		} else {
-			return listCount(vo);
-		}
-	}
-	@Override
-	public int listCount(ChalListSearchVO vo) {
-		String sql = "select count(*) from chal";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-	@Override
-	public int searchCount(ChalListSearchVO vo) {
-		String sql = "select count(*) from chal where instr(#1, ?) > 0";
-		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class, param);
-	}
 }

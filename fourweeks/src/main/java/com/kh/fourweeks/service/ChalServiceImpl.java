@@ -58,7 +58,7 @@ public class ChalServiceImpl implements ChalService {
 						
 				//+ 연결 테이블에 연결 정보 저장(챌린지 번호, 첨부파일 번호)
 				//chal_img에 insert
-				chalDao.chalAttachment(chalNo, attachmentNo);
+				chalDao.connectAttachment(chalNo, attachmentNo);
 			}
 		}
 		return chalNo;
