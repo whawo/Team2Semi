@@ -60,14 +60,11 @@
                <c:when test="${login}">
                	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
                   <li class="float-left"><a href="/">전체 챌린지</a></li>
-                  <li class="float-left"><a href="chal/create">챌린지 개설</a></li>
-                  <li class="float-left"><a href="#">챌린지 인증</a></li>
+                  <li class="float-left"><a href="/chal/create">챌린지 개설</a></li>
+                  <li class="float-left"><a href="/chal/confirm">챌린지 인증</a></li>
                   <li class="float-left"><a href="#">문의하기</a></li>
                   <li class="float-right"><a href="#">${user_img} ${loginId}</a>
                      <ul>
-                        <c:if test="${login && admin}">
-                           <li class="float-right"><a href="/admin/home">관리자페이지</a></li>
-                        </c:if>
                         	<li class="float-right"><a href="/member/mypage" >마이페이지</a></li>
                         	<li class="float-right"><a href="/logout">로그아웃</a></li>
                      </ul>
@@ -75,10 +72,10 @@
                </c:when>
                <c:otherwise>
                	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
-                  <li class="float-left"><a href="/">전체 챌린지</a></li>
+                  <li class="float-left"><a href="#">전체 챌린지</a></li>
                   <li class="float-left"><a href="/login">챌린지 개설</a></li>
                   <li class="float-left"><a href="/login">챌린지 인증</a></li>
-                  <li class="float-left"><a href="/login">문의하기</a></li>
+                  <li class="float-left"><a href="#">문의하기</a></li>
                  <li class="float-right">
                 	<a href="/join" class="navbtn" id="navbutton1">회원가입</a>
             	</li>
@@ -90,4 +87,6 @@
             </c:choose>
          </ul>
       </nav>
+
+
 
