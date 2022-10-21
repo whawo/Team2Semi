@@ -34,6 +34,7 @@ import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
@@ -48,6 +49,9 @@ public class ChalController {
 	
 	@Autowired
 	private ChalService chalService;
+	
+	@Autowired
+	private AttachmentService attachService;
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
@@ -133,6 +137,14 @@ public class ChalController {
 		return "chal/confirm_detail";
 	}
 	
+	@GetMapping("confirm/detail/download") //인증글 이미지 조회
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> download(
+			@RequestParam int confirmNo) throws IOException {
+		int attachmentNo = attachmentDao.selectConfirmImg(confirmNo);
+		
+		return attachService.load(attachmentNo);
+	}
 
 	@GetMapping("detail/download")//챌린지 상세 이미지 조회
 	@ResponseBody

@@ -14,7 +14,7 @@
 	${confirmDto.confirmDate}
 	<br><br>
 	<!-- 인증샷 다운로드해서 화면에 출력 : 경로 변경 필요-->
-	<img src = "/static/images/bg_default.png" width="200" height="200">
+	<img src = "confirm/detail/download?${confirmDto.confirmNo}" width="200" height="200">
 	<br><br>
 	${confirmDto.confirmContent}
 	<br><br>
