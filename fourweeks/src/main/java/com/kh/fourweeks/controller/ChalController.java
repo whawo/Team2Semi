@@ -50,6 +50,9 @@ public class ChalController {
 	@Autowired
 	private ChalService chalService;
 	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
 
 
