@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>챌린지 상세</title>
-</head>
-<body>
-
-
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="포켓몬 상세 정보" name="title"/>
+</jsp:include>
 
 <style>
 	ul.list {
@@ -35,16 +27,14 @@
 	<div class="row left">
 		<!-- list 태그 -->
 		<ul class="list">
-		    <li>챌린지 이미지 :<img src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
+			<li>챌린지 번호 : ${chalDto.getChalNo()}</li>
+			<li>개설자 : ${chalDto.getUserId()}</li>
 			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
+			<li>챌린지 내용 : ${chalDto.getChalContent()}</li>
+			<li>챌린지 인증방법 : ${chalDto.getChalContent()}</li>
+			<li>참가 인원: ${chalDto.getChalPerson()}</li>
 			<li>챌린지 주제 : ${chalDto.getChalTopic()}</li>
-			<li>참가 인원: ${chalDto.getChalPerson()}명/10명</li>
-			<li>챌린지 시작일: ${chalDto.getStartDate()} ${chalVO.getDDay()}일뒤 시작<br>~${chalVO.endDate}
-			</li>
-			<button>참가하기</button>
-			<li>챌린지 리더 : ${chalDto.getUserId()}</li>
-			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
-			<li>챌린지 인증방법 : ${chalDto.getHowConfirm()}</li>
+			<li>챌린지 시작일: ${chalDto.getStartDate()}</li>
 		</ul>
 	</div>
 </div>

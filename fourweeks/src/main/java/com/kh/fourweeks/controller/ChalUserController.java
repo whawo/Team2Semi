@@ -43,7 +43,7 @@ public class ChalUserController {
 											HttpSession session) {
 		ChalUserDto findDto = chalUserDao.selectOne(inputDto.getUserId());
 		if(findDto == null) {
-			return "redirect:login";
+			return "redirect:login?error";
 		}
 		// 비밀번호 검사
 		boolean pwMatch = inputDto.getUserPw().equals(findDto.getUserPw());
@@ -55,7 +55,7 @@ public class ChalUserController {
 			chalUserDao.updateLoginTime(inputDto.getUserId());
 			return "redirect:/";
 		} else {
-			return "redirect:login";
+			return "redirect:login?error";
 		}
 	}
 	
