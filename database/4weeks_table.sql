@@ -117,7 +117,7 @@ insert into chal_topic(chal_topic) values('정서');
 insert into chal_topic(chal_topic) values('취미');
 insert into chal_topic(chal_topic) values('학습');
 insert into chal_topic(chal_topic) values('환경');
-insert into chal_topic(chal_topic) values('그외');
+insert into chal_topic(chal_topic) values('그 외');
 commit;
 -------------------------------------------------------------------
 -- 챌린지 참가 관련 테이블
