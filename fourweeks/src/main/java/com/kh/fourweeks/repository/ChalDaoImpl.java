@@ -135,7 +135,7 @@ public class ChalDaoImpl implements ChalDao {
 	@Override
 	public ChalDetailVO selectEndDday(int chalNo) {
 		String sql ="select chal_no, ceil(start_date-sysdate) d_day,"
-				+ " to_char(start_date +28+ 23/24 + 59/(24*60) "
+				+ " to_char(start_date +27+ 23/24 + 59/(24*60) "
 				+ "+ 59/(24*60*60), 'yyyy-mm-dd')"
 				+ " end_date from chal where chal_no = ?";
 		Object[] param = {chalNo};

@@ -117,7 +117,7 @@ insert into chal_topic(chal_topic) values('정서');
 insert into chal_topic(chal_topic) values('취미');
 insert into chal_topic(chal_topic) values('학습');
 insert into chal_topic(chal_topic) values('환경');
-insert into chal_topic(chal_topic) values('그외');
+insert into chal_topic(chal_topic) values('그 외');
 commit;
 -------------------------------------------------------------------
 -- 챌린지 참가 관련 테이블
@@ -145,6 +145,8 @@ confirm_no number not null unique,
 chal_no number references chal(chal_no) on delete set null,
 confirm_title varchar2(120) not null,
 confirm_content varchar2(1500) not null,
+confirm_read number default 0 not null check(confirm_read >= 0),
+confirm_like number default 0 not null check(confirm_like > = 0),  
 confirm_date date default sysdate not null,
 modified_date date,
 constraints confirm_pk primary key(confirm_no, chal_no)

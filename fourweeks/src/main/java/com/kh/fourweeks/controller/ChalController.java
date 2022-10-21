@@ -39,15 +39,12 @@ public class ChalController {
 	@Autowired
 	private ChalService chalService;
 	
-	//윈도우
-	//private final File dir = new File("D:/upload");
-		
-	//맥
-	private final File dir = new File("/Users/jionylee/upload");
-	
+	private final File dir = new File(System.getProperty("user.home") + "/upload");
+
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
 		dir.mkdirs();
+		System.out.println("created");
 	}
 	
 	@GetMapping("/create")
@@ -71,7 +68,7 @@ public class ChalController {
 		partDto.setChalNo(chalNo);
 		partDto.setUserId(memberId);
 		chalDao.addParticipant(partDto);
-		
+		System.out.println(dir);
 		//redirect
 		attr.addAttribute("chalNo", chalNo);
 		return "redirect:detail";
@@ -84,27 +81,27 @@ public class ChalController {
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
 		
-		System.out.println(model);
 		return "chal/detail";
 	}
 	
 	@GetMapping("/confirm")
-	public String confirm() {
+	public String confirm(Model model,
+			HttpSession session) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("chalList", confirmDao.selectList(memberId));
 		return "chal/confirm";
 	}
 	
 	@PostMapping("/confirm")
 	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
-			@ModelAttribute ChalDto chalDto,
+			@RequestParam List<MultipartFile> attachment,
 			RedirectAttributes attr,
-			HttpSession session) {
+			HttpSession session) throws IllegalStateException, IOException {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		confirmDto.setUserId(memberId);
 		
-		int confirmNo = confirmDao.sequence();
-		confirmDto.setConfirmNo(confirmNo);
-		
-		confirmDao.write(confirmDto);
+		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
+		int confirmNo = chalService.confirm(confirmDto, attachment);
 		
 		attr.addAttribute("confirmNo", confirmNo);
 		return "redirect:/confirm/detail";

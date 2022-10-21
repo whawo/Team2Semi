@@ -21,11 +21,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	//윈도우
-	//private final File dir = new File("D:/upload");
-	
-	//맥
-	private final File dir = new File("/Users/jionylee/upload");
+	private final File dir = new File(System.getProperty("user.home") + "/upload");
 	
 	@Override
 	public ResponseEntity<ByteArrayResource> load(int attachmentNo) throws IOException {
