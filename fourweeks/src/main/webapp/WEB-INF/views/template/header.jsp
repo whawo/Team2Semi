@@ -63,7 +63,7 @@
             <c:choose>
                <c:when test="${login}">
                	  <li class="float-left"><span>4weeks</span></li>
-                  <li class="float-left"><a href="/">전체 챌린지</a></li>
+                  <li class="float-left"><a href="chal/list">전체 챌린지</a></li>
                   <li class="float-left"><a href="chal/create">챌린지 개설</a></li>
                   <li class="float-left"><a href="#">챌린지 인증</a></li>
                   <li class="float-left"><a href="#">문의하기</a></li>
@@ -79,7 +79,7 @@
                </c:when>
                <c:otherwise>
                	  <li class="float-left"><span>4weeks</span></li>
-                  <li class="float-left"><a href="/">전체 챌린지</a></li>
+                  <li class="float-left"><a href="chal/list">전체 챌린지</a></li>
                   <li class="float-left"><a href="/login">챌린지 개설</a></li>
                   <li class="float-left"><a href="/login">챌린지 인증</a></li>
                   <li class="float-left"><a href="/login">문의하기</a></li>
