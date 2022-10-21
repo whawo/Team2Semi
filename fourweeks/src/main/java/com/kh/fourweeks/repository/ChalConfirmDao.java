@@ -16,5 +16,5 @@ public interface ChalConfirmDao {
 	
 	//조회 관련 메소드
 	List<ConfirmAbleChalListVO> selectList(String userId); //인증글 작성 가능한 챌린지 조회
-	
+	ChalConfirmDto selectOne(int confirmNo); //인증글 상세 조회
 }

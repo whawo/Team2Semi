@@ -141,7 +141,6 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}
-	
 
 	// 시작
 	private RowMapper<ChalListVO> listMapper = new RowMapper<ChalListVO>() {
@@ -234,6 +233,5 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
-
 
 }
