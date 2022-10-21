@@ -2,12 +2,18 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +21,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
+import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
+import com.kh.fourweeks.error.TargetNotFoundException;
+import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
@@ -40,6 +51,7 @@ public class ChalController {
 	private ChalService chalService;
 	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
+
 
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -77,10 +89,14 @@ public class ChalController {
 	//상세 조회(단일)
 	@GetMapping("/detail")
 	public String detail(@ModelAttribute ChalDto chalDto,
+			@ModelAttribute AttachmentDto attachmentDto,
 			Model model) {
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
 		
+		//첨부파일
+		model.addAttribute("attachmentList", 
+				attachmentDao.selectDetail(attachmentDto.getAttachmentNo()));
 		return "chal/detail";
 	}
 	
@@ -107,6 +123,39 @@ public class ChalController {
 		return "redirect:/confirm/detail";
 	}
 	
+
+	@GetMapping("detail/download")//챌린지 상세 이미지 조회
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> detailDownload(
+			@ModelAttribute ChalDto chalDto
+		) throws IOException {
+		AttachmentDto dto = attachmentDao.selectDetail(chalDto.getChalNo());
+		if(dto == null) {//파일이 없으면
+			throw new TargetNotFoundException("존재하지 않는 파일입니다");
+		}
+		
+		//[2] 파일 불러오기
+		File target = new File(dir, String.valueOf(dto.getAttachmentNo()));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+		
+		//[3] 응답 객체를 만들어 데이터를 전송
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_ENCODING, 
+										StandardCharsets.UTF_8.name())
+				.contentLength(dto.getAttachmentSize())
+				.header(HttpHeaders.CONTENT_TYPE , 
+										dto.getAttachmentType())
+				.header(HttpHeaders.CONTENT_DISPOSITION, 
+									ContentDisposition.attachment()
+											.filename(
+													dto.getAttachmentName(), 
+													StandardCharsets.UTF_8)
+											.build().toString())
+				.body(resource);
+	}
+	
+
 	@GetMapping("/list")
 	public String list(
 				Model model,
@@ -117,4 +166,5 @@ public class ChalController {
 		model.addAttribute("list", chalDao.selectList(vo));
 		return "chal/list";
 	}
+
 }

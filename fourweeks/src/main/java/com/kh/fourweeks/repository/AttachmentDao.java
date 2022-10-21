@@ -10,4 +10,5 @@ public interface AttachmentDao {
 	List<AttachmentDto> selectList();
 	AttachmentDto selectOne(int attachmentNo);
 	boolean delete(int attachmentNo);
+	AttachmentDto selectDetail(int attachmentNo);
 }
