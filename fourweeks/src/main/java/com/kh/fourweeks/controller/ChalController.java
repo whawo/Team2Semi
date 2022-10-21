@@ -92,15 +92,14 @@ public class ChalController {
 	
 	@PostMapping("/confirm")
 	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
+			@RequestParam List<MultipartFile> attachment,
 			RedirectAttributes attr,
-			HttpSession session) {
+			HttpSession session) throws IllegalStateException, IOException {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		confirmDto.setUserId(memberId);
 		
-		int confirmNo = confirmDao.sequence();
-		confirmDto.setConfirmNo(confirmNo);
-		
-		confirmDao.write(confirmDto);
+		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
+		int confirmNo = chalService.confirm(confirmDto, attachment);
 		
 		attr.addAttribute("confirmNo", confirmNo);
 		return "redirect:/confirm/detail";
