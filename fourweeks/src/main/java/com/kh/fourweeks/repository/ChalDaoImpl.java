@@ -50,7 +50,7 @@ public class ChalDaoImpl implements ChalDao {
 	}
 
 	@Override
-	public void connectAttachment(int chalNo, int attachmentNo) {
+	public void chalAttachment(int chalNo, int attachmentNo) {
 		String sql = "insert into chal_img(chal_no, attachment_no) values(?, ?)";
 		Object[] param = {chalNo, attachmentNo};
 		
@@ -141,6 +141,5 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}
-	
-	
+
 }
