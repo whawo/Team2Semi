@@ -14,6 +14,8 @@ public class ChalConfirmDto {
 	private String userId;
 	private String confirmTitle;
 	private String confirmContent;
+	private int confirmRead;
+	private int confirmLike;
 	private Date confirmDate;
 	private Date modifiedDate;
 }
