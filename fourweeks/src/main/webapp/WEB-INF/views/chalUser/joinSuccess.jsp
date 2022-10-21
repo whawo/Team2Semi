@@ -59,7 +59,7 @@
             </div>
             
             <div class="row center">
-               <img src="./image/con.png" width="300" height="300">
+               <img src="./image/join_success.png" width="300" height="300">
             </div>
 
             <div class="row center">
