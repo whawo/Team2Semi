@@ -37,20 +37,20 @@ public class AttachmentDaoImpl implements AttachmentDao{
 	
 	private RowMapper<AttachmentDto> mapper = (rs, idx) -> {
 		return AttachmentDto.builder()
-				.attachmentNo(rs.getInt("attachement_no"))
-				.attachmentName(rs.getString("attachement_name"))
-				.attachmentType(rs.getString("attachement_type"))
-				.attachmentSize(rs.getLong("attachement_size"))
+				.attachmentNo(rs.getInt("attachment_no"))
+				.attachmentName(rs.getString("attachment_name"))
+				.attachmentType(rs.getString("attachment_type"))
+				.attachmentSize(rs.getLong("attachment_size"))
 				.build();
 	};
 	
 	private ResultSetExtractor<AttachmentDto> extractor = (rs) -> {
 		if(rs.next()) {
 			return AttachmentDto.builder()
-					.attachmentNo(rs.getInt("attachement_no"))
-					.attachmentName(rs.getString("attachement_name"))
-					.attachmentType(rs.getString("attachement_type"))
-					.attachmentSize(rs.getLong("attachement_size"))
+					.attachmentNo(rs.getInt("attachment_no"))
+					.attachmentName(rs.getString("attachment_name"))
+					.attachmentType(rs.getString("attachment_type"))
+					.attachmentSize(rs.getLong("attachment_size"))
 					.build();
 		}else {
 			return null;
