@@ -36,6 +36,7 @@ import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalListSearchVO;
 
 @Controller
 @RequestMapping("/chal")
@@ -49,23 +50,13 @@ public class ChalController {
 	@Autowired
 	private ChalService chalService;
 	
-	@Autowired
-	private AttachmentDao attachmentDao;
-	
-	@Autowired
-	private AttachmentService attachmentService;
-	
-	
-	//윈도우
-	//private final File dir = new File("D:/upload");
-		
-	//맥
-//	private final File dir = new File("/Users/jionylee/upload");
-	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
+
+
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
 		dir.mkdirs();
+		System.out.println("created");
 	}
 	
 	@GetMapping("/create")
@@ -89,7 +80,7 @@ public class ChalController {
 		partDto.setChalNo(chalNo);
 		partDto.setUserId(memberId);
 		chalDao.addParticipant(partDto);
-		
+		System.out.println(dir);
 		//redirect
 		attr.addAttribute("chalNo", chalNo);
 		return "redirect:detail";
@@ -119,20 +110,20 @@ public class ChalController {
 	
 	@PostMapping("/confirm")
 	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
+			@RequestParam List<MultipartFile> attachment,
 			RedirectAttributes attr,
-			HttpSession session) {
+			HttpSession session) throws IllegalStateException, IOException {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		confirmDto.setUserId(memberId);
 		
-		int confirmNo = confirmDao.sequence();
-		confirmDto.setConfirmNo(confirmNo);
-		
-		confirmDao.write(confirmDto);
+		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
+		int confirmNo = chalService.confirm(confirmDto, attachment);
 		
 		attr.addAttribute("confirmNo", confirmNo);
 		return "redirect:/confirm/detail";
 	}
 	
+
 	@GetMapping("detail/download")//챌린지 상세 이미지 조회
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> detailDownload(
@@ -164,4 +155,16 @@ public class ChalController {
 				.body(resource);
 	}
 	
+
+	@GetMapping("/list")
+	public String list(
+				Model model,
+				@ModelAttribute(name="vo") ChalListSearchVO vo) {
+
+		int count = chalDao.count(vo);
+		vo.setCount(count);
+		model.addAttribute("list", chalDao.selectList(vo));
+		return "chal/list";
+	}
+
 }

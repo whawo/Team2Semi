@@ -8,21 +8,16 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function() {
-		//첫 번째 항목을 default 선택값으로 설정
-		$("select[name=chalTitle]").first().selected;
-		//첫 번째 항목의 인증방법을 .how-confirm에 추가
-		var howContent = $(this).find("option:selected").attr("data-howConfirm");
-		$(".how-content").val(howContent);
-		
 		$("select[name=chalTitle]").on("input", function(){
 			//선택된 챌린지 번호를 input type=hidden에 추가
-			var chalNo = $(this).find("option:selected").attr("data-chalNo");
+			var chalNo = parseInt($(this).find("option:selected").attr("data-chalNo"));
+			console.log(chalNo);
 			//var chalNo =  $(this).find("option:selected").data("chalNo");//작동 안 함
 			$("input[name=chalNo]").val(chalNo);
 			
 			//선택된 챌린지 인증방법을 .how-confirm에 추가
-			var howContent = $(this).find("option:selected").attr("data-howConfirm");
-			$(".how-content").val(howContent);
+			var howConfirm = $(this).find("option:selected").attr("data-howConfirm");
+			$(".how-confirm").val(howConfirm);
 		});
 	});
 </script>    
@@ -36,7 +31,7 @@
 		1. 인증할 챌린지를 선택해주세요.
 		<br>
 		<select name="chalTitle">
-		  	<!-- <option value="">선택하기</option> -->
+		  	<option value="">선택하기</option>
 			<c:forEach var="list" items="${chalList}">
 				<option value="${list.chalTitle}" data-chalNo="${list.chalNo}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
 		  	</c:forEach>

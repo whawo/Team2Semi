@@ -17,8 +17,12 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
+<<<<<<< HEAD
+    /* div, ul, li {
+        border : 1px dotted black;
+    } */
    a {
-        color : #6c7aef;
+
         text-decoration-line: none;
     }
     a:hover {
@@ -43,7 +47,7 @@
     padding: 0.90em; /* 글자 크기의 0.9배 */
     cursor: pointer;
     display: inline-block;
-    text-align:center;
+    text-align: center;
     text-decoration: none;
     border-radius: 0.5em;
     width: 130px;
@@ -58,6 +62,7 @@
          <ul class="row dropdown-menu float-container">
             <c:choose>
                <c:when test="${login}">
+
                	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
                   <li class="float-left"><a href="/">전체 챌린지</a></li>
                   <li class="float-left"><a href="/chal/create">챌린지 개설</a></li>
@@ -71,6 +76,7 @@
                     </li>
                </c:when>
                <c:otherwise>
+
                	  <li class="float-left"><img src="/images/logo_top_icon.png" width="60"></li>
                   <li class="float-left"><a href="#">전체 챌린지</a></li>
                   <li class="float-left"><a href="/login">챌린지 개설</a></li>
@@ -87,6 +93,8 @@
             </c:choose>
          </ul>
       </nav>
+      <div align="center" style="min-height:400px"> 
+
 
 
 

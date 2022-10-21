@@ -63,5 +63,13 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+
+	@Override
+	public void confirmAttachment(int confirmNo, int attachmentNo, String userId) {
+		String sql = "insert into confirm_img(confirm_no, attachment_no, user_id) values(?, ?, ?)";
+		Object[] param = {confirmNo, attachmentNo, userId};
+		
+		jdbcTemplate.update(sql, param);
+	}
 	
 }

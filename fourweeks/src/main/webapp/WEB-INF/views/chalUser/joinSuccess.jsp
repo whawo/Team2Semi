@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>회원가입</title>
+		<title>4weeks 회원가입</title>
 	</head>
 	<body>
 		<h1>가입을 축하합니다!</h1>
