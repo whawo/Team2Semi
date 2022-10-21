@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
-    a {
+   a {
         color : #6c7aef;
         text-decoration-line: none;
     }
@@ -36,12 +36,11 @@
     border-width: 2px 2px 2px 2px;
     background-color: white;
     color: #6c7aef;
-    line-height: 100%; /*추가*/
 	}
 	.navbtn{
     border: none;
     font-size: 14px;
-    padding: 0.75em;/*글자 크기의 0.75배*/
+    padding: 0.90em; /* 글자 크기의 0.9배 */
     cursor: pointer;
     display: inline-block;
     text-align:center;
@@ -89,6 +88,5 @@
          </ul>
       </nav>
 
-      <div style="min-height:400px"> 
 
 
