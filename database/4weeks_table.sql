@@ -146,6 +146,8 @@ chal_no number references chal(chal_no) on delete set null,
 user_id references chal_user(user_id) on delete set null,
 confirm_title varchar2(120) not null,
 confirm_content varchar2(1500) not null,
+confirm_read number default 0 not null check(confirm_read >= 0),
+confirm_like number default 0 not null check(confirm_like > = 0),  
 confirm_date date default sysdate not null,
 modified_date date,
 constraints confirm_pk primary key(confirm_no, chal_no, user_id)
