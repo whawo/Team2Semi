@@ -13,19 +13,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.kh.fourweeks.entity.AttachmentDto;
+import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
+import com.kh.fourweeks.repository.ChalDao;
 
 @Service
 public class AttachmentServiceImpl implements AttachmentService {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
+	@Autowired
+	private ChalDao chalDao;
+	
 	//윈도우
 	//private final File dir = new File("D:/upload");
 	
 	//맥
-	private final File dir = new File("/Users/jionylee/upload");
+//	private final File dir = new File("/Users/jionylee/upload");
+	
+	private final File dir = new File(System.getProperty("user.home") + "/upload");
 	
 	@Override
 	public ResponseEntity<ByteArrayResource> load(int attachmentNo) throws IOException {
@@ -55,4 +62,5 @@ public class AttachmentServiceImpl implements AttachmentService {
 											.build().toString())
 				.body(resource);
 	}
+
 }

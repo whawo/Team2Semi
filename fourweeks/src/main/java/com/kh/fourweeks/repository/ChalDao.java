@@ -11,5 +11,4 @@ public interface ChalDao {
 	void connectAttachment(int chalNo, int attachmentNo); //chal_img 테이블에 첨부파일 정보 연결
     ChalDto selectOne(int chalNo);//상세페이지 조회 기능(단일)
     ChalDetailVO selectEndDday(int chalNo);//종료일, 남은일수 조회 메소드
-    
 }

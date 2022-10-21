@@ -14,4 +14,5 @@ public class AttachmentDto {
 	private String attachmentType;
 	private long attachmentSize;
 	private Date attachmentTime;
+	private int chalNo;
 }

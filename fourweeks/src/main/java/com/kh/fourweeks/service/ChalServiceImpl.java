@@ -25,8 +25,11 @@ public class ChalServiceImpl implements ChalService {
 		//private final File dir = new File("D:/upload");
 		
 	//맥
-	private final File dir = new File("/Users/jionylee/upload");
+	//private final File dir = new File("/Users/jionylee/upload");
 
+	private final File dir = new File(System.getProperty("user.home") + "/upload");
+	
+	
 	@Override
 	public int create(ChalDto chalDto, List<MultipartFile> attachment) throws IllegalStateException, IOException {
 		//번호 미리 생성

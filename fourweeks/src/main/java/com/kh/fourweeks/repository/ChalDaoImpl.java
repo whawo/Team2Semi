@@ -142,5 +142,4 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}
 	
-	
 }
