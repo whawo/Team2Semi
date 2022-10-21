@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>로그인</title>
+		<title>4weeks 로그인</title>
 	</head>
 	<body>
 		<div>
@@ -26,7 +27,11 @@
 			<div>
 				<button type="submit">로그인</button>
 			</div>
+			<c:if test="${param.error != null}">
+				<h2 style="color:red">입력한 정보가 맞지 않습니다.</h2>
+			</c:if>
 		</form>
+		
 		<div>
 			<%-- 헬퍼텍스트 --%>
 			아이디 또는 비밀번호를 잘못 입력했습니다.
@@ -44,6 +49,5 @@
 		<span>
 			<a href="join">회원가입</a>
 		</span>
-		
 	</body>
 </html>

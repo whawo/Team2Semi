@@ -25,6 +25,7 @@ import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalListSearchVO;
 
 @Controller
 @RequestMapping("/chal")
@@ -106,4 +107,14 @@ public class ChalController {
 		return "redirect:/confirm/detail";
 	}
 	
+	@GetMapping("/list")
+	public String list(
+				Model model,
+				@ModelAttribute(name="vo") ChalListSearchVO vo) {
+
+		int count = chalDao.count(vo);
+		vo.setCount(count);
+		model.addAttribute("list", chalDao.selectList(vo));
+		return "chal/list";
+	}
 }
