@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.AttachmentDto;
+import com.kh.fourweeks.entity.ChalDto;
 
 @Repository
 public class AttachmentDaoImpl implements AttachmentDao{
@@ -37,25 +38,41 @@ public class AttachmentDaoImpl implements AttachmentDao{
 	
 	private RowMapper<AttachmentDto> mapper = (rs, idx) -> {
 		return AttachmentDto.builder()
-				.attachmentNo(rs.getInt("attachement_no"))
-				.attachmentName(rs.getString("attachement_name"))
-				.attachmentType(rs.getString("attachement_type"))
-				.attachmentSize(rs.getLong("attachement_size"))
+				.attachmentNo(rs.getInt("attachment_no"))
+				.attachmentName(rs.getString("attachment_name"))
+				.attachmentType(rs.getString("attachment_type"))
+				.attachmentSize(rs.getLong("attachment_size"))
 				.build();
 	};
 	
 	private ResultSetExtractor<AttachmentDto> extractor = (rs) -> {
 		if(rs.next()) {
 			return AttachmentDto.builder()
-					.attachmentNo(rs.getInt("attachement_no"))
-					.attachmentName(rs.getString("attachement_name"))
-					.attachmentType(rs.getString("attachement_type"))
-					.attachmentSize(rs.getLong("attachement_size"))
+					.attachmentNo(rs.getInt("attachment_no"))
+					.attachmentName(rs.getString("attachment_name"))
+					.attachmentType(rs.getString("attachment_type"))
+					.attachmentSize(rs.getLong("attachment_size"))
 					.build();
 		}else {
 			return null;
 		}
 	};
+	
+	private ResultSetExtractor<AttachmentDto> detailExtractor = (rs) -> {//챌린지 상세 이미지 조회
+		if(rs.next()) {
+			return AttachmentDto.builder()
+					.attachmentNo(rs.getInt("attachment_no"))
+					.attachmentName(rs.getString("attachment_name"))
+					.attachmentType(rs.getString("attachment_type"))
+					.attachmentSize(rs.getLong("attachment_size"))
+					.attachmentTime(rs.getDate("attachment_time"))
+					.chalNo(rs.getInt("chal_no"))
+					.build();
+		}else {
+			return null;
+		}
+	};
+	
 	
 	@Override
 	public List<AttachmentDto> selectList() {
@@ -76,6 +93,12 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {attachmentNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
-	
-	
+
+	@Override
+	public AttachmentDto selectDetail(int chalNo) {//단일 챌린지 썸네일 조회 기능(view)
+		String sql ="select * from chal_img_detail_view where chal_no = ?";
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, detailExtractor, param);	
+	}
+
 }

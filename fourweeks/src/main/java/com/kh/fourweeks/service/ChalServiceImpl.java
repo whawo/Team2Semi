@@ -27,7 +27,8 @@ public class ChalServiceImpl implements ChalService {
 	private AttachmentDao attachmentDao;
 
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
-
+	
+	
 	@Override
 	public int create(ChalDto chalDto, List<MultipartFile> attachment) throws IllegalStateException, IOException {
 		//번호 미리 생성
