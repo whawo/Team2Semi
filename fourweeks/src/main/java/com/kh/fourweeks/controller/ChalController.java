@@ -35,14 +35,15 @@ public class ChalController {
 	private ChalService chalService;
 	
 	//윈도우
-	//private final File dir = new File("D:/upload");
+     private final File dir = new File("C:/upload");
 		
 	//맥
-	private final File dir = new File("/Users/jionylee/upload");
+//	private final File dir = new File("/Users/jionylee/upload");
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
 		dir.mkdirs();
+		System.out.println("created");
 	}
 	
 	@GetMapping("/create")
