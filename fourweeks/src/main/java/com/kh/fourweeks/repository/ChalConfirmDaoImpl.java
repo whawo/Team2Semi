@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -70,6 +71,31 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		Object[] param = {confirmNo, attachmentNo, userId};
 		
 		jdbcTemplate.update(sql, param);
+	}
+	
+	private ResultSetExtractor<ChalConfirmDto> extractor = (rs) -> {
+		if(rs.next()) {
+			return ChalConfirmDto.builder()
+			.confirmNo(rs.getInt("confirm_no"))
+			.chalNo(rs.getInt("chal_no"))
+			.userId(rs.getString("user_id"))
+			.confirmTitle(rs.getString("confirm_title"))
+			.confirmContent(rs.getString("confirm_content"))
+			.confirmRead(rs.getInt("confirm_read"))
+			.confirmLike(rs.getInt("confirm_like"))
+			.confirmDate(rs.getDate("confirm_date"))
+			.modifiedDate(rs.getDate("modified_date"))
+			.build();
+		}else {
+			return null;
+		}
+	};
+	
+	@Override
+	public ChalConfirmDto selectOne(int confirmNo) {
+		String sql = "select * from chal_confirm where confirm_no = ?";
+		Object[] param = {confirmNo};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
 }
