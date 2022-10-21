@@ -123,7 +123,15 @@ public class ChalController {
 		int confirmNo = chalService.confirm(confirmDto, attachment);
 		
 		attr.addAttribute("confirmNo", confirmNo);
-		return "redirect:/confirm/detail";
+		return "redirect:/chal/confirm/detail";
+	}
+	
+	@GetMapping("/confirm/detail")
+	public String confirmDetail(Model model,
+			@RequestParam int confirmNo,
+			HttpSession session) {
+		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
+		return "chal/confirm_detail";
 	}
 	
 
