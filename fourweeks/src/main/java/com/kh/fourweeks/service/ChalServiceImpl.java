@@ -20,12 +20,8 @@ public class ChalServiceImpl implements ChalService {
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
-
-	//윈도우
-		//private final File dir = new File("D:/upload");
-		
-	//맥
-	private final File dir = new File("/Users/jionylee/upload");
+	
+	private final File dir = new File(System.getProperty("user.home") + "/upload");
 
 	@Override
 	public int create(ChalDto chalDto, List<MultipartFile> attachment) throws IllegalStateException, IOException {

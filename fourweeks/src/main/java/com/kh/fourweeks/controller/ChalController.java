@@ -38,11 +38,7 @@ public class ChalController {
 	@Autowired
 	private ChalService chalService;
 	
-	//윈도우
-	//private final File dir = new File("D:/upload");
-		
-	//맥
-	private final File dir = new File("/Users/jionylee/upload");
+	private final File dir = new File(System.getProperty("user.home") + "/upload");
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -70,7 +66,7 @@ public class ChalController {
 		partDto.setChalNo(chalNo);
 		partDto.setUserId(memberId);
 		chalDao.addParticipant(partDto);
-		
+		System.out.println(dir);
 		//redirect
 		attr.addAttribute("chalNo", chalNo);
 		return "redirect:detail";
