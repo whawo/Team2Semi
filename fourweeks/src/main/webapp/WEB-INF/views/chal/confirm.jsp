@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="챌린지 인증" name="title"/>
+</jsp:include>
 <style>
 	textarea {
 		resize:none;
@@ -8,24 +12,23 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function() {
-		$("select[name=chalTitle]").on("input", function(){
+		$("select[name=chalTitle]").on("change", function(){
 			//선택된 챌린지 번호를 input type=hidden에 추가
-			var chalNo = parseInt($(this).find("option:selected").attr("data-chalNo"));
-			console.log(chalNo);
-			//var chalNo =  $(this).find("option:selected").data("chalNo");//작동 안 함
+			var chalNo = parseInt($(this).find("option:selected").attr("value"));
 			$("input[name=chalNo]").val(chalNo);
 			
 			//선택된 챌린지 인증방법을 .how-confirm에 추가
-			var howConfirm = $(this).find("option:selected").attr("data-howConfirm");
+			var howConfirm = $("select[name=chalTitle]").find("option:selected").attr("data-howConfirm");
 			$(".how-confirm").val(howConfirm);
 		});
+		//파라미터에 chalNo가 있을 때만 해당 챌린지를 자동으로 선택
+		var urlParams = new URL(location.href).searchParams;
+		var chalNo = urlParams.get('chalNo');
+		if(chalNo){			
+			$("select[name=chalTitle]").val(chalNo).attr("selected", "selected").trigger("change");
+		}
 	});
 </script>    
-    
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="챌린지 인증" name="title"/>
-</jsp:include>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<form action="confirm" method="post" enctype="multipart/form-data">
 		1. 인증할 챌린지를 선택해주세요.
@@ -33,7 +36,7 @@
 		<select name="chalTitle">
 		  	<option value="">선택하기</option>
 			<c:forEach var="list" items="${chalList}">
-				<option value="${list.chalTitle}" data-chalNo="${list.chalNo}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
+				<option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
 		  	</c:forEach>
 		</select>
 		<input type="hidden" name="chalNo">
