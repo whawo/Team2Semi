@@ -124,6 +124,7 @@ public class ChalDaoImpl implements ChalDao {
 						.endDate(rs.getString("end_date"))
 						.dDay(rs.getString("d_day"))
 						.chalNo(rs.getInt("chal_no"))
+						.endDday(rs.getString("end_d_day"))
 						.build();
 			}else {
 				return null;
@@ -134,10 +135,12 @@ public class ChalDaoImpl implements ChalDao {
 	
 	@Override
 	public ChalDetailVO selectEndDday(int chalNo) {
-		String sql ="select chal_no, ceil(start_date-sysdate) d_day,"
-				+ " to_char(start_date +27+ 23/24 + 59/(24*60) "
-				+ "+ 59/(24*60*60), 'yyyy-mm-dd')"
-				+ " end_date from chal where chal_no = ?";
+		String sql ="select "
+				+ "chal_no, "
+				+ "ceil(start_date-sysdate) d_day, "
+				+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date, "
+				+ "trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day "
+				+ "from chal where chal_no = ?";
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}

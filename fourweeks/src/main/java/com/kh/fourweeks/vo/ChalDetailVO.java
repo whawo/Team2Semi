@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ChalDetailVO {
-
 	private String endDate;
 	private String dDay;
 	private int chalNo;
-	
+	private String endDday;
 }
