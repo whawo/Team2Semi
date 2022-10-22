@@ -1,5 +1,6 @@
 package com.kh.fourweeks.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,35 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		String sql = "select * from chal_confirm where confirm_no = ?";
 		Object[] param = {confirmNo};
 		return jdbcTemplate.query(sql, extractor, param);
+	}
+
+	
+	private RowMapper<ChalConfirmDto> myListMapper = (rs, idx) -> {
+		return ChalConfirmDto.builder()
+				.confirmNo(rs.getInt("confirm_no"))
+				.chalNo(rs.getInt("chal_no"))
+				.userId(rs.getString("user_id"))
+				.confirmTitle(rs.getString("confirm_title"))
+				.confirmContent(rs.getString("confirm_content"))
+				.confirmRead(rs.getInt("confirm_read"))
+				.confirmLike(rs.getInt("confirm_like"))
+				.confirmDate(rs.getDate("confirm_date"))
+				.modifiedDate(rs.getDate("modified_date"))
+				.build();
+	};
+	
+	@Override
+	public List<ChalConfirmDto> myConfirmList(String userId, int chalNo) {
+		String sql = "select * from chal_confirm where user_id = ? and chal_no = ? order by confirm_no desc";
+		Object[] param = {userId, chalNo};
+		return jdbcTemplate.query(sql, myListMapper, param);
+	}
+	
+	@Override
+	public int confirmCnt(String userId, int chalNo) {
+		String sql = "select count(*) cnt from chal_confirm where user_id = ? and chal_no = ?";
+		Object[] param = {userId, chalNo};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
 }

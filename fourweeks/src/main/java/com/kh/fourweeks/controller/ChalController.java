@@ -106,6 +106,37 @@ public class ChalController {
 		return "chal/detail";
 	}
 	
+	@GetMapping("detail/download")//챌린지 상세 이미지 조회
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> detailDownload(
+			@ModelAttribute ChalDto chalDto
+		) throws IOException {
+		AttachmentDto dto = attachmentDao.selectDetail(chalDto.getChalNo());
+		if(dto == null) {//파일이 없으면
+			throw new TargetNotFoundException("존재하지 않는 파일입니다");
+		}
+		
+		//[2] 파일 불러오기
+		File target = new File(dir, String.valueOf(dto.getAttachmentNo()));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+		
+		//[3] 응답 객체를 만들어 데이터를 전송
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_ENCODING, 
+										StandardCharsets.UTF_8.name())
+				.contentLength(dto.getAttachmentSize())
+				.header(HttpHeaders.CONTENT_TYPE , 
+										dto.getAttachmentType())
+				.header(HttpHeaders.CONTENT_DISPOSITION, 
+									ContentDisposition.attachment()
+											.filename(
+													dto.getAttachmentName(), 
+													StandardCharsets.UTF_8)
+											.build().toString())
+				.body(resource);
+	}
+	
 	@GetMapping("/confirm")
 	public String confirm(Model model,
 			HttpSession session) {
@@ -141,40 +172,25 @@ public class ChalController {
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> download(
 			@RequestParam int confirmNo) throws IOException {
+		//인증글 번호로 첨부파일 번호 찾기
 		int attachmentNo = attachmentDao.selectConfirmImg(confirmNo);
-		System.out.println(attachService.load(attachmentNo));
+		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
 		return attachService.load(attachmentNo);
 	}
 
-	@GetMapping("detail/download")//챌린지 상세 이미지 조회
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> detailDownload(
-			@ModelAttribute ChalDto chalDto
-		) throws IOException {
-		AttachmentDto dto = attachmentDao.selectDetail(chalDto.getChalNo());
-		if(dto == null) {//파일이 없으면
-			throw new TargetNotFoundException("존재하지 않는 파일입니다");
-		}
+	@GetMapping("/confirm/mylist") //챌린지별 내 인증글 목록 조회
+	public String myConfirmList(@ModelAttribute ChalDto chalDto,
+			Model model,
+			HttpSession session) {
+		//챌린지 정보 조회
+		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
 		
-		//[2] 파일 불러오기
-		File target = new File(dir, String.valueOf(dto.getAttachmentNo()));
-		byte[] data = FileUtils.readFileToByteArray(target);
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		//[3] 응답 객체를 만들어 데이터를 전송
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_ENCODING, 
-										StandardCharsets.UTF_8.name())
-				.contentLength(dto.getAttachmentSize())
-				.header(HttpHeaders.CONTENT_TYPE , 
-										dto.getAttachmentType())
-				.header(HttpHeaders.CONTENT_DISPOSITION, 
-									ContentDisposition.attachment()
-											.filename(
-													dto.getAttachmentName(), 
-													StandardCharsets.UTF_8)
-											.build().toString())
-				.body(resource);
+		//내 인증글 목록 조회
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("confirmList", confirmDao.myConfirmList(memberId, chalDto.getChalNo()));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(memberId, chalDto.getChalNo()));
+		return "chal/confirm_mylist";
 	}
 	
 
@@ -188,5 +204,6 @@ public class ChalController {
 		model.addAttribute("list", chalDao.selectList(vo));
 		return "chal/list";
 	}
-
+	
+	
 }
