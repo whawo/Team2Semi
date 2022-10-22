@@ -142,7 +142,7 @@ public class ChalController {
 	public ResponseEntity<ByteArrayResource> download(
 			@RequestParam int confirmNo) throws IOException {
 		int attachmentNo = attachmentDao.selectConfirmImg(confirmNo);
-		
+		System.out.println(attachService.load(attachmentNo));
 		return attachService.load(attachmentNo);
 	}
 
