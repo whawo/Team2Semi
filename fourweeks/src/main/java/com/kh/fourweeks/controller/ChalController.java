@@ -238,17 +238,17 @@ public class ChalController {
 	}
 	
 	@GetMapping("/confirm/mylist") //챌린지별 내 인증글 목록 조회
-	public String myConfirmList(@ModelAttribute ChalDto chalDto,
+	public String myConfirmList(@RequestParam int chalNo,
 			Model model,
 			HttpSession session) {
 		//챌린지 정보 조회
-		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
-		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
+		model.addAttribute("chalDto", chalDao.selectOne(chalNo));
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalNo));
 		
 		//내 인증글 목록 조회
 		String userId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("confirmList", confirmDao.myConfirmList(userId, chalDto.getChalNo()));
-		model.addAttribute("listCnt", confirmDao.confirmCnt(userId, chalDto.getChalNo()));
+		model.addAttribute("confirmList", confirmDao.myConfirmList(userId, chalNo));
+		model.addAttribute("listCnt", confirmDao.myConfirmCnt(userId, chalNo));
 		return "chal/confirm_mylist";
 	}
 	
@@ -274,7 +274,16 @@ public class ChalController {
 		attr.addAttribute("confirmNo", confirmNo);
 		return "redirect:/chal/confirm/detail";
 	}
-
+	
+	@GetMapping("/confirm/all")
+	public String confirmAll(@RequestParam int chalNo,
+			Model model) {
+		model.addAttribute("confirmList", confirmDao.allConfirmList(chalNo));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(chalNo));
+		return "chal/confirm_list";
+	}
+		
+	
 	@GetMapping("/list")
 	public String list(
 				Model model,

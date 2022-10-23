@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
+import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
 
 @Repository
@@ -104,7 +105,7 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	}
 
 	
-	private RowMapper<ChalConfirmDto> myListMapper = (rs, idx) -> {
+	private RowMapper<ChalConfirmDto> listMapper = (rs, idx) -> {
 		return ChalConfirmDto.builder()
 				.confirmNo(rs.getInt("confirm_no"))
 				.chalNo(rs.getInt("chal_no"))
@@ -120,14 +121,18 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	
 	@Override
 	public List<ChalConfirmDto> myConfirmList(String userId, int chalNo) {
-		String sql = "select * from chal_confirm where user_id = ? and chal_no = ? order by confirm_no desc";
+		String sql = "select * from chal_confirm "
+				+ "where user_id = ? and chal_no = ? "
+				+ "order by confirm_no desc";
 		Object[] param = {userId, chalNo};
-		return jdbcTemplate.query(sql, myListMapper, param);
+		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
 	@Override
-	public int confirmCnt(String userId, int chalNo) {
-		String sql = "select count(*) cnt from chal_confirm where user_id = ? and chal_no = ?";
+	public int myConfirmCnt(String userId, int chalNo) {
+		String sql = "select count(*) cnt "
+				+ "from chal_confirm "
+				+ "where user_id = ? and chal_no = ?";
 		Object[] param = {userId, chalNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
@@ -154,4 +159,38 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		return this.selectOne(confirmNo);
 	}
 	
+	private RowMapper<ChalConfirmVO> listVOMapper = (rs, idx) -> {
+		return ChalConfirmVO.builder()
+				.confirmNo(rs.getInt("confirm_no"))
+				.chalNo(rs.getInt("chal_no"))
+				.userId(rs.getString("user_id"))
+				.confirmTitle(rs.getString("confirm_title"))
+				.confirmContent(rs.getString("confirm_content"))
+				.confirmRead(rs.getInt("confirm_read"))
+				.confirmLike(rs.getInt("confirm_like"))
+				.confirmDate(rs.getDate("confirm_date"))
+				.modifiedDate(rs.getDate("modified_date"))
+				.userNick(rs.getString("user_nick"))
+				.build();
+	};
+	
+	@Override
+	public List<ChalConfirmVO> allConfirmList(int chalNo) {
+		String sql = "select C.*, U.user_nick "
+				+ "from chal_confirm C "
+				+ "left outer join chal_user U on C.user_id = U.user_id "
+				+ "where chal_no = ? "
+				+ "order by chal_no desc";
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, listVOMapper, param);
+	}
+	
+	@Override
+	public int confirmCnt(int chalNo) {
+		String sql = "select count(*) cnt "
+				+ "from chal_confirm "
+				+ "where chal_no = ?";
+		Object[] param = {chalNo};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 }

@@ -13,10 +13,16 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function(){
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+		
 		//인증샷이 없으면 img 영역 미노출
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
 		});
+		
 	});
 </script>
 
@@ -24,7 +30,7 @@
 	<br><br>
 	
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-	<img src = "/images/bg_default.png" width="50" height="50">
+	<img src = "/images/bg_default.png" width="50" height="50" class="user-img">
 	${confirmDto.userId}
 	<br><br>
 	${confirmDto.confirmDate}
