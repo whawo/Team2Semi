@@ -28,8 +28,7 @@
 	
 	챌린지 정보
 	<br><br>
-	<!-- 챌린지 정보 미리보기 추가 필요 / 해당 영역클릭 시, 챌린지 상세로 이동-->
-	<!-- 이미지 못불러올 때 기본이미지로 대체(jQuery로 이벤트 처리하도록 수정해야 함) -->
+	<!-- 해당 영역클릭 시, 챌린지 상세로 이동하도록 처리 -->
 	<img src = "/chal/detail/download?chalNo=${chalDto.chalNo}" width="120" height="90" class="chal-img">
 	<br><br>
 	<c:choose>
@@ -46,7 +45,6 @@
 		<c:otherwise>
 			${chalVO.getDDay()}일 뒤 시작
 		</c:otherwise>
-		
 	</c:choose>
 	<br>
 	${chalDto.chalTitle}
@@ -65,11 +63,10 @@
 		
 	<br><br>	
 	
-	<!-- 인증 화면에서 해당 챌린지가 선택된 상태가 될 수 있도록 기능 추가 필요 -->
+	<!-- 인증 화면에서 해당 챌린지가 선택된 상태가 될 수 있도록 챌린지 번호 전달 -->
 	<a href="/chal/confirm?chalNo=${chalDto.chalNo}">인증하기</a>
 	<br><br>
 	
-	<!-- 전체 조회 개수 세는 기능 필요 -->
 	전체(${listCnt})
 	<br><br>
 	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
@@ -79,8 +76,9 @@
 	<br><br>
 	[공지] 글 제목
 	<br><br>
-	
+
 	<c:forEach var="list" items="${confirmList}">
+		<a href="/chal/confirm/detail?confirmNo=${list.confirmNo}">
 		<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
 		<img src = "detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
 		<br><br>
@@ -105,6 +103,7 @@
 		${list.confirmLike}
 		&nbsp; 
 		<i class="fa-regular fa-comment"></i> 댓글수
+		</a>
 		<br><br><br>
 	</c:forEach>
 	
