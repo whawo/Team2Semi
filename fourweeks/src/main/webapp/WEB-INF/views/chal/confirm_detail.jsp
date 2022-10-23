@@ -41,7 +41,7 @@
 	<br><br>
 	
 	<c:if test="${loginId == confirmDto.userId}">
-		<a href="edit?confirmNo=${confirmDto.confirmNo}" class="btn-edit">수정하기</a> <!-- jQuery에서 작성일 지나면 비활성화 처리, 비활성화 버튼 클릭 시 '작성한 날에만 수정할 수 있어요' 팝업 -->
+		<a href="edit?confirmNo=${confirmDto.confirmNo}" class="btn-edit">수정하기</a>
 	</c:if>
 	
 	<!-- 댓글 리스트 -->
