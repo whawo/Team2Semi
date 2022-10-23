@@ -90,17 +90,7 @@
 		&nbsp; 
 		<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
 		&nbsp;
-		<!-- 좋아요 -->
-		<c:if test="${isLike == null}">
-			<i class="fa-regular fa-heart"></i>
-		</c:if>
-		<c:if test="${isLike == true}">
-			<i class="fa-solid fa-heart"></i>
-		</c:if>
-		<c:if test="${isLike == false}">
-			<i class="fa-regular fa-heart"></i>
-		</c:if>
-		${list.confirmLike}
+		<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 		&nbsp; 
 		<i class="fa-regular fa-comment"></i> 댓글수
 		</a>
