@@ -20,4 +20,7 @@ public interface ChalConfirmDao {
 	ChalConfirmDto selectOne(int confirmNo); //인증글 상세 조회
 	List<ChalConfirmDto> myConfirmList(String userId, int chalNo); //챌린지별 내 인증글 목록 조회
 	int confirmCnt(String userId, int chalNo); //인증글 개수 조회
+	
+	ChalConfirmDto read(int confirmNo); //인증글 상세 조회+조회수 증가
+	boolean updateReadcount(int confirmNo); //인증글 조회수 증가
 }

@@ -139,5 +139,19 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	@Override
+	public boolean updateReadcount(int confirmNo) {
+		String sql = "update chal_confirm "
+				+ "set confirm_read = confirm_read + 1 "
+				+ "where confirm_no = ?"; 
+		Object[] param = {confirmNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	@Override
+	public ChalConfirmDto read(int confirmNo) {
+		this.updateReadcount(confirmNo);
+		return this.selectOne(confirmNo);
+	}
 	
 }

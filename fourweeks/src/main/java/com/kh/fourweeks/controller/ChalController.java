@@ -3,7 +3,9 @@ package com.kh.fourweeks.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -164,6 +166,24 @@ public class ChalController {
 	public String confirmDetail(Model model,
 			@RequestParam int confirmNo,
 			HttpSession session) {
+		//조회수 중복 방지(Set: 중복 비허용)
+		//(1) 세션에 읽은 인증글 번호 저장소(name=history)가 없으면 생성
+		Set<Integer> history = (Set<Integer>) session.getAttribute("history");
+		if(history == null) {
+			history = new HashSet<>();
+		}
+		
+		//(2) 현재 인증글 번호로 읽은 적이 있는지 검사
+		if(history.add(confirmNo)) {//처음 읽는 번호면 add됨
+			model.addAttribute("confirmDto", confirmDao.read(confirmNo));
+		}
+		else {//읽은 적이 있으면 add 안 됨
+			model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
+		}
+		
+		//(3) 갱신된 저장소를 세션에 다시 저장
+		session.setAttribute("history", history);
+		
 		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
 		return "chal/confirm_detail";
 	}
