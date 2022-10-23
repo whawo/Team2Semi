@@ -58,7 +58,6 @@ public class ChalController {
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
 		dir.mkdirs();
-		System.out.println("created");
 	}
 	
 	@GetMapping("/create")
@@ -170,11 +169,14 @@ public class ChalController {
 	public String list(
 				Model model,
 				@ModelAttribute(name="vo") ChalListSearchVO vo) {
-
+		// 페이지수 구하기
 		int count = chalDao.count(vo);
 		vo.setCount(count);
+		// 첨부파일 출력
+		model.addAttribute("list", attachmentDao.selectList());
+		// 
 		model.addAttribute("list", chalDao.selectList(vo));
 		return "chal/list";
 	}
-
+	
 }
