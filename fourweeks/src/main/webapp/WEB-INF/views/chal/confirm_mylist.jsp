@@ -4,6 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="내 인증글" name="title"/>
 </jsp:include>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
 	.confirm-img.no-img {
 		display: none;
@@ -22,6 +23,13 @@
 			$(this).addClass("no-img");
 		});
 	});
+	
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
+    });
 </script>
 	내 인증글
 	<br><br>
