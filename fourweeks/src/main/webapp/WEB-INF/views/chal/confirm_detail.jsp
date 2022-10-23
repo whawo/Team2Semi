@@ -4,6 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 인증글" name="title"/>
 </jsp:include>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
 	.confirm-img.no-img {
 		display: none;
@@ -33,11 +34,21 @@
 	<br><br>
 	${confirmDto.confirmContent}
 	<br><br>
-	조회 ${confirmDto.confirmRead}
+	<i class="fa-regular fa-eye"></i> ${confirmDto.confirmRead}
 	<br><br>
-	좋아요 ${confrimDto.confirmLike}
+	<!-- 좋아요 -->
+	<c:if test="${isLike == null}">
+		<a class="heart"><i class="fa-regular fa-heart"></i></a>
+	</c:if>
+	<c:if test="${isLike == true}">
+		<a href="like?confirmNo=${confirmDto.confirmNo}"><i class="fa-solid fa-heart"></i></a>
+	</c:if>
+	<c:if test="${isLike == false}">
+		<a href="like?confirmNo=${confirmDto.confirmNo}"><i class="fa-regular fa-heart"></i></a>
+	</c:if>
+	${confirmDto.confirmLike}
 	<br><br>
-	댓글 <!-- 댓글 테이블과 조인 필요 -->
+	<i class="fa-regular fa-comment"></i> 댓글수 <!-- 댓글 테이블과 조인 필요 -->
 	<br><br>
 	
 	<c:if test="${loginId == confirmDto.userId}">

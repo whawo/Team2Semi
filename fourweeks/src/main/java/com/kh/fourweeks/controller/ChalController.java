@@ -32,10 +32,12 @@ import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ParticipantDto;
+import com.kh.fourweeks.entity.UserConfirmLikeDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
@@ -48,6 +50,9 @@ public class ChalController {
 	
 	@Autowired
 	private ChalConfirmDao confirmDao;
+	
+	@Autowired
+	private UserConfirmLikeDao confirmLikeDao;
 	
 	@Autowired
 	private ChalService chalService;
@@ -78,15 +83,15 @@ public class ChalController {
 			@RequestParam List<MultipartFile> attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		chalDto.setUserId(memberId);
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		chalDto.setUserId(userId);
 		
 		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
 		int chalNo = chalService.create(chalDto, attachment);
 		
 		//참가자에 개설자 자동 추가
 		partDto.setChalNo(chalNo);
-		partDto.setUserId(memberId);
+		partDto.setUserId(userId);
 		chalDao.addParticipant(partDto);
 		System.out.println(dir);
 		//redirect
@@ -139,11 +144,11 @@ public class ChalController {
 				.body(resource);
 	}
 	
-	@GetMapping("/confirm")
+	@GetMapping("/confirm") //인증글 등록
 	public String confirm(Model model,
 			HttpSession session) {
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("chalList", confirmDao.selectList(memberId));
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("chalList", confirmDao.selectList(userId));
 		return "chal/confirm";
 	}
 	
@@ -152,8 +157,8 @@ public class ChalController {
 			@RequestParam List<MultipartFile> attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		confirmDto.setUserId(memberId);
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		confirmDto.setUserId(userId);
 		
 		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
 		int confirmNo = chalService.confirm(confirmDto, attachment);
@@ -162,7 +167,7 @@ public class ChalController {
 		return "redirect:/chal/confirm/detail";
 	}
 	
-	@GetMapping("/confirm/detail")
+	@GetMapping("/confirm/detail") //인증글 상세
 	public String confirmDetail(Model model,
 			@RequestParam int confirmNo,
 			HttpSession session) {
@@ -184,6 +189,15 @@ public class ChalController {
 		//(3) 갱신된 저장소를 세션에 다시 저장
 		session.setAttribute("history", history);
 		
+		//좋아요 기록 조회
+		String userId = (String) session.getAttribute(SessionConstant.ID);
+		if(userId != null) {
+			UserConfirmLikeDto likeDto = new UserConfirmLikeDto();
+			likeDto.setUserId(userId);
+			likeDto.setConfirmNo(confirmNo);
+			model.addAttribute("isLike", confirmLikeDao.check(likeDto));
+		}
+		
 		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
 		return "chal/confirm_detail";
 	}
@@ -198,12 +212,12 @@ public class ChalController {
 		return attachService.load(attachmentNo);
 	}
 	
-	@GetMapping("/confirm/edit")
+	@GetMapping("/confirm/edit") //인증글 수정
 	public String confirmEdit(@RequestParam int confirmNo,
 			HttpSession session,
 			Model model) {
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("chalList", confirmDao.selectList(memberId));
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("chalList", confirmDao.selectList(userId));
 		ChalConfirmDto confirmDto = confirmDao.selectOne(confirmNo);
 		if(confirmDto == null) {
 			throw new TargetNotFoundException();
@@ -216,7 +230,7 @@ public class ChalController {
 	public String confirmEdit(@ModelAttribute ChalConfirmDto confirmDto,
 			@RequestParam List<MultipartFile> attachment,
 			RedirectAttributes attr) throws IllegalStateException, IOException {
-		//chalService에서 수정, 첨부파일 업로드(저장)까지 처리
+		//chalService에서 수정, 첨부파일 업로드(추가, 변경)/삭제까지 처리
 		int confirmNo = chalService.confirmEdit(confirmDto, attachment);
 		
 		attr.addAttribute("confirmNo", confirmNo);
@@ -232,12 +246,34 @@ public class ChalController {
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
 		
 		//내 인증글 목록 조회
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("confirmList", confirmDao.myConfirmList(memberId, chalDto.getChalNo()));
-		model.addAttribute("listCnt", confirmDao.confirmCnt(memberId, chalDto.getChalNo()));
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("confirmList", confirmDao.myConfirmList(userId, chalDto.getChalNo()));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(userId, chalDto.getChalNo()));
 		return "chal/confirm_mylist";
 	}
 	
+	@GetMapping("/confirm/like") //인증글 좋아요
+	public String confirmLike(
+				@RequestParam int confirmNo,
+				HttpSession session, 
+				RedirectAttributes attr) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		UserConfirmLikeDto dto = new UserConfirmLikeDto();
+		dto.setUserId(userId);
+		dto.setConfirmNo(confirmNo);
+		
+		if(confirmLikeDao.check(dto)) {//좋아요를 한 상태면
+			confirmLikeDao.delete(dto);//취소(데이터 삭제)
+		}
+		else {//좋아요를 한 적이 없는 상태면
+			confirmLikeDao.insert(dto);//좋아요(데이터 추가)
+		}
+		
+		confirmLikeDao.refresh(confirmNo);//confirm_like(인증글 좋아요 수) 갱신
+		
+		attr.addAttribute("confirmNo", confirmNo);
+		return "redirect:/chal/confirm/detail";
+	}
 
 	@GetMapping("/list")
 	public String list(
