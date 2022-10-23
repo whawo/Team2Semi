@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalDto;
+import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
@@ -60,23 +61,6 @@ public class ChalDaoImpl implements ChalDao {
 		
 		jdbcTemplate.update(sql, param);
 	}
-	
-		// 미사용
-//  	private RowMapper<ChalDto> mapper = new RowMapper<ChalDto>() {
-//		@Override
-//		public ChalDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			return ChalDto.builder()
-//					.chalNo(rs.getInt("chal_no"))
-//					.userId(rs.getString("user_id"))
-//					.chalTitle(rs.getString("chal_title"))
-//					.chalContent(rs.getString("chal_content"))
-//					.howConfirm(rs.getString("how_confirm"))
-//					.chalPerson(rs.getInt("chal_person"))
-//					.chalTopic(rs.getString("chal_topic"))
-//					.startDate(rs.getDate("start_date"))
-//					.build();
-//		}
-//	};
 	
 	private ResultSetExtractor<ChalDto> extractor = new ResultSetExtractor<ChalDto>() {
 		@Override
@@ -347,6 +331,7 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+
 	@Override
 	public int searchForAllTypeCount(ChalListSearchVO vo) {
 		String sql = "select count(*) from chal where instr(#1, ?) > 0 and ceil(start_date-sysdate) > 0 and chal_person < 11";
@@ -359,5 +344,34 @@ public class ChalDaoImpl implements ChalDao {
 		String sql = "select count(*) from chal where instr(chal_topic, #1) > 0 and ceil(start_date-sysdate) > 0 and chal_person < 11";
 		sql = sql.replace("#1", vo.getType());
 		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	private RowMapper<ParticipantDto> participantMapper = new RowMapper<ParticipantDto>() {
+		@Override
+		public ParticipantDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			return ParticipantDto.builder()
+					.participantNo(rs.getInt("participant_no"))
+					.chalNo(rs.getInt("chal_no"))
+					.userId(rs.getString("user_id"))
+					.participantJoin(rs.getDate("participant_join"))
+				.build();
+		}
+	};
+	
+
+	@Override
+	public List<ParticipantDto> selectParticipant(int chalNo) {//조민재 추가
+		
+		String sql ="select * from participant where chal_no=?";
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, participantMapper,param);
+	}
+
+	@Override
+	public List<ParticipantDto> selectParticipantOne(int chalNo, String userId) {//조민재 추가
+		String sql ="select * from participant where chal_no= ? and user_id = ?";
+		Object[] param = {chalNo, userId};
+		return jdbcTemplate.query(sql, participantMapper,param);
 	}
 }

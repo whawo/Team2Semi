@@ -29,11 +29,13 @@ import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
+import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
@@ -51,6 +53,9 @@ public class ChalController {
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private ChalUserDao chalUserDao;
 	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
 
@@ -91,13 +96,22 @@ public class ChalController {
 	@GetMapping("/detail")
 	public String detail(@ModelAttribute ChalDto chalDto,
 			@ModelAttribute AttachmentDto attachmentDto,
-			Model model) {
+			Model model,
+			HttpSession session
+			) {
+		
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
-		
 		//첨부파일
 		model.addAttribute("attachmentList", 
 				attachmentDao.selectDetail(attachmentDto.getAttachmentNo()));
+		//참가여부 
+		model.addAttribute("participantDto", chalDao.selectParticipantOne(chalDto.getChalNo(),
+				(String)session.getAttribute(SessionConstant.ID)));
+		System.out.println(session.getAttribute(SessionConstant.ID) + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+
+				chalDto.getChalNo() + model);
+		
+		
 		return "chal/detail";
 	}
 	
