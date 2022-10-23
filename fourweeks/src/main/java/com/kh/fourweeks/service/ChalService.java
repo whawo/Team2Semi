@@ -14,4 +14,9 @@ public interface ChalService {
 	
 	int confirm(ChalConfirmDto confirmDto, List<MultipartFile> attachment) 
 			throws IllegalStateException, IOException; //인증샷 (챌린지 인증)
+	
+	boolean remove(int confirmNo); //인증글 수정 > 인증샷 삭제
+	
+	int confirmEdit(ChalConfirmDto confirmDto, List<MultipartFile> attachment)
+			throws IllegalStateException, IOException; //인증글 수정+인증샷;
 }

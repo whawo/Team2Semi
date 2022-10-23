@@ -1,6 +1,5 @@
 package com.kh.fourweeks.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +41,13 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 
 	@Override
 	public boolean update(ChalConfirmDto confirmDto) {
-		
-		return false;
+		String sql = "update chal_confirm set "
+				+ "confirm_title = ?, confirm_content = ?, "
+				+ "modified_date = sysdate "
+				+ "where confirm_no = ?";
+		Object[] param = {confirmDto.getConfirmTitle(), 
+				confirmDto.getConfirmContent(), confirmDto.getConfirmNo()};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
 	private RowMapper<ConfirmAbleChalListVO> mapper = (rs, idx) -> {
@@ -127,5 +131,13 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		Object[] param = {userId, chalNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+
+	@Override
+	public boolean delete(int confirmNo) {
+		String sql = "delete chal_confirm where confirm_no = ?";
+		Object[] param = {confirmNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
 	
 }

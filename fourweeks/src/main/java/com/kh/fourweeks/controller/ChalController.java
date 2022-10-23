@@ -177,7 +177,32 @@ public class ChalController {
 		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
 		return attachService.load(attachmentNo);
 	}
-
+	
+	@GetMapping("/confirm/edit")
+	public String confirmEdit(@RequestParam int confirmNo,
+			HttpSession session,
+			Model model) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("chalList", confirmDao.selectList(memberId));
+		ChalConfirmDto confirmDto = confirmDao.selectOne(confirmNo);
+		if(confirmDto == null) {
+			throw new TargetNotFoundException();
+		}
+		model.addAttribute("confirmDto", confirmDto);
+		return "chal/confirm_edit";
+	}
+	
+	@PostMapping("/confirm/edit")
+	public String confirmEdit(@ModelAttribute ChalConfirmDto confirmDto,
+			@RequestParam List<MultipartFile> attachment,
+			RedirectAttributes attr) throws IllegalStateException, IOException {
+		//chalService에서 수정, 첨부파일 업로드(저장)까지 처리
+		int confirmNo = chalService.confirmEdit(confirmDto, attachment);
+		
+		attr.addAttribute("confirmNo", confirmNo);
+		return "redirect:/chal/confirm/detail";
+	}
+	
 	@GetMapping("/confirm/mylist") //챌린지별 내 인증글 목록 조회
 	public String myConfirmList(@ModelAttribute ChalDto chalDto,
 			Model model,

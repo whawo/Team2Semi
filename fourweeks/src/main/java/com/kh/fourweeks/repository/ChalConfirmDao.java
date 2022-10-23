@@ -10,6 +10,7 @@ public interface ChalConfirmDao {
 	int sequence();
 	void write(ChalConfirmDto confirmDto);
 	boolean update(ChalConfirmDto confirmDto);
+	boolean delete(int confirmNo);
 	
 	//첨부파일 관련 메소드
 	void confirmAttachment(int confirmNo, int attachmentNo, String userId); //confirm_img 테이블에 첨부파일 정보 연결

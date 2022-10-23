@@ -108,5 +108,11 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {confirmNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
-
+	
+	@Override
+	public AttachmentDto confirmImgInfo(int confirmNo) {
+		String sql = "select * from confirm_info_view where confirm_no = ?";
+		Object[] param = {confirmNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
 }
