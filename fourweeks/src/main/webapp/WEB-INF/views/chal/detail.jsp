@@ -5,6 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="4weeks" name="title" />
 </jsp:include>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
 <style>
 ul.list {
@@ -24,6 +25,28 @@ ul.list>li:hover {
 	color: #d63031;
 }
 </style>
+<script>
+	$(function(){
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+		
+		//인증샷이 없으면 img 태그 가리기
+		$(".confirm-img").on("error", function(){
+			$(this).addClass("no-img");
+		});
+	});
+	
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
+    });
+
+</script>
+
 <div class="container-400">
 	<div class="row center">
 		<h1>챌린지 상세 정보</h1>
@@ -39,13 +62,15 @@ ul.list>li:hover {
 			<li>챌린지 시작일: ${chalDto.getStartDate()} ${chalVO.getDDay()}일뒤 시작<br>~${chalVO.endDate}
 			</li>
 			<c:choose>
-				<c:when test="${participantDto.size() != 0}">
+				<c:when test="${participantDto.size() != 0 || chalDto.getChalPerson()!=10}">
+				<button>참가하기</button>
 				</c:when>
 				<c:otherwise>
-				<button>참가하기</button>
+				<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
 				</c:otherwise>
 			</c:choose>
-			<li>챌린지 리더 : ${chalDto.getUserId()}</li>
+			<li>챌린지 리더 :<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
+		<img src = "#" width="50" height="50" class="user-img"> ${chalDto.getUserId()}</li>
 			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
 			<li>챌린지 인증방법 : ${chalDto.getHowConfirm()}</li>
 		</ul>
