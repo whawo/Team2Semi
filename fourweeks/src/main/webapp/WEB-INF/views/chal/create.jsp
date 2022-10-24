@@ -7,8 +7,6 @@
 <title>챌린지 개설</title>
 </head>
 <body>
-<!-- 확인용 -->
-${loginId}
 	<div>
 		원하는 챌린지를 직접 개설해보세요.
 	</div>
