@@ -72,13 +72,11 @@ float:left;
    	 <div class="row 4weeks-inner"> 
    		<div class="row 4weeks-nav">
    			<ul class="list-nav"> 
-   			<c:choose>
-               <c:when test="${login}">
-
-   			
    				<il class="nav-item">
    					<img src="/images/top_logo.png" width="60" class="logo-margin">
    					</il>
+   			<c:choose>
+               <c:when test="${login}">
    					<il class="nav-item">
    					<a href="/">전체 챌린지</a>
    					</il>
