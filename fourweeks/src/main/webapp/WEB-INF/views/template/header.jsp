@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
+
 	div, ul, li{
 	border: 1px dotted gray;
 	list-style:none;
@@ -26,6 +27,7 @@
 		width:1200px;
 		padding: 0 30px;
 		margin: 0 auto;		
+
 	}
 	.4weeks-nav{
 		overflow: hidden;
@@ -59,6 +61,7 @@ float:left;
    			<ul class="list-nav"> 
    			<c:choose>
                <c:when test="${login}">
+
    			
    				<il class="nav-item">
    					<img src="/images/join_success.png" width="60">
@@ -109,3 +112,4 @@ float:left;
    	</div>
  </div>
    	</body>
+

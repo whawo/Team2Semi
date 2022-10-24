@@ -9,14 +9,34 @@ public class ChalListSearchVO {
 	private String type, keyword;
 	
 	@ToString.Include
-	public boolean isSearch() {
-		return type != null && keyword != null;
+	public int isSearch() {
+		if(type == null && keyword == null) { //전체리스트
+			return 1; 
+		} else if(type.equals("chal_title") && keyword.equals("")) { // 타입(전체) 키워드 없이 검색 버튼 누를시
+			return 2; 
+		} else if(type.equals("chal_title")) { // 타입(전체)+키워드 검색시
+			return 3; 
+		} else if(!type.equals("chal_title") && keyword.equals("")){ // 타입(주제) 키워드 없이 검색 버튼 누를시 : 메인페이지 메소드와 겹침
+			return 4;
+		} else { // 타입(주제) + 키워드 검색시
+			return 5; // 
+		}
 	}
 	
-	
-	
-	
-	
+	@ToString.Include
+	public int isSearchAll() {
+		if(type == null && keyword == null) { //전체리스트
+			return 1; 
+		} else if(type.equals("chal_title") && keyword.equals("")) { // 타입(전체) 키워드 없이 검색 버튼 누를시
+			return 2; 
+		} else if(type.equals("chal_title")) { // 타입(전체)+키워드 검색시
+			return 3; 
+		} else if(!type.equals("chal_title") && keyword.equals("")){ // 타입(주제) 키워드 없이 검색 버튼 누를시 : 메인페이지 메소드와 겹침
+			return 4;
+		} else { // 타입(주제) + 키워드 검색시
+			return 5; // 
+		}
+	}
 	
 	//현재 페이지 번호(없을 경우 1로 설정)
 	private int p = 1;
@@ -83,10 +103,9 @@ public class ChalListSearchVO {
 		return endBlock() < lastBlock();
 	}
 	
-
 	@ToString.Include
 	public String parameter() {
-		if(isSearch()) {
+		if(isSearch() == 5 || isSearch() == 4 || isSearch() == 3) {
 			return "size="+size+"&type="+type+"&keyword="+keyword;
 		}
 		else {
