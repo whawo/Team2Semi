@@ -48,6 +48,9 @@ float:left;
 .list-nav .nav-item{
 	margin-left: 20px;
 } 
+.logo-margin {
+	margin-top : 5px;
+}
 
 
 </style>
@@ -64,7 +67,7 @@ float:left;
 
    			
    				<il class="nav-item">
-   					<img src="/images/join_success.png" width="60">
+   					<img src="/images/top_logo.png" width="60" class="logo-margin">
    					</il>
    					<il class="nav-item">
    					<a href="/">전체 챌린지</a>
