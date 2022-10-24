@@ -18,10 +18,10 @@
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 	
 	<style>
-	/* 이미지 */
 		  div, img, select, input {
 	        border: 1px dotted gray;
 	      }
+	      /* 이미지 */
 	      .main {
 	        margin: 30px;
 	        position: relative;
@@ -50,39 +50,39 @@
 	    }
 	    /* 검색창*/
 	 .select{
-            border:2px solid #6c7aef;
-            border-radius: 0.5em;
-            width: 150px;
-            height: auto;
-            font-size: 16px;
-            padding: 15px; /*이거 글씨 전체가 왼쪽에서 조금씩 떨어지는 거/*/
+          border:2px solid #6c7aef;
+          border-radius: 0.5em;
+          width: 150px;
+          height: auto;
+          font-size: 16px;
+          padding: 15px; /*이거 글씨 전체가 왼쪽에서 조금씩 떨어지는 거/*/
 
-            border-right: none;
-            border-bottom-right-radius: 0;
-            border-top-right-radius: 0;
+          border-right: none;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
         }
         .search-bar{
-            display: flex;
-            flex-direction: row;
-            position: relative;
+          display: flex;
+          flex-direction: row;
+          position: relative;
         }
         .search-box{
-        	position : relative;
-            border:2px solid #6c7aef;
-            border-radius: 0.5em;
-            width: 100%;
-            height: 60px;
-            font-size: 16px;
-            padding: 15px;
+     	position : relative;
+        border:2px solid #6c7aef;
+        border-radius: 0.5em;
+        width: 100%;
+        height: 60px;
+        font-size: 16px;
+        padding: 15px;
 
-            border-left: none;
-            border-bottom-left-radius: 0;
-            border-top-left-radius: 0;
+        border-left: none;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
         }
         .search-box > select > input{
-            display: flex;
-            flex-direction: row;
-            flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
         }
         /* 옵션보기 화살표 아이콘 */
         select {
@@ -100,18 +100,18 @@
         }
 
         .btn {
-            position: absolute;
-			margin-top : 20px;
-			margin-right : 15px;
-            padding : 0;
-            right: 0; 
-            background-color : white;           
+        position: absolute;
+		margin-top : 20px;
+		margin-right : 15px;
+        padding : 0;
+        right: 0; 
+        background-color : white;           
         }
         /* focus시 테두리 색변경 방지 */
-        input:focus, 
-        select:focus { 
-            outline: none; 
-        }
+       input:focus, 
+       select:focus { 
+       outline: none; 
+       }
 	</style>
 		
 		<div class="container-1200">
