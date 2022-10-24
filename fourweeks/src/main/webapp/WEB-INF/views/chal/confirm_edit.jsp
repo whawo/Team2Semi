@@ -37,7 +37,7 @@
 	});
 </script>    
 
-	<form action="/chal/confirm/edit" method="post" enctype="multipart/form-data" class="confirm-form">
+	<form action="edit" method="post" enctype="multipart/form-data" class="confirm-form">
 	<input type="hidden" name="confirmNo" value="${confirmDto.confirmNo}">
 	<input type="hidden" name="userId" value="${confirmDto.userId}">
 		1. 인증할 챌린지를 선택해주세요.

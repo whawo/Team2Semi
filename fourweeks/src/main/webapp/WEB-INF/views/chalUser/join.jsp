@@ -1,18 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    <link rel="stylesheet" type="text/css" href="basic.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
- 
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
+   <link rel="stylesheet" type="text/css" href="/css/basic.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 
     <style>
 
 /* 
+	10.21
+	디자인 수정해야할 것:
+	- 맨마지막 동이 어쩌고 왼쪽으로 좀 더 옮기
+	- 회원가입 버튼 클릭시 데이터 넘기기 = 메인페이지로 이동 <a> 사용해서 좀 더 수정하기  
+	- border가 전체적으로 좀 부드럽지 못한데 알아보기 
+	
+	DB수정해야할 것:
+	- 회원가입 버튼 클릭시 데이터 넘기기 = 메인페이지로 이동 <a> 사용해서 좀 더 수정하기 
+	
     10.20 
     디자인 수정해야할 것: 
     - 각 input간의 사이 간격 더 띄우기 
@@ -46,9 +58,10 @@
 
     
     div{
-        border: 1px dotted transparent;
+        /* border: 1px dotted transparent; */
+        border: 1px dotted gray;
     }
-    a{
+    .a-join{
         font-size: 14px;
         font-weight: bold;
         color:#6c7aef;
@@ -59,7 +72,7 @@
         text-decoration-line: underline;
     }
     /* 사이사이 폭 조절  */
-    .row{
+    .rows{
         margin: 20px 0;
 
     }
@@ -136,8 +149,8 @@
     } */
     .fail-message,
     .NNNNN-message{
-        
-        color: #eb6f7f
+        	margin-top:10px;
+        color: #eb6f7f;
     }
 
     .input.success {
@@ -308,36 +321,36 @@
     </script>
 <body>
     <div class="container-650">
-        <div class="row center">
+        <div class="rows center">
             <p class="join-p1">회원 가입</p>
             <p class="join-p2">함께 해요, 좋은 습관 챌린지!</p>
         </div>
 
         <form action="" method="post" autocomplete="off">
 
-            <div class="row">
+            <div class="rows">
                 <label>아이디</label>
-                <input type="text" name="userId" class="input short-text-box stbox" id="text-box1" onblur="checkId();" autocomplete="off">
+                <input type="text" name="userId" class="input short-text-box short-hover stbox" id="text-box1" onblur="checkId();" autocomplete="off">
                 <span class="fail-message">6~20자 이내 영문 소문자, 숫자를 입력해주세요.</span>
                 <span class="NNNNN-message">이미 사용중인 아이디 입니다.</span>
             </div>
 
-            <div class="row">
+            <div class="rows">
                 <label>닉네임</label>
-                <input type="text" name="userNick" class="input short-text-box stbox" onblur="checkNick();" autocomplete="off">
+                <input type="text" name="userNick" class="input short-text-box short-hover stbox" onblur="checkNick();" autocomplete="off">
                 <span class="fail-message">4~10자 한글/영문/숫자로 입력해주세요.</span>
                 <span class="NNNNN-message">이미 사용중인 닉네임 입니다.</span>
             </div>
 
-            <div class="row">
+            <div class="rows">
                 <label>비밀번호</label>
-                <input type="password" name="userPw" class="input short-text-box stbox" onblur="checkPw();" autocomplete="off"> 
+                <input type="password" name="userPw" class="input short-text-box short-hover stbox" onblur="checkPw();" autocomplete="off"> 
                 <span class="fail-message">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
             </div>
 
-            <div class="row">
+            <div class="rows">
                 <label>비밀번호 재확인</label>
-                <input type="password" id="password-check" class="input short-text-box stbox" onblur="checkPasswordRe();" autocomplete="off">
+                <input type="password" id="password-check" class="input short-text-box short-hover stbox" onblur="checkPasswordRe();" autocomplete="off">
                 <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
             </div>
 
@@ -346,16 +359,16 @@
                     <p class="join-p3">아이디/비밀번호 찾기에 사용됩니다.</p>
                 </label>
                 <li class="li-1">
-                    <input type="email" name="userEmail" class="input short-text-box email-box" onblur="checkEmail();" autocomplete="off">
+                    <input type="email" name="userEmail" class="input short-text-box short-hover email-box" onblur="checkEmail();" autocomplete="off">
                     <span class="fail-message">이메일을 다시 입력해주세요.</span>
                 </li>
             </div>
 
-            <div class="row">
+            <div class="rows">
                 <p class="join-p4">위 내용의 개인정보를 제공함에 동의합니다.</p>
                 <button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
             </div>
-                <p class="join-p5">이미 4weeks 계정이 있으신가요? <a href="#" class="a-hover">로그인</a>  </p> 
+                <p class="join-p5">이미 4weeks 계정이 있으신가요? <a href="/login" class="a-join a-hover">로그인</a>  </p> 
         </form>
     </div>
 </body>

@@ -5,7 +5,7 @@
 		<!-- 하단 푸터 -->
 		<footer>
 			<div class="row float-container">
-				<div class="float-left"><span>4weeks</span></div>
+				<div class="float-left"><img src="/images/bottom_logo.png" width="60"></div>
         		<div class="float-right"><span>© 4weeks. 2022. We root for our users!</span></div>
 			</div>
 		</footer>

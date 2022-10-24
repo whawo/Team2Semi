@@ -1,6 +1,5 @@
 package com.kh.fourweeks.repository;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
@@ -383,7 +382,7 @@ public class ChalDaoImpl implements ChalDao {
 				.build();
 		}
 	};
-	
+
 	@Override
 	public List<ParticipantDto> selectParticipant(int chalNo) {//조민재 추가
 		
@@ -393,9 +392,86 @@ public class ChalDaoImpl implements ChalDao {
 	}
 
 	@Override
-	public List<ParticipantDto> selectParticipantOne(int chalNo, String userId) {//조민재 추가
+	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//조민재 추가
 		String sql ="select * from participant where chal_no= ? and user_id = ?";
 		Object[] param = {chalNo, userId};
-		return jdbcTemplate.query(sql, participantMapper,param);
+		return jdbcTemplate.query(sql, participantExtractor,param);
 	}
+
+	private ResultSetExtractor<ChalMyDetailDto> myDetailExtractor = new ResultSetExtractor<ChalMyDetailDto>() {
+		
+		@Override
+		public ChalMyDetailDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return  ChalMyDetailDto.builder()
+						.chalTitle(rs.getString("chal_title"))
+						.chalContent(rs.getString("chal_content"))
+						.startDate(rs.getDate("start_date"))
+						.participantNo(rs.getInt("participant_no"))
+						.chalNo(rs.getInt("chal_no"))
+						.userId(rs.getString("user_id"))
+						.participantJoin(rs.getDate("participant_join"))
+						.build();
+			}else {
+				return null;
+			}
+			
+		}
+	};
+	
+	private RowMapper<ChalMyDetailDto> allDetailMapper = new RowMapper<ChalMyDetailDto>() {
+		@Override
+		public ChalMyDetailDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalMyDetailDto.builder()
+					.chalTitle(rs.getString("chal_title"))
+					.chalContent(rs.getString("chal_content"))
+					.startDate(rs.getDate("start_date"))
+					.participantNo(rs.getInt("participant_no"))
+					.chalNo(rs.getInt("chal_no"))
+					.userId(rs.getString("user_id"))
+					.participantJoin(rs.getDate("participant_join"))
+					.build();
+		}
+	};
+	
+	
+	@Override
+	public ChalMyDetailDto selectMy(String userId, int chalNo) {
+		String sql = "select * from my_chal_detail where user_id = ? and chal_no = ?";
+		Object[] param = {userId, chalNo};
+		return jdbcTemplate.query(sql, myDetailExtractor ,param);
+	}
+	
+	
+	@Override
+	public List<ChalMyDetailDto> selectAllDetail(int chalNo) {
+		String sql = "select * from my_chal_detail where chal_no = ?";
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, allDetailMapper, param);
+	}
+
+	@Override
+	public void insertParticipant(ParticipantDto partDto) {
+		//참가자 참가 메소드
+		String sql ="insert into participant(participant_no, chal_no,"
+				+ " user_id, participant_join)"
+				+ " values(participant_seq.nextval,"
+				+ " ?, ?, sysdate)";
+		Object[] param = {partDto.getChalNo(), 
+				          partDto.getUserId()};
+		 jdbcTemplate.update(sql, param);
+	}
+
+	@Override
+	public boolean updateChalPerson(int chalNo) {//참가자 증가 메소드
+
+		String sql ="update chal set chal_person = chal_person +1 where chal_no= ?";
+		
+		Object[] param = {chalNo};
+		
+		
+		return jdbcTemplate.update(sql, param)>0;
+	}
+	
+	
 }

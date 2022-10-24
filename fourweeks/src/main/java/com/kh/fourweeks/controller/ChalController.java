@@ -2,7 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,11 +9,8 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,16 +27,16 @@ import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.entity.UserConfirmLikeDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
-import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
@@ -104,199 +100,17 @@ public class ChalController {
 		return "redirect:detail";
 	}
 	
-	//상세 조회(단일)
-	@GetMapping("/detail")
-	public String detail(@ModelAttribute ChalDto chalDto,
-			@ModelAttribute AttachmentDto attachmentDto,
-			Model model,
-			HttpSession session
-			) {
-		
-		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
-		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
-		//첨부파일
-		model.addAttribute("attachmentList", 
-				attachmentDao.selectDetail(attachmentDto.getAttachmentNo()));
-		//참가여부 
-		model.addAttribute("participantDto", chalDao.selectParticipantOne(chalDto.getChalNo(),
-				(String)session.getAttribute(SessionConstant.ID)));
-		System.out.println(session.getAttribute(SessionConstant.ID) + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+
-				chalDto.getChalNo() + model);
-		
-		
-		return "chal/detail";
-	}
 	
 	@GetMapping("detail/download")//챌린지 상세 이미지 조회
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> detailDownload(
 			@ModelAttribute ChalDto chalDto
 		) throws IOException {
-		AttachmentDto dto = attachmentDao.selectDetail(chalDto.getChalNo());
-		if(dto == null) {//파일이 없으면
-			throw new TargetNotFoundException("존재하지 않는 파일입니다");
-		}
-		
-		//[2] 파일 불러오기
-		File target = new File(dir, String.valueOf(dto.getAttachmentNo()));
-		byte[] data = FileUtils.readFileToByteArray(target);
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		//[3] 응답 객체를 만들어 데이터를 전송
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_ENCODING, 
-										StandardCharsets.UTF_8.name())
-				.contentLength(dto.getAttachmentSize())
-				.header(HttpHeaders.CONTENT_TYPE , 
-										dto.getAttachmentType())
-				.header(HttpHeaders.CONTENT_DISPOSITION, 
-									ContentDisposition.attachment()
-											.filename(
-													dto.getAttachmentName(), 
-													StandardCharsets.UTF_8)
-											.build().toString())
-				.body(resource);
-	}
-	
-	@GetMapping("/confirm") //인증글 등록
-	public String confirm(Model model,
-			HttpSession session) {
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("chalList", confirmDao.selectList(userId));
-		return "chal/confirm";
-	}
-	
-	@PostMapping("/confirm")
-	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
-			@RequestParam List<MultipartFile> attachment,
-			RedirectAttributes attr,
-			HttpSession session) throws IllegalStateException, IOException {
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		confirmDto.setUserId(userId);
-		
-		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
-		int confirmNo = chalService.confirm(confirmDto, attachment);
-		
-		attr.addAttribute("confirmNo", confirmNo);
-		return "redirect:/chal/confirm/detail";
-	}
-	
-	@GetMapping("/confirm/detail") //인증글 상세
-	public String confirmDetail(Model model,
-			@RequestParam int confirmNo,
-			HttpSession session) {
-		//조회수 중복 방지(Set: 중복 비허용)
-		//(1) 세션에 읽은 인증글 번호 저장소(name=history)가 없으면 생성
-		Set<Integer> history = (Set<Integer>) session.getAttribute("history");
-		if(history == null) {
-			history = new HashSet<>();
-		}
-		
-		//(2) 현재 인증글 번호로 읽은 적이 있는지 검사
-		if(history.add(confirmNo)) {//처음 읽는 번호면 add됨
-			model.addAttribute("confirmDto", confirmDao.read(confirmNo));
-		}
-		else {//읽은 적이 있으면 add 안 됨
-			model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
-		}
-		
-		//(3) 갱신된 저장소를 세션에 다시 저장
-		session.setAttribute("history", history);
-		
-		//좋아요 기록 조회
-		String userId = (String) session.getAttribute(SessionConstant.ID);
-		if(userId != null) {
-			UserConfirmLikeDto likeDto = new UserConfirmLikeDto();
-			likeDto.setUserId(userId);
-			likeDto.setConfirmNo(confirmNo);
-			model.addAttribute("isLike", confirmLikeDao.check(likeDto));
-		}
-		
-		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
-		return "chal/confirm_detail";
-	}
-	
-	@GetMapping("confirm/detail/download") //인증글 이미지 조회
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> download(
-			@RequestParam int confirmNo) throws IOException {
 		//인증글 번호로 첨부파일 번호 찾기
-		int attachmentNo = attachmentDao.selectConfirmImg(confirmNo);
+		int attachmentNo = attachmentDao.selectChalImg(chalDto.getChalNo());
 		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
 		return attachService.load(attachmentNo);
 	}
-	
-	@GetMapping("/confirm/edit") //인증글 수정
-	public String confirmEdit(@RequestParam int confirmNo,
-			HttpSession session,
-			Model model) {
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("chalList", confirmDao.selectList(userId));
-		ChalConfirmDto confirmDto = confirmDao.selectOne(confirmNo);
-		if(confirmDto == null) {
-			throw new TargetNotFoundException();
-		}
-		model.addAttribute("confirmDto", confirmDto);
-		return "chal/confirm_edit";
-	}
-	
-	@PostMapping("/confirm/edit")
-	public String confirmEdit(@ModelAttribute ChalConfirmDto confirmDto,
-			@RequestParam List<MultipartFile> attachment,
-			RedirectAttributes attr) throws IllegalStateException, IOException {
-		//chalService에서 수정, 첨부파일 업로드(추가, 변경)/삭제까지 처리
-		int confirmNo = chalService.confirmEdit(confirmDto, attachment);
-		
-		attr.addAttribute("confirmNo", confirmNo);
-		return "redirect:/chal/confirm/detail";
-	}
-	
-	@GetMapping("/confirm/mylist") //챌린지별 내 인증글 목록 조회
-	public String myConfirmList(@RequestParam int chalNo,
-			Model model,
-			HttpSession session) {
-		//챌린지 정보 조회
-		model.addAttribute("chalDto", chalDao.selectOne(chalNo));
-		model.addAttribute("chalVO", chalDao.selectEndDday(chalNo));
-		
-		//내 인증글 목록 조회
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("confirmList", confirmDao.myConfirmList(userId, chalNo));
-		model.addAttribute("listCnt", confirmDao.myConfirmCnt(userId, chalNo));
-		return "chal/confirm_mylist";
-	}
-	
-	@GetMapping("/confirm/like") //인증글 좋아요
-	public String confirmLike(
-				@RequestParam int confirmNo,
-				HttpSession session, 
-				RedirectAttributes attr) {
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		UserConfirmLikeDto dto = new UserConfirmLikeDto();
-		dto.setUserId(userId);
-		dto.setConfirmNo(confirmNo);
-		
-		if(confirmLikeDao.check(dto)) {//좋아요를 한 상태면
-			confirmLikeDao.delete(dto);//취소(데이터 삭제)
-		}
-		else {//좋아요를 한 적이 없는 상태면
-			confirmLikeDao.insert(dto);//좋아요(데이터 추가)
-		}
-		
-		confirmLikeDao.refresh(confirmNo);//confirm_like(인증글 좋아요 수) 갱신
-		
-		attr.addAttribute("confirmNo", confirmNo);
-		return "redirect:/chal/confirm/detail";
-	}
-	
-	@GetMapping("/confirm/all")
-	public String confirmAll(@RequestParam int chalNo,
-			Model model) {
-		model.addAttribute("confirmList", confirmDao.allConfirmList(chalNo));
-		model.addAttribute("listCnt", confirmDao.confirmCnt(chalNo));
-		return "chal/confirm_list";
-	}
-		
 	
 	@GetMapping("/list")
 	public String list(
@@ -311,4 +125,76 @@ public class ChalController {
 		model.addAttribute("list", chalDao.selectList(vo));
 		return "chal/list";
 	}
+	//상세 조회(단일)
+	@GetMapping("/detail")
+	public String detail(@ModelAttribute ChalDto chalDto,
+			@ModelAttribute AttachmentDto attachmentDto,
+			Model model,
+			HttpSession session
+			) {
+		//챌린지 상세 조회
+		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
+		//종료일 조회
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
+		//첨부파일
+		model.addAttribute("attachmentList", 
+				attachmentDao.selectDetail(attachmentDto.getAttachmentNo()));
+		//참가여부 
+		model.addAttribute("participantDto", chalDao.selectParticipantOne(chalDto.getChalNo(),
+				(String)session.getAttribute(SessionConstant.ID)));
+		return "chal/detail";
+	}
+	@GetMapping("/mychal")
+	public String myChal(//챌린지 상세 
+			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			HttpSession session,
+			Model model) {
+		//챌린지 상세 조회
+		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
+		//종료일 조회
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		
+		return "chal/my_chal";
+		
+	}
+	
+	@GetMapping("/allchal")
+	public String allchal(//챌린지 상세 (참가중인 모든 유저)
+			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			HttpSession session,
+			Model model) {
+		//모든 유저 조회
+		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
+		//챌린지 종료일 조회
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		//챌린지 단일조회
+		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
+		System.out.println(model);
+		return "chal/all_chal";
+		
+	}
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "chal/insert";
+	}
+	
+	@PostMapping("/insert")
+	public String insert(// 참가자 참가
+			@ModelAttribute ParticipantDto participantDto,
+			HttpSession session,
+			RedirectAttributes attr
+			) {
+		attr.addAttribute("chalNo", participantDto.getChalNo());
+		String userId=(String)session.getAttribute(SessionConstant.ID);
+		participantDto.setUserId(userId);
+		chalDao.insertParticipant(participantDto);
+		//참가자 증가 메소드
+		chalDao.updateChalPerson(participantDto.getChalNo());
+		//
+		return "redirect:detail?chalNo="+participantDto.getChalNo();
+	}
+	
 }

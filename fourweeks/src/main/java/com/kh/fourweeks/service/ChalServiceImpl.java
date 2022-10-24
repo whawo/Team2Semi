@@ -150,6 +150,7 @@ public class ChalServiceImpl implements ChalService {
 					//기존 첨부파일이 있는지 검사, 있으면 테이블 데이터 & 실제 파일 삭제
 					AttachmentDto attachDto = attachmentDao.confirmImgInfo(confirmDto.getConfirmNo());
 					if(attachDto != null) {
+						System.out.println("confirmNo = " + confirmDto.getConfirmNo() + ", userId = "+confirmDto.getUserId());;;
 						this.remove(confirmDto.getConfirmNo());
 					}
 				}
