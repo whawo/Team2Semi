@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
- <jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
 
- 
- 
- 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
+ 	  <link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -18,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
-
 
     <style>
         /* 
@@ -257,8 +254,8 @@
             padding-top: 80px;
         }
     </style>
-     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-     <script type="text/javascript">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
     
     $(function(){
         var picker1 = new Lightpick({
@@ -347,24 +344,17 @@
              }
          });
      });
-
-
-
      </script>
-     </head>
      <body>
-     
-     <!-- 확인용 -->
-		${loginId}
-
         <div class="container-1200">
-		<div class="row" style="margin: 30px 50px 40px 50px;">
+      		<div class="row" style="margin: 30px 50px 40px 50px;">
             <div class="row">
                 <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
                 <p class="p2">내가 개설한 챌린지에 자동으로 참가하게 됩니다.</p>
             </div>
-
-           <div class="row">
+            
+            <form action="create" method="post" enctype="multipart/form-data">
+            <div class="row">
                 <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
 
                 <div class="row checks small">
@@ -454,13 +444,8 @@
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">개설하고 참가하기</button>
             </div>
         </div>
-        	</div>
+        </form>
+       </div>
      </body>
      
- <jsp:include page="/WEB-INF/views/template/footer.jsp">
-	<jsp:param value="챌린지 개설" name="title"/>
-</jsp:include>     
-
-
-
-
+ <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>     

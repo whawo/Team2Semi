@@ -58,11 +58,12 @@
 	<br><br>
 	
 	<c:if test="${loginId == confirmDto.userId}">
-		<a href="edit?confirmNo=${confirmDto.confirmNo}" class="btn-edit">수정하기</a>
+		<a href="edit?confirmNo=${confirmDto.confirmNo}">수정하기</a>
 	</c:if>
+	<br><br>	
 	
 	<!-- 댓글 리스트 -->
-	
+	댓글 
 	
 	
 
