@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>챌린지 개설</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="4weeks" name="title"/>
+</jsp:include>
 <!-- 확인용 -->
 ${loginId}
 	<div>
@@ -123,5 +119,4 @@ ${loginId}
 			</div>
 		</div>
 	</form>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

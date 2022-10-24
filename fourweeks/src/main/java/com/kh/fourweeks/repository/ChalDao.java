@@ -27,9 +27,11 @@ public interface ChalDao {
     // 모집중 조회+검색
   	List<ChalListVO> selectList(ChalListSearchVO vo);
   	List<ChalListVO> list(ChalListSearchVO vo); 
+  	List<ChalListVO> beNotInKeywordList(ChalListSearchVO vo); 
   	List<ChalListVO> search(ChalListSearchVO vo); 
   	List<ChalListVO> searchForAllType(ChalListSearchVO vo); 
   	List<ChalListVO> searchForOnlyType(ChalListSearchVO vo); 
+  	
   	
     int count(ChalListSearchVO vo);
     int searchCount(ChalListSearchVO vo); 

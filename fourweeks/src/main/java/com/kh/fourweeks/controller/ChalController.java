@@ -43,6 +43,7 @@ import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
+import com.kh.fourweeks.vo.ChalListVO;
 
 @Controller
 @RequestMapping("/chal")
@@ -308,6 +309,7 @@ public class ChalController {
 		model.addAttribute("list", attachmentDao.selectList());
 		// 
 		model.addAttribute("list", chalDao.selectList(vo));
+		System.out.println(chalDao.count(vo));
 		return "chal/list";
 	}
 }

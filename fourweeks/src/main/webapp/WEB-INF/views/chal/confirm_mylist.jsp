@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="내 인증글" name="title"/>
-</jsp:include>
+</jsp:include> 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
 	.confirm-img.no-img {
@@ -14,7 +14,7 @@
 <script>
 	$(function(){
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
-		$(".chal-img").on("error", function(){
+		$(".chal-img").error("error", function(){
 			$(this).attr("src", "/images/bg_default.png");
 		});
 		

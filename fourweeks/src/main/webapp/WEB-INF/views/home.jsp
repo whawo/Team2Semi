@@ -5,12 +5,28 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="4weeks" name="title"/>
 </jsp:include>
-		<style>
-			.img {
-				width: 100px;
-				height: 100px;
-			}
-		</style>
+	<style>
+		.main-img {
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script>
+	$(function(){
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".main-img").on("error", function(){
+			$(this).attr("src", "/images/bg_default.png");
+		});
+		
+		//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+		$(window).bind("pageshow", function (event) {
+	        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+	          	location.href = location.href;
+	        }
+	    });
+	});
+	</script>
 		<div>
 			<div>함께 해요, 좋은 습관 챌린지</div>
 			<div>‘내일 일은 내일의 내가 할 거야.’ 미루는 습관에 데어본 적 있나요? 
@@ -27,14 +43,17 @@
 		<form action="chal/list">
 			<select name="type">
 				<option value="chal_title">전체</option>
-				<option value="'운동'">운동</option>
-				<option value="'식습관'">식습관</option>
-				<option value="'생활'">생활</option>
-				<option value="'정서'">정서</option>
-				<option value="'취미'">취미</option>
-				<option value="'학습'">학습</option>
-				<option value="'환경'">환경</option>
-				<option value="'그 외'">그 외</option>
+				<option value="운동">운동</option>
+				<option value="식습관">식습관</option>
+				<option value="생활">생활</option>
+				<option value="정서">정서</option>
+				<option value="취미">취미</option>
+				<option value="학습">학습</option>
+				<option value="환경">환경</option>
+				<option value="그 외">그 외</option>
+			</select>
+			<select name="alignType" hidden="">
+				<option value="d_day asc"></option>
 			</select>
 			<input name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
 			<button type="submit">검색</button>
@@ -43,13 +62,13 @@
 		
 		<%-- 주제별 리스트 시작 --%>
 		<div>
-			<a href="chal/list?type=%27생활%27&keyword=">규칙적인 생활</a>
-			<a href="chal/list?type=%27운동%27&keyword=">운동</a>
-			<a href="chal/list?type=%27식습관%27&keyword=">식습관</a>
-			<a href="chal/list?type=%27정서%27&keyword=">마음챙김</a>
-			<a href="chal/list?type=%27취미%27&keyword=">취미</a>
-			<a href="chal/list?type=%27학습%27&keyword=">학습</a>
-			<a href="chal/list?type=%27환경%27&keyword=">에코•펫</a>
+			<a href="chal/list?alignType=d_day+asc&type=생활&keyword=">규칙적인 생활</a>
+			<a href="chal/list?alignType=d_day+asc&type=운동&keyword=">운동</a>
+			<a href="chal/list?alignType=d_day+asc&type=식습관&keyword=">식습관</a>
+			<a href="chal/list?alignType=d_day+asc&type=정서&keyword=">마음챙김</a>
+			<a href="chal/list?alignType=d_day+asc&type=취미&keyword=">취미</a>
+			<a href="chal/list?alignType=d_day+asc&type=학습&keyword=">학습</a>
+			<a href="chal/list?alignType=d_day+asc&type=환경&keyword=">에코•펫</a>
 		</div>
 		<%-- 주제별 리스트 끝 --%>
 		<hr> <!-- 구역나눔, 삭제필요 -->
@@ -65,10 +84,7 @@
 			<c:forEach var="chalDto" items="${list}">
 					<div>
 						<a href="chal/detail?chalNo=${chalDto.chalNo}">
-							<img class="img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-							<c:if test="${chalDto.getChalNo() == null}">
-								<img class="img" src="/images/bg_default.png">
-							</c:if>
+							<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
 						</a>
 					</div>
 					<div>
@@ -88,5 +104,4 @@
 					<br>
 			</c:forEach>
 		</div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
