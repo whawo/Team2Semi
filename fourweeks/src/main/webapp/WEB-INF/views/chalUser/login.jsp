@@ -40,7 +40,7 @@
             
         */
         div{
-            border: 1px dotted gray;
+            /* border: 1px dotted gray; */
         }
         .divi{  
             margin: 3px 4px 0 4px;
@@ -78,7 +78,7 @@
         color: #eb6f7f;
         }
         .margin-move{
-       
+       margin-top: 120px;
         }
 
     </style>
@@ -88,9 +88,9 @@
      
      </script>
       <body>
-<div class="row container-1200">
-        <div class="container-400">
-        <div class="row-center  margin-move">
+      <div class=" container-1200 ">
+        <div class=" container-400">
+        <div class=" margin-move">
             <div class="row center">
                 <h1>로그인</h1>
                 <p class="login-p1">가입하신 아이디와 비밀번호를 입력해주세요</p>
