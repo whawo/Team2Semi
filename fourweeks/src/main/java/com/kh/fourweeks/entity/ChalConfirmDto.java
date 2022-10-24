@@ -17,5 +17,4 @@ public class ChalConfirmDto {
 	private int confirmLike;
 	private Date confirmDate;
 	private Date modifiedDate;
-	private int confirmPk;
 }
