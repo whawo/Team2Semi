@@ -505,3 +505,96 @@ float 설정
 /*
     세미프로젝트
 */
+.label-wait{
+    border: none;
+    border-radius: 3px;
+    width: 50px;
+    height: 30px;
+    background-color:  #FBE9DD;
+    /* color: #F2A574; */
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+.label-wait::placeholder{
+    color: #F2A574;
+}
+
+.label-status {
+    border: none;
+    border-radius: 3px;
+    width: 35px;
+    height: 30px;
+    background-color: #DDDDDD;
+    /* color: #707070; */
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+.label-status::placeholder{
+    color: #707070;
+}
+.label-status-start {
+    width: 80px;
+    height: 27px;
+    font-size: 12px;
+}
+
+.label-progress{
+    border: none;
+    border-radius: 3px;
+    width: 50px;
+    height: 30px;
+    background-color: #E5E6F9;
+    /* color: #707070; */
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold; 
+}
+.label-progress::placeholder{
+    color:#6C7AEF;
+}
+
+.label-final{
+    border: none;
+    border-radius: 3px;
+    width: 120px;
+    height: 30px;
+    background-color: #F8E4E7;
+    /* color: #707070; */
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold; 
+}
+.label-final::placeholder{
+    color: #EC6E7D;
+}
+
+.label-category{
+    border: none;
+    border-radius: 3px;
+    width: 35px;
+    height: 30px;
+    background-color: #D5E9FA;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold; 
+}
+.label-category::placeholder{
+    color: #0084F3;
+}
+
+.label-notice{
+    border: none;
+    border-radius: 40%;
+    width: 40px;
+    height: 30px;
+    background-color: #E5E6F9;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold; 
+}
+.label-notice::placeholder{
+    color:#6C7AEF;
+}
+

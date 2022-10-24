@@ -5,25 +5,56 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="4weeks" name="title"/>
 </jsp:include>
-		<style>
-			.img {
-				width: 100px;
-				height: 100px;
-			}
-		</style>
-		<div>
-			<div>함께 해요, 좋은 습관 챌린지</div>
-			<div>‘내일 일은 내일의 내가 할 거야.’ 미루는 습관에 데어본 적 있나요? 
-			내가 원하는 대로 내 삶을 만들 수 있도록 오늘의 내가 할 수 있는 최선을 다해봐요. 
-			4weeks에서는 같은 목표를 가진 사람들과 함께하니까 끝까지 해낼 수 있어요. 
-			나에게 필요한 작은 습관 하나만 만들어보세요. 그 다음은 쉽습니다.
-			</div>
-			<div>#목표관리 #습관형성 #갓생살기</div>
-			<img src="/images/main_banner_illust.png">
-		</div>
-		<hr> <!-- 구역나눔, 삭제필요 -->
+
+	<style>
+		  div, img {
+	        border: 1px dotted gray;
+	      }
+	      .main {
+	        margin: 30px;
+	        position: relative;
+	        height : 240px;
+	      }
+	      #head-image {
+	        position: absolute;
+	        right: 0;
+	        height: 340px;
+	        width : 630px;
+	      }
+	      .search-bar {
+	        margin-top : 100px;
+	        margin-bottom: 30px;
+	      }
+	
+	    /* 다단배치 */
+	    .first {
+	      display: flex;
+	      flex-direction: row;
+	    }
+	    .first > div {
+	      flex-grow: 1;
+	    }
+	    .flexbox {
+	      margin: 0px;
+	    }
+	</style>
+		
+		<div class="container-1200">
+       <div class="row main">
+            <img src="/images/main_banner_illust.png" id="head-image">
+            <h2>함께 해요, 좋은 습관 챌린지</h2>
+            <span>‘내일 일은 내일의 내가 할 거야.’ 미루는 습관에 데어본 적 있나요?<br>
+              내가 원하는 대로 내 삶을 만들 수 있도록 오늘의 내가 할 수 있는 최선을 다해봐요. <br>
+              4weeks에서는 같은 목표를 가진 사람들과 함께하니까 끝까지 해낼 수 있어요. <br>
+              나에게 필요한 작은 습관 하나만 만들어보세요. 그 다음은 쉽습니다.<br>
+              <br>
+              #목표관리 #습관형성 #갓생살기
+            </span>         
+        </div>
 		
 		<%-- 검색 시작 --%>
+		<div class="search-bar">
+          <h2>검색바</h2>
 		<form action="chal/list">
 			<select name="type">
 				<option value="chal_title">전체</option>
@@ -39,24 +70,26 @@
 			<input name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
 			<button type="submit">검색</button>
 		</form>
+        </div>
 		<%-- 검색 끝 --%>
 		
 		<%-- 주제별 리스트 시작 --%>
-		<div>
-			<a href="chal/list?type=%27생활%27&keyword=">규칙적인 생활</a>
-			<a href="chal/list?type=%27운동%27&keyword=">운동</a>
-			<a href="chal/list?type=%27식습관%27&keyword=">식습관</a>
-			<a href="chal/list?type=%27정서%27&keyword=">마음챙김</a>
-			<a href="chal/list?type=%27취미%27&keyword=">취미</a>
-			<a href="chal/list?type=%27학습%27&keyword=">학습</a>
-			<a href="chal/list?type=%27환경%27&keyword=">에코•펫</a>
+		<div class="row first">
+			<div class="flexbox"><a href="chal/list?type=%27생활%27&keyword="><img src="/images/regular_lifestyle.png"></a></div>
+			<div class="flexbox"><a href="chal/list?type=%27운동%27&keyword="><img src="/images/exercise.png"></a></div>
+			<div class="flexbox"><a href="chal/list?type=%27식습관%27&keyword="><img src="/images/eating_habits.png"></a></div>
+			<div class="flexbox"><a href="chal/list?type=%27정서%27&keyword="><img src="/images/mind_control.png"></a></div>
+		</div>
+		<div class="row first">
+			<div class="flexbox"><a href="chal/list?type=%27취미%27&keyword="><img src="/images/hobby.png"></a></div>
+			<div class="flexbox"><a href="chal/list?type=%27학습%27&keyword="><img src="/images/study.png"></a></div>
+			<div class="flexbox"><a href="chal/list?type=%27환경%27&keyword="><img src="/images/echo_and_pat.png"></a></div>
+			<div class="flexbox"><a href=""><img src="/images/start_today.png"></a></div>	
 		</div>
 		<%-- 주제별 리스트 끝 --%>
-		<hr> <!-- 구역나눔, 삭제필요 -->
 		
 		<div>
-			<span>지금 바로 시작하는 거야!</span>
-			<a href="chal/list">전체보기</a>
+			<h3>지금 바로 시작하는 거야!<a href="chal/list" class="float-right" style="margin:0">전체보기</a></h3>
 		</div>
 		<hr> <!-- 구역나눔, 삭제필요 -->
 		
