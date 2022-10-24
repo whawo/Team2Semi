@@ -18,16 +18,29 @@ public interface ChalDao {
     
 	//조회 관련 메소드
 	ChalDto selectOne(int chalNo);//상세페이지 조회 기능(단일)
-  ChalDetailVO selectEndDday(int chalNo);//종료일, 남은일수 조회 메소드
+	ChalDetailVO selectEndDday(int chalNo);//종료일, 남은일수 조회 메소드
+	
+	// 메인페이지 참가자 많은 순 조회 메소드
+	List<ChalListVO> listOfLargePerson(ChalListSearchVO vo);
 
+
+    // 모집중 조회+검색
+  	List<ChalListVO> selectList(ChalListSearchVO vo);
+  	List<ChalListVO> list(ChalListSearchVO vo); 
+  	List<ChalListVO> search(ChalListSearchVO vo); 
+  	List<ChalListVO> searchForAllType(ChalListSearchVO vo); 
+  	List<ChalListVO> searchForOnlyType(ChalListSearchVO vo); 
+  	
+    int count(ChalListSearchVO vo);
+    int searchCount(ChalListSearchVO vo); 
+    int listCount(ChalListSearchVO vo);
+    int searchForAllTypeCount(ChalListSearchVO vo);
+    int searchForOnlyTypeCount(ChalListSearchVO vo);
+	
     
-  List<ChalListVO> selectList(ChalListSearchVO vo);
-  List<ChalListVO> list(ChalListSearchVO vo);
-  List<ChalListVO> search(ChalListSearchVO vo);
+
   List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 테스트용 추가(민재)
   List<ParticipantDto> selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
-	int count(ChalListSearchVO vo);
-	int searchCount(ChalListSearchVO vo);
-	int listCount(ChalListSearchVO vo);
-
+	
+	
 }
