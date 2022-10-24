@@ -6,15 +6,15 @@ import lombok.ToString;
 public class ChalListSearchVO {
 	
 	//검색분류와 검색어
-	private String type, keyword;
+	private String type, keyword, alignType;
 	
 	@ToString.Include
 	public int isSearch() {
-		if(type == null && keyword == null) { //전체리스트
+		if(type == null && keyword == null && alignType == null) { //전체리스트
 			return 1; 
 		} else if(type.equals("chal_title") && keyword.equals("")) { // 타입(전체) 키워드 없이 검색 버튼 누를시
 			return 2; 
-		} else if(type.equals("chal_title")) { // 타입(전체)+키워드 검색시
+		} else if(type.equals("chal_title")&& !keyword.equals("")) { // 타입(전체)+키워드 검색시
 			return 3; 
 		} else if(!type.equals("chal_title") && keyword.equals("")){ // 타입(주제) 키워드 없이 검색 버튼 누를시 : 메인페이지 메소드와 겹침
 			return 4;

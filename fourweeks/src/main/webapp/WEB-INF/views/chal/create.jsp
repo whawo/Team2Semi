@@ -459,5 +459,3 @@
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>     
 
-
-
