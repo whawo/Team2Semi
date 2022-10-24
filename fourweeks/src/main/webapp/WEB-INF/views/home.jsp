@@ -6,8 +6,20 @@
 	<jsp:param value="4weeks" name="title"/>
 </jsp:include>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+   href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+   rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+	
 	<style>
-		  div, img {
+	/* 이미지 */
+		  div, img, select, input {
 	        border: 1px dotted gray;
 	      }
 	      .main {
@@ -25,7 +37,6 @@
 	        margin-top : 100px;
 	        margin-bottom: 30px;
 	      }
-	
 	    /* 다단배치 */
 	    .first {
 	      display: flex;
@@ -37,6 +48,66 @@
 	    .flexbox {
 	      margin: 0px;
 	    }
+	    /* 검색창*/
+	 .select{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 150px;
+            height: auto;
+            font-size: 16px;
+            padding: 15px; /*이거 글씨 전체가 왼쪽에서 조금씩 떨어지는 거/*/
+
+            border-right: none;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .search-bar{
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+        .search-box{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 100%;
+            height: 60px;
+            font-size: 16px;
+            padding: 15px;
+
+            border-left: none;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+        .search-box > select > input{
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+        /* 옵션보기 화살표 아이콘 */
+        select {
+        -webkit-appearance:none; /* for chrome */
+        -moz-appearance:none; /*for firefox*/
+        appearance:none;
+        }
+
+        select::-ms-expand {
+        display:none;/*for IE10,11*/
+        }
+
+        select {
+        background:url("images/arrow-down.png") no-repeat 97% 50%/15px auto;
+        }
+
+        .btn {
+            position: absolute;
+            margin-top : 0;
+            right: 0;
+        }
+        /* focus시 테두리 색변경 방지 */
+        input:focus, 
+        select:focus { 
+            outline: none; 
+        }
 	</style>
 		
 		<div class="container-1200">
@@ -53,11 +124,10 @@
         </div>
 		
 		<%-- 검색 시작 --%>
-		<div class="search-bar">
-          <h2>검색바</h2>
 		<form action="chal/list">
-			<select name="type">
-				<option value="chal_title">전체</option>
+		<div class="search-bar">
+			<select name="type" class="select select-check">
+				<option selected="selected" value="chal_title">전체</option>
 				<option value="'운동'">운동</option>
 				<option value="'식습관'">식습관</option>
 				<option value="'생활'">생활</option>
@@ -67,9 +137,9 @@
 				<option value="'환경'">환경</option>
 				<option value="'그 외'">그 외</option>
 			</select>
-			<input name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
-			<button type="submit">검색</button>
-		</form>
+				<input class="search-box" type="text" name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
+				<button type="submit"><i class="fa-solid fa-magnifying-glass btn"></i></button> 
+			</form>
         </div>
 		<%-- 검색 끝 --%>
 		
