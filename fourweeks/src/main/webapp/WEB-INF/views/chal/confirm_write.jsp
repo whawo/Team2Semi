@@ -17,14 +17,19 @@
 
     <style>
         /* 
+        	10.24
+        	디자인 해야할 것:
+        	- 2번 hover 해야함 
+        	- 클릭하면 hover 색이 너무 진한 윈도우 색상으로 되어버림 
+        
+        
             디자인 수정해야 할 것 
             - 글자들은 그냥 허옇게 하는지.. -> 뭔소리냐면 선택시에는 글자 색 다 지정되는데 커서를 다른곳을 클릭하면 글씨 색상이 다시 바뀜 
             - 챌린지 인증샷 삭제버튼 글자 가운데 정렬 
             - 사진 삭제가 안됨 ㅋㅋㅎㅎ 
         */
         div{
-            border: 1px dotted gray;
-            display: block;
+        border: 1px dotted gray;
         }
 
         input::placeholder,
@@ -140,7 +145,6 @@
             display: none;
         }
         img{
-            border: 100px dotted gray;
             float: left;
         }
 
@@ -318,14 +322,14 @@
             <div class="row">
                 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" required autocomplete="off">
+                <input name="confirmTitle" class="short-text-underlinebox short-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" required autocomplete="off">
                 <span  class="helper-text-40 helper-css">0</span> /40
             </div>
 
             <div class="row">
                 <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
                 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
-                <textarea  name="confirmContent" class="helper-text2" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" required autocomplete="off"></textarea>
+                <textarea  name="confirmContent" class="helper-text2 short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" required autocomplete="off"></textarea>
                 <span  class="helper-text-40 helper-css">0</span> /300
             </div>
 
