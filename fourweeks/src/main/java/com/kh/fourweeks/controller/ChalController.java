@@ -309,7 +309,6 @@ public class ChalController {
 		model.addAttribute("list", attachmentDao.selectList());
 		// 
 		model.addAttribute("list", chalDao.selectList(vo));
-		System.out.println(chalDao.count(vo));
 		return "chal/list";
 	}
 }
