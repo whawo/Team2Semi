@@ -49,6 +49,9 @@ float:left;
 	margin-left: 20px;
 } 
 
+.logo-img{
+width: 20px;
+}
 
 </style>
     </style>
@@ -58,13 +61,11 @@ float:left;
 <div class="container-1200">
    	 <div class="row 4weeks-inner"> 
    		<div class="row 4weeks-nav">
-   			<ul class="list-nav"> 
-   			<c:choose>
+			<ul class="list-nav"> 
+			<c:choose>
                <c:when test="${login}">
-
-   			
    				<il class="nav-item">
-   					<img src="/images/join_success.png" width="60">
+   					<img class="logo-img" src="/images/join_success.png" >
    					</il>
    					<il class="nav-item">
    					<a href="/">전체 챌린지</a>
@@ -78,12 +79,12 @@ float:left;
 	                <il class="nav-item">
 	           	 	<a href="#">문의하기</a>
 	           	 	</il>
-	           	 	<li class="nav-item right-item">
+	           	 	<li class="nav-item">
 	           	 	<a href="#">${user_img} ${loginId}</a>
 	           	 	</li>
 	           	 		<ul>
-	           	 			<li class="nav-item right-item"><a href="마이페이지이이이">마이페이지</a></li>
-	           	 			<li><a href="/logout">로그아웃</a></li>
+	           	 			<li class="nav-item"><a href="마이페이지이이이">마이페이지</a></li>
+	           	 			<li class="nav-item"><a href="/logout">로그아웃</a></li>
 	           	 		</ul>
 					 </c:when>
                <c:otherwise>
@@ -107,9 +108,8 @@ float:left;
 					</li>
 			</c:otherwise>
 			</c:choose>
-	 </ul>
+	  </ul>
    		</div>
    	</div>
  </div>
    	</body>
-
