@@ -109,6 +109,7 @@ html{
     border-color: #cfc9d5;
     color: #3d3d3d;
 }
+.short-hover:focus,
 .short-hover:hover{
     border-color: #6c7aef;
     color: #cfc9d5;
@@ -351,17 +352,13 @@ p{
     font-weight: bold;
 }
 .text-underline{
-    text-decoration-line: underline;
+  	text-decoration-line: underline;
     text-underline-position: under;
 }
 ul{
 font-size: 20px;
 margin: 0;
 padding: 0;
-}
-a{
-text-decoration: none;
-color: #AAAAAA;
 }
 li{
 list-style: none;

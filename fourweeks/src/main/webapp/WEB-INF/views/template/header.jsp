@@ -22,6 +22,16 @@
 	border: 1px dotted gray;
 	list-style:none;
 	}
+	 a{
+        font-size: 16px;
+        font-weight:normal;
+   		color:#6c7aef;
+        cursor: pointer;
+    }
+    a:hover{
+	    font-weight: bold;
+	    text-decoration-line: underline;
+    }
 	4weeks-inner{
 		position: relative;
 		width:1200px;
@@ -76,7 +86,7 @@ float:left;
 	                <a href="/chal/create">챌린지 개설</a>
 	                </il>
 	                <il class="nav-item">
-	                <a href="/chal/confirm">챌린지 인증</a>
+	                <a href="/confirm/write">챌린지 인증</a>
 	                </il>
 	                <il class="nav-item">
 	           	 	<a href="#">문의하기</a>
@@ -97,7 +107,7 @@ float:left;
 	                <a href="/chal/create">챌린지 개설</a>
 	                </il>
 	                <il class="nav-item">
-	                <a href="/chal/confirm">챌린지 인증</a>
+	                <a href="/confirm/write">챌린지 인증</a>
 	                </il>
 	                <il class="nav-item">
 	           	 	<a href="#">문의하기</a>
