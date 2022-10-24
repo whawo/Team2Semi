@@ -48,7 +48,7 @@ public interface ChalDao {
     
 
   List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
-  List<ParticipantDto> selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
+  ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
 	
 	
 }

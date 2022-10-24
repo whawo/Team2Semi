@@ -183,19 +183,17 @@ public class ChalController {
 	@PostMapping("/insert")
 	public String insert(// 참가자 참가
 			@ModelAttribute ParticipantDto participantDto,
-			HttpSession session
+			HttpSession session,
+			RedirectAttributes attr
 			) {
+		attr.addAttribute("chalNo", participantDto.getChalNo());
 		String userId=(String)session.getAttribute(SessionConstant.ID);
 		participantDto.setUserId(userId);
 		chalDao.insertParticipant(participantDto);
 		//참가자 증가 메소드
 		chalDao.updateChalPerson(participantDto.getChalNo());
-		return "redirect:insert_success";
+		//
+		return "redirect:detail?chalNo="+participantDto.getChalNo();
 	}
 	
-	
-	@GetMapping("/insert_success")
-	public String insertSuccess() {
-		return "chal/insert_success";
-	}
 }

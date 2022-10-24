@@ -63,11 +63,12 @@ ul.list>li:hover {
 			<li>챌린지 시작일: ${chalDto.getStartDate()} ${chalVO.getDDay()}일뒤 시작<br>~${chalVO.endDate}
 			</li>
 			<c:choose>
-				<c:when test="${participantDto.size() != 0 || chalDto.getChalPerson()!=10}">
+				<c:when test="${participantDto==null && chalDto.getChalPerson()<10}">
 				<button type = "submit">참가하기</button>
 				</c:when>
 				<c:otherwise>
 				<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
+				<button type = "submit" disabled>참가하기</button>
 				</c:otherwise>
 			</c:choose>
 			<li>챌린지 리더 :<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
