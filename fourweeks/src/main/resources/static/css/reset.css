@@ -53,3 +53,8 @@ q:before, q:after {
 html {
     font-family: 'Noto Sans KR', sans-serif;
 }
+/*  기본 html에 있던 속성인데 헤더에서 밑줄이 자꾸 적용되어서 넣음  */
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
+}
