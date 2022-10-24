@@ -74,7 +74,7 @@
 	
 	<!-- 인증 화면에서 해당 챌린지가 선택된 상태가 될 수 있도록 챌린지 번호 전달 -->
 	<!-- 챌린지 시작 전에 인증하기 버튼 비활성화(jquery) -->
-	<a href="/chal/confirm?chalNo=${chalDto.chalNo}" class="btn">인증하기</a>
+	<a href="write?chalNo=${chalDto.chalNo}" class="btn">인증하기</a>
 	<br><br>
 	
 	전체(${listCnt})
@@ -88,7 +88,7 @@
 	<br><br>
 
 	<c:forEach var="list" items="${confirmList}">
-		<a href="/chal/confirm/detail?confirmNo=${list.confirmNo}">
+		<a href="detail?confirmNo=${list.confirmNo}">
 		<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
 		<img src = "detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
 		<br><br>

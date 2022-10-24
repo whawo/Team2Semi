@@ -30,7 +30,7 @@
 	});
 </script>    
 
-	<form action="confirm" method="post" enctype="multipart/form-data">
+	<form action="write" method="post" enctype="multipart/form-data">
 		1. 인증할 챌린지를 선택해주세요.
 		<br>
 		<select name="chalTitle">
