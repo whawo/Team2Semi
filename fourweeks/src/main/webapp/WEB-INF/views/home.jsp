@@ -67,6 +67,7 @@
             position: relative;
         }
         .search-box{
+        	position : relative;
             border:2px solid #6c7aef;
             border-radius: 0.5em;
             width: 100%;
@@ -100,8 +101,11 @@
 
         .btn {
             position: absolute;
-            margin-top : 0;
-            right: 0;
+			margin-top : 20px;
+			margin-right : 15px;
+            padding : 0;
+            right: 0; 
+            background-color : white;           
         }
         /* focus시 테두리 색변경 방지 */
         input:focus, 
@@ -138,7 +142,7 @@
 				<option value="'그 외'">그 외</option>
 			</select>
 				<input class="search-box" type="text" name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
-				<button type="submit"><i class="fa-solid fa-magnifying-glass btn"></i></button> 
+				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
 			</form>
         </div>
 		<%-- 검색 끝 --%>
