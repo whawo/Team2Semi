@@ -2,7 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,11 +9,8 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,17 +27,18 @@ import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.entity.UserConfirmLikeDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
-import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalAllDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
 @Controller
@@ -103,6 +100,31 @@ public class ChalController {
 		return "redirect:detail";
 	}
 	
+	
+	@GetMapping("detail/download")//챌린지 상세 이미지 조회
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> detailDownload(
+			@ModelAttribute ChalDto chalDto
+		) throws IOException {
+		//인증글 번호로 첨부파일 번호 찾기
+		int attachmentNo = attachmentDao.selectChalImg(chalDto.getChalNo());
+		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
+		return attachService.load(attachmentNo);
+	}
+	
+	@GetMapping("/list")
+	public String list(
+				Model model,
+				@ModelAttribute(name="vo") ChalListSearchVO vo) {
+		// 페이지수 구하기
+		int count = chalDao.count(vo);
+		vo.setCount(count);
+		// 첨부파일 출력
+		model.addAttribute("list", attachmentDao.selectList());
+		// 
+		model.addAttribute("list", chalDao.selectList(vo));
+		return "chal/list";
+	}
 	//상세 조회(단일)
 	@GetMapping("/detail")
 	public String detail(@ModelAttribute ChalDto chalDto,
@@ -119,55 +141,29 @@ public class ChalController {
 		//참가여부 
 		model.addAttribute("participantDto", chalDao.selectParticipantOne(chalDto.getChalNo(),
 				(String)session.getAttribute(SessionConstant.ID)));
-		System.out.println(session.getAttribute(SessionConstant.ID) + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+
-				chalDto.getChalNo() + model);
-		
-		
 		return "chal/detail";
 	}
-	
-	@GetMapping("detail/download")//챌린지 상세 이미지 조회
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> detailDownload(
-			@ModelAttribute ChalDto chalDto
-		) throws IOException {
-		AttachmentDto dto = attachmentDao.selectDetail(chalDto.getChalNo());
-		if(dto == null) {//파일이 없으면
-			throw new TargetNotFoundException("존재하지 않는 파일입니다");
-		}
+	@GetMapping("/mychal")
+	public String myChal(//챌린지 상세 
+			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			HttpSession session,
+			Model model) {
+		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@");
+		return "chal/my_chal";
 		
-		//[2] 파일 불러오기
-		File target = new File(dir, String.valueOf(dto.getAttachmentNo()));
-		byte[] data = FileUtils.readFileToByteArray(target);
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		//[3] 응답 객체를 만들어 데이터를 전송
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_ENCODING, 
-										StandardCharsets.UTF_8.name())
-				.contentLength(dto.getAttachmentSize())
-				.header(HttpHeaders.CONTENT_TYPE , 
-										dto.getAttachmentType())
-				.header(HttpHeaders.CONTENT_DISPOSITION, 
-									ContentDisposition.attachment()
-											.filename(
-													dto.getAttachmentName(), 
-													StandardCharsets.UTF_8)
-											.build().toString())
-				.body(resource);
 	}
 	
-	@GetMapping("/list")
-	public String list(
-				Model model,
-				@ModelAttribute(name="vo") ChalListSearchVO vo) {
-		// 페이지수 구하기
-		int count = chalDao.count(vo);
-		vo.setCount(count);
-		// 첨부파일 출력
-		model.addAttribute("list", attachmentDao.selectList());
-		// 
-		model.addAttribute("list", chalDao.selectList(vo));
-		return "chal/list";
+	@GetMapping("/allchal")
+	public String allchal(//챌린지 상세 
+			@ModelAttribute List<ChalAllDetailVO> dto,
+			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			HttpSession session,
+			Model model) {
+		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
+		return "chal/all_chal";
+		
 	}
 }

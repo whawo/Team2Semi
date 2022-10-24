@@ -7,15 +7,31 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
  
-	<link rel="stylesheet" type="text/css" href="basic.css">
+	<link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
     <style>
         /* 
+        	10.24
+        	디자인 수정해야할 것:
+        	- container 확인해보기 사이즈 맞추기 
+        
+        	10.22
+        	디자인 수정해야할 것: 
+        	- 가운데로 옮기기... 
+        	
         	10.21
-        	- 로그인 에러 구현 완료 
+        	디자인 수정해야할 것:
+        	- div 가운데로 옮기기
+        	- 사이 간격 더 띄우기 
+        	- 로그인 비밀번호 입력시 hover 색상이 검정색이 됨.. ? 왜? 지? 요? 다시 수정하기 
+        	 
+        	DB 수정해야할 것:
+        	- 로그인 에러 구현 완료
+        	- 비밀번호찾기/ 아이디 찾기 링크 걸어야 함.  
+            
             10.20 
             디자인 수정해야할 것
             - 아이디창과 비밀번호 창을 중심으로 위아래로 간격 더 넓히기 
@@ -61,6 +77,9 @@
         font-size:12px;
         color: #eb6f7f;
         }
+        .margin-move{
+       
+        }
 
     </style>
     
@@ -69,8 +88,9 @@
      
      </script>
       <body>
-
-        <div class="row container-400">
+<div class="row container-1200">
+        <div class="container-400">
+        <div class="row-center  margin-move">
             <div class="row center">
                 <h1>로그인</h1>
                 <p class="login-p1">가입하신 아이디와 비밀번호를 입력해주세요</p>
@@ -104,5 +124,7 @@
                 <em class="divi">|</em>
                 <a class="find" href="/join ">회원가입</a>
             </section>
+        </div>
+        </div>
         </div>
      </body>

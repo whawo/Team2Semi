@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="로그인 성공" name="title"/>
 </jsp:include>
-   <link rel="stylesheet" type="text/css" href="basic.css">
+	<link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -14,9 +14,14 @@
 
     <style>
         /* 
-            해야할 것! 
-             - 로그인 버튼 누를 시 로그인 페이지로 이동 
-             
+            10.21
+        	- 로그인 에러 구현 완료 
+            10.20 
+            디자인 수정해야할 것
+            - 아이디창과 비밀번호 창을 중심으로 위아래로 간격 더 넓히기 
+            - 로그인 밑에 비번찾기 아이디 찾기 간격 좀 더 띄우기 
+            - 헤더 수정 
+            
         */
         body{
             font-family: sans-serif;
@@ -63,7 +68,7 @@
             </div>
 
             <div class="row center">
-                <button class="largebtn btn1" type="submit" id="largebutton1"><a href="#">로그인</a></button>
+                <button class="largebtn btn1" type="submit" id="largebutton1"><a href="/login">로그인</a></button>
             </div>
         </div>
      </body>

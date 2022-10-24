@@ -1,6 +1,5 @@
 package com.kh.fourweeks.repository;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,8 +11,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
+import com.kh.fourweeks.vo.ChalAllDetailVO;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
@@ -376,5 +376,56 @@ public class ChalDaoImpl implements ChalDao {
 		String sql ="select * from participant where chal_no= ? and user_id = ?";
 		Object[] param = {chalNo, userId};
 		return jdbcTemplate.query(sql, participantMapper,param);
+	}
+
+	private ResultSetExtractor<ChalMyDetailDto> myDetailExtractor = new ResultSetExtractor<ChalMyDetailDto>() {
+		
+		@Override
+		public ChalMyDetailDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return  ChalMyDetailDto.builder()
+						.chalTitle(rs.getString("chal_title"))
+						.chalContent(rs.getString("chal_content"))
+						.startDate(rs.getDate("start_date"))
+						.participantNo(rs.getInt("participant_no"))
+						.chalNo(rs.getInt("chal_no"))
+						.userId(rs.getString("user_id"))
+						.participantJoin(rs.getDate("participant_join"))
+						.build();
+			}else {
+				return null;
+			}
+			
+		}
+	};
+	
+	private RowMapper<ChalAllDetailVO> allDetailMapper = new RowMapper<ChalAllDetailVO>() {
+		@Override
+		public ChalAllDetailVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalAllDetailVO.builder()
+					.chalTitle(rs.getString("chal_title"))
+					.chalContent(rs.getString("chal_content"))
+					.startDate(rs.getDate("start_date"))
+					.participantNo(rs.getInt("participant_no"))
+					.chalNo(rs.getInt("chal_no"))
+					.userId(rs.getString("user_id"))
+					.participantJoin(rs.getDate("participant_join"))
+					.build();
+		}
+	};
+	
+	
+	@Override
+	public ChalMyDetailDto selectMy(String userId, int chalNo) {
+		String sql = "select * from my_chal_detail where user_id = ? and chal_no = ?";
+		Object[] param = {userId, chalNo};
+		return jdbcTemplate.query(sql, myDetailExtractor ,param);
+	}
+	
+	@Override
+	public List<ChalAllDetailVO> selectAllDetail(int chalNo) {
+		String sql = "select * from my_chal_detail where chal_no = ?";
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
 }
