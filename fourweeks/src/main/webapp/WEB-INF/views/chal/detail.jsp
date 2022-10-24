@@ -46,7 +46,8 @@ ul.list>li:hover {
     });
 
 </script>
-
+<form action ="insert" method="post" >
+	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}">
 <div class="container-400">
 	<div class="row center">
 		<h1>챌린지 상세 정보</h1>
@@ -63,7 +64,7 @@ ul.list>li:hover {
 			</li>
 			<c:choose>
 				<c:when test="${participantDto.size() != 0 || chalDto.getChalPerson()!=10}">
-				<button>참가하기</button>
+				<button type = "submit">참가하기</button>
 				</c:when>
 				<c:otherwise>
 				<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
@@ -76,7 +77,7 @@ ul.list>li:hover {
 		</ul>
 	</div>
 </div>
-
+</form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 

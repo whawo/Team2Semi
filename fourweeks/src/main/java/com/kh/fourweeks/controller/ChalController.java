@@ -38,7 +38,6 @@ import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
-import com.kh.fourweeks.vo.ChalAllDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
 @Controller
@@ -132,8 +131,9 @@ public class ChalController {
 			Model model,
 			HttpSession session
 			) {
-		
+		//챌린지 상세 조회
 		model.addAttribute("chalDto", chalDao.selectOne(chalDto.getChalNo()));
+		//종료일 조회
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalDto.getChalNo()));
 		//첨부파일
 		model.addAttribute("attachmentList", 
@@ -148,22 +148,54 @@ public class ChalController {
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
 			HttpSession session,
 			Model model) {
+		//챌린지 상세 조회
 		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
 				chalMyDetailDto.getChalNo()));
+		//종료일 조회
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
-		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
 		return "chal/my_chal";
 		
 	}
 	
 	@GetMapping("/allchal")
-	public String allchal(//챌린지 상세 
-			@ModelAttribute List<ChalAllDetailVO> dto,
+	public String allchal(//챌린지 상세 (참가중인 모든 유저)
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
 			HttpSession session,
 			Model model) {
+		//모든 유저 조회
 		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
+		//챌린지 종료일 조회
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		//챌린지 단일조회
+		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
+		System.out.println(model);
 		return "chal/all_chal";
 		
+	}
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "chal/insert";
+	}
+	
+	@PostMapping("/insert")
+	public String insert(// 참가자 참가
+			@ModelAttribute ParticipantDto participantDto,
+			HttpSession session
+			) {
+		String userId=(String)session.getAttribute(SessionConstant.ID);
+		participantDto.setUserId(userId);
+		chalDao.insertParticipant(participantDto);
+		//참가자 증가 메소드
+		chalDao.updateChalPerson(participantDto.getChalNo());
+		return "redirect:insert_success";
+	}
+	
+	
+	@GetMapping("/insert_success")
+	public String insertSuccess() {
+		return "chal/insert_success";
 	}
 }

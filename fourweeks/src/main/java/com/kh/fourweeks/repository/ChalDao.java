@@ -4,7 +4,6 @@ import java.util.List;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
-import com.kh.fourweeks.vo.ChalAllDetailVO;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
@@ -14,6 +13,8 @@ public interface ChalDao {
 	void insert(ChalDto chalDto); //챌린지 개설
 	void addParticipant(ParticipantDto partDto); //참가자에 개설자 자동 추가
 
+	void insertParticipant(ParticipantDto partDto);// 참가하기 메소드
+	
 	//첨부파일 관련 메소드
 	void chalAttachment(int chalNo, int attachmentNo); //chal_img 테이블에 첨부파일 정보 연결
     
@@ -26,7 +27,7 @@ public interface ChalDao {
 	List<ChalListVO> listOfLargePerson(ChalListSearchVO vo);
 	
 	// 챌린지 참가자 상세 조회 메소드
-	List<ChalAllDetailVO> selectAllDetail(int chalNo);
+	List<ChalMyDetailDto> selectAllDetail(int chalNo);
 
 
     // 모집중 조회+검색
@@ -42,6 +43,8 @@ public interface ChalDao {
     int searchForAllTypeCount(ChalListSearchVO vo);
     int searchForOnlyTypeCount(ChalListSearchVO vo);
 	
+    // 참가자 인원수 증가
+    public boolean updateChalPerson(int chalNo);
     
 
   List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
