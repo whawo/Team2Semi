@@ -1,13 +1,14 @@
-package com.kh.fourweeks.entity;
+package com.kh.fourweeks.vo;
 
 import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ChalConfirmDto {
+public class ChalConfirmVO {
 	private int confirmNo;
 	private int chalNo;
 	private String userId;
@@ -17,5 +18,5 @@ public class ChalConfirmDto {
 	private int confirmLike;
 	private Date confirmDate;
 	private Date modifiedDate;
-	private int confirmPk;
+	private String userNick;
 }
