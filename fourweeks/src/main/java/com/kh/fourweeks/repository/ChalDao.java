@@ -2,6 +2,7 @@ package com.kh.fourweeks.repository;
 import java.util.List;
 
 import com.kh.fourweeks.entity.ChalDto;
+import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
@@ -23,7 +24,8 @@ public interface ChalDao {
   List<ChalListVO> selectList(ChalListSearchVO vo);
   List<ChalListVO> list(ChalListSearchVO vo);
   List<ChalListVO> search(ChalListSearchVO vo);
-    
+  List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 테스트용 추가(민재)
+  List<ParticipantDto> selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
 	int count(ChalListSearchVO vo);
 	int searchCount(ChalListSearchVO vo);
 	int listCount(ChalListSearchVO vo);

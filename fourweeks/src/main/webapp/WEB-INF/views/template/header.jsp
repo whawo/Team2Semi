@@ -93,8 +93,3 @@
             </c:choose>
          </ul>
       </nav>
-      <div align="center" style="min-height:400px"> 
-
-
-
-

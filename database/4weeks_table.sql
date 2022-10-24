@@ -200,3 +200,16 @@ notice_content varchar2(4000) null,
 notice_time date default sysdate not null,
 notice_modified date
 );
+
+-- 챌린지 상세 이미지 조회 view 생성
+
+create view chal_img_detail_view as
+select A.*,C.chal_no
+from attachment A
+inner join chal_img C on C.attachment_no = A.attachment_no;
+
+-- 유저 이미지 조회 view 생성
+create view chal_user_img_detail_view as
+select A.*,C.user_id
+from attachment A
+inner join user_img C on C.attachment_no = A.attachment_no;

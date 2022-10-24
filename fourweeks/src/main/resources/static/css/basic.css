@@ -1,0 +1,573 @@
+@charset "UTF-8";
+
+
+/* 
+    - margin: 상 하 좌 우
+*/
+
+html{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+/* 컨테이너 사이즈 (container-size) */
+.container-300 { width:300px; margin:0 auto; }
+.container-350 { width:350px; margin:0 auto; }
+.container-400 { width:400px; margin:0 auto; }
+.container-450 { width:450px; margin:0 auto; }
+.container-500 { width:500px; margin:0 auto; }
+.container-550 { width:550px; margin:0 auto; }
+.container-590 { width:590px; margin:0 auto; }
+.container-600 { width:600px; margin:0 auto; }
+.container-650 { width:650px; margin:0 auto; }
+.container-700 { width:700px; margin:0 auto; }
+.container-750 { width:750px; margin:0 auto; }
+.container-794 { width:794px; margin:0 auto; }
+.container-800 { width:800px; margin:0 auto; }
+.container-850 { width:850px; margin:0 auto; }
+.container-900 { width:900px; margin:0 auto; }
+.container-950 { width:950px; margin:0 auto; }
+.container-1000 { width:1000px; margin:0 auto; }
+.container-1050 { width:1050px; margin:0 auto; }
+.container-1100 { width:1100px; margin:0 auto; }
+.container-1150 { width:1150px; margin:0 auto; }
+.container-1200 { width:1200px; margin:0 auto; }
+
+.row {
+    margin: 10px 0px;
+}
+
+/*
+    row 내부에 위치하는 도구들의 폭을 설정
+    - 폭을 row에 맞게 100%로 설정하거나 아니면 자신의 폭을 그대로 사용
+    - 아무 표시도 하지 않으면 폭을 있는 그대로 두고 클래스를 부여하면 100%로 변경
+*/
+.w-20{
+    width: 20%;
+}
+.w-33{
+    width: 33%;
+}
+.w-25{
+    width: 25%;
+}
+.w-30{
+    width: 30%;
+}
+.w-40{
+    width: 40%;
+}
+.w-50{
+    width: 50%;
+}
+.w-70{
+    width: 70%;
+}
+.w-100 {
+    width:100%;
+}
+
+
+.left {text-align: left;}
+.center {text-align: center;}
+.right {text-align: right;}
+
+
+.mt-10 { margin-top: 10px;}
+.mt-20 { margin-top: 20px;}
+.mt-30 { margin-top: 30px;}
+.mt-40 { margin-top: 40px;}
+.mt-50 { margin-top: 50px;}
+
+.mb-10 { margin-bottom: 10px;}
+.mb-20 { margin-bottom: 20px;}
+.mb-30 { margin-bottom: 30px;}
+.mb-40 { margin-bottom: 40px;}
+.mb-50 { margin-bottom: 50px;}
+
+.ms-10 { margin-left: 10px;}
+.ms-20 { margin-left: 20px;}
+.ms-30 { margin-left: 30px;}
+.ms-40 { margin-left: 40px;}
+.ms-50 { margin-left: 50px;}
+
+.me-10 { margin-right: 10px;}
+.me-20 { margin-right: 20px;}
+.me-30 { margin-right: 30px;}
+.me-40 { margin-right: 40px;}
+.me-50 { margin-right: 50px;}
+
+
+.short-text-box{
+    border: solid;
+    /* border-width: thin thin thin thin; */
+    border-width: 2px 2px 2px 2px;
+    border-radius: 0.5em;
+    width: 99%;
+    height: 58px;
+    font-size: 16px;
+    border-color: #cfc9d5;
+    color: #3d3d3d;
+}
+.short-hover:hover{
+    border-color: #6c7aef;
+    color: #cfc9d5;
+}
+.long-text-box{
+    border: 2px solid;
+    border-width: 2px 2px 2px 2px;
+    border-radius: 0.5em;
+    width: 400px;
+    height: 123px;
+    text-align: left;
+    font-size: 16px;
+    /* 상자안ㅇ ㅔ글 위쪽 부터 쓰는 방법 좀..  */
+}
+#long-box1{
+    border-color: #ebebed;
+    color: #3d3d3d;
+}
+.long-hover:hover{
+    border-color: #cfc9d5;
+    color: #3f3f3f3f;
+}
+
+#long-box2{
+    border-color: #6c7aef;
+}
+
+#long-box4{
+    border-color: #ebebed;
+    color: #3d3d3d;
+}
+
+
+/* 버튼 모음  */
+
+
+.largebtn{
+    border: none;
+    font-size: 20px;
+    padding: 0.75em;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+
+    /* 높이와 너비는 상황에 따라 맞게 비율 설정 */
+    width: 100%;
+    height: 60px;
+}
+
+
+#largebutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#largebutton2{
+    background-color: e5e6f9;
+    color: #6c7aef;
+}
+#largebutton3{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+#largebutton4{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #6c7aef;
+}
+
+#largebutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#largebutton2-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#largebutton3-1{
+    border:solid;
+    border-color: #ebebed;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #ebebed;
+}
+#largebutton4-1{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #ebebed;
+}
+
+
+.smallbtn{
+    border: none;
+    font-size: 16px;
+    padding: 0.75em;/*글자 크기의 0.75배*/
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+    width: 225px;
+    height: 50px;
+}
+#smallbutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#smallbutton2{
+    background-color: e5e6f9;
+    color: #6c7aef;
+}
+#smallbutton3{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+#smallbutton4{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #6c7aef;
+}
+#smallbutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#smallbutton2-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#smallbutton3-1{
+    border:solid;
+    border-color: #ebebed;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #ebebed;
+}
+#smallbutton4-1{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #ebebed;
+}
+.navbtn{
+    border: none;
+    font-size: 16px;
+    padding: 0.75em;/*글자 크기의 0.75배*/
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+    width: 130px;
+    height: 40px;
+}
+#navbutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#navbutton2{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+
+/* 언더라인  수정해야함 
+     수정해야할 부분은... 
+     hover active visited 
+     
+*/
+.short-text-underlinebox{
+    border: none;
+    border-width: 2px 2px 2px 2px;
+    width: 100%;
+    height: 58px;
+    font-size: 16px;
+}
+#text-underlinebox1{
+    border-bottom: 2px solid #cfc9d5;
+    outline: none;
+    color: #3d3d3d;
+}
+#text-underlinebox1:focus,
+#text-underlinebox1:hover{
+    border-bottom: 2px solid #6c7aef;
+    color: #3f3f3f;
+}
+
+/* 
+    select
+    
+*/
+
+.dropdown{
+    border:2px solid #AAAAAA;
+    border-radius: 0.5em;
+    width: 150px;
+    height: 60px;
+    font-size: 14px;
+    color: #AAAAAA
+}
+.dropdown-hover:focus{
+    border:2px solid #6c7aef;
+    font-weight: bold;
+    color:#6c7aef
+}
+
+
+
+/*  TAB 부분 수정할거 몇개 있음  */
+
+p{
+    font-size: 20px;
+    color: #6c7aef;
+}
+.p-hover:hover{
+    font-weight: bold;
+}
+.text-underline{
+    text-decoration-line: underline;
+    text-underline-position: under;
+}
+ul{
+font-size: 20px;
+margin: 0;
+padding: 0;
+}
+a{
+text-decoration: none;
+color: #AAAAAA;
+}
+li{
+list-style: none;
+}
+#nav{
+    width: 100%; /* 컨테이너 정하고 다시 ..!*/
+    height: 50px;
+    /* outline: 1px dotted red; */
+    border: 3px solid #DDDDDD;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+   }
+#nav ul li{
+float: left;
+width: 50%; /*li항목에 따라 등분으로 나눈 것 2개라 50으로 나눔 항목에 따라 비율 나누면 됩니다~ */
+height: 100%;
+line-height: 50px;
+text-align: center;
+background:transparent;
+}
+#nav ul li a{
+display: block;
+}
+#nav ul li a:hover{
+background: transparent;
+color: #6c7aef;
+font-weight: bold;
+border-bottom: 3px solid #6c7aef;
+}
+
+
+
+
+/* 
+        라디오 버튼 
+        절대로 이 안에 모든 것을 수정하지 마시오!!!!!!!!!!!!!!!!!!!!!
+*/
+
+body {margin: 10px; font-size: 13px}
+.where {
+  display: block;
+  margin: 25px 15px;
+  font-size: 11px;
+  color: black;
+  text-decoration: none;
+  font-family: verdana;
+  font-style: italic;
+} 
+
+.checks {position: relative;}
+.checks input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+.checks input[type="radio"] + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+/* 버튼 누르기전  */
+.checks input[type="radio"] + label:before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: -4px;
+  width: 21px;
+  height: 21px;
+  text-align: center;
+  background: transparent;
+  border: 2px solid #a8b0e9;
+  border-radius: 100%;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="radio"] + label:active:before,
+.checks input[type="radio"]:checked + label:active:before  {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.checks input[type="radio"]:checked + label:before {
+  background: transparent;
+  border-color: #6c7aef;
+}
+/* 안에 내부 원 */
+.checks input[type="radio"]:checked + label:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 15px;
+  height: 15px;
+  background: #6c7aef;
+  border-radius: 100%;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+}
+
+.checks input[id="ex_rd2"]:checked + label:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 15px;
+  height: 15px;
+  background: #6c7aef;
+  border-radius: 100%;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+}
+
+/* radio size */
+.checks.small input[type="radio"] + label {
+  font-size: 12px; /* 라디오에 라벨 폰트 사이즈 */ 
+  padding-left: 20px;
+}
+.checks.small input[type="radio"] + label:before {
+	top: -2px;
+  width: 16px;
+  height: 16px;
+}
+.checks.small input[type="radio"]:checked + label:after {
+	top: 2px;
+  width: 12px;
+  height: 12px;
+}
+
+
+/* 체크박스 스몰 12px  수정X  */
+
+     /*  체크박스 숨김 */
+     .line input{
+        display: none;
+    }
+
+    /* 체크박스 테두리  */
+    .chk-1{
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #ebebed;
+        background-color: white;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    /* 체크박스 가상요소  안에 체크 표시 */
+    .chk-1::before, .chk-1::after{
+        content: '';
+        display: inline-block;
+        width: 2px;
+        height: 0px;
+        background-color:  #6c7aef;
+        /* background-color: black; */
+        position: absolute;
+        transform-origin: left top;
+        
+    }
+
+    /* 가상요소 비뽀 */
+    .chk-1::before{
+        top: 4px;
+        left: -1px;
+        transform: rotate(-44deg);
+    }
+
+    /* 가상요소 에뽀또  */
+    .chk-1::after{
+        top: 9px;
+        left: 5px;
+        transform:  rotate(-135deg);
+    }
+
+    /* 체크되었을때 테두리  */
+    .line input:checked + .chk-1{
+        border-color:  #6c7aef;
+        /* background-color: #6c7aef; */
+    }
+
+    /* 체크되었을 때 가상요소 비포 */
+    .line input:checked + .chk-1::before{
+        height: 8px;
+        transition: all 0.15s ease 0.15s;
+    }
+
+    /* 체크되었을 때 가상요소 에포 */
+    .line input:checked + .chk-1::after{
+        height: 10px;
+        transition: all 0.15s ease 0.15s;
+    }
+
+
+/* select 창  */
+
+.li-1{
+    list-style: none;
+    max-height: 1000000px;
+    text-align: -webkit-math-parent;
+}
+select{
+    margin: 0 0 0 0;
+    padding: 0 0 0 5px; /* 글자 띄우기 */
+    vertical-align: bottom;
+    font-weight: 400;
+    writing-mode: horizontal-tb!important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    align-items: center;
+    white-space: pre;
+    cursor: default;
+}
