@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
-
+ 
  	  <link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
