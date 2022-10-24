@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
-import com.kh.fourweeks.vo.ChalAllDetailVO;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
@@ -399,10 +398,10 @@ public class ChalDaoImpl implements ChalDao {
 		}
 	};
 	
-	private RowMapper<ChalAllDetailVO> allDetailMapper = new RowMapper<ChalAllDetailVO>() {
+	private RowMapper<ChalMyDetailDto> allDetailMapper = new RowMapper<ChalMyDetailDto>() {
 		@Override
-		public ChalAllDetailVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return  ChalAllDetailVO.builder()
+		public ChalMyDetailDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalMyDetailDto.builder()
 					.chalTitle(rs.getString("chal_title"))
 					.chalContent(rs.getString("chal_content"))
 					.startDate(rs.getDate("start_date"))
@@ -422,10 +421,36 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, myDetailExtractor ,param);
 	}
 	
+	
 	@Override
-	public List<ChalAllDetailVO> selectAllDetail(int chalNo) {
+	public List<ChalMyDetailDto> selectAllDetail(int chalNo) {
 		String sql = "select * from my_chal_detail where chal_no = ?";
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
+
+	@Override
+	public void insertParticipant(ParticipantDto partDto) {
+		//참가자 참가 메소드
+		String sql ="insert into participant(participant_no, chal_no,"
+				+ " user_id, participant_join)"
+				+ " values(participant_seq.nextval,"
+				+ " ?, ?, sysdate)";
+		Object[] param = {partDto.getChalNo(), 
+				          partDto.getUserId()};
+		 jdbcTemplate.update(sql, param);
+	}
+
+	@Override
+	public boolean updateChalPerson(int chalNo) {//참가자 증가 메소드
+
+		String sql ="update chal set chal_person = chal_person +1 where chal_no= ?";
+		
+		Object[] param = {chalNo};
+		
+		
+		return jdbcTemplate.update(sql, param)>0;
+	}
+	
+	
 }

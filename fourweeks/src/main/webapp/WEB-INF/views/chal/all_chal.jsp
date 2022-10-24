@@ -23,15 +23,25 @@ ul.list>li:hover {
 	color: #d63031;
 }
 </style>
+<ul class="list">
+			<li>챌린지 이미지 :<img
+				src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
+			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
+			<li>챌린지 시작일: ${chalDto.getStartDate()}~${chalVO.endDate}</li>
+			<button>챌린지 바로가기</button><br>
+			</ul>
 <table class="table table-border">
 		<tbody>
 			<c:forEach var="dto" items="${dto}">
 			<tr>
-				<th>${dto.getUserId()}</th>
+				<td>${dto.userId}</td>
+				<td>${dto.chalContent}</td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+			<a href="/chal/mychal?userId=${chalDto.userId}&chalNo=${chalDto.chalNo}">내 인증 현황</a>
+			<a href="/chal/allchal?chalNo=${chalDto.chalNo}">참가자 인증 현황</a>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
