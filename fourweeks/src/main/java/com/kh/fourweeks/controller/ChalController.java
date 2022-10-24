@@ -81,7 +81,7 @@ public class ChalController {
 	@PostMapping("/create")
 	private String create(@ModelAttribute ChalDto chalDto,
 			@ModelAttribute ParticipantDto partDto,
-			@RequestParam List<MultipartFile> attachment,
+			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String userId = (String)session.getAttribute(SessionConstant.ID);

@@ -63,7 +63,7 @@ public class ChalConfirmController {
 	
 	@PostMapping("/write")
 	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
-			@RequestParam List<MultipartFile> attachment,
+			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -137,7 +137,7 @@ public class ChalConfirmController {
 	
 	@PostMapping("/edit")
 	public String confirmEdit(@ModelAttribute ChalConfirmDto confirmDto,
-			@RequestParam List<MultipartFile> attachment,
+			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr) throws IllegalStateException, IOException {
 		//chalService에서 수정, 첨부파일 업로드(추가, 변경)/삭제까지 처리
 		int confirmNo = chalService.confirmEdit(confirmDto, attachment);
