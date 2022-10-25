@@ -229,3 +229,7 @@ create view confirm_info_view as
 select C.CONFIRM_NO, A.* 
 from confirm_img C inner join attachment A on C.attachment_no = A.attachment_no;
 
+-- 프로필 이미지(user_img) 파일 정보 조회 뷰 생성
+create view user_info_view as 
+select U.user_id, A.* 
+from user_img U inner join attachment A on U.attachment_no = A.attachment_no;
