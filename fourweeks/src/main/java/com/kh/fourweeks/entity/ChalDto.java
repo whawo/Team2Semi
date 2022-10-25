@@ -15,4 +15,5 @@ public class ChalDto {
 	private int chalPerson;
 	private String chalTopic;
 	private Date startDate;
+	private String userNick;
 }

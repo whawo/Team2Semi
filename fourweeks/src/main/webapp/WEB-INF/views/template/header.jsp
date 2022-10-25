@@ -16,9 +16,11 @@
 <link rel="stylesheet" type="text/css" href="/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<style>
 
 	div, ul, li{
-	border: 1px dotted gray;
+	/* 이거 지우면 안됨;;; */
+	border: 1px dotted transparent;
 	list-style:none;
 	}
 	 a{
@@ -69,29 +71,32 @@ float:left;
    <main>
 <div class="container-1200">
    	 <div class="row 4weeks-inner"> 
+   	  <hr class="divider1">
    		<div class="row 4weeks-nav">
    			<ul class="list-nav"> 
-   			<c:choose>
-               <c:when test="${login}">
-               <c:otherwise>
-               <il class="nav-item">
-   					<a href="/">전체 챌린지</a>
-   					</il>
-   					<il class="nav-item">
-	                <a href="/chal/create">챌린지 개설</a>
-	                </il>
-	                <il class="nav-item">
-	                <a href="/confirm/write">챌린지 인증</a>
-	                </il>
-	                <il class="nav-item">
-	           	 	<a href="#">문의하기</a>
-	           	 	</il>
-	           	 	<li class="nav-item">
-	           	 	<a href="/join">회원가입</a>
-	           	 	</li>
-	           	 	<li class="nav-item">
-	           	 	<a href="/login" >로그인</a>
-					</li>
+   				<il class="nav-item"><img src="/images/top_logo.png" width="60" class="logo-margin"></il>
+   				<c:choose>
+				<c:when test="${login}">
+   					<il class="nav-item"><a href="/">전체 챌린지</a></il>
+   					<il class="nav-item"><a href="/chal/create">챌린지 개설</a></il>
+	                <il class="nav-item"><a href="/confirm/write">챌린지 인증</a></il>
+	                <il class="nav-item"><a href="#">문의하기</a></il>
+	                
+	           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
+	           	 		<li class="nav-item" ><a href="마이페이지이이이">마이페이지</a></li>
+	           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
+	           	 		
+				</c:when>
+				<c:otherwise>
+				
+               <il class="nav-item"><a href="/">전체 챌린지</a></il>
+   					<il class="nav-item"><a href="/chal/create">챌린지 개설</a></il>
+	                <il class="nav-item"><a href="/confirm/write">챌린지 인증</a></il>
+	                <il class="nav-item"><a href="#">문의하기</a></il>
+	                
+	           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
+	           	 	<li class="nav-item"><a href="/login" >로그인</a></li>
+					
 			</c:otherwise>
 			</c:choose>
 	 </ul>
@@ -99,4 +104,3 @@ float:left;
    	</div>
  </div>
    	</body>
-
