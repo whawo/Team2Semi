@@ -24,7 +24,10 @@
         /* 
        		10.24
        		DB 수정해야할 것: 
-       		-  
+       		-  2번 hover 재설정하기 ㅇ 
+       		- lightpick 4번 날짜 뜨기 완료 ㅇ  
+       		- moment +day = 날짜 + 28일 찾아보세요.
+       		- 사진 삭제 누르면 갑자기 라이트픽 날짜 선택하라고 가버림..??
        
         		10.22
         		디자인 수정해야할 것: 
@@ -54,7 +57,7 @@
 
         */
         div{
-            /* border: 1px dotted gray; */
+            border: 1px dotted gray;
             display: block;
         }
         body {margin: 10px; font-size: 13px}
@@ -89,7 +92,7 @@
             color: #3f3f3f;
             font-weight: bold;
             /* margin-bottom: 10px; */
-            margin-top:100px;
+            margin-top:60px;
             padding-bottom: 10px;
        }
         .p1{
@@ -97,7 +100,7 @@
             color: #3f3f3f;
             font-weight: bold;
             margin-bottom: 16px;
-            padding-top:114px; /* 큰 제목간의 사이 간격 */
+            padding-top:80px; /* 큰 제목간의 사이 간격 */
         }
          .p1-1{
             font-size: 20px;
@@ -141,9 +144,6 @@
             width: 200px;
             height: 40px;
         }
-        #text-underlinebox1{
-        border:1px solid gray;
-        }
         
         /* 챌린지 예상 종료일 수정 삭제 x  */
         .blind{
@@ -166,14 +166,15 @@
             margin-inline-end: 0px;
             font-weight: bold;
         }
+        /* 캘린더  */
         .sp-1{
             display: block;
-            padding: 15px 0;
-            margin-top: 11px;
-            padding-left: 40px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
+            padding: 13px 0;
+            margin-top: 10px;
+            padding-left: 20px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
             background-color: #e5e6f9;
             border: 1px solid #e5e6f9;
-            border-radius: 1em;
+            border-radius: 0.5em;
             font-size: 14px;
             color: #6c7aef;
             font-weight: 700;
@@ -258,22 +259,28 @@
      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
      <script type="text/javascript">
     
-    $(function(){
-        var picker1 = new Lightpick({
-            //field는 datepicker은 적용 대상을 설정하는 공간 
-            field:document.querySelector(".single-date-picker"),
+     $(function(){
+         var picker1 = new Lightpick({
+             //field는 datepicker은 적용 대상을 설정하는 공간 
+             field:document.querySelector(".single-date-picker"),
+             
+             minDate:moment(), // 오늘자 선택 가능
+             minDate:moment().add(4,'day'), // 오늘 + 5일
 
-            //format은 선택한 날짜의 적용 형식을 변경 
-            format:"YYYY-MM-DD",
-            
-            // (+옵션) 미래/과거를 선택하지 못하도록 설정 
-            // maxDate:moment(), //미래 선택 못함 
-            minDate:moment(), // 과거 선택 못함  괄호안에 특정 날짜 넣어줘도 됨~ 
+             firstDay:0, // 시작일 일요일부터 
+             singleDate:true, // 날짜 한개만 선택
 
-            // (+옵션) 표시되는 달의 개수를 지정 
-            numberOfMonths:1, //2개의 달씩 보여줘라 
-        });
-    });
+             // (+옵션) 표시되는 달의 개수를 지정 
+             numberOfMonths:1, //2개의 달씩 보여줘라 
+        
+             // 날짜 출력하기 
+             onSelect: function(date){
+             document.getElementById("result-1").innerHTML = date.format("YYYY.MM.DD(dd)");
+             }
+         });
+        /*  // 오늘 날짜 기본값으로 자동 선택
+         picker1.setDate(moment()); */
+     });
 
     // 이미지 
     $(function(){
@@ -376,7 +383,8 @@
                 <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
                 <div class="row">
-               <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40">
+                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
+               <!-- <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40"> -->
                 <span  class="helper-text-40 helper-css">0</span> /40
                 </div>
             </div>
@@ -387,13 +395,13 @@
                 <span  class="helper-text-300 helper-css">0</span> /300
             </div>
 
-            <div class="row">
+        <div class="row">
                 <p class="p1">4. 챌린지 시작일을 선택해주세요.</p>
                 <p class="p2">개설일로부터 5일 이내에 시작해야 해요.</p>
 
                 <div class="row">
                     <i class="fa-solid fa-calendar-days"></i>
-                    <input type="text" class="single-date-picker" id="short-text-box"  name="startDate" required>
+                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" required>
                 </div>
 
                 <div class="row date-calendar">
@@ -402,8 +410,9 @@
                     <i class="c-end">
                         <span class="blind">캘린더</span>
                     </i>
-                    챌린지 예상 종료일 YYYY-MM-DD(A)
-                    종료일: startDate + 28일 
+                 	<p class="end-date"> 
+                 	챌린지 예상 종료일 <p id="result-1"></p>
+                 	</p> 
                 </span>
                 </div>
 
