@@ -273,11 +273,6 @@
             // (+옵션) 표시되는 달의 개수를 지정 
             numberOfMonths:1, //2개의 달씩 보여줘라 
         });
-
-        var Picker2 = new Lightpick({
-            field:document.querySelector("[name=begin]"),
-            secondField:document.querySelector("[name=end"),
-        });
     });
 
     // 이미지 
@@ -460,5 +455,3 @@
  <jsp:include page="/WEB-INF/views/template/footer.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>     
-
-
