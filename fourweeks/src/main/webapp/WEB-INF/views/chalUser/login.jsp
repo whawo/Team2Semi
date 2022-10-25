@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
  
@@ -40,7 +40,7 @@
             
         */
         div{
-            border: 1px dotted gray;
+            border: 1px dotted transparent;
         }
         .divi{  
             margin: 3px 4px 0 4px;
@@ -78,7 +78,7 @@
         color: #eb6f7f;
         }
         .margin-move{
-       
+       margin: 80px 0 0 505px;
         }
 
     </style>
@@ -89,8 +89,7 @@
      </script>
       <body>
 <div class="row container-1200">
-        <div class="container-400">
-        <div class="row-center  margin-move">
+        <div class="container-400 margin-move">
             <div class="row center">
                 <h1>로그인</h1>
                 <p class="login-p1">가입하신 아이디와 비밀번호를 입력해주세요</p>
@@ -99,10 +98,10 @@
             
             <form action="login" method="post">
             <div class="row">
-                <input type="text" name="userId" class="input short-text-box" id="text-box1" placeholder="아이디" required>
+                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required>
             </div>
             <div class="row">
-                <input type="password" name="userPw" class="input short-text-box" id="text-box1" placeholder="비밀번호" required >
+                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호" required >
             </div>
             <div class="row">
                 <button type="submit" class="largebtn w-100" id="largebutton1">로그인</button>
@@ -124,7 +123,6 @@
                 <em class="divi">|</em>
                 <a class="find" href="/join ">회원가입</a>
             </section>
-        </div>
         </div>
         </div>
      </body>

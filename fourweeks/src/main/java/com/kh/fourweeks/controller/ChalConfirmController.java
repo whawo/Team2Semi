@@ -2,7 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;

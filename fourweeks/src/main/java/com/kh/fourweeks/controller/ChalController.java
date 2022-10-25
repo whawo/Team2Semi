@@ -2,9 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -40,6 +37,7 @@ import com.kh.fourweeks.vo.ChalListSearchVO;
 public class ChalController {
 	@Autowired
 	private ChalDao chalDao;
+	
 	
 	@Autowired
 	private ChalService chalService;
@@ -152,6 +150,9 @@ public class ChalController {
 						(String)session.getAttribute(SessionConstant.ID)));
 		//모든 참가자 달성률 조회
 		model.addAttribute("allProgressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
+		//참가자 인증글 목록(최신 5개)
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		return "chal/mychal";
 		
 	}
