@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="로그인 성공" name="title"/>
+	<jsp:param value="회원 전용 페이지" name="title"/>
 </jsp:include>
 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* 
-            10.21
-        	- 로그인 에러 구현 완료 
-            10.20 
-            디자인 수정해야할 것
-            - 아이디창과 비밀번호 창을 중심으로 위아래로 간격 더 넓히기 
-            - 로그인 밑에 비번찾기 아이디 찾기 간격 좀 더 띄우기 
-            - 헤더 수정 
-            
-        */
         body{
             font-family: sans-serif;
         }
@@ -59,8 +49,8 @@
  <body>
         <div class="container-590">
             <div class="row center">
-                <p class="p-1">가입을 축하합니다!</p>
-                <p class="p-2">좋은 습관 챌린지를 함께 할 준비가 완료되었어요</p>
+                <p class="p-1">로그인이 필요한 서비스입니다.</p>
+                <p class="p-2">로그인하고 4weeks의 다양한 서비스를 즐겨보세요.</p>
             </div>
             
             <div class="row center">
@@ -69,6 +59,7 @@
 
             <div class="row center">
                 <button class="largebtn btn1" type="button" id="largebutton1"><a href="/login">로그인</a></button>
+                <a class="largebtn btn1" id="largebutton3" href="/join">회원가입</a>
             </div>
         </div>
      </body>

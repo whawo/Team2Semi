@@ -69,11 +69,12 @@
    	 <div class="row 4weeks-inner"> 
    	  <hr class="divider1">
    		<div class="row 4weeks-nav">
-   			<ul class="list-nav"> 
-   				<li class="nav-item"><img src="/images/top_logo.png" width="60" class="logo-margin"></li>
+   			<ul class="list-nav">
+	   			<li class="nav-item"><a href="/"><img src="/images/top_logo.png" width="60" class="logo-margin"></a></li>
+	   			
    				<c:choose>
 					<c:when test="${login}">
-	   					<li class="nav-item"><a href="/">전체 챌린지</a></li>
+	   					<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
 	   					<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="#">문의하기</a></li>
@@ -84,9 +85,9 @@
 		           	 		
 					</c:when>
 					<c:otherwise>
-		               	<li class="nav-item"><a href="/">전체 챌린지</a></li>
-		  				<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
-		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
+		               	<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
+		  				<li class="nav-item"><a href="/need_login">챌린지 개설</a></li>
+		                <li class="nav-item"><a href="/need_login">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="#">문의하기</a></li>
 		                
 		           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
