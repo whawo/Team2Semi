@@ -51,9 +51,6 @@ public class ChalController {
 	private ChalConfirmDao confirmDao;
 	
 	@Autowired
-	private UserConfirmLikeDao confirmLikeDao;
-	
-	@Autowired
 	private ChalService chalService;
 	
 	@Autowired
@@ -61,9 +58,6 @@ public class ChalController {
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
-	
-	@Autowired
-	private ChalUserDao chalUserDao;
 	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
 
@@ -156,8 +150,7 @@ public class ChalController {
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
 		//달성률 조회
 		model.addAttribute("progressDto",
-				confirmDao.myConfirmCnt((String)session.getAttribute(SessionConstant.ID),
-				chalMyDetailDto.getChalNo()));
+				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), (String)session.getAttribute(SessionConstant.ID)));
 		
 		return "chal/my_chal";
 		
