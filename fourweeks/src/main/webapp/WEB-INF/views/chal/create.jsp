@@ -351,11 +351,11 @@
      </script>
      </head>
      <body>
-     
      <!-- 확인용 -->
 		${loginId}
 
         <div class="container-1200">
+        <!-- 폼 추가 ! --><form action="create" method="post" enctype="multipart/form-data">
 		<div class="row" style="margin: 30px 50px 40px 50px;">
             <div class="row">
                 <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
@@ -451,11 +451,14 @@
                 <button class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</button>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">개설하고 참가하기</button>
             </div>
-        </div>
+        </div>    
+        </form>    
         	</div>
+        	
      </body>
      
  <jsp:include page="/WEB-INF/views/template/footer.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>     
+
 

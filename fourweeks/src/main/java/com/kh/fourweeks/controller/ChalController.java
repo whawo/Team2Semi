@@ -154,6 +154,10 @@ public class ChalController {
 				chalMyDetailDto.getChalNo()));
 		//종료일 조회
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		//달성률 조회
+		model.addAttribute("progressDto",
+				confirmDao.myConfirmCnt((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
 		
 		return "chal/my_chal";
 		
@@ -171,7 +175,7 @@ public class ChalController {
 		//챌린지 단일조회
 		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
 				chalMyDetailDto.getChalNo()));
-		System.out.println(model);
+
 		return "chal/all_chal";
 		
 	}
