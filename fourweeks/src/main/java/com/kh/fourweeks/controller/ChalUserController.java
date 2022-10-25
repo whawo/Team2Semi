@@ -102,21 +102,20 @@ public class ChalUserController {
 			@ModelAttribute AttachmentDto attachmentDto,
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
 			Model model,
-			HttpSession session
-			) {
+			HttpSession session) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
 		model.addAttribute("myDto", chalUserDao.selectOne(userId));
-		model.addAttribute("chalDto" , chalUserDao.selectAllMyDetail((String)session.getAttribute(SessionConstant.ID)));
+		model.addAttribute("chalDto" , chalUserDao.selectAllMyDetail(userId));
 		model.addAttribute("progressDto",
-				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(),
-						(String)session.getAttribute(SessionConstant.ID)));
+				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
 		return "chalUser/mypage";
 	}
 	
 	@GetMapping("/mypage/edit")
-	public String editInfo(@RequestParam String userId,
+	public String editInfo(HttpSession session,
 			Model model) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
 		ChalUserDto userDto = chalUserDao.selectOne(userId);
 		if(userDto == null) {
 			throw new TargetNotFoundException();
@@ -146,6 +145,29 @@ public class ChalUserController {
 
 		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
 		return attachService.load(attachmentNo);
+	}
+	
+	@GetMapping("/mypage/edit/auth")
+	public String editAuth(Model model,
+			HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+			model.addAttribute("userDto", chalUserDao.selectOne(userId));			
+			return "chalUser/edit_auth";
+	}
+	
+	@PostMapping("/mypage/edit/auth")
+	public String editAuth(@ModelAttribute ChalUserDto inputDto,
+			RedirectAttributes attr) {
+		ChalUserDto findDto = chalUserDao.selectOne(inputDto.getUserId());
+		if(findDto == null) {
+			return "redirect:/need_login";
+		}
+		boolean passwordMatch = findDto.getUserPw().equals(inputDto.getUserPw());
+		if(!passwordMatch) {
+			return "redirect:auth?error";
+		}else {
+			return "redirect:/mypage/edit";
+		}
 	}
 	
 }

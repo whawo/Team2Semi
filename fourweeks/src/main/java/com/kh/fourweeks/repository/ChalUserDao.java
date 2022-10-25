@@ -19,5 +19,4 @@ public interface ChalUserDao {
 
 	//참가중인 모든챌린지 조회 메소드
 	List<ChalMyDetailDto> selectAllMyDetail(String userId);
-
 }
