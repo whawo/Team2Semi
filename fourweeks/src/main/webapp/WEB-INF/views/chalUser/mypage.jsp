@@ -31,7 +31,7 @@
 	<li><img src="/profile/download?userId=${myDto.userId}" width="50" height="50" class="user-img">
 		${myDto.getUserNick()}</li>
 	<li>${myDto.userEmail}</li>
-	<li><button>계정 관리</button></li><br><br><br><br><br><br><br><br><br>
+	<li><a href="mypage/edit/auth">계정 관리</a></li><br><br><br><br><br><br><br><br><br>
 </ul>
 
 <c:forEach var="chalDto" items="${chalDto}">
