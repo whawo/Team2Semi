@@ -219,3 +219,10 @@ create view confirm_img_view as
 select C.confirm_no, A.attachment_no 
 from confirm_img C 
 inner join attachment A on C.attachment_no = A.attachment_no;
+
+--유저 단일 인증글 조회 view 생성
+
+create view my_chal_detail as 
+select C.chal_title, C.chal_content, C.start_date ,P.*
+from chal C inner join participant P on C.chal_no=P.chal_no;
+
