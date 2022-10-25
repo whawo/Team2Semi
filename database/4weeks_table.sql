@@ -213,3 +213,9 @@ create view chal_user_img_detail_view as
 select A.*,C.user_id
 from attachment A
 inner join user_img C on C.attachment_no = A.attachment_no;
+
+-- 인증글 이미지(confirm_img) 조회 뷰 생성
+create view confirm_img_view as 
+select C.confirm_no, A.attachment_no 
+from confirm_img C 
+inner join attachment A on C.attachment_no = A.attachment_no;
