@@ -152,6 +152,9 @@ public class ChalController {
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), (String)session.getAttribute(SessionConstant.ID)));
 		
+		//참가자 인증글 목록(최신 5개)
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		return "chal/my_chal";
 		
 	}
