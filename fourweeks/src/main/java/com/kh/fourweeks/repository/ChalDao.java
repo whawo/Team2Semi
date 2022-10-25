@@ -5,6 +5,7 @@ import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
+import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
 
@@ -43,13 +44,17 @@ public interface ChalDao {
     int searchForOnlyTypeCount(ChalListSearchVO vo);
 	
     // 전체 조회+검색
-    List<ChalListVO> selectListRecruited(ChalListSearchVO vo);
-  	List<ChalListVO> listRecruited(ChalListSearchVO vo); 
-  	List<ChalListVO> beNotInKeywordListRecruited(ChalListSearchVO vo); 
-  	List<ChalListVO> searchRecruited(ChalListSearchVO vo); 
-  	List<ChalListVO> searchForAllTypeRecruited(ChalListSearchVO vo); 
-  	List<ChalListVO> searchForOnlyTypeRecruited(ChalListSearchVO vo); 
-    
+    List<ChalListVO> selectListRecruited(ChalListSearchRecruitedVO vo);
+  	List<ChalListVO> listRecruited(ChalListSearchRecruitedVO vo); 
+  	List<ChalListVO> beNotInKeywordListRecruited(ChalListSearchRecruitedVO vo); 
+  	List<ChalListVO> searchRecruited(ChalListSearchRecruitedVO vo); 
+  	List<ChalListVO> searchForAllTypeRecruited(ChalListSearchRecruitedVO vo); 
+  	List<ChalListVO> searchForOnlyTypeRecruited(ChalListSearchRecruitedVO vo);
+    int countRecruited(ChalListSearchRecruitedVO vo);
+    int searchCountRecruited(ChalListSearchRecruitedVO vo); 
+    int listCountRecruited(ChalListSearchRecruitedVO vo);
+    int searchForAllTypeCountRecruited(ChalListSearchRecruitedVO vo);
+    int searchForOnlyTypeCountRecruited(ChalListSearchRecruitedVO vo);
   	
     // 참가자 인원수 증가
     public boolean updateChalPerson(int chalNo);

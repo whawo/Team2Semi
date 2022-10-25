@@ -14,6 +14,7 @@ import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
+import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
 @Repository
@@ -101,7 +102,6 @@ public class ChalDaoImpl implements ChalDao {
 //	};
 	
 	private ResultSetExtractor<ChalDetailVO> detailExtractor = new ResultSetExtractor<ChalDetailVO>() {
-		
 		@Override
 		public ChalDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
 			if(rs.next()) {
@@ -114,7 +114,6 @@ public class ChalDaoImpl implements ChalDao {
 			}else {
 				return null;
 			}
-			
 		}
 	};
 	
@@ -130,7 +129,8 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}
 
-	// 시작
+	// --------------------------------------------------------------------------
+	
 	private RowMapper<ChalListVO> listMapper = new RowMapper<ChalListVO>() {
 		@Override
 		public ChalListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -141,6 +141,7 @@ public class ChalDaoImpl implements ChalDao {
 					.chalTopic(rs.getString("chal_topic"))
 					.dDay(rs.getString("d_day"))
 					.endDate(rs.getString("end_date"))
+					.startDate(rs.getDate("start_date"))
 					.rn(rs.getInt("rn"))
 				.build();
 		}
@@ -156,6 +157,7 @@ public class ChalDaoImpl implements ChalDao {
 						+ "chal_title,"
 						+ "chal_topic,"
 						+ "chal_person, "
+						+ "start_date, "
 						+ "ceil(start_date-sysdate) d_day, "
 						+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 					+ "from "
@@ -187,8 +189,9 @@ public class ChalDaoImpl implements ChalDao {
 			return search(vo);
 		}
 	}
+	
 	// 전체 챌린지 조회 판정 메소드
-	public List<ChalListVO> selectListRecruited(ChalListSearchVO vo) {
+	public List<ChalListVO> selectListRecruited(ChalListSearchRecruitedVO vo) {
 		if (vo.isSearch() == 1) { // 전체리스트
 			return listRecruited(vo);
 		} else if(vo.isSearch() == 2) { // 타입(전체) 키워드 없이 검색 버튼 누를시
@@ -212,6 +215,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title,"
 								+ "chal_topic,"
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -237,6 +241,7 @@ public class ChalDaoImpl implements ChalDao {
 						+ "chal_title,"
 						+ "chal_topic,"
 						+ "chal_person, "
+						+ "start_date, "
 						+ "ceil(start_date-sysdate) d_day, "
 						+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 					+ "from "
@@ -264,6 +269,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title, "
 								+ "chal_topic, "
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -295,6 +301,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title,"
 								+ "chal_topic,"
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -323,6 +330,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title, "
 								+ "chal_topic, "
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -345,7 +353,7 @@ public class ChalDaoImpl implements ChalDao {
 	
 	// 전체 챌린지 조회
 	@Override
-	public List<ChalListVO> listRecruited(ChalListSearchVO vo) {
+	public List<ChalListVO> listRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select * from ("
 						+ "select TMP.*, rownum rn from ("
 							+ "select "
@@ -353,6 +361,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title,"
 								+ "chal_topic,"
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -360,14 +369,14 @@ public class ChalDaoImpl implements ChalDao {
 							+ "where "
 								+ "chal_person < 11 "
 							+ "order by "
-								+ "chal_no desc"
+								+ "chal_no desc "
 							+ ")TMP"
 							+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	@Override
-	public List<ChalListVO> beNotInKeywordListRecruited(ChalListSearchVO vo) {
+	public List<ChalListVO> beNotInKeywordListRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select * from ("
 				+ "select TMP.*, rownum rn from ("
 					+ "select "
@@ -375,6 +384,7 @@ public class ChalDaoImpl implements ChalDao {
 						+ "chal_title,"
 						+ "chal_topic,"
 						+ "chal_person, "
+						+ "start_date, "
 						+ "ceil(start_date-sysdate) d_day, "
 						+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 					+ "from "
@@ -382,15 +392,17 @@ public class ChalDaoImpl implements ChalDao {
 					+ "where "
 						+ "chal_person < 11 "
 					+ "order by "
-						+ "chal_no desc"
+						+ "chal_no desc, "
+						+ "#1"
 					+ ")TMP"
 					+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getAlignType());
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
 
 	@Override
-	public List<ChalListVO> searchRecruited(ChalListSearchVO vo) {
+	public List<ChalListVO> searchRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select * from ("
 						+ "select TMP.*, rownum rn from ("
 							+ "select "
@@ -398,6 +410,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title, "
 								+ "chal_topic, "
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -409,15 +422,17 @@ public class ChalDaoImpl implements ChalDao {
 							+ "and "
 								+ "chal_person < 11 "
 							+ "order by "
-								+ "chal_no desc"
+								+ "chal_no desc,"
+								+ "#1"
 							+ ")TMP"
 							+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getAlignType());
 		Object[] param = {vo.getKeyword(),vo.getType(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
 	@Override
-	public List<ChalListVO> searchForAllTypeRecruited(ChalListSearchVO vo) {
+	public List<ChalListVO> searchForAllTypeRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select * from ("
 						+ "select TMP.*, rownum rn from ("
 							+ "select "
@@ -425,21 +440,26 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title,"
 								+ "chal_topic,"
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
+								+ "instr(chal_title, ?) > 0 "
+							+ "and "
 								+ "chal_person < 11"
 							+ "order by "
-								+ "chal_no desc"
+								+ "chal_no desc, "
+								+ "#1"
 							+ ")TMP"
 							+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getAlignType());
 		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	@Override
-	public List<ChalListVO> searchForOnlyTypeRecruited(ChalListSearchVO vo) {
+	public List<ChalListVO> searchForOnlyTypeRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select * from ("
 						+ "select TMP.*, rownum rn from ("
 							+ "select "
@@ -447,6 +467,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_title, "
 								+ "chal_topic, "
 								+ "chal_person, "
+								+ "start_date, "
 								+ "ceil(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
@@ -456,9 +477,11 @@ public class ChalDaoImpl implements ChalDao {
 							+ "and "
 								+ "chal_person < 11 "
 							+ "order by "
-								+ "chal_no desc"
+								+ "chal_no desc, "
+								+ "#1"
 							+ ")TMP"
 							+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getAlignType());
 		Object[] param = {vo.getType(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
@@ -475,6 +498,21 @@ public class ChalDaoImpl implements ChalDao {
 			return searchForOnlyTypeCount(vo);
 		} else {
 			return searchCount(vo);
+		}
+	}
+	
+	@Override
+	public int countRecruited(ChalListSearchRecruitedVO vo) {
+		if (vo.isSearch() == 1) {
+			return listCountRecruited(vo);
+		} else if(vo.isSearch() == 2) {
+			return listCountRecruited(vo);
+		} else if(vo.isSearch() == 3) {
+			return searchForAllTypeCountRecruited(vo);
+		} else if(vo.isSearch() == 4) {
+			return searchForOnlyTypeCountRecruited(vo);
+		} else {
+			return searchCountRecruited(vo);
 		}
 	}
 	
@@ -503,8 +541,35 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
+	// 
+	
+	@Override
+	public int listCountRecruited(ChalListSearchRecruitedVO vo) {
+		String sql = "select count(*) from chal where chal_person < 11";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	@Override
+	public int searchCountRecruited(ChalListSearchRecruitedVO vo) {
+		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and instr(chal_title, ?) > 0 and chal_person < 11";
+		Object[] param = {vo.getType(), vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	@Override
+	public int searchForAllTypeCountRecruited(ChalListSearchRecruitedVO vo) {
+		String sql = "select count(*) from chal where instr(chal_title, ?) > 0 and chal_person < 11";
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	@Override
+	public int searchForOnlyTypeCountRecruited(ChalListSearchRecruitedVO vo) {
+		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and chal_person < 11";
+		Object[] param = {vo.getType()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 	
 	
+	// -------------------------------------------------------------------------
 	private RowMapper<ParticipantDto> participantMapper = new RowMapper<ParticipantDto>() {
 		@Override
 		public ParticipantDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -540,8 +605,6 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, participantMapper,param);
 	}
 	
-	
-
 	@Override
 	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//조민재 추가
 		String sql ="select * from participant where chal_no= ? and user_id = ?";
@@ -619,7 +682,6 @@ public class ChalDaoImpl implements ChalDao {
 		String sql ="update chal set chal_person = chal_person +1 where chal_no= ?";
 		
 		Object[] param = {chalNo};
-		
 		
 		return jdbcTemplate.update(sql, param)>0;
 	}
