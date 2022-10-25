@@ -25,12 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
-import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
-import com.kh.fourweeks.entity.UserConfirmLikeDto;
-import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
@@ -39,7 +36,6 @@ import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
-import com.kh.fourweeks.vo.ChalListVO;
 
 @Controller
 @RequestMapping("/chal")
@@ -168,6 +164,8 @@ public class ChalController {
 		//챌린지 단일조회
 		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
 				chalMyDetailDto.getChalNo()));
+		//모든 참가자 진행률 조회
+		model.addAttribute("progressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
 
 		return "chal/all_chal";
 		

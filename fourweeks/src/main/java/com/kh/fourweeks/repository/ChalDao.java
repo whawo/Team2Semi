@@ -7,6 +7,7 @@ import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
+import com.kh.fourweeks.vo.ChalProgressVO;
 
 public interface ChalDao {
 	int chalSeq(); //챌린지 개설 시퀀스
@@ -29,6 +30,10 @@ public interface ChalDao {
 	// 챌린지 참가자 상세 조회 메소드
 	List<ChalMyDetailDto> selectAllDetail(int chalNo);
 
+	//챌린지 참가자 진행률 조회 메소드
+	List<ChalProgressVO> selectAllProgress(int chalNo);
+	
+	
     // 모집중 조회+검색
   	List<ChalListVO> selectList(ChalListSearchVO vo);
   	List<ChalListVO> list(ChalListSearchVO vo); 

@@ -72,7 +72,7 @@ ul.list>li:hover {
 				</c:otherwise>
 			</c:choose>
 			<li>챌린지 리더 :<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-		<img src = "#" width="50" height="50" class="user-img"> ${chalDto.getUserId()}</li>
+		<img src = "#" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}</li>
 			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
 			<li>챌린지 인증방법 : ${chalDto.getHowConfirm()}</li>
 		</ul>
