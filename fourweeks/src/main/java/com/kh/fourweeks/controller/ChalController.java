@@ -39,6 +39,7 @@ import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
+import com.kh.fourweeks.vo.ChalListVO;
 
 @Controller
 @RequestMapping("/chal")

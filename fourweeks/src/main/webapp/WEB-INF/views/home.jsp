@@ -113,7 +113,22 @@
        outline: none; 
        }
 	</style>
-		
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+      $(function(){
+        //챌린지 썸네일이 없으면 기본 이미지로 대체
+        $(".main-img").on("error", function(){
+          $(this).attr("src", "/images/bg_default.png");
+        });
+
+        //뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+        $(window).bind("pageshow", function (event) {
+              if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+                  location.href = location.href;
+              }
+          });
+      });
+    </script>
 		<div class="container-1200">
        <div class="row main">
             <img src="/images/main_banner_illust.png" id="head-image">
@@ -127,20 +142,23 @@
             </span>         
         </div>
 		
-		<%-- 검색 시작 --%>
-		<form action="chal/list">
-		<div class="search-bar">
-			<select name="type" class="select select-check">
-				<option selected="selected" value="chal_title">전체</option>
-				<option value="'운동'">운동</option>
-				<option value="'식습관'">식습관</option>
-				<option value="'생활'">생활</option>
-				<option value="'정서'">정서</option>
-				<option value="'취미'">취미</option>
-				<option value="'학습'">학습</option>
-				<option value="'환경'">환경</option>
-				<option value="'그 외'">그 외</option>
-			</select>
+		<%-- 검색 시작 --%>      
+      <form action="chal/list">
+      <div class="search-bar">
+        <select name="type" class="select select-check">
+          <option value="chal_title">전체</option>
+          <option value="운동">운동</option>
+          <option value="식습관">식습관</option>
+          <option value="생활">생활</option>
+          <option value="정서">정서</option>
+          <option value="취미">취미</option>
+          <option value="학습">학습</option>
+          <option value="환경">환경</option>
+          <option value="그 외">그 외</option>
+        </select>
+        <select name="alignType" hidden="">
+          <option value="d_day asc"></option>
+			  </select>
 				<input class="search-box" type="text" name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
 				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
 			</form>
@@ -148,17 +166,19 @@
 		<%-- 검색 끝 --%>
 		
 		<%-- 주제별 리스트 시작 --%>
+
 		<div class="row first">
-			<div class="flexbox"><a href="chal/list?type=%27생활%27&keyword="><img src="/images/regular_lifestyle.png"></a></div>
-			<div class="flexbox"><a href="chal/list?type=%27운동%27&keyword="><img src="/images/exercise.png"></a></div>
-			<div class="flexbox"><a href="chal/list?type=%27식습관%27&keyword="><img src="/images/eating_habits.png"></a></div>
-			<div class="flexbox"><a href="chal/list?type=%27정서%27&keyword="><img src="/images/mind_control.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=생활&keyword="><img src="/images/regular_lifestyle.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=운동&keyword="><img src="/images/exercise.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=식습관&keyword="><img src="/images/eating_habits.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=정서&keyword="><img src="/images/mind_control.png"></a></div>
 		</div>
 		<div class="row first">
-			<div class="flexbox"><a href="chal/list?type=%27취미%27&keyword="><img src="/images/hobby.png"></a></div>
-			<div class="flexbox"><a href="chal/list?type=%27학습%27&keyword="><img src="/images/study.png"></a></div>
-			<div class="flexbox"><a href="chal/list?type=%27환경%27&keyword="><img src="/images/echo_and_pat.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=취미&keyword="><img src="/images/hobby.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=학습&keyword="><img src="/images/study.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=환경&keyword="><img src="/images/echo_and_pat.png"></a></div>
 			<div class="flexbox"><a href=""><img src="/images/start_today.png"></a></div>	
+
 		</div>
 		<%-- 주제별 리스트 끝 --%>
 		
@@ -172,10 +192,7 @@
 			<c:forEach var="chalDto" items="${list}">
 					<div>
 						<a href="chal/detail?chalNo=${chalDto.chalNo}">
-							<img class="img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-							<c:if test="${chalDto.getChalNo() == null}">
-								<img class="img" src="/images/bg_default.png">
-							</c:if>
+							<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
 						</a>
 					</div>
 					<div>
@@ -195,5 +212,4 @@
 					<br>
 			</c:forEach>
 		</div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

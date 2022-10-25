@@ -458,5 +458,7 @@
      </body>
      
  <jsp:include page="/WEB-INF/views/template/footer.jsp">
+	<jsp:param value="챌린지 개설" name="title"/>
+</jsp:include>     
 
 

@@ -16,7 +16,6 @@
 <link rel="stylesheet" type="text/css" href="/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-<style>
 
 	div, ul, li{
 	border: 1px dotted gray;
@@ -74,31 +73,6 @@ float:left;
    			<ul class="list-nav"> 
    			<c:choose>
                <c:when test="${login}">
-
-   			
-   				<il class="nav-item">
-   					<img src="/images/top_logo.png" width="60" class="logo-margin">
-   					</il>
-   					<il class="nav-item">
-   					<a href="/">전체 챌린지</a>
-   					</il>
-   					<il class="nav-item">
-	                <a href="/chal/create">챌린지 개설</a>
-	                </il>
-	                <il class="nav-item">
-	                <a href="/confirm/write">챌린지 인증</a>
-	                </il>
-	                <il class="nav-item">
-	           	 	<a href="#">문의하기</a>
-	           	 	</il>
-	           	 	<li class="nav-item right-item">
-	           	 	<a href="#">${user_img} ${loginId}</a>
-	           	 	</li>
-	           	 		<ul>
-	           	 			<li class="nav-item right-item"><a href="마이페이지이이이">마이페이지</a></li>
-	           	 			<li><a href="/logout">로그아웃</a></li>
-	           	 		</ul>
-					 </c:when>
                <c:otherwise>
                <il class="nav-item">
    					<a href="/">전체 챌린지</a>
