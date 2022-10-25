@@ -113,6 +113,7 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		jdbcTemplate.update(sql, param);
 	}
 	
+	@Override
 	public List<ChalMyDetailDto> selectAllMyDetail(String userId) {
 		String sql ="select my_chal_detail.*,"
 				+ " ceil(start_date-sysdate) d_day,"
