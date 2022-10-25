@@ -16,18 +16,6 @@ public class ReplyDaoImpl implements ReplyDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private RowMapper<ReplyDto> mapper = (rs, idx) -> {
-		return ReplyDto.builder()
-				.replyNo(rs.getInt("reply_no"))
-				.confirmNo(rs.getInt("confirm_no"))
-				.userId(rs.getString("user_id"))
-				.replyContent(rs.getString("reply_content"))
-				.replyDate(rs.getDate("reply_date"))
-				.replyUpdate(rs.getDate("reply_update"))
-				.replyBlind(rs.getBoolean("reply_blind"))
-				.build();
-	};
-	
 	private RowMapper<ReplyListVO> listMapper = (rs, idx) -> {
 		return ReplyListVO.builder()
 				.replyNo(rs.getInt("reply_no"))
@@ -36,8 +24,8 @@ public class ReplyDaoImpl implements ReplyDao{
 				.replyContent(rs.getString("reply_content"))
 				.replyDate(rs.getDate("reply_date"))
 				.replyUpdate(rs.getDate("reply_update"))
-				.replyBlind(rs.getBoolean("reply_blind"))
-				.userId(rs.getString("user_id"))
+				.replyBlind(rs.getString("reply_blind") != null)
+				.userNick(rs.getString("user_nick"))
 				.build();
 	};
 	
@@ -50,7 +38,7 @@ public class ReplyDaoImpl implements ReplyDao{
 					.replyContent(rs.getString("reply_content"))
 					.replyDate(rs.getDate("reply_date"))
 					.replyUpdate(rs.getDate("reply_update"))
-					.replyBlind(rs.getBoolean("reply_blind"))
+					.replyBlind(rs.getString("reply_blind") != null)
 					.build();
 		} else {
 			return null;
@@ -62,14 +50,15 @@ public class ReplyDaoImpl implements ReplyDao{
 		String sql = "insert into reply("
 				+ "reply_no, confirm_no, user_id, reply_content"
 				+ ") values(reply_seq.nextval, ?, ?, ?)";
-		Object[] param = {replyDto.getReplyNo(), replyDto.getConfirmNo(),
-				replyDto.getUserId(), replyDto.getReplyContent()};
+		Object[] param = {replyDto.getConfirmNo(),
+						replyDto.getUserId(), 
+						replyDto.getReplyContent()};
 		jdbcTemplate.update(sql, param);
 	}
 
 	@Override
 	public List<ReplyListVO> selectList(int confirmNo) {
-		String sql = "select * from reply where confirm_no = ?";
+		String sql = "select R.*, U.user_nick from reply R left outer join chal_user U on R.user_id = U.user_id where confirm_no = ? order by reply_no asc";
 		Object[] param = {confirmNo};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
