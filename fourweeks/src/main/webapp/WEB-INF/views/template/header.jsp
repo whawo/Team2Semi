@@ -67,10 +67,10 @@ float:left;
 
    			
    				<il class="nav-item">
-   					<img src="/images/top_logo.png" width="60" class="logo-margin">
+   					<a href="/"><img src="/images/top_logo.png" width="60" class="logo-margin"></a>
    					</il>
    					<il class="nav-item">
-   					<a href="/">전체 챌린지</a>
+   					<a href="/chal/list">전체 챌린지</a>
    					</il>
    					<il class="nav-item">
 	                <a href="/chal/create">챌린지 개설</a>
@@ -91,7 +91,7 @@ float:left;
 					 </c:when>
                <c:otherwise>
                <il class="nav-item">
-   					<a href="/">전체 챌린지</a>
+   					<a href="/chal/list">전체 챌린지</a>
    					</il>
    					<il class="nav-item">
 	                <a href="/chal/create">챌린지 개설</a>

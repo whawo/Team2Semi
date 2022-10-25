@@ -1,26 +1,108 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+   href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+   rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>4weeks 챌린지</title>
 		<style>
+		div {
+			border:1px solid gray;
+		}
 			.img {
 				width: 100px;
 				height: 100px;
 			}
+	 /* 검색창*/
+	 .select{
+          border:2px solid #6c7aef;
+          border-radius: 0.5em;
+          width: 150px;
+          height: auto;
+          font-size: 16px;
+          padding: 15px; /*이거 글씨 전체가 왼쪽에서 조금씩 떨어지는 거/*/
+
+          border-right: none;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+        }
+        .search-bar{
+          display: flex;
+          flex-direction: row;
+          position: relative;
+        }
+        .search-box{
+     	position : relative;
+        border:2px solid #6c7aef;
+        border-radius: 0.5em;
+        width: 100%;
+        height: 60px;
+        font-size: 16px;
+        padding: 15px;
+
+        border-left: none;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        }
+        .search-box > select > input{
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        }
+        /* 옵션보기 화살표 아이콘 */
+        select {
+        -webkit-appearance:none; /* for chrome */
+        -moz-appearance:none; /*for firefox*/
+        appearance:none;
+        }
+
+        select::-ms-expand {
+        display:none;/*for IE10,11*/
+        }
+
+        select {
+        background:url("/images/arrow-down.png") no-repeat 97% 50%/15px auto;
+        }
+
+        .btn {
+        position: absolute;
+		margin-top : 20px;
+		margin-right : 15px;
+        padding : 0;
+        right: 0; 
+        background-color : white;           
+        }
+        /* focus시 테두리 색변경 방지 */
+       input:focus, 
+       select:focus { 
+       outline: none; 
+       }
+
 		</style>
 	</head>
 	<body>
-		<div class="page-1">
+		<div class="page-1" >
+		
 			<%-- 검색 시작 --%>
 			<c:set var="type" value="${param.type}"></c:set>
-			<form action="list">
+			<form action="list" width="590px">
+			<div class="search-bar" >
 				<c:choose>
 					<c:when test="${type eq null}">
-						<select name="type">
+						<select name="type" class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -33,7 +115,7 @@
 						</select>
 					</c:when>
 					<c:when test="${type eq 'chal_title'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title" selected>전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -46,7 +128,7 @@
 						</select>
 					</c:when>
 					<c:when test="${type eq '운동'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'" selected>운동</option>
 							<option value="'식습관'">식습관</option>
@@ -59,7 +141,7 @@
 						</select>
 					</c:when>
 					<c:when test="${param.type eq '%27식습관%27'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'" selected>식습관</option>
@@ -72,7 +154,7 @@
 						</select>
 					</c:when>
 					<c:when test="${param.type eq '%27생활%27'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -85,7 +167,7 @@
 						</select>
 					</c:when>
 					<c:when test="${param.type eq '%27정서%27'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -98,7 +180,7 @@
 						</select>
 					</c:when>
 					<c:when test="${param.type eq '%27취미%27'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -111,7 +193,7 @@
 						</select>
 					</c:when>
 					<c:when test="${param.type eq '학습'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -124,7 +206,7 @@
 						</select>
 					</c:when>
 					<c:when test="${param.type eq '%27환경%27'}">
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -137,7 +219,7 @@
 						</select>
 					</c:when>
 					<c:otherwise>
-						<select name="type">
+						<select name="type"  class="select select-check">
 							<option value="chal_title">전체</option>
 							<option value="'운동'">운동</option>
 							<option value="'식습관'">식습관</option>
@@ -150,9 +232,10 @@
 						</select>
 					</c:otherwise>
 				</c:choose>
-				<input name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
-				<button type="submit">검색</button>
+				<input class="search-box" name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
+				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 			</form>
+			</div>
 			<%-- 검색 끝 --%>
 			
 			<%-- 모집중 페이지 --%>
