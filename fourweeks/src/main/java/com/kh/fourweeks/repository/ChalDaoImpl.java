@@ -520,21 +520,6 @@ public class ChalDaoImpl implements ChalDao {
 				.build();
 		}
 	};
-   private ResultSetExtractor<ParticipantDto> participantExtractor = new ResultSetExtractor<ParticipantDto>() {
-	      @Override
-	      public ParticipantDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-	         if(rs.next()) {
-	            return ParticipantDto.builder()
-	                  .participantNo(rs.getInt("participant_no"))
-	                  .chalNo(rs.getInt("chal_no"))
-	                  .userId(rs.getString("user_id"))
-	                  .participantJoin(rs.getDate("participant_join"))
-	               .build();
-	         } else {
-	            return null;
-	         }
-	      }
-	   };
 	@Override
 	public List<ParticipantDto> selectParticipant(int chalNo) {//참가자 조회
 		
@@ -542,25 +527,6 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, participantMapper,param);
 	}
-
-	   private ResultSetExtractor<ParticipantDto> participantExtractor = new ResultSetExtractor<ParticipantDto>() {
-		      
-		      @Override
-		      public ParticipantDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-		         if(rs.next()) {
-
-		            return ParticipantDto.builder()
-		                  .participantNo(rs.getInt("participant_no"))
-		                  .chalNo(rs.getInt("chal_no"))
-		                  .userId(rs.getString("user_id"))
-		                  .participantJoin(rs.getDate("participant_join"))
-		               .build();
-		         }else {
-		            return null;
-		         }
-		         
-		      }
-		   };
 
 	
 
@@ -601,6 +567,7 @@ public class ChalDaoImpl implements ChalDao {
 						.chalNo(rs.getInt("chal_no"))
 						.userId(rs.getString("user_id"))
 						.participantJoin(rs.getDate("participant_join"))
+						.chalTopic(rs.getString("chal_topic"))
 						.build();
 			}else {
 				return null;
@@ -639,6 +606,7 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
+
 
 	@Override
 	public void insertParticipant(ParticipantDto partDto) {
