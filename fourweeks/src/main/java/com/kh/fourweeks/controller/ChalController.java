@@ -48,12 +48,6 @@ public class ChalController {
 	private ChalDao chalDao;
 	
 	@Autowired
-	private ChalConfirmDao confirmDao;
-	
-	@Autowired
-	private UserConfirmLikeDao confirmLikeDao;
-	
-	@Autowired
 	private ChalService chalService;
 	
 	@Autowired
@@ -62,11 +56,7 @@ public class ChalController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	@Autowired
-	private ChalUserDao chalUserDao;
-	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
-
 
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -94,7 +84,6 @@ public class ChalController {
 		partDto.setChalNo(chalNo);
 		partDto.setUserId(userId);
 		chalDao.addParticipant(partDto);
-		System.out.println(dir);
 		//redirect
 		attr.addAttribute("chalNo", chalNo);
 		return "redirect:detail";
@@ -112,7 +101,8 @@ public class ChalController {
 		return attachService.load(attachmentNo);
 	}
 	
-	@GetMapping("/list")
+	// 모집중인 화면 맵핑
+	@GetMapping(value = {"/list", "/recruited_list"})
 	public String list(
 				Model model,
 				@ModelAttribute(name="vo") ChalListSearchVO vo) {
@@ -121,10 +111,13 @@ public class ChalController {
 		vo.setCount(count);
 		// 첨부파일 출력
 		model.addAttribute("list", attachmentDao.selectList());
-		// 
+		// 모집중인 챌린지 화면에 해당하는 모델 첨부
 		model.addAttribute("list", chalDao.selectList(vo));
+		// 전체 챌린지 화면에 해당하는 모델 첨부
+		model.addAttribute("recruitedList", chalDao.selectListRecruited(vo));
 		return "chal/list";
 	}
+	
 	//상세 조회(단일)
 	@GetMapping("/detail")
 	public String detail(@ModelAttribute ChalDto chalDto,

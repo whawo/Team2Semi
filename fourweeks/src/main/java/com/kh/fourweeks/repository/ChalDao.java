@@ -29,7 +29,6 @@ public interface ChalDao {
 	// 챌린지 참가자 상세 조회 메소드
 	List<ChalMyDetailDto> selectAllDetail(int chalNo);
 
-
     // 모집중 조회+검색
   	List<ChalListVO> selectList(ChalListSearchVO vo);
   	List<ChalListVO> list(ChalListSearchVO vo); 
@@ -37,20 +36,25 @@ public interface ChalDao {
   	List<ChalListVO> search(ChalListSearchVO vo); 
   	List<ChalListVO> searchForAllType(ChalListSearchVO vo); 
   	List<ChalListVO> searchForOnlyType(ChalListSearchVO vo); 
-  	
-  	
     int count(ChalListSearchVO vo);
     int searchCount(ChalListSearchVO vo); 
     int listCount(ChalListSearchVO vo);
     int searchForAllTypeCount(ChalListSearchVO vo);
     int searchForOnlyTypeCount(ChalListSearchVO vo);
 	
+    // 전체 조회+검색
+    List<ChalListVO> selectListRecruited(ChalListSearchVO vo);
+  	List<ChalListVO> listRecruited(ChalListSearchVO vo); 
+  	List<ChalListVO> beNotInKeywordListRecruited(ChalListSearchVO vo); 
+  	List<ChalListVO> searchRecruited(ChalListSearchVO vo); 
+  	List<ChalListVO> searchForAllTypeRecruited(ChalListSearchVO vo); 
+  	List<ChalListVO> searchForOnlyTypeRecruited(ChalListSearchVO vo); 
+    
+  	
     // 참가자 인원수 증가
     public boolean updateChalPerson(int chalNo);
-    
-
-  List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
-  ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
+    List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
+    ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
 	
 	
 }
