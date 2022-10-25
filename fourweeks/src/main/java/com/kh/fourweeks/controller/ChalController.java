@@ -2,9 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -25,21 +22,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
-import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
-import com.kh.fourweeks.entity.UserConfirmLikeDto;
-import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
-import com.kh.fourweeks.repository.ChalUserDao;
-import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
-import com.kh.fourweeks.vo.ChalListVO;
 
 @Controller
 @RequestMapping("/chal")
