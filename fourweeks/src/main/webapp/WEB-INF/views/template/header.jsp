@@ -85,7 +85,7 @@
 		                <li class="nav-item"><a href="#">문의하기</a></li>
 		                
 		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-		           	 		<li class="nav-item" ><a href="마이페이지이이이">마이페이지</a></li>
+		           	 		<li class="nav-item" ><a href="/mypage?userId=${loginId}">마이페이지</a></li>
 		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
 		           	 		
 					</c:when>

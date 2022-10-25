@@ -20,9 +20,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
+
+import com.kh.fourweeks.entity.ChalMyDetailDto;
+
 import com.kh.fourweeks.entity.ChalUserDto;
+
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
+
+import com.kh.fourweeks.repository.ChalConfirmDao;
+
 import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalUserService;
@@ -40,6 +47,9 @@ public class ChalUserController {
 	
 	@Autowired
 	private AttachmentService attachService;
+
+	@Autowired
+	private ChalConfirmDao confirmDao;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -85,6 +95,23 @@ public class ChalUserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/mypage")
+	public String myPage(@ModelAttribute ChalUserDto chalUserDto,
+			@ModelAttribute AttachmentDto attachmentDto,
+			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			Model model,
+			HttpSession session
+			) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		
+		model.addAttribute("myDto", chalUserDao.selectOne(userId));
+		model.addAttribute("chalDto" , chalUserDao.selectAllMyDetail((String)session.getAttribute(SessionConstant.ID)));
+		model.addAttribute("progressDto",
+				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(),
+						(String)session.getAttribute(SessionConstant.ID)));
+		return "chalUser/mypage";
 	}
 	
 	@GetMapping("/mypage/edit")
