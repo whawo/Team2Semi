@@ -31,19 +31,19 @@ public interface ChalDao {
 	List<ChalMyDetailDto> selectAllDetail(int chalNo);
 
     // 모집중 조회+검색
-  	List<ChalListVO> selectList(ChalListSearchVO vo);
-  	List<ChalListVO> list(ChalListSearchVO vo); 
-  	List<ChalListVO> beNotInKeywordList(ChalListSearchVO vo); 
-  	List<ChalListVO> search(ChalListSearchVO vo); 
-  	List<ChalListVO> searchForAllType(ChalListSearchVO vo); 
-  	List<ChalListVO> searchForOnlyType(ChalListSearchVO vo); 
-    int count(ChalListSearchVO vo);
-    int searchCount(ChalListSearchVO vo); 
-    int listCount(ChalListSearchVO vo);
-    int searchForAllTypeCount(ChalListSearchVO vo);
-    int searchForOnlyTypeCount(ChalListSearchVO vo);
+  	List<ChalListVO> selectList(ChalListSearchVO vo); // 유저의 반응에 따라 메소드를 판정
+  	List<ChalListVO> list(ChalListSearchVO vo); // keyword, type, recruited가 null일때 실행됨
+  	List<ChalListVO> beNotInKeywordList(ChalListSearchVO vo); // type은 chal_title을 선택, keyword는 공백으로 검색시 실행
+  	List<ChalListVO> search(ChalListSearchVO vo); // type,keyword를 선택 후 검색하면 실행됨
+  	List<ChalListVO> searchForAllType(ChalListSearchVO vo); // 전체 검색시 실행됨
+  	List<ChalListVO> searchForOnlyType(ChalListSearchVO vo);  // 타입만 선택 후 검색시 실행됨
+    int count(ChalListSearchVO vo); // 검색한 페이지를 판정
+    int searchCount(ChalListSearchVO vo); // 주제와 검색어로 검색시 페이지수 조회
+    int listCount(ChalListSearchVO vo); // 전체검색시 페이지수 조회
+    int searchForAllTypeCount(ChalListSearchVO vo); // 전체검색시 페이지수 조회
+    int searchForOnlyTypeCount(ChalListSearchVO vo); // 타입만 선택 후 검색시 해당 페이지수 조회
 	
-    // 전체 조회+검색
+    // 전체 조회+검색 (Recruited == 전체페이지를 뜻함) (모집중 메소드와 나열 순서 상동)
     List<ChalListVO> selectListRecruited(ChalListSearchRecruitedVO vo);
   	List<ChalListVO> listRecruited(ChalListSearchRecruitedVO vo); 
   	List<ChalListVO> beNotInKeywordListRecruited(ChalListSearchRecruitedVO vo); 

@@ -108,18 +108,20 @@ public class ChalController {
 				Model model,
 				@ModelAttribute(name="voRecruited") ChalListSearchRecruitedVO voRecruited,
 				@ModelAttribute(name="vo") ChalListSearchVO vo) {
-		// 페이지수 구하기
+		
+		// 페이지수 구하기(모집중 페이지)
 		int count = chalDao.count(vo); 
 		vo.setCount(count);
 		
+		// 페이지수 구하기(전체 페이지)
 		int countRecruited = chalDao.countRecruited(voRecruited);
 		voRecruited.setCount(countRecruited);
 		
 		// 첨부파일 출력
 		model.addAttribute("list", attachmentDao.selectList());
-		// 모집중인 챌린지 화면에 해당하는 모델 첨부
+		// 모집중인 페이지 화면에 해당하는 모델 첨부
 		model.addAttribute("list", chalDao.selectList(vo));
-		// 전체 챌린지 화면에 해당하는 모델 첨부
+		// 전체 페이지 화면에 해당하는 모델 첨부
 		model.addAttribute("recruitedList", chalDao.selectListRecruited(voRecruited));
 		return "chal/list";
 	}

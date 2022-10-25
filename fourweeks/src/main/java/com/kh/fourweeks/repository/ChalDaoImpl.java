@@ -129,7 +129,7 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, detailExtractor, param);
 	}
 
-	// --------------------------------------------------------------------------
+	// 
 	
 	private RowMapper<ChalListVO> listMapper = new RowMapper<ChalListVO>() {
 		@Override
@@ -205,7 +205,6 @@ public class ChalDaoImpl implements ChalDao {
 		}
 	}
 	
-	// 모집중 메소드
 	@Override
 	public List<ChalListVO> list(ChalListSearchVO vo) {
 		String sql = "select * from ("
@@ -350,8 +349,7 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {vo.getType(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
-	
-	// 전체 챌린지 조회
+
 	@Override
 	public List<ChalListVO> listRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select * from ("
@@ -486,6 +484,7 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
+	// 모집중 챌린지 페이지수 판정 메소드
 	@Override
 	public int count(ChalListSearchVO vo) {
 		if (vo.isSearch() == 1) {
@@ -501,6 +500,7 @@ public class ChalDaoImpl implements ChalDao {
 		}
 	}
 	
+	// 전체 챌린지 페이지수 판정 메소드
 	@Override
 	public int countRecruited(ChalListSearchRecruitedVO vo) {
 		if (vo.isSearch() == 1) {
@@ -516,6 +516,7 @@ public class ChalDaoImpl implements ChalDao {
 		}
 	}
 	
+	// 모집중 페이지수 조회
 	@Override
 	public int listCount(ChalListSearchVO vo) {
 		String sql = "select count(*) from chal where ceil(start_date-sysdate) > -1 and chal_person < 11";
@@ -539,10 +540,9 @@ public class ChalDaoImpl implements ChalDao {
 		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and ceil(start_date-sysdate) > -1 and chal_person < 11";
 		Object[] param = {vo.getType()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
-	}
+	} 
 	
-	// 
-	
+	// 전체 챌린지 페이지수 조회 
 	@Override
 	public int listCountRecruited(ChalListSearchRecruitedVO vo) {
 		String sql = "select count(*) from chal where chal_person < 11";
@@ -569,7 +569,6 @@ public class ChalDaoImpl implements ChalDao {
 	}
 	
 	
-	// -------------------------------------------------------------------------
 	private RowMapper<ParticipantDto> participantMapper = new RowMapper<ParticipantDto>() {
 		@Override
 		public ParticipantDto mapRow(ResultSet rs, int rowNum) throws SQLException {
