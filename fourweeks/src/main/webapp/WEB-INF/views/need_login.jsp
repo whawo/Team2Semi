@@ -3,21 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="회원 전용 페이지" name="title"/>
 </jsp:include>
 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
+    div{
+		 border: 1px dotted transparent;
+    }
         body{
             font-family: sans-serif;
         }
         a{
-            color:#FFFFFF;
+        line-height:32px;
         }
         .p-1{
             font-size: 24px;
@@ -47,6 +51,7 @@
 
      </script>
  <body>
+ <div class="container-1200">
         <div class="container-590">
             <div class="row center">
                 <p class="p-1">로그인이 필요한 서비스입니다.</p>
@@ -58,9 +63,10 @@
             </div>
 
             <div class="row center">
-                <button class="largebtn btn1" type="button" id="largebutton1"><a href="/login">로그인</a></button>
+                <a class="largebtn btn1"  id="largebutton1" href="/login">로그인</a></button>
                 <a class="largebtn btn1" id="largebutton3" href="/join">회원가입</a>
             </div>
         </div>
+</div>
      </body>
 </html>
