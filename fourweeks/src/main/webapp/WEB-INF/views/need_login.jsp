@@ -27,12 +27,13 @@
             font-size: 24px;
             font-weight: bold;
             color: #3F3F3F;
-            margin-bottom: 10px;
+            margin-top:50px;
+            margin-bottom:22px;
         }
         .p-2{
             font-size: 12px;
             color:#3F3F3F;
-            margin-bottom: 100px;
+            margin-bottom: 50px;
 
         }
         .btn1{
