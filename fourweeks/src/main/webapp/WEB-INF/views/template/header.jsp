@@ -16,12 +16,21 @@
 <link rel="stylesheet" type="text/css" href="/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-<style>
 
 	div, ul, li, table, tr, td, th{
 	border: 1px dotted gray;
 	list-style:none;
 	}
+	 a{
+        font-size: 16px;
+        font-weight:normal;
+   		color:#6c7aef;
+        cursor: pointer;
+    }
+    a:hover{
+	    font-weight: bold;
+	    text-decoration-line: underline;
+    }
 	4weeks-inner{
 		position: relative;
 		width:1200px;
@@ -48,6 +57,9 @@ float:left;
 .list-nav .nav-item{
 	margin-left: 20px;
 } 
+.logo-margin {
+	margin-top : 5px;
+}
 
 
 </style>
@@ -61,31 +73,6 @@ float:left;
    			<ul class="list-nav"> 
    			<c:choose>
                <c:when test="${login}">
-
-   			
-   				<il class="nav-item">
-   					<img src="/images/join_success.png" width="60">
-   					</il>
-   					<il class="nav-item">
-   					<a href="/">전체 챌린지</a>
-   					</il>
-   					<il class="nav-item">
-	                <a href="/chal/create">챌린지 개설</a>
-	                </il>
-	                <il class="nav-item">
-	                <a href="/chal/confirm">챌린지 인증</a>
-	                </il>
-	                <il class="nav-item">
-	           	 	<a href="#">문의하기</a>
-	           	 	</il>
-	           	 	<li class="nav-item right-item">
-	           	 	<a href="#">${user_img} ${loginId}</a>
-	           	 	</li>
-	           	 		<ul>
-	           	 			<li class="nav-item right-item"><a href="마이페이지이이이">마이페이지</a></li>
-	           	 			<li><a href="/logout">로그아웃</a></li>
-	           	 		</ul>
-					 </c:when>
                <c:otherwise>
                <il class="nav-item">
    					<a href="/">전체 챌린지</a>
@@ -94,7 +81,7 @@ float:left;
 	                <a href="/chal/create">챌린지 개설</a>
 	                </il>
 	                <il class="nav-item">
-	                <a href="/chal/confirm">챌린지 인증</a>
+	                <a href="/confirm/write">챌린지 인증</a>
 	                </il>
 	                <il class="nav-item">
 	           	 	<a href="#">문의하기</a>

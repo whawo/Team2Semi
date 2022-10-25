@@ -213,3 +213,9 @@ create view chal_user_img_detail_view as
 select A.*,C.user_id
 from attachment A
 inner join user_img C on C.attachment_no = A.attachment_no;
+
+--유저 단일 인증글 조회 view 생성
+
+create view my_chal_detail as 
+select C.chal_title, C.chal_content, C.start_date ,P.*
+from chal C inner join participant P on C.chal_no=P.chal_no;

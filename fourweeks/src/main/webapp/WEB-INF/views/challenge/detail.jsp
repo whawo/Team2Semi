@@ -4,7 +4,7 @@
 	<jsp:param value="포켓몬 상세 정보" name="title"/>
 </jsp:include>
 
-<style>
+<style> 
 	ul.list {
 		list-style:none;
 		padding:0;

@@ -34,7 +34,10 @@ ul.list>li:hover {
 				src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
 			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
 			<li>챌린지 시작일: ${chalDto.getStartDate()}~${chalVO.endDate}</li>
-			<button>챌린지 바로가기</button>
+			<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button>챌린지 바로가기</button></a><br>
+			<a href="/chal/mychal?userId=${chalDto.userId}&chalNo=${chalDto.chalNo}">내 인증 현황</a>
+			<a href="/chal/allchal?chalNo=${chalDto.chalNo}">참가자 인증 현황</a><br>
+			달성률 : ${progressDto*100/28}%
 		</ul>
 	</div>
 </div>

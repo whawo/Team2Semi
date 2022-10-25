@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+ <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
 
- 	  <link rel="stylesheet" type="text/css" href="/css/basic.css">
+ 
+ 
+ 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -16,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
+
 
     <style>
         /* 
@@ -93,7 +96,7 @@
             font-size: 20px;
             color: #3f3f3f;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             padding-top:114px; /* 큰 제목간의 사이 간격 */
         }
          .p1-1{
@@ -215,7 +218,6 @@
             display: none;
         }
         img{
-            /* border: 100px dotted gray; */
             float: left;
         }
 
@@ -231,7 +233,6 @@
             display: none;
         }
         .preview{
-            border: 1px solid gray;
             border-radius: 0.25em;
         }
         /* 이미지 업로드 버튼들 */
@@ -248,14 +249,14 @@
 			color: #AAAAAA;
 		}
 		.img-btns{
-			padding-top: 176px;
+			padding-top: 161px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
 		}
         .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 80px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript">
+     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+     <script type="text/javascript">
     
     $(function(){
         var picker1 = new Lightpick({
@@ -281,7 +282,7 @@
 
     // 이미지 
     $(function(){
-            $("[name=thumbnail-input]").change(function(e){
+            $("[name=attachment]").change(function(e){
                 //input[type=file] 태그에는 files라는 속성이 존재
                 console.log(this.files);
                 if(this.files.length > 0){
@@ -299,15 +300,15 @@
                 // 사진 변경하기 
                 var inputImage = document.getElementById("input-image")
                 inputImage.addEventListener(function(e){
-                    $("[name=thumbnail-input]")(e.target)
+                    $("[name=attachment]")(e.target)
                 });
             });
             $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "");
+                $(".preview").attr("src", "/images/bg_default.png");
             });
         });
     
-    //2번 help-text
+    //help-text
      $(function(){
             $(".helper-text1").on("input", function(){
                 var text = $(this).val();
@@ -344,17 +345,24 @@
              }
          });
      });
+
+
+
      </script>
+     </head>
      <body>
+     <!-- 확인용 -->
+		${loginId}
+
         <div class="container-1200">
-      		<div class="row" style="margin: 30px 50px 40px 50px;">
+        <!-- 폼 추가 ! --><form action="create" method="post" enctype="multipart/form-data">
+		<div class="row" style="margin: 30px 50px 40px 50px;">
             <div class="row">
                 <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
                 <p class="p2">내가 개설한 챌린지에 자동으로 참가하게 됩니다.</p>
             </div>
-            
-            <form action="create" method="post" enctype="multipart/form-data">
-            <div class="row">
+
+           <div class="row">
                 <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
 
                 <div class="row checks small">
@@ -425,7 +433,7 @@
                 <p class="p2">노출 위치에 따라 섬네일이 축소/확대되어 적용합니다. 등록하지 않는 경우, 랜점으로 기본 이미지가 적용됩니다.</p>
                 <div class="row">
                     <input id="input-file" type="file" name="attachment" class="thumbnail">
-                    <img class="preview" src="" width="250" height="200">
+                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
                         <button class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
@@ -443,9 +451,14 @@
                 <button class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</button>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">개설하고 참가하기</button>
             </div>
-        </div>
-        </form>
-       </div>
+        </div>    
+        </form>    
+        	</div>
+        	
      </body>
      
- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>     
+ <jsp:include page="/WEB-INF/views/template/footer.jsp">
+	<jsp:param value="챌린지 개설" name="title"/>
+</jsp:include>     
+
+
