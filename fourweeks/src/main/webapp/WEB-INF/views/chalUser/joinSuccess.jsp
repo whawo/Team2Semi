@@ -64,11 +64,11 @@
             </div>
             
             <div class="row center">
-               <img src="./image/join_success.png" width="300" height="300">
+               <img src="/images/join_success.png" width="300" height="300">
             </div>
 
             <div class="row center">
-                <button class="largebtn btn1" type="submit" id="largebutton1"><a href="/login">로그인</a></button>
+                <button class="largebtn btn1" type="button" id="largebutton1"><a href="/login">로그인</a></button>
             </div>
         </div>
      </body>
