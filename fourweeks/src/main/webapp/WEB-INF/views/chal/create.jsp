@@ -424,7 +424,7 @@
                 <p class="p1">6. 챌린지 대표 이미지를 등록하세요.(선택)</p>
                 <p class="p2">노출 위치에 따라 섬네일이 축소/확대되어 적용합니다. 등록하지 않는 경우, 랜점으로 기본 이미지가 적용됩니다.</p>
                 <div class="row">
-                    <input id="input-file" type="file" name="thumbnail-input" class="thumbnail">
+                    <input id="input-file" type="file" name="attachment" class="thumbnail">
                     <img class="preview" src="" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        

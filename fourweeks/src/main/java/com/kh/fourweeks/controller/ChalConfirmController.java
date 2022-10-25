@@ -23,11 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.ChalConfirmDto;
+import com.kh.fourweeks.entity.ReplyDto;
 import com.kh.fourweeks.entity.UserConfirmLikeDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.repository.ReplyDao;
 import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
@@ -40,6 +42,9 @@ public class ChalConfirmController {
 	
 	@Autowired
 	private ChalDao chalDao;
+	
+	@Autowired
+	private ReplyDao replyDao;
 	
 	@Autowired
 	private UserConfirmLikeDao confirmLikeDao;
@@ -98,6 +103,9 @@ public class ChalConfirmController {
 		//(3) 갱신된 저장소를 세션에 다시 저장
 		session.setAttribute("history", history);
 		
+		//인증글 단일 조회
+		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
+		
 		//좋아요 기록 조회
 		String userId = (String) session.getAttribute(SessionConstant.ID);
 		if(userId != null) {
@@ -107,7 +115,9 @@ public class ChalConfirmController {
 			model.addAttribute("isLike", confirmLikeDao.check(likeDto));
 		}
 		
-		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
+		//댓글 목록 조회
+		model.addAttribute("replyList", replyDao.selectList(confirmNo));
+		
 		return "chal/confirm_detail";
 	}
 	
@@ -192,6 +202,46 @@ public class ChalConfirmController {
 		return "chal/confirm_list";
 	}
 	
-	//@GetMapping("/confirm/reply")
+	@PostMapping("/reply/write") //인증글 댓글 등록
+	public String replyWrite(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr, HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		replyDto.setUserId(userId);
+		replyDao.insert(replyDto);
+		
+		attr.addAttribute("confirmNo", replyDto.getConfirmNo());
+		return "redirect:/confirm/detail";
+	}
 	
+	@GetMapping("/reply/delete") //인증글 댓글 삭제
+	public String replyDelete(
+			@RequestParam int replyNo,
+			@RequestParam int confirmNo,
+			RedirectAttributes attr) {
+		replyDao.delete(replyNo);
+		attr.addAttribute("confirmNo", confirmNo);
+		return "redirect:/confirm/detail";
+	}
+	
+	@PostMapping("/reply/edit") //인증글 댓글 수정
+	public String replyEdit(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr) {
+		replyDao.update(replyDto);
+		attr.addAttribute("confirmNo", replyDto.getConfirmNo());
+		return "redirect:/confirm/detail";
+	}
+	
+	@GetMapping("/reply/blind") //인증글 댓글 블라인드(관리자)
+	public String replyBlind(
+			@RequestParam int replyNo,
+			@RequestParam int confirmNo,
+			RedirectAttributes attr) {
+		ReplyDto replyDto = replyDao.selectOne(replyNo);
+		replyDao.updateBlind(replyNo, !replyDto.isReplyBlind());
+
+		attr.addAttribute("confirmNo", confirmNo);
+		return "redirect:/confirm/detail";
+	}
 }
