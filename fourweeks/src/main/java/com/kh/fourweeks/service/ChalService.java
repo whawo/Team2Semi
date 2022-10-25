@@ -9,14 +9,14 @@ import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 
 public interface ChalService {
-	int create(ChalDto chalDto, List<MultipartFile> attachment) 
+	int create(ChalDto chalDto, MultipartFile attachment) 
 			throws IllegalStateException, IOException; //챌린지 썸네일(챌린지 개설)
 	
-	int confirm(ChalConfirmDto confirmDto, List<MultipartFile> attachment) 
+	int confirm(ChalConfirmDto confirmDto, MultipartFile attachment) 
 			throws IllegalStateException, IOException; //인증샷 (챌린지 인증)
 	
 	boolean remove(int confirmNo); //인증글 수정 > 인증샷 삭제
 	
-	int confirmEdit(ChalConfirmDto confirmDto, List<MultipartFile> attachment)
+	int confirmEdit(ChalConfirmDto confirmDto, MultipartFile attachment)
 			throws IllegalStateException, IOException; //인증글 수정+인증샷;
 }

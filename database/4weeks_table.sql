@@ -143,13 +143,14 @@ drop table chal_confirm;
 create table chal_confirm(
 confirm_no number not null unique,
 chal_no number references chal(chal_no) on delete set null,
+user_id references chal_user(user_id) on delete set null,
 confirm_title varchar2(120) not null,
 confirm_content varchar2(1500) not null,
 confirm_read number default 0 not null check(confirm_read >= 0),
-confirm_like number default 0 not null check(confirm_like > = 0),  
+confirm_like number default 0 not null check(confirm_like > = 0),
 confirm_date date default sysdate not null,
 modified_date date,
-constraints confirm_pk primary key(confirm_no, chal_no)
+constraints confirm_pk primary key(confirm_no, chal_no, user_id)
 );
 
 -- 인증글 좋아요(confirm_like) 테이블 생성
@@ -202,7 +203,6 @@ notice_modified date
 );
 
 -- 챌린지 상세 이미지 조회 view 생성
-
 create view chal_img_detail_view as
 select A.*,C.chal_no
 from attachment A
@@ -213,3 +213,23 @@ create view chal_user_img_detail_view as
 select A.*,C.user_id
 from attachment A
 inner join user_img C on C.attachment_no = A.attachment_no;
+
+-- 유저가 참가 중인 챌린지 상세 조회 view 생성
+create view my_chal_detail as 
+select C.chal_title, C.chal_content, C.start_date ,C.chal_topic, P.*
+from chal C inner join participant P on C.chal_no=P.chal_no;
+
+-- 인증글 이미지(confirm_img)의 첨부파일 번호 조회 뷰 생성
+create view confirm_img_view as 
+select C.confirm_no, A.attachment_no 
+from confirm_img C inner join attachment A on C.attachment_no = A.attachment_no;
+
+-- 인증글 이미지(confirm_img) 파일 정보 조회 뷰 생성
+create view confirm_info_view as 
+select C.CONFIRM_NO, A.* 
+from confirm_img C inner join attachment A on C.attachment_no = A.attachment_no;
+
+-- 프로필 이미지(user_img) 파일 정보 조회 뷰 생성
+create view user_info_view as 
+select U.user_id, A.* 
+from user_img U inner join attachment A on U.attachment_no = A.attachment_no;

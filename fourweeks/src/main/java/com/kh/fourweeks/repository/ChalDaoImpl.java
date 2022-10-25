@@ -17,6 +17,7 @@ import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
+import com.kh.fourweeks.vo.ChalProgressVO;
 @Repository
 
 public class ChalDaoImpl implements ChalDao {
@@ -75,6 +76,7 @@ public class ChalDaoImpl implements ChalDao {
 						.chalPerson(rs.getInt("chal_person"))
 						.chalTopic(rs.getString("chal_topic"))
 						.startDate(rs.getDate("start_date"))
+						.userNick(rs.getString("user_nick"))
 						.build();
 			}else {
 				return null;
@@ -84,7 +86,8 @@ public class ChalDaoImpl implements ChalDao {
 	
 	@Override
 	public ChalDto selectOne(int chalNo) {
-		String sql = "select * from chal where chal_no = ?";
+		String sql = "select C.*, U.user_nick from "
+				+ "chal C inner join chal_user U on C.user_id = U.user_id where chal_no = ?";
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
@@ -581,35 +584,38 @@ public class ChalDaoImpl implements ChalDao {
 				.build();
 		}
 	};
-   private ResultSetExtractor<ParticipantDto> participantExtractor = new ResultSetExtractor<ParticipantDto>() {
-	      @Override
-	      public ParticipantDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-	         if(rs.next()) {
-	            return ParticipantDto.builder()
-	                  .participantNo(rs.getInt("participant_no"))
-	                  .chalNo(rs.getInt("chal_no"))
-	                  .userId(rs.getString("user_id"))
-	                  .participantJoin(rs.getDate("participant_join"))
-	               .build();
-	         } else {
-	            return null;
-	         }
-	      }
-	   };
+
 	@Override
-	public List<ParticipantDto> selectParticipant(int chalNo) {//조민재 추가
+	public List<ParticipantDto> selectParticipant(int chalNo) {//참가자 조회
 		
 		String sql ="select * from participant where chal_no=?";
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, participantMapper,param);
 	}
-	
+  
 	@Override
-	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//조민재 추가
+	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//참가자 한 명 조회
 		String sql ="select * from participant where chal_no= ? and user_id = ?";
 		Object[] param = {chalNo, userId};
 		return jdbcTemplate.query(sql, participantExtractor, param);
 	}
+	
+	private ResultSetExtractor<ParticipantDto> participantExtractor = new ResultSetExtractor<ParticipantDto>() {
+	      
+		@Override
+		public ParticipantDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return ParticipantDto.builder()
+		              .participantNo(rs.getInt("participant_no"))
+		              .chalNo(rs.getInt("chal_no"))
+		              .userId(rs.getString("user_id"))
+		              .participantJoin(rs.getDate("participant_join"))
+		               .build();
+			}else {
+		            return null;
+			}
+		}
+	};
 
 	private ResultSetExtractor<ChalMyDetailDto> myDetailExtractor = new ResultSetExtractor<ChalMyDetailDto>() {
 		
@@ -624,6 +630,7 @@ public class ChalDaoImpl implements ChalDao {
 						.chalNo(rs.getInt("chal_no"))
 						.userId(rs.getString("user_id"))
 						.participantJoin(rs.getDate("participant_join"))
+						.chalTopic(rs.getString("chal_topic"))
 						.build();
 			}else {
 				return null;
@@ -663,6 +670,7 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
 
+
 	@Override
 	public void insertParticipant(ParticipantDto partDto) {
 		//참가자 참가 메소드
@@ -683,6 +691,25 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		
 		return jdbcTemplate.update(sql, param)>0;
+	}
+	private RowMapper<ChalProgressVO> allProgressMapper = new RowMapper<ChalProgressVO>() {
+		@Override
+		public ChalProgressVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalProgressVO.builder()
+					.userNick(rs.getString("user_nick"))
+					.cnt(rs.getInt("cnt"))
+					.build();
+		}
+	};
+
+	@Override
+	public List<ChalProgressVO> selectAllProgress(int chalNo) {
+		
+		String sql ="select count(*) cnt , U.user_nick from"
+				+ " chal_confirm C left outer join chal_user U on C.user_id = U.user_id"
+				+ " where chal_no =? group by U.user_nick order by cnt desc";;
+		Object[] param = {chalNo};
+		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}
 	
 	

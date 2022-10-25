@@ -45,7 +45,7 @@
 	<br><br>
 
 	<c:forEach var="list" items="${confirmList}">
-		<a href="/chal/confirm/detail?confirmNo=${list.confirmNo}">
+		<a href="detail?confirmNo=${list.confirmNo}">
 		<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
 		<img src = "detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
 		<br><br>
@@ -54,7 +54,7 @@
 		${list.confirmContent}
 		<br>
 		<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-		<img src = "#" width="50" height="50" class="user-img">
+		<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
 		${list.userNick}
 		&nbsp; 
 		${list.confirmDate} 
@@ -63,7 +63,7 @@
 		&nbsp;
 		<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 		&nbsp; 
-		<i class="fa-regular fa-comment"></i> 댓글수
+		<i class="fa-regular fa-comment"></i> ${list.replyCount}
 		</a>
 		<br><br><br>
 	</c:forEach>

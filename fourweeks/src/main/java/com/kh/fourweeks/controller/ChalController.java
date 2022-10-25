@@ -2,9 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -25,28 +22,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
-import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
-import com.kh.fourweeks.entity.UserConfirmLikeDto;
-import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
-import com.kh.fourweeks.repository.ChalUserDao;
-import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
-import com.kh.fourweeks.vo.ChalListVO;
 
 @Controller
 @RequestMapping("/chal")
 public class ChalController {
 	@Autowired
 	private ChalDao chalDao;
+	
 	
 	@Autowired
 	private ChalService chalService;
@@ -56,6 +48,9 @@ public class ChalController {
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private ChalConfirmDao confirmDao;
 	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
 
@@ -72,7 +67,7 @@ public class ChalController {
 	@PostMapping("/create")
 	private String create(@ModelAttribute ChalDto chalDto,
 			@ModelAttribute ParticipantDto partDto,
-			@RequestParam List<MultipartFile> attachment,
+			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -150,32 +145,26 @@ public class ChalController {
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
 			HttpSession session,
 			Model model) {
+		//모든 유저 조회
+		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
 		//챌린지 상세 조회
 		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
 				chalMyDetailDto.getChalNo()));
 		//종료일 조회
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
-		
-		return "chal/my_chal";
-		
-	}
-	
-	@GetMapping("/allchal")
-	public String allchal(//챌린지 상세 (참가중인 모든 유저)
-			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
-			HttpSession session,
-			Model model) {
-		//모든 유저 조회
-		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
-		//챌린지 종료일 조회
-		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
-		//챌린지 단일조회
-		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
-				chalMyDetailDto.getChalNo()));
-		System.out.println(model);
-		return "chal/all_chal";
+		//달성률 조회
+		model.addAttribute("progressDto",
+				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(),
+						(String)session.getAttribute(SessionConstant.ID)));
+		//모든 참가자 달성률 조회
+		model.addAttribute("allProgressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
+		//참가자 인증글 목록(최신 5개)
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		return "chal/mychal";
 		
 	}
+
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -195,7 +184,7 @@ public class ChalController {
 		//참가자 증가 메소드
 		chalDao.updateChalPerson(participantDto.getChalNo());
 		//
-		return "redirect:detail?chalNo="+participantDto.getChalNo();
+		return "redirect:detail";
 	}
 	
 }
