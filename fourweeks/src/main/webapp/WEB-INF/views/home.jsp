@@ -158,7 +158,7 @@
         </select>
         <select name="alignType" hidden="">
           <option value="d_day asc"></option>
-			  </select>
+		</select>
 				<input class="search-box" type="text" name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
 				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
 			</form>
