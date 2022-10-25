@@ -38,15 +38,15 @@
 </script>    
 
 	<form action="edit" method="post" enctype="multipart/form-data" class="confirm-form">
-	<input type="hidden" name="confirmNo" value="${confirmDto.confirmNo}">
-	<input type="hidden" name="userId" value="${confirmDto.userId}">
+	<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
+	<input type="hidden" name="userId" value="${confirmVO.userId}">
 		1. 인증할 챌린지를 선택해주세요.
 		<br>
 		<!-- 기존 챌린지 자동 선택, 수정 불가 (form submit 시 disabled 속성 제거) -->
 		<select name="chalTitle" disabled>
 			<option value="">선택하기</option>
 			<c:forEach var="list" items="${chalList}">
-				<option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}" <c:if test="${confirmDto.chalNo == list.chalNo}">selected</c:if>>${list.chalTitle}</option>
+				<option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}" <c:if test="${confirmVO.chalNo == list.chalNo}">selected</c:if>>${list.chalTitle}</option>
 		  	</c:forEach>
 		</select>
 		<input type="hidden" name="chalNo">
@@ -61,7 +61,7 @@
 		<br>
 		타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.
 		<br>
-		<input type="text" name="confirmTitle" placeholder="예) 2022.09.03(토) 헬스 인증" value = "${confirmDto.confirmTitle}" required autocomplete="off">
+		<input type="text" name="confirmTitle" placeholder="예) 2022.09.03(토) 헬스 인증" value = "${confirmVO.confirmTitle}" required autocomplete="off">
 		<br><br>
 		<span><!-- 글자 수 --></span>/40
 		<span>제목을 입력해주세요.</span>
@@ -72,7 +72,7 @@
 		<br>
 		실천 여부를 알 수 있도록 구체적으로 적어주세요.
 		<br>
-		<textarea name="confirmContent" placeholder="예) 매일 깃 커밋하기 - 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" rows="10" required required autocomplete="off">${confirmDto.confirmContent}</textarea>
+		<textarea name="confirmContent" placeholder="예) 매일 깃 커밋하기 - 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" rows="10" required required autocomplete="off">${confirmVO.confirmContent}</textarea>
 		<br><br>
 		<span><!-- 글자 수 --></span>/300
 		<span>내용을 입력해주세요.</span>
@@ -83,7 +83,7 @@
 		<br>
 		jpg, png 파일만 업로드할 수 있어요.
 		<br>
-		<img src = "detail/download?confirmNo=${confirmDto.confirmNo}" width="200" height="200" class="confirm-img">
+		<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" width="200" height="200" class="confirm-img">
 		<input type="file" name="attachment" accept="jpg, png"><br><br>
 		<!--  선택한 파일 취소하기(js) -->
 		<button type="button">삭제</button>

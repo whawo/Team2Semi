@@ -533,7 +533,7 @@ public class ChalDaoImpl implements ChalDao {
 	      }
 	   };
 	@Override
-	public List<ParticipantDto> selectParticipant(int chalNo) {//조민재 추가
+	public List<ParticipantDto> selectParticipant(int chalNo) {//참가자 조회
 		
 		String sql ="select * from participant where chal_no=?";
 		Object[] param = {chalNo};
@@ -543,11 +543,28 @@ public class ChalDaoImpl implements ChalDao {
 	
 
 	@Override
-	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//조민재 추가
+	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//참가자 한 명 조회
 		String sql ="select * from participant where chal_no= ? and user_id = ?";
 		Object[] param = {chalNo, userId};
 		return jdbcTemplate.query(sql, participantExtractor, param);
 	}
+	
+	private ResultSetExtractor<ParticipantDto> participantExtractor = new ResultSetExtractor<ParticipantDto>() {
+	      
+		@Override
+		public ParticipantDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return ParticipantDto.builder()
+		              .participantNo(rs.getInt("participant_no"))
+		              .chalNo(rs.getInt("chal_no"))
+		              .userId(rs.getString("user_id"))
+		              .participantJoin(rs.getDate("participant_join"))
+		               .build();
+			}else {
+		            return null;
+			}
+		}
+	};
 
 	private ResultSetExtractor<ChalMyDetailDto> myDetailExtractor = new ResultSetExtractor<ChalMyDetailDto>() {
 		

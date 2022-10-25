@@ -31,7 +31,7 @@ public class ChalServiceImpl implements ChalService {
 	
 	
 	@Override
-	public int create(ChalDto chalDto, List<MultipartFile> attachment) throws IllegalStateException, IOException {
+	public int create(ChalDto chalDto, MultipartFile attachment) throws IllegalStateException, IOException {
 		//번호 미리 생성
 		int chalNo = chalDao.chalSeq();
 		chalDto.setChalNo(chalNo);
@@ -43,31 +43,29 @@ public class ChalServiceImpl implements ChalService {
 		//해당 파일을 등록(attachment) & 저장 
 		//& 연결(chal_img)
 		//- 첨부파일이 없어도 리스트에는 1개의 객체가 들어있음 -> isEmpty()로 검사
-		for(MultipartFile file : attachment) {
-			if(!file.isEmpty()) {
-				//DB 등록
-				int attachmentNo = attachmentDao.sequence();
-				attachmentDao.insert(AttachmentDto.builder()
-								.attachmentNo(attachmentNo)
-								.attachmentName(file.getOriginalFilename())
-								.attachmentType(file.getContentType())
-								.attachmentSize(file.getSize())
-								.build());
-						
-				//파일 저장
-				File target = new File(dir, String.valueOf(attachmentNo));
-				file.transferTo(target); //예외 전가
-						
-				//+ 연결 테이블에 연결 정보 저장(챌린지 번호, 첨부파일 번호)
-				//chal_img에 insert
-				chalDao.chalAttachment(chalNo, attachmentNo);
-			}
+		if(!attachment.isEmpty()) {
+			//DB 등록
+			int attachmentNo = attachmentDao.sequence();
+			attachmentDao.insert(AttachmentDto.builder()
+							.attachmentNo(attachmentNo)
+							.attachmentName(attachment.getOriginalFilename())
+							.attachmentType(attachment.getContentType())
+							.attachmentSize(attachment.getSize())
+							.build());
+					
+			//파일 저장
+			File target = new File(dir, String.valueOf(attachmentNo));
+			attachment.transferTo(target); //예외 전가
+					
+			//+ 연결 테이블에 연결 정보 저장(챌린지 번호, 첨부파일 번호)
+			//chal_img에 insert
+			chalDao.chalAttachment(chalNo, attachmentNo);
 		}
 		return chalNo;
 	}
 
 	@Override
-	public int confirm(ChalConfirmDto confirmDto, List<MultipartFile> attachment)
+	public int confirm(ChalConfirmDto confirmDto, MultipartFile attachment)
 			throws IllegalStateException, IOException {
 		//번호 미리 생성
 		int confirmNo = confirmDao.sequence();
@@ -80,25 +78,23 @@ public class ChalServiceImpl implements ChalService {
 		//해당 파일을 등록(attachment) & 저장 
 		//& 연결(confirm_img)
 		//- 첨부파일이 없어도 리스트에는 1개의 객체가 들어있음 -> isEmpty()로 검사
-		for(MultipartFile file : attachment) {
-			if(!file.isEmpty()) {
-				//DB 등록
-				int attachmentNo = attachmentDao.sequence();
-				attachmentDao.insert(AttachmentDto.builder()
-								.attachmentNo(attachmentNo)
-								.attachmentName(file.getOriginalFilename())
-								.attachmentType(file.getContentType())
-								.attachmentSize(file.getSize())
-								.build());
-						
-				//파일 저장
-				File target = new File(dir, String.valueOf(attachmentNo));
-				file.transferTo(target); //예외 전가
-						
-				//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
-				//chal_img에 insert
-				confirmDao.confirmAttachment(confirmNo, attachmentNo, confirmDto.getUserId());
-			}
+		if(!attachment.isEmpty()) {
+			//DB 등록
+			int attachmentNo = attachmentDao.sequence();
+			attachmentDao.insert(AttachmentDto.builder()
+							.attachmentNo(attachmentNo)
+							.attachmentName(attachment.getOriginalFilename())
+							.attachmentType(attachment.getContentType())
+							.attachmentSize(attachment.getSize())
+							.build());
+					
+			//파일 저장
+			File target = new File(dir, String.valueOf(attachmentNo));
+			attachment.transferTo(target); //예외 전가
+					
+			//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
+			//chal_img에 insert
+			confirmDao.confirmAttachment(confirmNo, attachmentNo, confirmDto.getUserId());	
 		}
 		return confirmNo;
 	}
@@ -119,46 +115,40 @@ public class ChalServiceImpl implements ChalService {
 	}
 	
 	@Override
-	public int confirmEdit(ChalConfirmDto confirmDto, List<MultipartFile> attachment)
+	public int confirmEdit(ChalConfirmDto confirmDto, MultipartFile attachment)
 			throws IllegalStateException, IOException {
 		if(confirmDao.update(confirmDto)) {
 			//인증글 수정 후 파일이 있다면 등록(attachment) & 저장 & 연결(confirm_img)
-			for(MultipartFile file : attachment) {
-				if(!file.isEmpty()) {
-					//기존 첨부파일이 있는지 검사, 있으면 테이블 데이터 & 실제 파일 삭제
-					AttachmentDto attachDto = attachmentDao.confirmImgInfo(confirmDto.getConfirmNo());
-					if(attachDto != null) {
-						this.remove(confirmDto.getConfirmNo());
-					}
-					int attachmentNo = attachmentDao.sequence();
-					//DB 등록
-					attachmentDao.insert(AttachmentDto.builder()
-							.attachmentNo(attachmentNo)
-							.attachmentName(file.getOriginalFilename())
-							.attachmentType(file.getContentType())
-							.attachmentSize(file.getSize())
-							.build());
-					
-					//파일 저장
-					File target = new File(dir, String.valueOf(attachmentNo));
-					file.transferTo(target); //예외 전가
-					System.out.println("confirmNo = " + confirmDto.getConfirmNo() + ", attachmentNo = "+ attachmentNo + ", userId = "+confirmDto.getUserId());;;
-					//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
-					//chal_img에 insert
-					confirmDao.confirmAttachment(confirmDto.getConfirmNo(), attachmentNo, confirmDto.getUserId());	
-				}else {//수정 후 첨부파일이 없다면
-					//기존 첨부파일이 있는지 검사, 있으면 테이블 데이터 & 실제 파일 삭제
-					AttachmentDto attachDto = attachmentDao.confirmImgInfo(confirmDto.getConfirmNo());
-					if(attachDto != null) {
-						System.out.println("confirmNo = " + confirmDto.getConfirmNo() + ", userId = "+confirmDto.getUserId());;;
-						this.remove(confirmDto.getConfirmNo());
-					}
+			if(!attachment.isEmpty()) {
+				//기존 첨부파일이 있는지 검사, 있으면 테이블 데이터 & 실제 파일 삭제
+				AttachmentDto attachDto = attachmentDao.confirmImgInfo(confirmDto.getConfirmNo());
+				if(attachDto != null) {
+					this.remove(confirmDto.getConfirmNo());
 				}
+				int attachmentNo = attachmentDao.sequence();
+				//DB 등록
+				attachmentDao.insert(AttachmentDto.builder()
+						.attachmentNo(attachmentNo)
+						.attachmentName(attachment.getOriginalFilename())
+						.attachmentType(attachment.getContentType())
+						.attachmentSize(attachment.getSize())
+						.build());
+				
+				//파일 저장
+				File target = new File(dir, String.valueOf(attachmentNo));
+				attachment.transferTo(target); //예외 전가
+				System.out.println("confirmNo = " + confirmDto.getConfirmNo() + ", attachmentNo = "+ attachmentNo + ", userId = "+confirmDto.getUserId());;;
+				//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
+				//chal_img에 insert
+				confirmDao.confirmAttachment(confirmDto.getConfirmNo(), attachmentNo, confirmDto.getUserId());	
 			}
-		}else {
+			//수정 후 첨부파일이 없는 경우
+			//  1) 원래 없고, 새로 추가도 안한 경우
+			//  2) 원래 있고, 변경을 안한 경우
+			// 현 상태를 유지하면되므로 별도의 처리를 하지 않음
+		} else {
 			throw new TargetNotFoundException();
 		}
-		
 		return confirmDto.getConfirmNo();
 	}
 }

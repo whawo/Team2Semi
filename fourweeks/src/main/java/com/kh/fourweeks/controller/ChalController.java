@@ -71,7 +71,7 @@ public class ChalController {
 	@PostMapping("/create")
 	private String create(@ModelAttribute ChalDto chalDto,
 			@ModelAttribute ParticipantDto partDto,
-			@RequestParam List<MultipartFile> attachment,
+			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -147,6 +147,10 @@ public class ChalController {
 				chalMyDetailDto.getChalNo()));
 		//종료일 조회
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		//달성률 조회
+		model.addAttribute("progressDto",
+				confirmDao.myConfirmCnt((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
 		
 		return "chal/my_chal";
 		
@@ -164,7 +168,7 @@ public class ChalController {
 		//챌린지 단일조회
 		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
 				chalMyDetailDto.getChalNo()));
-		System.out.println(model);
+
 		return "chal/all_chal";
 		
 	}
