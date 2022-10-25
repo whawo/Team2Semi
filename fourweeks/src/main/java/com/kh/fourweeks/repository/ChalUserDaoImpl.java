@@ -79,6 +79,15 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	@Override
+	public boolean myInfoUpdate(ChalUserDto userDto) {
+		String sql = "update chal_user set user_nick = ?, user_email = ? where user_id = ?";
+		Object[] param = {userDto.getUserNick(),
+				userDto.getUserEmail(),
+				userDto.getUserId()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
 	private RowMapper<ChalMyDetailDto> allDetailMapper = new RowMapper<ChalMyDetailDto>() {
 		@Override
 		public ChalMyDetailDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -95,8 +104,15 @@ public class ChalUserDaoImpl implements ChalUserDao{
 					.build();
 		}
 	};
-	
+
 	@Override
+	public void userAttachment(int attachmentNo, String userId) {
+		String sql = "insert into user_img(attachment_no, user_id) values(?, ?)";
+		Object[] param = {attachmentNo, userId};
+		
+		jdbcTemplate.update(sql, param);
+	}
+	
 	public List<ChalMyDetailDto> selectAllMyDetail(String userId) {
 		String sql ="select my_chal_detail.*,"
 				+ " ceil(start_date-sysdate) d_day,"
@@ -106,5 +122,4 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
-	
 }

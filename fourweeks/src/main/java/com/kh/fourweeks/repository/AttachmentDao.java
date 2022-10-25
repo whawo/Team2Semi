@@ -15,4 +15,6 @@ public interface AttachmentDao {
 	int selectConfirmImg(int confirmNo); //인증글 번호로 첨부파일 번호 조회
 	AttachmentDto confirmImgInfo(int confirmNo); //인증글 번호로 첨부파일 정보 조회
 	int selectChalImg(int chalNo); //챌린지 번호로 첨부파일 번호 조회
+	
+	AttachmentDto userImgInfo(String userId); //아이디로 첨부파일 정보 조회
 }
