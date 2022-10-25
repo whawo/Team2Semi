@@ -33,6 +33,7 @@ import com.kh.fourweeks.repository.ReplyDao;
 import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalConfirmVO;
 
 @Controller
 @RequestMapping("/confirm")
@@ -104,7 +105,7 @@ public class ChalConfirmController {
 		session.setAttribute("history", history);
 		
 		//인증글 단일 조회
-		model.addAttribute("confirmDto", confirmDao.selectOne(confirmNo));
+		model.addAttribute("confirmVO", confirmDao.selectOne(confirmNo));
 		
 		//좋아요 기록 조회
 		String userId = (String) session.getAttribute(SessionConstant.ID);
@@ -137,11 +138,11 @@ public class ChalConfirmController {
 			Model model) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("chalList", confirmDao.selectList(userId));
-		ChalConfirmDto confirmDto = confirmDao.selectOne(confirmNo);
-		if(confirmDto == null) {
+		ChalConfirmVO confirmVO = confirmDao.selectOne(confirmNo);
+		if(confirmVO == null) {
 			throw new TargetNotFoundException();
 		}
-		model.addAttribute("confirmDto", confirmDto);
+		model.addAttribute("confirmVO", confirmVO);
 		return "chal/confirm_edit";
 	}
 	
@@ -166,8 +167,8 @@ public class ChalConfirmController {
 		
 		//내 인증글 목록 조회
 		String userId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("confirmList", confirmDao.myConfirmList(userId, chalNo));
-		model.addAttribute("listCnt", confirmDao.myConfirmCnt(userId, chalNo));
+		model.addAttribute("confirmList", confirmDao.myConfirmList(chalNo, userId));
+		model.addAttribute("listCnt", confirmDao.myConfirmCnt(chalNo, userId));
 		return "chal/confirm_mylist";
 	}
 	

@@ -102,7 +102,7 @@
 		&nbsp;
 		<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 		&nbsp; 
-		<i class="fa-regular fa-comment"></i> 댓글수
+		<i class="fa-regular fa-comment"></i> ${list.replyCount}
 		</a>
 		<br><br><br>
 	</c:forEach>

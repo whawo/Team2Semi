@@ -43,39 +43,39 @@
 </script>
 
 
-	${confirmDto.confirmTitle}
+	${confirmVO.confirmTitle}
 	<br><br>
 	
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	<img src = "#" width="50" height="50" class="user-img">
-	${confirmDto.userId}
+	${confirmVO.userNick}
 	<br><br>
-	${confirmDto.confirmDate}
+	${confirmVO.confirmDate}
 	<br><br>
 	<!-- 인증샷-->
-	<img src = "detail/download?confirmNo=${confirmDto.confirmNo}" width="200" height="200" class="confirm-img">
+	<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" width="200" height="200" class="confirm-img">
 	<br><br>
-	${confirmDto.confirmContent}
+	${confirmVO.confirmContent}
 	<br><br>
-	<i class="fa-regular fa-eye"></i> ${confirmDto.confirmRead}
+	<i class="fa-regular fa-eye"></i> ${confirmVO.confirmRead}
 	<br><br>
 	<!-- 좋아요 -->
 	<c:if test="${isLike == null}">
 		<a class="heart"><i class="fa-regular fa-heart"></i></a>
 	</c:if>
 	<c:if test="${isLike == true}">
-		<a href="like?confirmNo=${confirmDto.confirmNo}"><i class="fa-solid fa-heart"></i></a>
+		<a href="like?confirmNo=${confirmVO.confirmNo}"><i class="fa-solid fa-heart"></i></a>
 	</c:if>
 	<c:if test="${isLike == false}">
-		<a href="like?confirmNo=${confirmDto.confirmNo}"><i class="fa-regular fa-heart"></i></a>
+		<a href="like?confirmNo=${confirmVO.confirmNo}"><i class="fa-regular fa-heart"></i></a>
 	</c:if>
-	${confirmDto.confirmLike}
+	${confirmVO.confirmLike}
 	<br><br>
-	<i class="fa-regular fa-comment"></i> 댓글수 <!-- 댓글 테이블과 조인 필요 -->
+	<i class="fa-regular fa-comment"></i> ${replyList.size()}
 	<br><br>
 	
-	<c:if test="${loginId == confirmDto.userId}">
-		<a href="edit?confirmNo=${confirmDto.confirmNo}">수정하기</a>
+	<c:if test="${loginId == confirmVO.userId}">
+		<a href="edit?confirmNo=${confirmVO.confirmNo}">수정하기</a>
 	</c:if>
 	<br><br>	
 	
@@ -86,7 +86,7 @@
 	<!-- 로그인한 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	<img src = "#" width="50" height="50" class="user-img">
 	<form action="reply/write" method="post" class="reply-insert-form">
-		<input type="hidden" name="confirmNo" value="${confirmDto.confirmNo}">
+		<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
 		<input type="text" name="replyContent" placeholder="댓글을 남겨보세요." required>
 		<button type="submit">댓글</button>
 	</form>
@@ -108,7 +108,7 @@
 						<!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 						<img src = "#" width="50" height="50" class="user-img">
 						${replyDto.userNick}
-						<c:if test="${replyDto.userId == confirmDto.userId}">
+						<c:if test="${replyDto.userId == confirmVO.userId}">
 							&nbsp; [작성자]
 						</c:if>
 						<br>
