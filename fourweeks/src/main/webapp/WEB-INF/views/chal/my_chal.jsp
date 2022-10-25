@@ -62,7 +62,8 @@ ul.list>li:hover {
 			<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}">챌린지 바로가기</a>
 			<li>내 인증 현황</li>
 			<li>참가자 인증 현황</li>
-			달성률 : ${progressDto*100/28}%
+	     달성률 : <fmt:formatNumber type="number" 
+				 pattern="0" value="${progressDto*100/28}"/>%</td>
 		</ul>
 	</div>
 	

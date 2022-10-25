@@ -1,4 +1,6 @@
 package com.kh.fourweeks.vo;
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,5 +14,6 @@ public class ChalListVO {
 	private String chalTopic;
 	private String dDay;
 	private String endDate;
+	private Date startDate;
 	private int rn;
 }

@@ -32,10 +32,10 @@ ul.list>li:hover {
 			</ul>
 <table class="table table-border">
 		<tbody>
-			<c:forEach var="dto" items="${dto}">
+			<c:forEach var="progressDto" items="${progressDto}">
 			<tr>
-				<td>${dto.userId}</td>
-				<td>${dto.chalContent}</td>
+				<td>${progressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
+				 pattern="0" value="${progressDto.cnt*100/28}"/>%</td>
 			</tr>
 			</c:forEach>
 		</tbody>
