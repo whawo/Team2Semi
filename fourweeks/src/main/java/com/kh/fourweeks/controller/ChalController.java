@@ -2,9 +2,6 @@ package com.kh.fourweeks.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -31,8 +28,6 @@ import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
-import com.kh.fourweeks.repository.ChalUserDao;
-import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalListSearchVO;
@@ -42,6 +37,9 @@ import com.kh.fourweeks.vo.ChalListSearchVO;
 public class ChalController {
 	@Autowired
 	private ChalDao chalDao;
+	
+	@Autowired
+	private ChalConfirmDao confirmDao;
 	
 	@Autowired
 	private ChalService chalService;
@@ -145,9 +143,11 @@ public class ChalController {
 		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
 		//달성률 조회
 		model.addAttribute("progressDto",
-				confirmDao.myConfirmCnt((String)session.getAttribute(SessionConstant.ID),
-				chalMyDetailDto.getChalNo()));
+				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), (String)session.getAttribute(SessionConstant.ID)));
 		
+		//참가자 인증글 목록(최신 5개)
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		return "chal/my_chal";
 		
 	}
