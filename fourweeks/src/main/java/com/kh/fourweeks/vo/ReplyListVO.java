@@ -16,4 +16,5 @@ public class ReplyListVO {
 	private Date replyDate;
 	private Date replyUpdate;
 	private boolean replyBlind;
+	private String userNick;
 }

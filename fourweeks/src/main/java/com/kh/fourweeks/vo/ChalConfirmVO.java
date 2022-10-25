@@ -19,4 +19,5 @@ public class ChalConfirmVO {
 	private Date confirmDate;
 	private Date modifiedDate;
 	private String userNick;
+	private int replyCount;
 }

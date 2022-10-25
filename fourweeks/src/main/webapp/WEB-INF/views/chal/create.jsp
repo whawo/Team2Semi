@@ -381,14 +381,14 @@
                 <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
                 <div class="row">
-               <input name="chalTitle"  class="short-text-underlinebox uderline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40">
+               <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40">
                 <span  class="helper-text-40 helper-css">0</span> /40
                 </div>
             </div>
 
             <div class="row">
                 <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-                <textarea class="helper-text2" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300"></textarea>
+                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300"></textarea>
                 <span  class="helper-text-300 helper-css">0</span> /300
             </div>
 
@@ -444,7 +444,7 @@
             <div class="row row-7 row-padding">
                 <p class="p1-1" >7. 챌린지를 소개해주세요.(선택)</p>
                 <p class="p2">다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.</p>
-                <textarea class="helper-text3" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
+                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
                 <span  class="helper-text-500 helper-css">0</span> /500
             </div>
             <div class="row center"> <!--센터? 아니면 노센터?-->

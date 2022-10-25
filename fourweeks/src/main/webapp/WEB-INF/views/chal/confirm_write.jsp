@@ -16,14 +16,20 @@
 
 
     <style>
-        /* 
+        /*
+        	10.25 
+        	디자인 수정: 
+        	- focus 선택자가 브라우저 보다 후에 선택되어서 적용 안됨 해결 하세요.
+        	-  
+        	DB 수정:
+        	 
             디자인 수정해야 할 것 
             - 글자들은 그냥 허옇게 하는지.. -> 뭔소리냐면 선택시에는 글자 색 다 지정되는데 커서를 다른곳을 클릭하면 글씨 색상이 다시 바뀜 
             - 챌린지 인증샷 삭제버튼 글자 가운데 정렬 
             - 사진 삭제가 안됨 ㅋㅋㅎㅎ 
         */
         div{
-            border: 1px dotted gray;
+          /*   border: 1px dotted gray; */
             display: block;
         }
 
@@ -140,7 +146,6 @@
             display: none;
         }
         img{
-            border: 100px dotted gray;
             float: left;
         }
 
@@ -156,7 +161,7 @@
             display: none;
         }
         .preview{
-            border-radius: 0.25em;
+            border-radius: 0.5em;
         }
               /* 이미지 업로드 버튼들 */
         	.img-lab{
@@ -210,29 +215,6 @@
  			$("select[name=chalTitle]").val(chalNo).attr("selected", "selected").trigger("change");
  		}
  	});
-    
-    $(function(){
-        var picker1 = new Lightpick({
-            //field는 datepicker은 적용 대상을 설정하는 공간 
-            field:document.querySelector(".single-date-picker"),
-
-            //format은 선택한 날짜의 적용 형식을 변경 
-            format:"YYYY-MM-DD",
-            
-            // (+옵션) 미래/과거를 선택하지 못하도록 설정 
-            maxDate:moment(), //미래 선택 못함 
-            // minDate:moment(), // 과거 선택 못함  괄호안에 특정 날짜 넣어줘도 됨~ 
-
-            // (+옵션) 표시되는 달의 개수를 지정 
-            numberOfMonths:2, //2개의 달씩 보여줘라 
-        });
-
-        var Picker2 = new Lightpick({
-            field:document.querySelector("[name=begin]"),
-            secondField:document.querySelector("[name=end"),
-        });
-    });
-
     // 이미지 
     $(function(){
             $("[name=attachment]").change(function(e){
@@ -325,7 +307,7 @@
             <div class="row">
                 <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
                 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
-                <textarea  name="confirmContent" class="helper-text2" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" required autocomplete="off"></textarea>
+                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" required autocomplete="off"></textarea>
                 <span  class="helper-text-40 helper-css">0</span> /300
             </div>
 
@@ -342,7 +324,7 @@
                 </div>
             </div>
 
-            <div class="row-7 center"> <!--센터? 아니면 노센터?-->
+            <div class="row-7 center">
                 <button class="smallbtn cancel-btn" type="button" id="smallbutton3">취소</button>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
             </div>

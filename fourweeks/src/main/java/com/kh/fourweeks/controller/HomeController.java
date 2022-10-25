@@ -40,4 +40,9 @@ public class HomeController {
 		model.addAttribute("list", chalDao.listOfLargePerson(vo));
 		return "home";
 	}
+	
+	@RequestMapping("/need_login")
+	public String needLogin() {
+		return "need_login";
+	}
 }
