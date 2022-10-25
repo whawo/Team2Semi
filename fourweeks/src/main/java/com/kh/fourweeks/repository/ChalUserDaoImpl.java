@@ -2,13 +2,16 @@ package com.kh.fourweeks.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
 
 @Repository
@@ -76,9 +79,32 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	private RowMapper<ChalMyDetailDto> allDetailMapper = new RowMapper<ChalMyDetailDto>() {
+		@Override
+		public ChalMyDetailDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalMyDetailDto.builder()
+					.chalTitle(rs.getString("chal_title"))
+					.chalContent(rs.getString("chal_content"))
+					.startDate(rs.getDate("start_date"))
+					.participantNo(rs.getInt("participant_no"))
+					.chalNo(rs.getInt("chal_no"))
+					.userId(rs.getString("user_id"))
+					.participantJoin(rs.getDate("participant_join"))
+					.chalTopic(rs.getString("chal_topic"))
+					.endDate(rs.getString("end_date"))
+					.build();
+		}
+	};
 	
-	
-	
-	
+	@Override
+	public List<ChalMyDetailDto> selectAllMyDetail(String userId) {
+		String sql ="select my_chal_detail.*,"
+				+ " ceil(start_date-sysdate) d_day,"
+				+ " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
+				+ " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day"
+				+ " from my_chal_detail where user_id = ?";
+		Object[] param = {userId};
+		return jdbcTemplate.query(sql, allDetailMapper, param);
+	}
 	
 }

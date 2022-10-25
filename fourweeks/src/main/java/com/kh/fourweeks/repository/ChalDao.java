@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
+import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
@@ -23,6 +24,7 @@ public interface ChalDao {
 	ChalDto selectOne(int chalNo);//상세페이지 조회 기능(단일)
 	ChalDetailVO selectEndDday(int chalNo);//종료일, 남은일수 조회 메소드
 	ChalMyDetailDto selectMy(String userId, int chalNo);//내 인증글 조회기능
+
 	
 	// 메인페이지 참가자 많은 순 조회 메소드
 	List<ChalListVO> listOfLargePerson(ChalListSearchVO vo);
@@ -33,6 +35,7 @@ public interface ChalDao {
 	//챌린지 참가자 진행률 조회 메소드
 	List<ChalProgressVO> selectAllProgress(int chalNo);
 	
+
 	
     // 모집중 조회+검색
   	List<ChalListVO> selectList(ChalListSearchVO vo);
