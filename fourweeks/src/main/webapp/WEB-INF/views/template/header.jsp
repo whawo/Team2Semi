@@ -19,7 +19,7 @@
 <style>
 
 	div, ul, li{
-	/* 이거 지우면 안됨;;; */
+	/* 이거 지우면 위로 더 올라오니깐 삭제하지 마세요  */
 	border: 1px dotted transparent;
 	list-style:none;
 	}
@@ -62,12 +62,17 @@
 	.logo-margin {
 		margin-top : 5px;
 	}
+	
+	/*  */
+	head-line{
+	border-bottom:1px solid #d9d9d9;
+	width:800px;
+	}
 </style>
 
 <body>
-<div class="container-1200">
+<div class="container-1200 head-line">
    	 <div class="row 4weeks-inner"> 
-   	  <hr class="divider1">
    		<div class="row 4weeks-nav">
    			<ul class="list-nav">
 	   			<li class="nav-item"><a href="/"><img src="/images/top_logo.png" width="60" class="logo-margin"></a></li>
