@@ -1,6 +1,7 @@
 package com.kh.fourweeks.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,16 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
-
 import com.kh.fourweeks.entity.ChalMyDetailDto;
-
 import com.kh.fourweeks.entity.ChalUserDto;
-
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
-
 import com.kh.fourweeks.repository.ChalConfirmDao;
-
 import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalUserService;
@@ -120,7 +116,7 @@ public class ChalUserController {
 		return "chalUser/mypage";
 	}
 	
-	@GetMapping("/mypage/edit")
+	@GetMapping("/mypage/edit") // 프로필 수정
 	public String editInfo(HttpSession session,
 			Model model) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -155,7 +151,7 @@ public class ChalUserController {
 		return attachService.load(attachmentNo);
 	}
 	
-	@GetMapping("/mypage/edit/auth")
+	@GetMapping("/mypage/edit/auth") // 프로필 수정 전 비밀번호 확인
 	public String editAuth(Model model,
 			HttpSession session) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -178,7 +174,7 @@ public class ChalUserController {
 		}
 	}
 	
-	@GetMapping("/mypage/edit/pw")
+	@GetMapping("/mypage/edit/pw") // 비밀번호 변경
 	public String editPw(Model model,
 			HttpSession session) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -186,10 +182,70 @@ public class ChalUserController {
 		return "chalUser/edit_pw";
 	}
 	
-	@PostMapping("/mypage/edit/pw")
+	@PostMapping("/mypage/edit/pw") 
 	public String editPw(@ModelAttribute ChalUserDto inputDto,
 			RedirectAttributes attr) {
 		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
 		return "redirect:/mypage";
+	}
+	
+	@GetMapping("/leave") // 탈퇴
+	public String leave(HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		if(chalUserDao.delete(userId)) {
+			session.removeAttribute(SessionConstant.ID);
+			return "chalUser/leave";
+		}else {
+			throw new TargetNotFoundException();
+		}
+	}
+	
+	@GetMapping("/find_id")
+	public String findId() {
+		return "chalUser/find_id";
+	}
+	
+	@PostMapping("/find_id")
+	public String findId(Model model, @RequestParam String userEmail) {
+		List<ChalUserDto> userDto = chalUserDao.selectEmail(userEmail);
+		if(!userDto.isEmpty()) {			
+			model.addAttribute("idList", userDto);
+			return "chalUser/find_id_result";
+		} else {			
+			return "redirect:find_id?error";
+		}
+	}
+
+	@GetMapping("/find_pw")
+	public String findPw() {
+		return "chalUser/find_pw";
+	}
+	
+	@PostMapping("/find_pw")
+	public String findPw(
+			Model model, 
+			@RequestParam String userId,
+			@RequestParam String userEmail) {
+		ChalUserDto userDto = chalUserDao.findPw(userId, userEmail);
+		if(userDto != null) {			
+			model.addAttribute("userDto", userDto);
+			return "chalUser/reset_pw";
+		} else {			
+			return "redirect:find_pw?error";
+		}
+	}
+	
+	@GetMapping("/reset_pw") // 비밀번호 재설정
+	public String resetPw(Model model,
+			@RequestParam String userId) {
+		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
+		return "chalUser/reset_pw";
+	}
+	
+	@PostMapping("/reset_pw") 
+	public String resetPw(@ModelAttribute ChalUserDto inputDto,
+			RedirectAttributes attr) {
+		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
+		return "redirect:/login";
 	}
 }

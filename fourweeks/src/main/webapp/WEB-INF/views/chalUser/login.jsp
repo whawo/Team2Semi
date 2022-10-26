@@ -14,11 +14,15 @@
 
     <style>
         /* 
+        	10.26
+        	디자인 수정:
+        	- 에러 메세지 글자 줄바꿈 해야됨 ㅇ 
+        	
         	10.24
         	디자인 수정해야할 것:
-        	- container 확인해보기 사이즈 맞추기 
+        	- container 확인해보기 사이즈 맞추기 ㅇ 
         
-        	10.22
+        	10.22	
         	디자인 수정해야할 것: 
         	- 가운데로 옮기기... 
         	
@@ -80,10 +84,14 @@
         .margin-move{
        margin: 80px 0 0 505px;
         }
-
+        
+        /*  에러 메세지 줄바]꿈 */
+	.error-span{
+	white-space: pre;
+	}
     </style>
     
-     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">
      
      </script>
@@ -98,7 +106,9 @@
             
             <form action="login" method="post">
             <div class="row">
-                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required>
+                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required
+                	<c:if test="${param.userId != null}">value="${param.userId}"</c:if>>
+                
             </div>
             <div class="row">
                 <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호" required >
@@ -111,17 +121,17 @@
              <!--  아이디/비밀번호가 일치하지 않을때. -->
          <c:if test="${param.error != null}">
 		<div class="row center login-error">
-			<span>아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</span>
+			<span class="error-span">아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</span>
 		</div>
 		</c:if>
 		 
             </form>
             <section class="row center">
-                <a class="find" href="#비밀번호찾기 ">비밀번호 찾기</a>
+                <a class="find" href="/find_pw">비밀번호 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="#아이디찾기 ">아이디 찾기</a>
+                <a class="find" href="/find_id">아이디 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/join ">회원가입</a>
+                <a class="find" href="/join">회원가입</a>
             </section>
         </div>
         </div>

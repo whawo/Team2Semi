@@ -17,28 +17,26 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
-
 	div, ul, li{
 	/* 이거 지우면 위로 더 올라오니깐 삭제하지 마세요  */
 	border: 1px dotted transparent;
 	list-style:none;
 	}
-	a{
+	.head-a{
         font-size: 16px;
         font-weight:normal;
    		color:#6c7aef;
         cursor: pointer;
     }
-    a:hover{
+    haed-a-hover:hover{
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }
-	4weeks-inner{
+	.4weeks-inner{
 		position: relative;
 		width:1200px;
 		padding: 0 30px;
 		margin: 0 auto;		
-
 	}
 	.4weeks-nav{
 		overflow: hidden;
@@ -69,7 +67,19 @@
 	width:800px;
 	}
 </style>
-
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/6358bb84daff0e1306d4011a/1gg99p084';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+</script>
+<!--End of Tawk.to Script-->
 <body>
 <div class="container-1200 head-line">
    	 <div class="row 4weeks-inner"> 
@@ -82,21 +92,21 @@
 	   					<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
 	   					<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
-		                <li class="nav-item"><a href="#">문의하기</a></li>
+		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
-		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-		           	 		<li class="nav-item" ><a href="/mypage">마이페이지</a></li>
-		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="#">${user_img} ${loginId}</a></li>
+		           	 		<li class="nav-item" ><a class="head-a head-a-hover" href="/mypage">마이페이지</a></li>
+		           	 		<li class="nav-item"><a class="head-a head-a-hover" href="/logout">로그아웃</a></li>
 		           	 		
 					</c:when>
 					<c:otherwise>
 		               	<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
 		  				<li class="nav-item"><a href="/need_login">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/need_login">챌린지 인증</a></li>
-		                <li class="nav-item"><a href="#">문의하기</a></li>
+		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
-		           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
-		           	 	<li class="nav-item"><a href="/login" >로그인</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="/join">회원가입</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="/login" >로그인</a></li>
 					</c:otherwise>
 				</c:choose>
 	 		</ul>
