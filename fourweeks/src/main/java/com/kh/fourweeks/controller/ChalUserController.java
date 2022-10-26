@@ -78,9 +78,10 @@ public class ChalUserController {
 		
 		if(pwMatch) {
 			session.setAttribute(SessionConstant.ID, findDto.getUserId());
-			
+			session.setAttribute(SessionConstant.NICK, findDto.getUserNick());
 			// 로그인 시각 업데이트
 			chalUserDao.updateLoginTime(inputDto.getUserId());
+			System.out.println();
 			return "redirect:/";
 		} else {
 			return "redirect:login?error";
@@ -90,6 +91,7 @@ public class ChalUserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute("loginNick");
 		return "redirect:/";
 	}
 	
@@ -102,9 +104,17 @@ public class ChalUserController {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
 		model.addAttribute("myDto", chalUserDao.selectOne(userId));
+		//참가중인 챌린지 조회
 		model.addAttribute("chalDto" , chalUserDao.selectAllMyDetail(userId));
+		//참가종료 챌린지 조회
+		model.addAttribute("chalEndDto" , chalUserDao.selectEndAllMyDetail(userId));
+		//내가 개설한 챌린지 조회
+		model.addAttribute("createDto" , chalUserDao.selectCreateAllMyDetail(userId));
+		
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
+		
+		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chalUser/mypage";
 	}
 	

@@ -22,13 +22,13 @@
 	border: 1px dotted transparent;
 	list-style:none;
 	}
-	a{
+	.head-a{
         font-size: 16px;
         font-weight:normal;
    		color:#6c7aef;
         cursor: pointer;
     }
-    a:hover{
+    haed-a-hover:hover{
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }
@@ -66,9 +66,15 @@
 	border-bottom:1px solid #d9d9d9;
 	width:800px;
 	}
+	.user-img {
+	border-radius: 50%;
+	}
+	.user-img > .user-img-position {
+	
+	}
 </style>
-<!--Start of Tawk.to Script-->
 <script type="text/javascript">
+	// 채팅 API 소스 코드
 	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 	(function(){
 	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -79,7 +85,23 @@
 	s0.parentNode.insertBefore(s1,s0);
 	})();
 </script>
-<!--End of Tawk.to Script-->
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script>
+//프로필 이미지가 없으면 기본 아이콘으로 대체
+	$(function(){
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+	});
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+	   if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+	     	location.href = location.href;
+	   }
+	});
+});
+</script>
 <body>
 <div class="container-1200 head-line">
    	 <div class="row 4weeks-inner"> 
@@ -93,11 +115,14 @@
 	   					<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
-		                
-		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-		           	 		<li class="nav-item" ><a href="/mypage">마이페이지</a></li>
-		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
-		           	 		
+		           	 	<li class="nav-item">
+		           	 		<a href="/mypage">
+		           	 		<img class="user-img" src="/profile/download?userId=${loginId}" width="35" height="35">
+		           	 		<span>${loginNick}</span>
+		           	 		</a>
+		           	 	</li>
+	           	 		<li class="nav-item"><a href="/mypage">마이페이지</a></li>
+	           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
 		               	<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
@@ -105,8 +130,8 @@
 		                <li class="nav-item"><a href="/need_login">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
-		           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
-		           	 	<li class="nav-item"><a href="/login" >로그인</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="/join">회원가입</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="/login" >로그인</a></li>
 					</c:otherwise>
 				</c:choose>
 	 		</ul>

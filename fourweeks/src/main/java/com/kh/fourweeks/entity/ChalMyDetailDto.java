@@ -18,6 +18,9 @@ public class ChalMyDetailDto {
 	private Date participantJoin;
 	private String chalTopic;
 	private String endDate;
+	private String dDay;
+	private String endDDay;
+	private int cnt;
 	
 
 }

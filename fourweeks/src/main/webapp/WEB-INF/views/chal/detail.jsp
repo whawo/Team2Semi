@@ -214,6 +214,46 @@
 		${chalDto.getHowConfirm()}
 	</div>
 		
+<!-- 
+		<ul class="list">
+			<li>챌린지 이미지 :
+			<img src="detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></li>
+			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
+			<li>챌린지 주제 : ${chalDto.getChalTopic()}</li>
+			<li>참가 인원: ${chalDto.getChalPerson()}명/10명</li>
+		<c:choose>
+		<c:when test="${chalVO.endDday> 0 && chalVO.endDday < 28}">
+			${chalVO.endDday}일 뒤 종료
+		</c:when>
+		<c:when test="${chalVO.endDday == 0}">
+			오늘 종료
+		</c:when>
+		<c:when test="${chalVO.endDday < 0}">
+			종료
+		</c:when>
+		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+		<c:otherwise>
+			${chalVO.endDday}일 뒤 시작
+		</c:otherwise>
+	</c:choose>
+			<li>챌린지 시작일: ${chalDto.getStartDate()}<br>~${chalVO.endDate}
+			</li>
+			<c:choose>
+				<c:when test="${participantDto==null && chalDto.getChalPerson()<10 && loginId==null}">
+				<button type = "submit">참가하기</button>
+				</c:when>
+				<c:otherwise>
+				<button type = "submit" disabled>참가하기</button>
+				</c:otherwise>
+			</c:choose>
+			<li>챌린지 리더 :
+		<img src = "/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}</li>
+			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
+			<li>챌린지 인증방법 : ${chalDto.getHowConfirm()}</li>
+		</ul>
+	</div>
+ -->
+
 	<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	

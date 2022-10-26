@@ -463,6 +463,7 @@
 			</table>
 			-->           
 
+
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row left">
 			최신 인증글
