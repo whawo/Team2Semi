@@ -130,4 +130,11 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		Object[] param = {newPw, userId};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	@Override
+	public boolean delete(String userId) {
+		String sql = "delete chal_user where user_id = ?";
+		Object[] param = {userId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }

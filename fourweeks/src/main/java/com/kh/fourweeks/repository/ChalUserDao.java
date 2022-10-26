@@ -11,6 +11,7 @@ public interface ChalUserDao {
 	ChalUserDto selectOne(String userId); // 유저 단일조회 메소드
 	ChalUserDto selectNick(String userNick); // 유저 단일조회 메소드
 	boolean updateLoginTime(String userId); // 로그인 시각 자동갱신 메소드
+	boolean delete(String userId); // 탈퇴(테이블 데이터 삭제)
 	
 
 	//프로필 수정용 메소드

@@ -112,7 +112,7 @@ public class ChalUserController {
 		return "chalUser/mypage";
 	}
 	
-	@GetMapping("/mypage/edit")
+	@GetMapping("/mypage/edit") // 프로필 수정
 	public String editInfo(HttpSession session,
 			Model model) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -147,7 +147,7 @@ public class ChalUserController {
 		return attachService.load(attachmentNo);
 	}
 	
-	@GetMapping("/mypage/edit/auth")
+	@GetMapping("/mypage/edit/auth") // 프로필 수정 전 비밀번호 확인
 	public String editAuth(Model model,
 			HttpSession session) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -170,7 +170,7 @@ public class ChalUserController {
 		}
 	}
 	
-	@GetMapping("/mypage/edit/pw")
+	@GetMapping("/mypage/edit/pw") // 비밀번호 변경
 	public String editPw(Model model,
 			HttpSession session) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
@@ -178,10 +178,21 @@ public class ChalUserController {
 		return "chalUser/edit_pw";
 	}
 	
-	@PostMapping("/mypage/edit/pw")
+	@PostMapping("/mypage/edit/pw") 
 	public String editPw(@ModelAttribute ChalUserDto inputDto,
 			RedirectAttributes attr) {
 		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
 		return "redirect:/mypage";
+	}
+	
+	@GetMapping("/leave") // 탈퇴
+	public String leave(HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		if(chalUserDao.delete(userId)) {
+			session.removeAttribute(SessionConstant.ID);
+			return "chalUser/leave";
+		}else {
+			throw new TargetNotFoundException();
+		}
 	}
 }
