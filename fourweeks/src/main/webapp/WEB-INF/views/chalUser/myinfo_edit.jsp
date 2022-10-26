@@ -11,6 +11,15 @@
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
+		
+		$(".btn-leave").click(function(){
+			var choice = confirm("정말 탈퇴하시겠습니까?");
+            if(!choice) {
+                return false;
+            } else {
+            	return true;
+            }
+		});
 	});
 </script>
 <div class="container-794">
@@ -38,7 +47,8 @@
 			<br><br>
 			비밀번호 : <a href="edit/pw">비밀번호 변경</a>
 			<br><br>
-			<a href="#">탈퇴하기</a>
+			<!-- 탈퇴 버튼 클릭 시, 확인 팝업 노출(jQuery) -->
+			<a href="/leave" class="btn-leave">탈퇴하기</a>
 			<br><br>
 			<a href="/mypage">취소</a>
 			<button type="submit">저장하기</button>
