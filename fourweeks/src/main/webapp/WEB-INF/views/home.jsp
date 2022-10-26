@@ -238,7 +238,7 @@
             </tr>
             
             <c:if test="${chalDto.getDDay() == 0}">
-	            <tr> <%-- 시작일 --%>
+	            <tr> <%-- 시작일 조건 --%>
 	                <td>
 	                <img src="/images/chal_start_date.png" class="img-margin">
 	                 오늘 시작
@@ -246,7 +246,7 @@
 	            </tr>
             </c:if>
             <c:if test="${chalDto.getDDay() > 0}">
-            	<tr> <%-- 시작일 --%>
+            	<tr> <%-- 시작일 조건 --%>
             		<td>
             		<img src="/images/chal_start_date.png" class="img-margin">
             		${chalDto.getDDay()}일 뒤 시작
