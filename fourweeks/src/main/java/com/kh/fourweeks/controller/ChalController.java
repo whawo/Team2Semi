@@ -86,7 +86,7 @@ public class ChalController {
 	}
 	
 	
-	@GetMapping("detail/download")//챌린지 상세 이미지 조회
+	@GetMapping("/detail/download")//챌린지 상세 이미지 조회
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> detailDownload(
 			@ModelAttribute ChalDto chalDto

@@ -36,11 +36,11 @@
 			이메일 : <input type="text" name="userEmail" required placeholder="예) id@4weeks.com" value="${userDto.userEmail}">
 			<span>이메일을 입력해주세요</span>				
 			<br><br>
-			비밀번호 : <a href="#">비밀번호 변경</a>
+			비밀번호 : <a href="edit/pw">비밀번호 변경</a>
 			<br><br>
 			<a href="#">탈퇴하기</a>
 			<br><br>
-			<a href="/mypage?userId=${loginId}">취소</a>
+			<a href="/mypage">취소</a>
 			<button type="submit">저장하기</button>
 		</form>
 	</div>

@@ -113,6 +113,7 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		jdbcTemplate.update(sql, param);
 	}
 	
+	@Override
 	public List<ChalMyDetailDto> selectAllMyDetail(String userId) {
 		String sql ="select my_chal_detail.*,"
 				+ " ceil(start_date-sysdate) d_day,"
@@ -121,5 +122,12 @@ public class ChalUserDaoImpl implements ChalUserDao{
 				+ " from my_chal_detail where user_id = ?";
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, allDetailMapper, param);
+	}
+	
+	@Override
+	public boolean updatePw(String newPw, String userId) {
+		String sql = "update chal_user set user_pw = ? where user_id = ?";
+		Object[] param = {newPw, userId};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 }
