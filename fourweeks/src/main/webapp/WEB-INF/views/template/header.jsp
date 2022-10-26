@@ -17,9 +17,8 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
-
 	div, ul, li{
-	/* 이거 지우면 안됨;;; */
+	/* 이거 지우면 위로 더 올라오니깐 삭제하지 마세요  */
 	border: 1px dotted transparent;
 	list-style:none;
 	}
@@ -33,12 +32,11 @@
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }
-	4weeks-inner{
+	.4weeks-inner{
 		position: relative;
 		width:1200px;
 		padding: 0 30px;
 		margin: 0 auto;		
-
 	}
 	.4weeks-nav{
 		overflow: hidden;
@@ -62,12 +60,17 @@
 	.logo-margin {
 		margin-top : 5px;
 	}
+	
+	/*  */
+	.head-line{
+	border-bottom:1px solid #d9d9d9;
+	width:800px;
+	}
 </style>
 
 <body>
-<div class="container-1200">
+<div class="container-1200 head-line">
    	 <div class="row 4weeks-inner"> 
-   	  <hr class="divider1">
    		<div class="row 4weeks-nav">
    			<ul class="list-nav">
 	   			<li class="nav-item"><a href="/"><img src="/images/top_logo.png" width="60" class="logo-margin"></a></li>
@@ -80,7 +83,7 @@
 		                <li class="nav-item"><a href="#">문의하기</a></li>
 		                
 		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-		           	 		<li class="nav-item" ><a href="마이페이지이이이">마이페이지</a></li>
+		           	 		<li class="nav-item" ><a href="/mypage?userId=${loginId}">마이페이지</a></li>
 		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
 		           	 		
 					</c:when>
