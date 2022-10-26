@@ -115,7 +115,6 @@
 	   					<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
-<<<<<<< HEAD
 		           	 	<li class="nav-item">
 		           	 		<a href="/mypage">
 		           	 		<img class="user-img" src="/profile/download?userId=${loginId}" width="35" height="35">
@@ -124,13 +123,6 @@
 		           	 	</li>
 	           	 		<li class="nav-item"><a href="/mypage">마이페이지</a></li>
 	           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
-=======
-		                
-		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="#">${user_img} ${loginId}</a></li>
-		           	 		<li class="nav-item" ><a class="head-a head-a-hover" href="/mypage">마이페이지</a></li>
-		           	 		<li class="nav-item"><a class="head-a head-a-hover" href="/logout">로그아웃</a></li>
-		           	 		
->>>>>>> refs/remotes/origin/main
 					</c:when>
 					<c:otherwise>
 		               	<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>

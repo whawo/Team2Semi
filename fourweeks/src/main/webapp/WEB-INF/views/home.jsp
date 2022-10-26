@@ -220,35 +220,9 @@
          <tbody>
             <tr>  <%-- 이미지 --%>
                 <td>
-						<a href="chal/detail?chalNo=${chalDto.chalNo}">
-							<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-						</a>
-<<<<<<< HEAD
-					</div>
-					<div>
-						<a href="chal/detail?chalNo=${chalDto.chalNo}">
-							${chalDto.chalTitle}
-						</a>
-					</div>
-					<div>${chalDto.chalPerson}명 / 10명</div>
-					<c:if test="${chalDto.getDDay() == 0}">
-						<div>오늘 시작</div>
-					</c:if>
-					<c:if test="${chalDto.getDDay() > 0}">
-						<div>${chalDto.getDDay()}일 뒤 시작</div>
-					</c:if>
-					<div>~${chalDto.endDate}</div>
-					<div>
-						<c:if test="${chalDto.getDDay() > -1}">
-							<span>모집중</span>
-						</c:if>
-						<span>${chalDto.chalTopic}</span>
-					</div>
-					<br>
-			</c:forEach>
-		</div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-=======
+					<a href="chal/detail?chalNo=${chalDto.chalNo}">
+						<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
+					</a>
                 </td>
             </tr>
             
@@ -263,13 +237,22 @@
                  </td>
             </tr>
             
-            <tr> <%-- 시작일 --%>
-                <td>
-                <img src="/images/chal_start_date.png" class="img-margin">
-                 ${chalDto.getDDay()}일뒤 시작
-                </td>
-            </tr>
-            
+            <c:if test="${chalDto.getDDay() == 0}">
+	            <tr> <%-- 시작일 --%>
+	                <td>
+	                <img src="/images/chal_start_date.png" class="img-margin">
+	                 오늘 시작
+	                </td>
+	            </tr>
+            </c:if>
+            <c:if test="${chalDto.getDDay() > 0}">
+            	<tr> <%-- 시작일 --%>
+            		<td>
+            		<img src="/images/chal_start_date.png" class="img-margin">
+            		${chalDto.getDDay()}일 뒤 시작
+            		</td>
+	            </tr>
+            </c:if>
             <tr> <%-- 종료일 --%>
                 <td>
                 <img src="/images/chal_end_date.png" class="img-margin">
@@ -290,8 +273,4 @@
       </c:forEach>
      </div>
 
- <%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>--%>
-
-
-
->>>>>>> refs/remotes/origin/main
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
