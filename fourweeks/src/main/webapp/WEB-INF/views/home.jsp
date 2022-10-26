@@ -220,9 +220,9 @@
          <tbody>
             <tr>  <%-- 이미지 --%>
                 <td>
-						<a href="chal/detail?chalNo=${chalDto.chalNo}">
-							<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-						</a>
+					<a href="chal/detail?chalNo=${chalDto.chalNo}">
+						<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
+					</a>
                 </td>
             </tr>
             
@@ -237,13 +237,22 @@
                  </td>
             </tr>
             
-            <tr> <%-- 시작일 --%>
-                <td>
-                <img src="/images/chal_start_date.png" class="img-margin">
-                 ${chalDto.getDDay()}일뒤 시작
-                </td>
-            </tr>
-            
+            <c:if test="${chalDto.getDDay() == 0}">
+	            <tr> <%-- 시작일 조건 --%>
+	                <td>
+	                <img src="/images/chal_start_date.png" class="img-margin">
+	                 오늘 시작
+	                </td>
+	            </tr>
+            </c:if>
+            <c:if test="${chalDto.getDDay() > 0}">
+            	<tr> <%-- 시작일 조건 --%>
+            		<td>
+            		<img src="/images/chal_start_date.png" class="img-margin">
+            		${chalDto.getDDay()}일 뒤 시작
+            		</td>
+	            </tr>
+            </c:if>
             <tr> <%-- 종료일 --%>
                 <td>
                 <img src="/images/chal_end_date.png" class="img-margin">
@@ -264,7 +273,4 @@
       </c:forEach>
      </div>
 
- <%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>--%>
-
-
-
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
