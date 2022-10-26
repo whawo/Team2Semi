@@ -23,13 +23,13 @@
 	border: 1px dotted transparent;
 	list-style:none;
 	}
-	a{
+	.head-a{
         font-size: 16px;
         font-weight:normal;
    		color:#6c7aef;
         cursor: pointer;
     }
-    a:hover{
+    haed-a-hover:hover{
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }

@@ -22,13 +22,13 @@
 	border: 1px dotted transparent;
 	list-style:none;
 	}
-	a{
+	.head-a{
         font-size: 16px;
         font-weight:normal;
    		color:#6c7aef;
         cursor: pointer;
     }
-    a:hover{
+    haed-a-hover:hover{
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }
@@ -94,9 +94,9 @@
 		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
-		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-		           	 		<li class="nav-item" ><a href="/mypage">마이페이지</a></li>
-		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="#">${user_img} ${loginId}</a></li>
+		           	 		<li class="nav-item" ><a class="head-a head-a-hover" href="/mypage">마이페이지</a></li>
+		           	 		<li class="nav-item"><a class="head-a head-a-hover" href="/logout">로그아웃</a></li>
 		           	 		
 					</c:when>
 					<c:otherwise>
@@ -105,8 +105,8 @@
 		                <li class="nav-item"><a href="/need_login">챌린지 인증</a></li>
 		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
-		           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
-		           	 	<li class="nav-item"><a href="/login" >로그인</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="/join">회원가입</a></li>
+		           	 	<li class="nav-item"><a class="head-a head-a-hover" href="/login" >로그인</a></li>
 					</c:otherwise>
 				</c:choose>
 	 		</ul>

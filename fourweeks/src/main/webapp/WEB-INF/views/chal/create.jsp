@@ -19,9 +19,17 @@
 
     <style>
         /* 
+        	10.26
+        	디자인 수정해야할 것: 
+        	- 6번 챌린지 대표 이미지 삭제 사진변경 안에 글자 위치 맞춰야함 -> 여러번 했었는데 안되면 그냥 border높이를 올리는 걸로 ...
+        	- input박스 안에 달력 넣어야 함.  
+        	- 챌린지 예상 종료일 + 28일 해셔 나와야함 
+        	- 챌린지 필 수 값 입력 안할시 에러 떠야함 
+        	- 챌린지 예상 종료일과 날짜가 맞아야함 
+        
         	10.25
-        	DB 수정해야할 것: 
-        	- form 위치 확인 
+        	DB 수정해야할 것: 해결 완료  
+        	- form 위치 확인  
         	- submit 버튼은 한개여야 함 
         	- name 확인 
         	
@@ -148,7 +156,7 @@
             height: 40px;
         }
         
-        /* 챌린지 예상 종료일 수정 삭제 x  */
+        /* 챌린지 예상 종료일 수정 삭제 x 굳이 없어도 될듯   */
         .blind{
             position:absolute;
             clip: rect(0 0 0 0);
@@ -172,9 +180,10 @@
         /* 캘린더  */
         .sp-1{
             display: block;
-            padding: 13px 0;
-            margin-top: 10px;
-            padding-left: 20px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
+            /* padding: 13px 0; */
+            height:60px;
+            margin-top:16px;
+        		padding-left: 105px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
             background-color: #e5e6f9;
             border: 1px solid #e5e6f9;
             border-radius: 0.5em;
@@ -182,6 +191,7 @@
             color: #6c7aef;
             font-weight: 700;
             text-decoration: none;
+			white-space: nowrap;
         }
         i{
             font-size:normal;
@@ -194,6 +204,13 @@
             background-repeat: no-repeat;
             vertical-align: top;
             margin: 2px 5px 0 0;
+        }
+        .end-date{
+        font-size:20px;
+        padding: 20px 20px;
+        }
+        #result-1{
+        	padding-left:20px;
         }
         /* 체크박스 */
         .chk-1{
@@ -219,7 +236,7 @@
 
         /* 이미지 보기  */
         .thumbnail{
-            display: none;
+             display: none; 
         }
         img{
             float: left;
@@ -227,8 +244,10 @@
 
            /* 업로드 버튼 */
         .input-file-upload{
-            padding: 6px 17px; 
+            padding: 5px 20px; 
+            padding-bottom: 12px;/* 버튼 아래로 위치 조정 */
             background-color: #e5e6f9;
+            border: 1px solid #e5e6f9;
             border-radius: 0.25em;
             color: #6c7aef;
             cursor: pointer;
@@ -246,9 +265,10 @@
 		.img-btn{ /* 삭제 버튼 */
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
-			border-radius: 0.25em;
+			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 16px; /* 삭제 버튼 크기 조절 */
+			padding: 4px 30px; /* 삭제 버튼 크기 조절  위, 옆 */ 
+			padding-bottom: 12px; /* 버튼 아래로 위치 조정 */
 			text-align: center;
 			color: #AAAAAA;
 		}
@@ -257,6 +277,9 @@
 		}
         .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 80px;
+        }
+        .error{
+        border: 1px solid red;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -352,16 +375,51 @@
              }
          });
      });
+
+// 모르겠다 required 꾸며서 할란다 
+  /*    //  회원가입 폼 제어 + 오류 메세지 
+     $(function(){
+        $(".create-btn").click(function(){
+            var chal2 = document.getElementById("chal-2");
+            var chal3 = document.getElementById("chal-3");
+            var chal4 = document.getElementById("chal-4");
+            var chal4 = document.getElementById("chal-5");
+            if(chal2){
+                // 얘는 정규식이 있는것도 아니고 성공 실패를 어캐 나놤노이ㅏㅁㄴ 
+                $(".chal-2").attr("input", "").focus();
+                return false;
+            }
+            else if(chal3){
+                $(".chal-3").attr("input", "");
+                return false;
+            }
+            else if(chal4){
+                $(".chal-4").attr("input","");
+                return false;
+            }
+            else if(chal-5){
+                $("chal-5").attr("input","");
+                return false;
+            }else{
+                return true;
+            }
+        });
+     });
+ */
+  
+
+     </script>
+     </head>
+     <body>
+
+
+        <div class="container-1200">
+        <!-- 폼 추가 ! -->
+
 </script>
 <body>
 	<div class="container-1200">
         <form action="create" method="post" enctype="multipart/form-data">
-			<div class="row" style="margin: 30px 50px 40px 50px;">
-	            <div class="row">
-	                <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
-	                <p class="p2">내가 개설한 챌린지에 자동으로 참가하게 됩니다.</p>
-	            </div>
-	
 	           <div class="row">
 	                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
 	
@@ -462,4 +520,4 @@
         	name 맞늕니 확인 
         	-->
 </body>     
-<jsp:include page="/WEB-INF/views/template/footer.jsp">
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
