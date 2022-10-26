@@ -62,11 +62,7 @@
 	}
 	
 	/*  */
-<<<<<<< HEAD
-	.head-line{
-=======
 	head-line{
->>>>>>> branch 'main' of https://github.com/whawo/Team2Semi.git
 	border-bottom:1px solid #d9d9d9;
 	width:800px;
 	}
@@ -87,11 +83,7 @@
 		                <li class="nav-item"><a href="#">문의하기</a></li>
 		                
 		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-<<<<<<< HEAD
-		           	 		<li class="nav-item" ><a href="/mypage?userId=${loginId}">마이페이지</a></li>
-=======
 		           	 		<li class="nav-item" ><a href="/mypage">마이페이지</a></li>
->>>>>>> branch 'main' of https://github.com/whawo/Team2Semi.git
 		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
 		           	 		
 					</c:when>
