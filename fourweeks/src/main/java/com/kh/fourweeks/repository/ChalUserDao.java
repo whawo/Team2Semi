@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
-import com.kh.fourweeks.vo.ChalDetailVO;
 
 public interface ChalUserDao {
 	void join(ChalUserDto chalUserDto); // 회원가입 메소드

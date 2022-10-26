@@ -148,7 +148,7 @@
 				<div>
 					<div>
 						<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
-							<img class="list-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
+							<img class="list-img" src="detail/download?chalNo=${chalDtoRecruited.getChalNo()}">
 						</a>
 					</div>
 					<div>
@@ -239,4 +239,5 @@
 				</c:otherwise>
 			</c:choose>
 		</c:if>
+		<!-- 머지 -->
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
