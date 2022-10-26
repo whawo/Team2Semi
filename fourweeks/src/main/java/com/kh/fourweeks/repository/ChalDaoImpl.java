@@ -703,10 +703,14 @@ public class ChalDaoImpl implements ChalDao {
 	@Override
 	public List<ChalProgressVO> selectAllProgress(int chalNo) {
 		
-		String sql ="select count(*) cnt , U.user_nick from"
-				+ " chal_user U left outer join chal_confirm C on C.user_id = U.user_id"
-				+ " where chal_no =? group by U.user_nick order by cnt desc";
-		Object[] param = {chalNo};
+		String sql = "select count(C.confirm_no) cnt,"
+				+ " U.user_nick from participant P"
+				+ " left outer join (select * from chal_confirm where chal_no = ?) C "
+				+ "on P.user_id = C.user_id left outer join"
+				+ " chal_user U on P.user_id = U.user_id"
+				+ " where P.chal_no = ?"
+				+ " group by U.user_nick";
+		Object[] param = {chalNo, chalNo};
 		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}
 	
