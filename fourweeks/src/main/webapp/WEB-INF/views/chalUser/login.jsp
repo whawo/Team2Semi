@@ -98,7 +98,9 @@
             
             <form action="login" method="post">
             <div class="row">
-                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required>
+                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required
+                	<c:if test="${param.userId != null}">value="${param.userId}"</c:if>>
+                
             </div>
             <div class="row">
                 <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호" required >
@@ -109,19 +111,19 @@
 
             
              <!--  아이디/비밀번호가 일치하지 않을때. -->
-         <c:if test="${param.error != null}">
-		<div class="row center login-error">
-			<span>아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</span>
-		</div>
-		</c:if>
+         	<c:if test="${param.error != null}">
+				<div class="row center login-error">
+					<span>아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</span>
+				</div>
+			</c:if>
 		 
             </form>
             <section class="row center">
-                <a class="find" href="#비밀번호찾기 ">비밀번호 찾기</a>
+                <a class="find" href="/find_pw">비밀번호 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="#아이디찾기 ">아이디 찾기</a>
+                <a class="find" href="/find_id">아이디 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/join ">회원가입</a>
+                <a class="find" href="/join">회원가입</a>
             </section>
         </div>
         </div>

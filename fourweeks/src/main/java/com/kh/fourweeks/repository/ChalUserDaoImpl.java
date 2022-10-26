@@ -67,6 +67,33 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
+	private RowMapper<ChalUserDto> mapper = (rs, idx) -> {
+		return ChalUserDto.builder()
+				.userId(rs.getString("user_id"))
+				.userNick(rs.getString("user_nick"))
+				.userPw(rs.getString("user_pw"))
+				.userEmail(rs.getString("user_email"))
+				.createDate(rs.getDate("create_date"))
+				.modifiedDate(rs.getDate("modified_date"))
+				.loginDate(rs.getDate("login_date"))
+				.build();
+	};
+	
+	// 아이디 찾기를 위한 이메일 조회
+	@Override
+	public List<ChalUserDto> selectEmail(String userEmail) {
+		String sql = "select * from chal_user where user_email = ?";
+		Object[] param = {userEmail};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public ChalUserDto findPw(String userId, String userEmail) {
+		String sql = "select * from chal_user where user_id = ? and user_email = ?";
+		Object[] param = {userId, userEmail};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
 	@Override
 	public boolean updateLoginTime(String userId) {
 		String sql = "update "
