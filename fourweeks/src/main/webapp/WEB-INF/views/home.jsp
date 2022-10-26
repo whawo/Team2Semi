@@ -126,6 +126,7 @@
 		   font-weight: bold;
 		   font-size : 22px;
 		}
+		
 		 /* table 왼쪽 나란히 정렬 */
 		table {
 	    float : left;
@@ -173,7 +174,7 @@
       <form action="chal/list">
       <div class="search-bar">
         <select name="type" class="select select-check">
-          <option value="chal_title">전체</option>
+          <option selected="selected"  value="chal_title">전체</option>
           <option value="운동">운동</option>
           <option value="식습관">식습관</option>
           <option value="생활">생활</option>
