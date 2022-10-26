@@ -278,9 +278,20 @@
         .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 80px;
         }
-        .error{
-        border: 1px solid red;
-        }
+      .fail-message {
+		display: none;
+	}
+	
+	.input.fail ~ .fail-message {
+		display: block;
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+	
+	.input ~ .find-error {
+		font-size:12px;
+	    color: #eb6f7f;
+	}
     </style>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
@@ -303,7 +314,9 @@
         
              // 날짜 출력하기 
              onSelect: function(date){
-             document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD");
+             	/* document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD"); */
+             	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
+             	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
              }
          });
         /*  // 오늘 날짜 기본값으로 자동 선택
@@ -408,18 +421,33 @@
  */
   
 
-     </script>
-     </head>
-     <body>
+		 $(".create-form").submit(function(){
+	
+     $("input[name=chalTitle]").blur();
 
+     //모든 input을 검사하도록 강제실행했으므로
+     //“모두 success이거나, fail이 없거나” 중에 한 가지 방식으로 코드 구현해서 전송하도록 처리
+     //console.log($(".input.fail").length);
+     if($(".input.fail".length > 0)) {
+         return false;
+     } 
 
-        <div class="container-1200">
-        <!-- 폼 추가 ! -->
+ });
+ 
+	$(function() {
+		$("input[name=chalTitle]").on("blur", function() {
+			var chalTitle = $(this).val();
+			$(this).removeClass("fail");
+			if (!userEmail) {
+				$(this).addClass("fail");
+			}
+		});
+	});
 
 </script>
 <body>
 	<div class="container-1200">
-        <form action="create" method="post" enctype="multipart/form-data">
+        <form action="create" method="post" enctype="multipart/form-data" class="create-form">
 	           <div class="row">
 	                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
 	
@@ -440,14 +468,14 @@
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
 	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
-	               <!-- <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40"> -->
 	                <span  class="helper-text-40 helper-css">0</span> /40
+	                <span class="fail-message">이메일을 입력해주세요.</span> 
 	                </div>
 	            </div>
 	
 	            <div class="row">
 	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300"></textarea>
+	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300" ></textarea>
 	                <span  class="helper-text-300 helper-css">0</span> /300
 	            </div>
 	
@@ -457,7 +485,7 @@
 	
 	                <div class="row">
 	                    <i class="fa-solid fa-calendar-days"></i>
-	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" required>
+	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" >
 	                </div>
 	
 	                <div class="row date-calendar">
@@ -474,14 +502,14 @@
 	
 	            </div>
 	
-	            <!--  체크해야 넘어간다  -->
+	            <!--  라벨이라 체크를 어떻게 해야할지 ..   -->
 	            <div class="row">
 	                <p class="p1">5. 모집 방식을 확인해주세요.</p>
 	                <p class="p2-1">[모집 방식] 선착순 자동 마감</p>
 	                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
 	                <div class="row chk-line">
 	                <label class="line" >
-	                    <input type="checkbox" required>
+	                    <input type="checkbox" >
 	                    <span class="chk-1"></span>
 	                    <span class="chk-2">확인했어요!</span>
 	                </label>    
@@ -507,17 +535,13 @@
 	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
 	                <span  class="helper-text-500 helper-css">0</span> /500
 	            </div>
-	            <div class="row center"> <!--센터? 아니면 노센터?-->
-	                <a  class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</a>
+	            
+	            <div class="row center"> 
+	                <a  class="smallbtn cancel-btn" id="smallbutton3">취소</a>
 	                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
 	            </div>
         	</div>    
         </form>    
 	</div>
-        	<!--  
-        	sumit 버튼 한개 
-        	form 위치 
-        	name 맞늕니 확인 
-        	-->
 </body>     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
