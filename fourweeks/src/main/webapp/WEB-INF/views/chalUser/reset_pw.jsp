@@ -3,14 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="비밀번호 변경" name="title"/>
+	<jsp:param value="비밀번호 재설정" name="title"/>
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="/css/basic.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
 <style>
     div{
@@ -51,8 +51,13 @@
 	 <div class="row center">
 	     <p class="p-1">비밀번호 재설정</p>
 	 </div>
+	 
+	 <div class="row center">
+	 	비밀번호 재설정을 위한 본인 확인이 완료되었습니다.
+	 	<br> 새로운 비밀번호를 등록 후 사용해주세요.
+	 </div>
 	<!-- 회원가입처럼 새 비밀번호와 새 비밀번호 확인이 일치해야 form 전송되도록 설정 필요(jQuery) -->    
-	<form action="pw" method="post">
+	<form action="reset_pw" method="post">
 		<div class="row center">
 			<input type="hidden" name="userId" value="${userDto.userId}">
  		     아이디 : ${userDto.userId}
@@ -66,8 +71,7 @@
 		     <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
 		     
 		     <br><br>
-		     <a id = "largebuttotn3" href="/mypage">취소</a>
-		     <button type="submit">확인</button>
+		     <button type="submit">변경</button>
 		</div>
 	</form>
 </div>

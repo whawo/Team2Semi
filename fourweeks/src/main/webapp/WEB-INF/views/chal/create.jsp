@@ -16,9 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
-
 
     <style>
         /* 
@@ -262,8 +259,10 @@
             padding-top: 80px;
         }
     </style>
-     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-     <script type="text/javascript">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
+    <script type="text/javascript">
     
      $(function(){
          var picker1 = new Lightpick({
@@ -272,7 +271,7 @@
              
              minDate:moment(), // 오늘자 선택 가능
              minDate:moment().add(4,'day'), // 오늘 + 5일
-
+			 format:"YYYY-MM-DD",
              firstDay:0, // 시작일 일요일부터 
              singleDate:true, // 날짜 한개만 선택
 
@@ -281,7 +280,7 @@
         
              // 날짜 출력하기 
              onSelect: function(date){
-             document.getElementById("result-1").innerHTML = date.format("YYYY.MM.DD");
+             document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD");
              }
          });
         /*  // 오늘 날짜 기본값으로 자동 선택
@@ -353,125 +352,114 @@
              }
          });
      });
-
-
-
-     </script>
-     </head>
-     <body>
-     <!-- 확인용 -->
-		${loginId}
-
-        <div class="container-1200">
-        <!-- 폼 추가 ! -->
+</script>
+<body>
+	<div class="container-1200">
         <form action="create" method="post" enctype="multipart/form-data">
-		<div class="row" style="margin: 30px 50px 40px 50px;">
-            <div class="row">
-                <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
-                <p class="p2">내가 개설한 챌린지에 자동으로 참가하게 됩니다.</p>
-            </div>
-
-           <div class="row">
-                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
-
-                <div class="row checks small">
-                <input class="lab"  id="ex_rd1" name="chalTopic" type="radio" value="운동" checked><label for="ex_rd1">운동</label><br>
-                <input class="lab"  id="ex_rd2" name="chalTopic" type="radio" value="생활"><label for="ex_rd2">생활</label><br>
-                <input class="lab"  id="ex_rd3" name="chalTopic" type="radio" value="정서"><label for="ex_rd3">정서</label><br>
-                <input class="lab"  id="ex_rd4" name="chalTopic" type="radio" value="취미"><label for="ex_rd4">취미</label><br>
-                <input class="lab"  id="ex_rd5" name="chalTopic" type="radio" value="학습"><label for="ex_rd5">학습</label><br>
-                <input class="lab"  id="ex_rd6" name="chalTopic" type="radio" value="환경"><label for="ex_rd6">환경</label><br>
-                <input class="lab"  id="ex_rd7" name="chalTopic" type="radio" value="그 외"><label for="ex_rd7">그 외</label><br>
-                </div>
-             
-            </div>
-
-            <div class="row">
-                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
-                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-                <div class="row">
-                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
-               <!-- <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40"> -->
-                <span  class="helper-text-40 helper-css">0</span> /40
-                </div>
-            </div>
-
-            <div class="row">
-                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300"></textarea>
-                <span  class="helper-text-300 helper-css">0</span> /300
-            </div>
-
-        <div class="row">
-                <p class="p1">4. 챌린지 시작일을 선택해주세요.</p>
-                <p class="p2">개설일로부터 5일 이내에 시작해야 해요.</p>
-
-                <div class="row">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" required>
-                </div>
-
-                <div class="row date-calendar">
-                    <h2 class="blind"> 챌린지 예상 종료일</h2>
-                    <span class="sp-1 calendar">
-                    <i class="c-end">
-                        <span class="blind">캘린더</span>
-                    </i>
-                 	<p class="end-date"> 
-                 	챌린지 예상 종료일 <p id="result-1"></p>
-                 	</p> 
-                </span>
-                </div>
-
-            </div>
-
-            <!--  체크해야 넘어간다  -->
-            <div class="row">
-                <p class="p1">5. 모집 방식을 확인해주세요.</p>
-                <p class="p2-1">[모집 방식] 선착순 자동 마감</p>
-                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
-                <div class="row chk-line">
-                <label class="line" >
-                    <input type="checkbox" required>
-                    <span class="chk-1"></span>
-                    <span class="chk-2">확인했어요!</span>
-                </label>    
-            </div>
-            </div>
-
-            <div class="row">
-                <p class="p1">6. 챌린지 대표 이미지를 등록하세요.(선택)</p>
-                <p class="p2">노출 위치에 따라 섬네일이 축소/확대되어 적용합니다. 등록하지 않는 경우, 랜점으로 기본 이미지가 적용됩니다.</p>
-                <div class="row">
-                    <input id="input-file" type="file" name="attachment" class="thumbnail">
-                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
-                    <div class="row img-btns">
-                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <a class="delete-file-upload img-btn" name="thumbnail-delete">삭제</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-7 row-padding">
-                <p class="p1-1" >7. 챌린지를 소개해주세요.(선택)</p>
-                <p class="p2">다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.</p>
-                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
-                <span  class="helper-text-500 helper-css">0</span> /500
-            </div>
-            <div class="row center"> <!--센터? 아니면 노센터?-->
-                <a  class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</a>
-                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
-            </div>
-        </div>    
+			<div class="row" style="margin: 30px 50px 40px 50px;">
+	            <div class="row">
+	                <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
+	                <p class="p2">내가 개설한 챌린지에 자동으로 참가하게 됩니다.</p>
+	            </div>
+	
+	           <div class="row">
+	                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
+	
+	                <div class="row checks small">
+	                <input class="lab"  id="ex_rd1" name="chalTopic" type="radio" value="운동" checked><label for="ex_rd1">운동</label><br>
+	                <input class="lab"  id="ex_rd2" name="chalTopic" type="radio" value="생활"><label for="ex_rd2">생활</label><br>
+	                <input class="lab"  id="ex_rd3" name="chalTopic" type="radio" value="정서"><label for="ex_rd3">정서</label><br>
+	                <input class="lab"  id="ex_rd4" name="chalTopic" type="radio" value="취미"><label for="ex_rd4">취미</label><br>
+	                <input class="lab"  id="ex_rd5" name="chalTopic" type="radio" value="학습"><label for="ex_rd5">학습</label><br>
+	                <input class="lab"  id="ex_rd6" name="chalTopic" type="radio" value="환경"><label for="ex_rd6">환경</label><br>
+	                <input class="lab"  id="ex_rd7" name="chalTopic" type="radio" value="그 외"><label for="ex_rd7">그 외</label><br>
+	                </div>
+	             
+	            </div>
+	
+	            <div class="row">
+	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
+	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
+	                <div class="row">
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
+	               <!-- <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40"> -->
+	                <span  class="helper-text-40 helper-css">0</span> /40
+	                </div>
+	            </div>
+	
+	            <div class="row">
+	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
+	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300"></textarea>
+	                <span  class="helper-text-300 helper-css">0</span> /300
+	            </div>
+	
+	        <div class="row">
+	                <p class="p1">4. 챌린지 시작일을 선택해주세요.</p>
+	                <p class="p2">개설일로부터 5일 이내에 시작해야 해요.</p>
+	
+	                <div class="row">
+	                    <i class="fa-solid fa-calendar-days"></i>
+	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" required>
+	                </div>
+	
+	                <div class="row date-calendar">
+	                    <h2 class="blind"> 챌린지 예상 종료일</h2>
+	                    <span class="sp-1 calendar">
+	                    <i class="c-end">
+	                        <span class="blind">캘린더</span>
+	                    </i>
+	                 	<p class="end-date"> 
+	                 	챌린지 예상 종료일 <p id="result-1"></p>
+	                 	</p> 
+	                </span>
+	                </div>
+	
+	            </div>
+	
+	            <!--  체크해야 넘어간다  -->
+	            <div class="row">
+	                <p class="p1">5. 모집 방식을 확인해주세요.</p>
+	                <p class="p2-1">[모집 방식] 선착순 자동 마감</p>
+	                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
+	                <div class="row chk-line">
+	                <label class="line" >
+	                    <input type="checkbox" required>
+	                    <span class="chk-1"></span>
+	                    <span class="chk-2">확인했어요!</span>
+	                </label>    
+	            </div>
+	            </div>
+	
+	            <div class="row">
+	                <p class="p1">6. 챌린지 대표 이미지를 등록하세요.(선택)</p>
+	                <p class="p2">노출 위치에 따라 섬네일이 축소/확대되어 적용합니다. 등록하지 않는 경우, 랜점으로 기본 이미지가 적용됩니다.</p>
+	                <div class="row">
+	                    <input id="input-file" type="file" name="attachment" class="thumbnail">
+	                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
+	                    <div class="row img-btns">
+	                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
+	                        <a class="delete-file-upload img-btn" name="thumbnail-delete">삭제</a>
+	                    </div>
+	                </div>
+	            </div>
+	
+	            <div class="row row-7 row-padding">
+	                <p class="p1-1" >7. 챌린지를 소개해주세요.(선택)</p>
+	                <p class="p2">다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.</p>
+	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
+	                <span  class="helper-text-500 helper-css">0</span> /500
+	            </div>
+	            <div class="row center"> <!--센터? 아니면 노센터?-->
+	                <a  class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</a>
+	                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
+	            </div>
+        	</div>    
         </form>    
-        	</div>
+	</div>
         	<!--  
         	sumit 버튼 한개 
         	form 위치 
         	name 맞늕니 확인 
         	-->
-     </body>
-     
- <jsp:include page="/WEB-INF/views/template/footer.jsp">
-	<jsp:param value="챌린지 개설" name="title"/>
-</jsp:include>     
+</body>     
+<jsp:include page="/WEB-INF/views/template/footer.jsp">
