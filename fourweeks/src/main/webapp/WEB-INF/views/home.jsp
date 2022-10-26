@@ -18,8 +18,9 @@
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 	
 	<style>
-		  div, img, select, input {
-	        border: 1px dotted gray;
+		  div, img, select, input, table, td {		   
+		    /*border: 1px dotted gray; */
+	         border: 1px solid transparent;
 	      }
 	      /* 이미지 */
 	      .main {
@@ -65,6 +66,9 @@
           display: flex;
           flex-direction: row;
           position: relative;
+          
+          width : 590px;
+      	  margin: 150px auto auto;
         }
         .search-box{
      	position : relative;
@@ -112,6 +116,30 @@
        select:focus { 
        outline: none; 
        }
+        .main-img {
+		   width : 288px;
+		   height : 208px;
+		   border-top-left-radius: 10px;
+		   border-top-right-radius: 10px;
+		}
+		.home-chal-title {
+		   font-weight: bold;
+		   font-size : 22px;
+		}
+		
+		 /* table 왼쪽 나란히 정렬 */
+		table {
+	    float : left;
+		}
+		 /* table 안 글자 가운데*/
+		td {
+			display: flex;
+            align-items: center;
+         }
+         .img-margin {
+         margin-right : 10px;
+         }
+
 	</style>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script>
@@ -146,7 +174,7 @@
       <form action="chal/list">
       <div class="search-bar">
         <select name="type" class="select select-check">
-          <option value="chal_title">전체</option>
+          <option selected="selected"  value="chal_title">전체</option>
           <option value="운동">운동</option>
           <option value="식습관">식습관</option>
           <option value="생활">생활</option>
@@ -160,7 +188,7 @@
           <option value="d_day asc"></option>
 		</select>
 				<input class="search-box" type="text" name="keyword" value="${param.keyword}" autocomplete="off" placeholder="지금 나에게 필요한 습관은?">
-				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
+				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button> 
 			</form>
         </div>
 		<%-- 검색 끝 --%>
@@ -183,33 +211,60 @@
 		<%-- 주제별 리스트 끝 --%>
 		
 		<div>
-			<h3>지금 바로 시작하는 거야!<a href="chal/list" class="float-right" style="margin:0">전체보기</a></h3>
+			<h2>지금 바로 시작하는 거야!<a href="chal/list" class="float-right" style="margin:0">전체보기</a></h2>
 		</div>
-		<hr> <!-- 구역나눔, 삭제필요 -->
-		
-		<%-- 참가자 많은 순 16개 출력 --%>
-		<div>
-			<c:forEach var="chalDto" items="${list}">
-					<div>
+	
+	<div>	
+   <c:forEach var="chalDto" items="${list}">
+	 <table>
+         <tbody>
+            <tr>  <%-- 이미지 --%>
+                <td>
 						<a href="chal/detail?chalNo=${chalDto.chalNo}">
 							<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
 						</a>
-					</div>
-					<div>
-						<a href="chal/detail?chalNo=${chalDto.chalNo}">
-							${chalDto.chalTitle}
-						</a>
-					</div>
-					<div>${chalDto.chalPerson}명 / 10명</div>
-					<div>${chalDto.getDDay()}일 뒤 시작</div>
-					<div>~${chalDto.endDate}</div>
-					<div>
-						<c:if test="${chalDto.getDDay() > -1}">
-							<span>모집중</span>
-						</c:if>
-						<span>${chalDto.chalTopic}</span>
-					</div>
-					<br>
-			</c:forEach>
-		</div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+                </td>
+            </tr>
+            
+            <tr>  <%-- 제목 --%>
+                <td><a href="chal/detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a></td>
+            </tr>
+            
+            <tr>  <%-- 인원수 --%>
+                <td>
+                <img src="/images/attend_user.png" class="img-margin">
+                ${chalDto.chalPerson}명 / 10명
+                 </td>
+            </tr>
+            
+            <tr> <%-- 시작일 --%>
+                <td>
+                <img src="/images/chal_start_date.png" class="img-margin">
+                 ${chalDto.getDDay()}일뒤 시작
+                </td>
+            </tr>
+            
+            <tr> <%-- 종료일 --%>
+                <td>
+                <img src="/images/chal_end_date.png" class="img-margin">
+                ~${chalDto.endDate}
+                </td>     
+            </tr>
+            
+            <tr> <%-- 라벨 --%>
+                <td>
+                <c:if test="${chalDto.getDDay() > 0}">
+					<input class="label-wait" placeholder="모집중">
+				</c:if>
+                	<input class="label-category" placeholder="${chalDto.chalTopic}">
+                </td>
+            </tr>
+         </tbody>
+       </table>
+      </c:forEach>
+     </div>
+
+ <%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>--%>
+
+
+

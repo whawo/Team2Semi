@@ -17,7 +17,6 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
-
 	div, ul, li{
 	/* 이거 지우면 위로 더 올라오니깐 삭제하지 마세요  */
 	border: 1px dotted transparent;
@@ -33,12 +32,11 @@
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }
-	4weeks-inner{
+	.4weeks-inner{
 		position: relative;
 		width:1200px;
 		padding: 0 30px;
 		margin: 0 auto;		
-
 	}
 	.4weeks-nav{
 		overflow: hidden;
