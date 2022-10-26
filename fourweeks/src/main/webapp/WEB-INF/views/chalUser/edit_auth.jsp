@@ -58,7 +58,7 @@
 			<input type="hidden" name="userId" value="${userDto.userId}">
  		     아이디 : ${userDto.userId}
 		     <br><br>
-		     비밀번호 : <input type="text" name="userPw" required placeholder="8~16자의 영문/숫자">
+		     비밀번호 : <input type="password" name="userPw" required placeholder="8~16자의 영문/숫자">
 		     <br>
 		     <c:if test="${param.error != null}">
 			     <span>비밀번호를 다시 확인해주세요.</span>
