@@ -584,7 +584,6 @@ public class ChalDaoImpl implements ChalDao {
 				.build();
 		}
 	};
-
 	@Override
 	public List<ParticipantDto> selectParticipant(int chalNo) {//참가자 조회
 		
@@ -592,7 +591,6 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, participantMapper,param);
 	}
-  
 	@Override
 	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//참가자 한 명 조회
 		String sql ="select * from participant where chal_no= ? and user_id = ?";
@@ -706,8 +704,8 @@ public class ChalDaoImpl implements ChalDao {
 	public List<ChalProgressVO> selectAllProgress(int chalNo) {
 		
 		String sql ="select count(*) cnt , U.user_nick from"
-				+ " chal_confirm C left outer join chal_user U on C.user_id = U.user_id"
-				+ " where chal_no =? group by U.user_nick order by cnt desc";;
+				+ " chal_user U left outer join chal_confirm C on C.user_id = U.user_id"
+				+ " where chal_no =? group by U.user_nick order by cnt desc";
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}

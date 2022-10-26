@@ -2,6 +2,7 @@ package com.kh.fourweeks.repository;
 
 import java.util.List;
 
+import com.kh.fourweeks.entity.ChalCreateMyDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
 
@@ -22,4 +23,11 @@ public interface ChalUserDao {
 
 	//참가중인 모든챌린지 조회 메소드
 	List<ChalMyDetailDto> selectAllMyDetail(String userId);
+	
+	//참가했던 (종료된) 모든 챌린지 조회 메소드
+	List<ChalMyDetailDto> selectEndAllMyDetail(String userId);
+	
+	//내가 개설한 모든 챌린지 조회 메소드
+	List<ChalCreateMyDto> selectCreateAllMyDetail(String userId);
+	
 }

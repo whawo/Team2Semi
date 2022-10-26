@@ -104,9 +104,17 @@ public class ChalUserController {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
 		model.addAttribute("myDto", chalUserDao.selectOne(userId));
+		//참가중인 챌린지 조회
 		model.addAttribute("chalDto" , chalUserDao.selectAllMyDetail(userId));
+		//참가종료 챌린지 조회
+		model.addAttribute("chalEndDto" , chalUserDao.selectEndAllMyDetail(userId));
+		//내가 개설한 챌린지 조회
+		model.addAttribute("createDto" , chalUserDao.selectCreateAllMyDetail(userId));
+		
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
+		
+		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chalUser/mypage";
 	}
 	

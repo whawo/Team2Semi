@@ -138,8 +138,11 @@ public class ChalController {
 		//참가여부 
 		model.addAttribute("participantDto", chalDao.selectParticipantOne(chalDto.getChalNo(),
 				(String)session.getAttribute(SessionConstant.ID)));
+		
+		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chal/detail";
 	}
+	
 	@GetMapping("/mychal")
 	public String myChal(//챌린지 상세 
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
@@ -161,6 +164,7 @@ public class ChalController {
 		//참가자 인증글 목록(최신 5개)
 		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		
 		return "chal/mychal";
 		
 	}
