@@ -49,20 +49,22 @@
 
  <div class="container-794">
 	 <div class="row center">
-	     <p class="p-1">비밀번호 인증</p>
-	     <p class="p-2">정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</p>
+	     <p class="p-1">비밀번호 재설정</p>
 	 </div>
-	    
-	<form action="auth" method="post">
+	<!-- 회원가입처럼 새 비밀번호와 새 비밀번호 확인이 일치해야 form 전송되도록 설정 필요(jQuery) -->    
+	<form action="pw" method="post">
 		<div class="row center">
 			<input type="hidden" name="userId" value="${userDto.userId}">
  		     아이디 : ${userDto.userId}
 		     <br><br>
-		     비밀번호 : <input type="text" name="userPw" required placeholder="8~16자의 영문/숫자">
+		     새 비밀번호 : <input type="password" name="userPw" required placeholder="8~16자의 영문/숫자">
 		     <br>
-		     <c:if test="${param.error != null}">
-			     <span>비밀번호를 다시 확인해주세요.</span>
-		     </c:if>
+		     <span class="fail-message">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
+		     <br><br>
+		     새 비밀번호 확인 : <input type="password" required>
+		     <br><br>
+		     <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
+		     
 		     <br><br>
 		     <a id = "largebuttotn3" href="/mypage">취소</a>
 		     <button type="submit">확인</button>

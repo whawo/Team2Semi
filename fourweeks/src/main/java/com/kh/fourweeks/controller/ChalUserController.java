@@ -151,8 +151,8 @@ public class ChalUserController {
 	public String editAuth(Model model,
 			HttpSession session) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
-			model.addAttribute("userDto", chalUserDao.selectOne(userId));			
-			return "chalUser/edit_auth";
+		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
+		return "chalUser/edit_auth";
 	}
 	
 	@PostMapping("/mypage/edit/auth")
@@ -170,4 +170,18 @@ public class ChalUserController {
 		}
 	}
 	
+	@GetMapping("/mypage/edit/pw")
+	public String editPw(Model model,
+			HttpSession session) {
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
+		return "chalUser/edit_pw";
+	}
+	
+	@PostMapping("/mypage/edit/pw")
+	public String editPw(@ModelAttribute ChalUserDto inputDto,
+			RedirectAttributes attr) {
+		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
+		return "redirect:/mypage";
+	}
 }

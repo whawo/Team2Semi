@@ -123,4 +123,11 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
+	
+	@Override
+	public boolean updatePw(String newPw, String userId) {
+		String sql = "update chal_user set user_pw = ? where user_id = ?";
+		Object[] param = {newPw, userId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }
