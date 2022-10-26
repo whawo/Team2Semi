@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
-	<jsp:param value="가입 완료" name="title"/>
+	<jsp:param value="탈퇴 완료" name="title"/>
 </jsp:include>
 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* 
-            10.21
-        	- 로그인 에러 구현 완료 
-            10.20 
-            디자인 수정해야할 것
-            - 아이디창과 비밀번호 창을 중심으로 위아래로 간격 더 넓히기 
-            - 로그인 밑에 비번찾기 아이디 찾기 간격 좀 더 띄우기 
-            - 헤더 수정 
-            
-        */
         body{
             font-family: sans-serif;
         }
@@ -50,26 +40,21 @@
         .color{
             color: #425F57;
         }
-        
     </style>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-     <script type="text/javascript">
+    <script type="text/javascript">
 
-     </script>
+    </script>
  <body>
         <div class="container-590">
             <div class="row center">
-                <p class="p-1">가입을 축하합니다!</p>
-                <p class="p-2">좋은 습관 챌린지를 함께 할 준비가 완료되었어요</p>
+                <p class="p-1">다음에 또 만나요!</p>
+                <p class="p-2">좋은 습관을 쭉 이어나가실 수 있도록 당신을 응원합니다.</p>
             </div>
             
             <div class="row center">
                <img src="/images/join_success.png" width="300" height="300">
             </div>
 
-            <div class="row center">
-                <button class="largebtn btn1" type="button" id="largebutton1"><a href="/login">로그인</a></button>
-            </div>
         </div>
-     </body>
-</html>
+</body>

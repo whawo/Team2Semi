@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
    <link rel="stylesheet" type="text/css" href="/css/basic.css">
@@ -167,7 +167,7 @@
     }
  
     </style>
-   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
    <script type="text/javascript">
         function checkId(){
             var input = document.querySelector("input[name=userId]");
