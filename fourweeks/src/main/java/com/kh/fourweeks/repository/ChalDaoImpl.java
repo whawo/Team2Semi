@@ -166,7 +166,7 @@ public class ChalDaoImpl implements ChalDao {
 					+ "from "
 						+ "chal "
 					+ "where "
-						+ "ceil(start_date-sysdate) > 0 "
+						+ "ceil(start_date-sysdate) > -1 "
 					+ "and "
 						+ "chal_person < 11 "
 					+ "order by "
@@ -584,7 +584,6 @@ public class ChalDaoImpl implements ChalDao {
 				.build();
 		}
 	};
-
 	@Override
 	public List<ParticipantDto> selectParticipant(int chalNo) {//참가자 조회
 		
@@ -592,7 +591,6 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo};
 		return jdbcTemplate.query(sql, participantMapper,param);
 	}
-  
 	@Override
 	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//참가자 한 명 조회
 		String sql ="select * from participant where chal_no= ? and user_id = ?";

@@ -91,7 +91,7 @@
 	}
     </style>
     
-     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">
      
      </script>
@@ -106,7 +106,9 @@
             
             <form action="login" method="post">
             <div class="row">
-                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required>
+                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required
+                	<c:if test="${param.userId != null}">value="${param.userId}"</c:if>>
+                
             </div>
             <div class="row">
                 <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호" required >
@@ -125,11 +127,11 @@
 		 
             </form>
             <section class="row center">
-                <a class="find" href="#비밀번호찾기 ">비밀번호 찾기</a>
+                <a class="find" href="/find_pw">비밀번호 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="#아이디찾기 ">아이디 찾기</a>
+                <a class="find" href="/find_id">아이디 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/join ">회원가입</a>
+                <a class="find" href="/join">회원가입</a>
             </section>
         </div>
         </div>

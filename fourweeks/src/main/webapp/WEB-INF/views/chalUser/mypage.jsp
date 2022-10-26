@@ -35,10 +35,14 @@
 </ul>
 
 <c:forEach var="chalDto" items="${chalDto}">
+<div>
+		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"><img src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
+    </a>
+				<div>${chachalDtolVO.getDDay()}일뒤 시작</div>
+				<div><button>내 인증글</button></div>
+	
 	<div>
-		<img src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
-	<div>
-		<a href="chal/detail?chalNo=${chalDto.chalNo}"> ${chalDto.chalTitle}</a>
+		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"> ${chalDto.chalTitle}</a>
 	</div><br>
 	<div>${chalDto.getStartDate()}~${chalDto.getEndDate()}</div><br>
 	<div>${chalDto.getChalTopic()}</div>
