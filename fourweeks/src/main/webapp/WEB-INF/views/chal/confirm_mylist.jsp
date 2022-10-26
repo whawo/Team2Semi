@@ -14,7 +14,7 @@
 <script>
 	$(function(){
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
-		$(".chal-img").error("error", function(){
+		$(".chal-img").on("error", function(){
 			$(this).attr("src", "/images/bg_default.png");
 		});
 		

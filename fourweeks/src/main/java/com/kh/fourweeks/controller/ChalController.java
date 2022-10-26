@@ -30,6 +30,7 @@ import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
 @Controller
@@ -85,7 +86,7 @@ public class ChalController {
 	}
 	
 	
-	@GetMapping("detail/download")//챌린지 상세 이미지 조회
+	@GetMapping("/detail/download")//챌린지 상세 이미지 조회
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> detailDownload(
 			@ModelAttribute ChalDto chalDto
@@ -97,19 +98,26 @@ public class ChalController {
 	}
 	
 	// 모집중인 화면 맵핑
-	@GetMapping(value = {"/list", "/recruited_list"})
+	@GetMapping("/list")
 	public String list(
 				Model model,
+				@ModelAttribute(name="voRecruited") ChalListSearchRecruitedVO voRecruited,
 				@ModelAttribute(name="vo") ChalListSearchVO vo) {
-		// 페이지수 구하기
-		int count = chalDao.count(vo);
+		
+		// 페이지수 구하기(모집중 페이지)
+		int count = chalDao.count(vo); 
 		vo.setCount(count);
+		
+		// 페이지수 구하기(전체 페이지)
+		int countRecruited = chalDao.countRecruited(voRecruited);
+		voRecruited.setCount(countRecruited);
+		
 		// 첨부파일 출력
 		model.addAttribute("list", attachmentDao.selectList());
-		// 모집중인 챌린지 화면에 해당하는 모델 첨부
+		// 모집중인 페이지 화면에 해당하는 모델 첨부
 		model.addAttribute("list", chalDao.selectList(vo));
-		// 전체 챌린지 화면에 해당하는 모델 첨부
-		model.addAttribute("recruitedList", chalDao.selectListRecruited(vo));
+		// 전체 페이지 화면에 해당하는 모델 첨부
+		model.addAttribute("recruitedList", chalDao.selectListRecruited(voRecruited));
 		return "chal/list";
 	}
 	

@@ -54,7 +54,7 @@
 		${list.confirmContent}
 		<br>
 		<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-		<img src = "#" width="50" height="50" class="user-img">
+		<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
 		${list.userNick}
 		&nbsp; 
 		${list.confirmDate} 

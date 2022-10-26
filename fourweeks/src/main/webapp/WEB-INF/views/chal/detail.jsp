@@ -27,6 +27,11 @@ ul.list>li:hover {
 </style>
 <script>
 	$(function(){
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function(){
+			$(this).attr("src", "/images/bg_default.png");
+		});
+		
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
@@ -55,8 +60,8 @@ ul.list>li:hover {
 	<div class="row left">
 		<!-- list 태그 -->
 		<ul class="list">
-			<li>챌린지 이미지 :<img
-				src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
+			<li>챌린지 이미지 :
+			<img src="detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></li>
 			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
 			<li>챌린지 주제 : ${chalDto.getChalTopic()}</li>
 			<li>참가 인원: ${chalDto.getChalPerson()}명/10명</li>
@@ -72,7 +77,7 @@ ul.list>li:hover {
 				</c:otherwise>
 			</c:choose>
 			<li>챌린지 리더 :<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-		<img src = "#" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}</li>
+		<img src = "/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}</li>
 			<li>챌린지 소개 : ${chalDto.getChalContent()}</li>
 			<li>챌린지 인증방법 : ${chalDto.getHowConfirm()}</li>
 		</ul>

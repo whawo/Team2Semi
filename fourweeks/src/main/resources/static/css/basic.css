@@ -307,6 +307,7 @@ html{
 }
 #text-underlinebox1:focus,
 #text-underlinebox1:hover{
+	outline:none;
     border-bottom: 2px solid #6c7aef;
     color: #3f3f3f;
 }
@@ -324,7 +325,9 @@ html{
     font-size: 14px;
     color: #AAAAAA
 }
+.dropdown-hover:hover,
 .dropdown-hover:focus{
+	outline:none;
     border:2px solid #6c7aef;
     font-weight: bold;
     color:#6c7aef

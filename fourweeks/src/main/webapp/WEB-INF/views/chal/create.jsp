@@ -22,6 +22,12 @@
 
     <style>
         /* 
+        	10.25
+        	DB 수정해야할 것: 
+        	- form 위치 확인 
+        	- submit 버튼은 한개여야 함 
+        	- name 확인 
+        	
        		10.24
        		DB 수정해야할 것: 
        		-  2번 hover 재설정하기 ㅇ 
@@ -275,7 +281,7 @@
         
              // 날짜 출력하기 
              onSelect: function(date){
-             document.getElementById("result-1").innerHTML = date.format("YYYY.MM.DD(dd)");
+             document.getElementById("result-1").innerHTML = date.format("YYYY.MM.DD");
              }
          });
         /*  // 오늘 날짜 기본값으로 자동 선택
@@ -357,7 +363,8 @@
 		${loginId}
 
         <div class="container-1200">
-        <!-- 폼 추가 ! --><form action="create" method="post" enctype="multipart/form-data">
+        <!-- 폼 추가 ! -->
+        <form action="create" method="post" enctype="multipart/form-data">
 		<div class="row" style="margin: 30px 50px 40px 50px;">
             <div class="row">
                 <p class="p0">원하는 챌린지를 직접 개설해보세요.</p>
@@ -440,7 +447,7 @@
                     <img class="preview" src="/images/bg_default.png" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <button class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
+                        <a class="delete-file-upload img-btn" name="thumbnail-delete">삭제</a>
                     </div>
                 </div>
             </div>
@@ -452,13 +459,17 @@
                 <span  class="helper-text-500 helper-css">0</span> /500
             </div>
             <div class="row center"> <!--센터? 아니면 노센터?-->
-                <button class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</button>
-                <button class="smallbtn create-btn" type="submit" id="smallbutton1">개설하고 참가하기</button>
+                <a  class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</a>
+                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
             </div>
         </div>    
         </form>    
         	</div>
-        	
+        	<!--  
+        	sumit 버튼 한개 
+        	form 위치 
+        	name 맞늕니 확인 
+        	-->
      </body>
      
  <jsp:include page="/WEB-INF/views/template/footer.jsp">

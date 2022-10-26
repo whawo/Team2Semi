@@ -137,7 +137,6 @@ public class ChalServiceImpl implements ChalService {
 				//파일 저장
 				File target = new File(dir, String.valueOf(attachmentNo));
 				attachment.transferTo(target); //예외 전가
-				System.out.println("confirmNo = " + confirmDto.getConfirmNo() + ", attachmentNo = "+ attachmentNo + ", userId = "+confirmDto.getUserId());;;
 				//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
 				//chal_img에 insert
 				confirmDao.confirmAttachment(confirmDto.getConfirmNo(), attachmentNo, confirmDto.getUserId());	
