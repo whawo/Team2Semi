@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
-	<jsp:param value="로그인 성공" name="title"/>
+	<jsp:param value="가입 완료" name="title"/>
 </jsp:include>
 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
         }
         
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">
 
      </script>

@@ -41,7 +41,7 @@
             color: #425F57;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
 
     </script>
