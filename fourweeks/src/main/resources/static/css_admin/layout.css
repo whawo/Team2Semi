@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* 
+    홈페이지 레이아웃을 설정하는 스타일 시트
+*/
+
+main {
+    width: 1000px;
+    margin: 0 auto;
+}
+header {
+    padding: 20px 0;
+}
+body {
+	padding-top: 92px;
+}
+nav {
+
+}
+aside {
+    padding: 20px;
+    float: left;
+    width: 25%;
+    min-height: 400px;
+}
+section {
+    padding: 20px;
+    float: left;
+    width: 75%;
+    min-height: 400px;
+}
+footer {
+    padding: 20px;
+}
