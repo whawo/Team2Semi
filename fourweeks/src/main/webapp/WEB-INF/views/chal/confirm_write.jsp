@@ -286,15 +286,16 @@
             </div>
             
             <div class="row">
-                <span class="sp-1 calendar">
+              <!--   <span class="sp-1 calendar how-confirm"  >
                     <i class="c-end">
                         <span class="blind">캘린더</span>
-                    </i>
+                    </i> -->
+                    <input class=" sp-1 calendar how-confirm" disabled>
                     <!-- 자동으로 맞춰서 늘어나세요 ~  -->
-                    ✅ 인증 방법
-                    선택된 챌린지의 인증방법을 자동으로 불러오는 영역이고 인증 방법은 최대 300자까지 설정할수 있으므로 여역만큼 칸이 늘어남 
-                    <textarea class="how-confirm" rows="5" readonly></textarea>
-                </span>
+                  <!--   ✅ 인증 방법
+                    선택된 챌린지의 인증방법을 자동으로 불러오는 영역이고 인증 방법은 최대 300자까지 설정할수 있으므로 여역만큼 칸이 늘어남  -->
+                    <!-- textarea rows="5" readonly></textarea> -->
+               <!--  </span> -->
             </div>
 
             <div class="row">
