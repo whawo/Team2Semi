@@ -67,7 +67,19 @@
 	width:800px;
 	}
 </style>
-
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/6358bb84daff0e1306d4011a/1gg99p084';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+</script>
+<!--End of Tawk.to Script-->
 <body>
 <div class="container-1200 head-line">
    	 <div class="row 4weeks-inner"> 
@@ -80,7 +92,7 @@
 	   					<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
 	   					<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
-		                <li class="nav-item"><a href="#">문의하기</a></li>
+		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
 		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
 		           	 		<li class="nav-item" ><a href="/mypage">마이페이지</a></li>
@@ -91,7 +103,7 @@
 		               	<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
 		  				<li class="nav-item"><a href="/need_login">챌린지 개설</a></li>
 		                <li class="nav-item"><a href="/need_login">챌린지 인증</a></li>
-		                <li class="nav-item"><a href="#">문의하기</a></li>
+		                <li class="nav-item"><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                
 		           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
 		           	 	<li class="nav-item"><a href="/login" >로그인</a></li>

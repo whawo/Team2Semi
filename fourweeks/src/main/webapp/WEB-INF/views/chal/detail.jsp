@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="4weeks" name="title" />
+	<jsp:param value="챌린지 상세" name="title" />
 </jsp:include>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

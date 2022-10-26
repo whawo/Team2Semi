@@ -415,6 +415,7 @@
 	<div id="tab2" class="tab_content">
 	
 		<%-- 전체 페이지 시작 --%>
+
 	<c:forEach var="chalDtoRecruited" items="${recruitedList}">
 	<table>
 		<tbody>
@@ -558,3 +559,4 @@
 </div>	
 	
  <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
+

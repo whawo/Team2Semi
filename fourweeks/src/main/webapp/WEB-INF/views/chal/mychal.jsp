@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="4weeks" name="title" />
+	<jsp:param value="챌린지 상세" name="title" />
 </jsp:include>
    
-    <style>
+<style>
     ul.tabs {
     color: #AAAAAA;
     position:relative;
@@ -43,9 +43,9 @@
     .tab_content {
         border: none;
     }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script type="text/javascript">
+</style>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
     $(function () {
     $(".tab_content").hide();
     $(".tab_content:first").show();
@@ -58,16 +58,15 @@
     $("#" + activeTab).show();
     });
 });
-    </script>
-    </head>
-<body>
-        <ul class="list">
-			<li>챌린지 이미지 :<img
-				src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
-			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
-			<li>챌린지 시작일: ${chalDto.getStartDate()}~${chalVO.endDate}</li>
-			<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button>챌린지 바로가기</button></a><br>
-			</ul>
+</script>
+<div class="container-794">
+	<ul class="list">
+		<li>챌린지 이미지 :<img
+			src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
+		<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
+		<li>챌린지 시작일: ${chalDto.getStartDate()}~${chalVO.endDate}</li>
+		<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button>챌린지 바로가기</button></a><br>
+	</ul>
 			
     <ul class="tabs">
         <li class="active" rel="tab1">탭1</li>
@@ -86,62 +85,60 @@
 
         </div>
 
-          <!-- #tab2 --> 
-    <div id="tab2" class="tab_content">
-<table class="table table-border">
-		<tbody>
-			<c:forEach var="allProgressDto" items="${allProgressDto}">
-			<tr>
-				<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${allProgressDto.cnt*100/28}"/>%</td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-    </div> 
+        <!-- #tab2 --> 
+	    <div id="tab2" class="tab_content">
+			<table class="table table-border">
+				<tbody>
+					<c:forEach var="allProgressDto" items="${allProgressDto}">
+					<tr>
+						<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
+						 pattern="0" value="${allProgressDto.cnt*100/28}"/>%</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+	    </div> 
 
 
-<!-- 인증글 목록(최신 max 5개) -->
-	<div class="row left">
-		최신 인증글
-	</div>
-	<div class="row right">
-		<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
-	</div>
-	<br><br>
-	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-	[공지] 글 제목
-	<br><br>
-	[공지] 글 제목
-	<br><br>
-	[공지] 글 제목
-	<br><br>
-
-	<c:forEach var="list" items="${confirmList}">
-		<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-		<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-		<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
+		<!-- 인증글 목록(최신 max 5개) -->
+		<div class="row left">
+			최신 인증글
+		</div>
+		<div class="row right">
+			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
+		</div>
 		<br><br>
-		${list.confirmTitle}
-		<br>
-		${list.confirmContent}
-		<br>
-		<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-		<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
-		${list.userNick}
-		&nbsp; 
-		${list.confirmDate} 
-		&nbsp; 
-		<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-		&nbsp;
-		<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-		&nbsp; 
-		<i class="fa-regular fa-comment"></i> ${list.replyCount}
-		</a>
-		<br><br><br>
-	</c:forEach>
+		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
+		[공지] 글 제목
+		<br><br>
+		[공지] 글 제목
+		<br><br>
+		[공지] 글 제목
+		<br><br>
+	
+		<c:forEach var="list" items="${confirmList}">
+			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+			<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
+			<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
+			<br><br>
+			${list.confirmTitle}
+			<br>
+			${list.confirmContent}
+			<br>
+			<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
+			<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
+			${list.userNick}
+			&nbsp; 
+			${list.confirmDate} 
+			&nbsp; 
+			<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+			&nbsp;
+			<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+			&nbsp; 
+			<i class="fa-regular fa-comment"></i> ${list.replyCount}
+			</a>
+			<br><br><br>
+		</c:forEach>
+	</div>
 </div>
-
-</body>
-</html>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
