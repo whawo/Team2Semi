@@ -22,9 +22,17 @@
 
     <style>
         /* 
+        	10.26
+        	디자인 수정해야할 것: 
+        	- 6번 챌린지 대표 이미지 삭제 사진변경 안에 글자 위치 맞춰야함 -> 여러번 했었는데 안되면 그냥 border높이를 올리는 걸로 ...
+        	- input박스 안에 달력 넣어야 함.  
+        	- 챌린지 예상 종료일 + 28일 해셔 나와야함 
+        	- 챌린지 필 수 값 입력 안할시 에러 떠야함 
+        	- 챌린지 예상 종료일과 날짜가 맞아야함 
+        
         	10.25
-        	DB 수정해야할 것: 
-        	- form 위치 확인 
+        	DB 수정해야할 것: 해결 완료  
+        	- form 위치 확인  
         	- submit 버튼은 한개여야 함 
         	- name 확인 
         	
@@ -151,7 +159,7 @@
             height: 40px;
         }
         
-        /* 챌린지 예상 종료일 수정 삭제 x  */
+        /* 챌린지 예상 종료일 수정 삭제 x 굳이 없어도 될듯   */
         .blind{
             position:absolute;
             clip: rect(0 0 0 0);
@@ -175,9 +183,10 @@
         /* 캘린더  */
         .sp-1{
             display: block;
-            padding: 13px 0;
-            margin-top: 10px;
-            padding-left: 20px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
+            /* padding: 13px 0; */
+            height:60px;
+            margin-top:16px;
+        		padding-left: 105px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
             background-color: #e5e6f9;
             border: 1px solid #e5e6f9;
             border-radius: 0.5em;
@@ -185,6 +194,7 @@
             color: #6c7aef;
             font-weight: 700;
             text-decoration: none;
+			white-space: nowrap;
         }
         i{
             font-size:normal;
@@ -197,6 +207,13 @@
             background-repeat: no-repeat;
             vertical-align: top;
             margin: 2px 5px 0 0;
+        }
+        .end-date{
+        font-size:20px;
+        padding: 20px 20px;
+        }
+        #result-1{
+        	padding-left:20px;
         }
         /* 체크박스 */
         .chk-1{
@@ -222,7 +239,7 @@
 
         /* 이미지 보기  */
         .thumbnail{
-            display: none;
+             display: none; 
         }
         img{
             float: left;
@@ -230,8 +247,10 @@
 
            /* 업로드 버튼 */
         .input-file-upload{
-            padding: 6px 17px; 
+            padding: 5px 20px; 
+            padding-bottom: 12px;/* 버튼 아래로 위치 조정 */
             background-color: #e5e6f9;
+            border: 1px solid #e5e6f9;
             border-radius: 0.25em;
             color: #6c7aef;
             cursor: pointer;
@@ -249,9 +268,10 @@
 		.img-btn{ /* 삭제 버튼 */
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
-			border-radius: 0.25em;
+			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 16px; /* 삭제 버튼 크기 조절 */
+			padding: 4px 30px; /* 삭제 버튼 크기 조절  위, 옆 */ 
+			padding-bottom: 12px; /* 버튼 아래로 위치 조정 */
 			text-align: center;
 			color: #AAAAAA;
 		}
@@ -260,6 +280,9 @@
 		}
         .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 80px;
+        }
+        .error{
+        border: 1px solid red;
         }
     </style>
      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -353,8 +376,37 @@
              }
          });
      });
-
-
+// 모르겠다 required 꾸며서 할란다 
+  /*    //  회원가입 폼 제어 + 오류 메세지 
+     $(function(){
+        $(".create-btn").click(function(){
+            var chal2 = document.getElementById("chal-2");
+            var chal3 = document.getElementById("chal-3");
+            var chal4 = document.getElementById("chal-4");
+            var chal4 = document.getElementById("chal-5");
+            if(chal2){
+                // 얘는 정규식이 있는것도 아니고 성공 실패를 어캐 나놤노이ㅏㅁㄴ 
+                $(".chal-2").attr("input", "").focus();
+                return false;
+            }
+            else if(chal3){
+                $(".chal-3").attr("input", "");
+                return false;
+            }
+            else if(chal4){
+                $(".chal-4").attr("input","");
+                return false;
+            }
+            else if(chal-5){
+                $("chal-5").attr("input","");
+                return false;
+            }else{
+                return true;
+            }
+        });
+     });
+ */
+  
 
      </script>
      </head>
@@ -390,7 +442,7 @@
                 <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
                 <div class="row">
-                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
+                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1 chal-2" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" required="">
                <!-- <input name="chalTitle"  class="short-text-underlinebox underline-hover helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" style="border:none;   border-bottom: 2px solid #cfc9d5; outline: none; color: #3d3d3d;" maxlength="40"> -->
                 <span  class="helper-text-40 helper-css">0</span> /40
                 </div>
@@ -398,7 +450,7 @@
 
             <div class="row">
                 <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300"></textarea>
+                <textarea class="helper-text2 short-hover chal-3" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300" required=""></textarea>
                 <span  class="helper-text-300 helper-css">0</span> /300
             </div>
 
@@ -408,19 +460,18 @@
 
                 <div class="row">
                     <i class="fa-solid fa-calendar-days"></i>
-                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" required>
+                    <input type="text" class="single-date-picker short-text-box chal-4" id="chal-4"  name="startDate"  required="">
                 </div>
 
                 <div class="row date-calendar">
-                    <h2 class="blind"> 챌린지 예상 종료일</h2>
+                   <!--  <h2 class="blind"> 챌린지 예상 종료일</h2> -->
                     <span class="sp-1 calendar">
-                    <i class="c-end">
+                  <!--   <i class="c-end">
                         <span class="blind">캘린더</span>
-                    </i>
-                 	<p class="end-date"> 
-                 	챌린지 예상 종료일 <p id="result-1"></p>
-                 	</p> 
+                    </i> -->
+                 	<p class="end-date"> 챌린지 예상 종료일</p> 
                 </span>
+                 	<p id="result-1"></p>
                 </div>
 
             </div>
@@ -431,10 +482,10 @@
                 <p class="p2-1">[모집 방식] 선착순 자동 마감</p>
                 <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
                 <div class="row chk-line">
-                <label class="line" >
-                    <input type="checkbox" required>
+                <label class="line"  required="" >
+                    <input type="checkbox" class="chal-5" >
                     <span class="chk-1"></span>
-                    <span class="chk-2">확인했어요!</span>
+                    <span class="chk-2" required="">확인했어요!</span>
                 </label>    
             </div>
             </div>
@@ -447,7 +498,7 @@
                     <img class="preview" src="/images/bg_default.png" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <a class="delete-file-upload img-btn" name="thumbnail-delete">삭제</a>
+                        <a class="delete-file-upload img-btn"  name="thumbnail-delete">삭제</a>
                     </div>
                 </div>
             </div>
@@ -459,7 +510,7 @@
                 <span  class="helper-text-500 helper-css">0</span> /500
             </div>
             <div class="row center"> <!--센터? 아니면 노센터?-->
-                <a  class="smallbtn cancel-btn" type="submit" id="smallbutton3">취소</a>
+                <a  class="smallbtn cancel-btn"  id="smallbutton3">취소</a>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
             </div>
         </div>    
