@@ -94,6 +94,7 @@
 			<tr>
 				<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
 				 pattern="0" value="${allProgressDto.cnt*100/28}"/>%</td>
+				 <!-- 달성률 -->
 			</tr>
 			</c:forEach>
 		</tbody>

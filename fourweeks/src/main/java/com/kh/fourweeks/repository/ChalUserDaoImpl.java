@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.kh.fourweeks.entity.ChalCreateMyDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
 
@@ -101,6 +102,9 @@ public class ChalUserDaoImpl implements ChalUserDao{
 					.participantJoin(rs.getDate("participant_join"))
 					.chalTopic(rs.getString("chal_topic"))
 					.endDate(rs.getString("end_date"))
+					.dDay(rs.getString("d_day"))
+					.endDDay(rs.getString("end_d_day"))
+					.cnt(rs.getInt("cnt"))
 					.build();
 		}
 	};
@@ -115,19 +119,74 @@ public class ChalUserDaoImpl implements ChalUserDao{
 	
 	@Override
 	public List<ChalMyDetailDto> selectAllMyDetail(String userId) {
-		String sql ="select my_chal_detail.*,"
-				+ " ceil(start_date-sysdate) d_day,"
+		String sql ="select * from (select M.*, ceil(start_date-sysdate) d_day,"
 				+ " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
-				+ " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day"
-				+ " from my_chal_detail where user_id = ?";
-		Object[] param = {userId};
+				+ " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
+				+ " nvl(C.cnt, 0) cnt from my_chal_detail M left outer join (select count(*) cnt,"
+				+ " chal_no from chal_confirm where user_id = ? group by chal_no) C"
+				+ " on M.chal_no = C.chal_no where user_id = ?)"
+				+ " where end_d_day > 0";
+		Object[] param = {userId, userId};
 		return jdbcTemplate.query(sql, allDetailMapper, param);
 	}
+	
+	
+	
+	@Override
+	public List<ChalMyDetailDto> selectEndAllMyDetail(String userId) {
+		String sql ="select * from (select M.*, ceil(start_date-sysdate) d_day,"
+				+ " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
+				+ " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
+				+ " nvl(C.cnt, 0) cnt from my_chal_detail M left outer join (select count(*) cnt,"
+				+ " chal_no from chal_confirm where user_id = ? group by chal_no) C"
+				+ " on M.chal_no = C.chal_no where user_id = ?)"
+				+ " where end_d_day < 0";
+		Object[] param = {userId, userId};
+		return jdbcTemplate.query(sql, allDetailMapper, param);
+	}
+	
+	
 	
 	@Override
 	public boolean updatePw(String newPw, String userId) {
 		String sql = "update chal_user set user_pw = ? where user_id = ?";
 		Object[] param = {newPw, userId};
 		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	
+	private RowMapper<ChalCreateMyDto> createDetailMapper = new RowMapper<ChalCreateMyDto>() {
+		@Override
+		public ChalCreateMyDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalCreateMyDto.builder()
+					.chalTitle(rs.getString("chal_title"))
+					.chalContent(rs.getString("chal_content"))
+					.startDate(rs.getDate("start_date"))
+					.chalNo(rs.getInt("chal_no"))
+					.userId(rs.getString("user_id"))
+					.chalTopic(rs.getString("chal_topic"))
+					.endDate(rs.getString("end_date"))
+					.dDay(rs.getString("d_day"))
+					.endDDay(rs.getString("end_d_day"))
+					.cnt(rs.getInt("cnt"))
+					.build();
+		}
+	};
+	
+	
+	
+	
+	@Override
+	public List<ChalCreateMyDto> selectCreateAllMyDetail(String userId) {
+		String sql ="select * from (select C.*,ceil(start_date-sysdate) d_day,"
+				+ " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
+				+ " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
+				+ " nvl(T.cnt, 0) cnt from chal C left outer join"
+				+ " (select count(*) cnt, chal_no from chal_confirm where user_id = ? group by chal_no)"
+				+ " T on C.chal_no = T.chal_no where C.user_id = ?)where end_d_day >0";
+		
+		Object[] param = {userId, userId};
+		
+		return jdbcTemplate.query(sql, createDetailMapper, param);
 	}
 }

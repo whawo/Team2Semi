@@ -65,10 +65,25 @@ ul.list>li:hover {
 			<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
 			<li>챌린지 주제 : ${chalDto.getChalTopic()}</li>
 			<li>참가 인원: ${chalDto.getChalPerson()}명/10명</li>
-			<li>챌린지 시작일: ${chalDto.getStartDate()} ${chalVO.getDDay()}일뒤 시작<br>~${chalVO.endDate}
+		<c:choose>
+		<c:when test="${chalVO.endDday> 0 && chalVO.endDday < 28}">
+			${chalVO.endDday}일 뒤 종료
+		</c:when>
+		<c:when test="${chalVO.endDday == 0}">
+			오늘 종료
+		</c:when>
+		<c:when test="${chalVO.endDday < 0}">
+			종료
+		</c:when>
+		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+		<c:otherwise>
+			${chalVO.endDday}일 뒤 시작
+		</c:otherwise>
+	</c:choose>
+			<li>챌린지 시작일: ${chalDto.getStartDate()}<br>~${chalVO.endDate}
 			</li>
 			<c:choose>
-				<c:when test="${participantDto==null && chalDto.getChalPerson()<10}">
+				<c:when test="${participantDto==null && chalDto.getChalPerson()<10 && loginId==null}">
 				<button type = "submit">참가하기</button>
 				</c:when>
 				<c:otherwise>
