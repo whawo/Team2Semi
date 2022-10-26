@@ -272,7 +272,7 @@
              
              minDate:moment(), // 오늘자 선택 가능
              minDate:moment().add(4,'day'), // 오늘 + 5일
-
+			 format:"YYYY-MM-DD",
              firstDay:0, // 시작일 일요일부터 
              singleDate:true, // 날짜 한개만 선택
 
@@ -281,7 +281,7 @@
         
              // 날짜 출력하기 
              onSelect: function(date){
-             document.getElementById("result-1").innerHTML = date.format("YYYY.MM.DD");
+             document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD");
              }
          });
         /*  // 오늘 날짜 기본값으로 자동 선택

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="로그인 성공" name="title"/>
 </jsp:include>
 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
