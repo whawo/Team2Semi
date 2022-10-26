@@ -201,7 +201,12 @@
 						</a>
 					</div>
 					<div>${chalDto.chalPerson}명 / 10명</div>
-					<div>${chalDto.getDDay()}일 뒤 시작</div>
+					<c:if test="${chalDto.getDDay() == 0}">
+						<div>오늘 시작</div>
+					</c:if>
+					<c:if test="${chalDto.getDDay() > 0}">
+						<div>${chalDto.getDDay()}일 뒤 시작</div>
+					</c:if>
 					<div>~${chalDto.endDate}</div>
 					<div>
 						<c:if test="${chalDto.getDDay() > -1}">

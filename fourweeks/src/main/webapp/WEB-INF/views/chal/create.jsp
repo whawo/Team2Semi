@@ -462,4 +462,4 @@
         	name 맞늕니 확인 
         	-->
 </body>     
-<jsp:include page="/WEB-INF/views/template/footer.jsp">
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
