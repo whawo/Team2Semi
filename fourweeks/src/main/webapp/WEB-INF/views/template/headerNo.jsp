@@ -17,8 +17,9 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
+
 	div, ul, li{
-	/* 이거 지우면 위로 더 올라오니깐 삭제하지 마세요  */
+	/* 이거 지우면 안됨;;; */
 	border: 1px dotted transparent;
 	list-style:none;
 	}
@@ -32,11 +33,12 @@
 	    font-weight: bold;
 	    text-decoration-line: underline;
     }
-	.4weeks-inner{
+	4weeks-inner{
 		position: relative;
 		width:1200px;
 		padding: 0 30px;
 		margin: 0 auto;		
+
 	}
 	.4weeks-nav{
 		overflow: hidden;
@@ -60,13 +62,7 @@
 	.logo-margin {
 		margin-top : 5px;
 	}
-	
-	/*  */
-<<<<<<< HEAD
-	.head-line{
-=======
-	head-line{
->>>>>>> branch 'main' of https://github.com/whawo/Team2Semi.git
+.head-line{
 	border-bottom:1px solid #d9d9d9;
 	width:800px;
 	}
@@ -78,36 +74,8 @@
    		<div class="row 4weeks-nav">
    			<ul class="list-nav">
 	   			<li class="nav-item"><a href="/"><img src="/images/top_logo.png" width="60" class="logo-margin"></a></li>
-	   			
-   				<c:choose>
-					<c:when test="${login}">
-	   					<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
-	   					<li class="nav-item"><a href="/chal/create">챌린지 개설</a></li>
-		                <li class="nav-item"><a href="/confirm/write">챌린지 인증</a></li>
-		                <li class="nav-item"><a href="#">문의하기</a></li>
-		                
-		           	 	<li class="nav-item"><a href="#">${user_img} ${loginId}</a></li>
-<<<<<<< HEAD
-		           	 		<li class="nav-item" ><a href="/mypage?userId=${loginId}">마이페이지</a></li>
-=======
-		           	 		<li class="nav-item" ><a href="/mypage">마이페이지</a></li>
->>>>>>> branch 'main' of https://github.com/whawo/Team2Semi.git
-		           	 		<li class="nav-item"><a href="/logout">로그아웃</a></li>
-		           	 		
-					</c:when>
-					<c:otherwise>
-		               	<li class="nav-item"><a href="/chal/list">전체 챌린지</a></li>
-		  				<li class="nav-item"><a href="/need_login">챌린지 개설</a></li>
-		                <li class="nav-item"><a href="/need_login">챌린지 인증</a></li>
-		                <li class="nav-item"><a href="#">문의하기</a></li>
-		                
-		           	 	<li class="nav-item"><a href="/join">회원가입</a></li>
-		           	 	<li class="nav-item"><a href="/login" >로그인</a></li>
-					</c:otherwise>
-				</c:choose>
 	 		</ul>
    		</div>
    	</div>
  </div>
 </body>
-
