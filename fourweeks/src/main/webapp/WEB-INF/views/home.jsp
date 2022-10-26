@@ -204,7 +204,7 @@
 					<div>${chalDto.getDDay()}일 뒤 시작</div>
 					<div>~${chalDto.endDate}</div>
 					<div>
-						<c:if test="${chalDto.getDDay() > 0}">
+						<c:if test="${chalDto.getDDay() > -1}">
 							<span>모집중</span>
 						</c:if>
 						<span>${chalDto.chalTopic}</span>
