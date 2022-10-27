@@ -88,8 +88,10 @@
         <!-- #tab2 --> 
 	    <div id="tab2" class="tab_content">
 			<table class="table table-border">
-			<h2>총 참가자 정보</h2><br>
-			평균 달성률 : 
+			<h2>총 참가자 정보</h2><br> 
+			
+			<br><br><br>
+			총 ${chalDto.getChalPerson()}명 참가
 				<tbody>
 					<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<tr>
