@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-		<hr>
-		
-		<!-- 하단 푸터 -->
-		<footer class="container-1200 float-container" style="min-height:100px">
-			
-				<div class="float-left w-50"><img src="/images/bottom_logo.png" width="60"></div>
-        		<div class="float-right"><span>© 4weeks. 2022. We root for our users!</span></div>
-			
+		<!-- footer css: /css/commons1.css -->
+		<footer class="container-1200">
+			<a href="/" class="logo"><img src="/images/bottom_logo.png" width="60"></a>
+			<span class="copyright">© 4weeks. 2022. We root for our users!</span>
 		</footer>
 </html>
 

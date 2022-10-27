@@ -20,101 +20,109 @@
 
 <style>
 	div {
-	/* border: 1px dotted gray; */
-	      border: 1px solid transparent;
-	      margin : 40px 0px;
-	      vertical-align: bottom;
-      }
-     #chal_img {
-         margin-left : 0px;
-         height : 400px;
-         width: 790px; 
-         border-radius: 10px;
-     }
-     .chal-title {
-         font-size: 29px;
-         font-weight: bold;
-     }
-     span {
-         font-size: 26px;
-         vertical-align: top;
-     }
-     .img-margin {
-        margin-right: 10px;
-        height: 24px;
-     }
-     .border-line {
-         border: 3px solid #AAAAAA;
-         border-top: none;
-         border-left: none;
-         border-right: none;
-     }
-      .largebtn{
-	     border: none;
-	     font-size: 20px;
-	     padding: 0.75em;
-	     cursor: pointer;
-	     display: inline-block;
-	     text-align: center;
-	     text-decoration: none;
-	     border-radius: 0.5em;
-	     width: 100%; 
-	     height: 60px;
-      }
-       /* 챌린지 이미지 */
-       .detail-top-img {
-           position: relative;
-           width : 790px;
-           height: 400px;
-           border-radius: 10px;
-       }
-       /* 챌린지 타이머 */
-     .chal-timer{
-         position: absolute;
-         margin: -50px 0;
-         background-color: #707A89;
-         background : rgba(112, 122, 137, 0.7);
-         color: white;
-         border-bottom-left-radius: 10px;
-         border-bottom-right-radius: 10px;
-         height: 50px;
-         width: 790px;
-         /* 타이머 폰트 가운데 */
-         display: flex;
-         justify-content: center;
-         align-items: center;
-       }
-       .chal-timer-font {
-           font-size: 20px;
-       }
-     .user-img {
-         width: 50px;
-         height: 50px;
-         border-radius: 50%;
-         margin-top: 0px;
-         margin-bottom: -19px;
-     }
+		/* border: 1px dotted gray; */
+		border: 1px solid transparent;
+		margin: 40px 0px;
+		vertical-align: bottom;
+	}
+	
+	#chal_img {
+		margin-left: 0px;
+		height: 400px;
+		width: 790px;
+		border-radius: 10px;
+	}
+	
+	.chal-title {
+		font-size: 29px;
+		font-weight: bold;
+	}
+	
+	span {
+		font-size: 26px;
+		vertical-align: top;
+	}
+	
+	.img-margin {
+		margin-right: 10px;
+		height: 24px;
+	}
+	
+	.border-line {
+		border: 3px solid #AAAAAA;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+	}
+	
+	.largebtn {
+		border: none;
+		font-size: 20px;
+		padding: 0.75em;
+		cursor: pointer;
+		display: inline-block;
+		text-align: center;
+		text-decoration: none;
+		border-radius: 0.5em;
+		width: 100%;
+		height: 60px;
+	}
+	/* 챌린지 이미지 */
+	.detail-top-img {
+		position: relative;
+		width: 790px;
+		height: 400px;
+		border-radius: 10px;
+	}
+	/* 챌린지 타이머 */
+	.chal-timer {
+		position: absolute;
+		margin: -50px 0;
+		background-color: #707A89;
+		background: rgba(112, 122, 137, 0.7);
+		color: white;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		height: 50px;
+		width: 790px;
+		/* 타이머 폰트 가운데 */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.chal-timer-font {
+		font-size: 20px;
+	}
+	
+	.user-img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		margin-top: 0px;
+		margin-bottom: -19px;
+	}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-	$(function(){
+	$(function() {
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
-		$(".chal-img").on("error", function(){
+		$(".chal-img").on("error", function() {
 			$(this).attr("src", "/images/bg_default.png");
 		});
-		
+
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
-		$(".user-img").on("error", function(){
+		$(".user-img").on("error", function() {
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
-		
+
 		//인증샷이 없으면 img 태그 가리기
-		$(".confirm-img").on("error", function(){
+		$(".confirm-img").on("error", function() {
 			$(this).addClass("no-img");
 		});
 	});
-	
+
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
 	$(window).bind("pageshow", function (event) {
         if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
@@ -130,7 +138,7 @@
 
 	<%-- 이미지 --%>
 	  <div class="detail-top"> 
-          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
           <div class="chal-timer">
               <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
           </div>
