@@ -21,6 +21,8 @@ public class ChalMyDetailDto {
 	private String dDay;
 	private String endDDay;
 	private int cnt;
+	private int chalPerson;
 	
-
+	
+	
 }
