@@ -22,7 +22,7 @@
 <style>
 	div, 
 	td {
-		/*border : 1px dotted gray; */
+		/*border : 1px dotted transparent; */
 		border : 1px dotted  transparent;
 	}
 	.confirm-img.no-img {
@@ -97,7 +97,16 @@
      .icon-size {
      	border-bottom : 1px solid #E7E7E7;
      }
-
+     .user-img {
+     	width:50px;
+     	height:50px;
+     }
+     .reply-user-img {
+ 		transform: translate(15%, 35%);
+     }
+      td {
+	font-size : 14px;
+     }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -136,17 +145,18 @@
 		<h2>${confirmVO.confirmTitle}</h2>
 
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-	<div class="div-align">
-         <div class="div-align">
-            <img src = "/profile/download?userId=${confirmVO.userId}" width="50" height="50" class="user-img user-img-place">	
-         </div>
+	<div>
          <div class="div-align" >
-         	<pre><div style="padding-top:15px;">${confirmVO.userNick}</div>
-${confirmVO.confirmDate}
-         	</pre>
+            <img src = "/profile/download?userId=${confirmVO.userId}" class="user-img">
          </div>
+         <div class="div-align">
+	         <ul style="list-style:none; font-size:15px;">
+				  <li> ${confirmVO.userNick}</li>
+				  <li> ${confirmVO.confirmDate}</li>
+			</ul>
+		</div>
      </div>
-	
+     
 	<!-- 인증샷-->
        <div>
            <img src = "detail/download?confirmNo=${confirmVO.confirmNo}" class="confirm-img">
@@ -181,21 +191,19 @@ ${confirmVO.confirmDate}
 	
 	<!-- 댓글 CRUD 비동기 처리 예정 -->
 	<!-- 댓글 입력 -->
-	<div class="div-align"  width="50" height="50">
-		<i class='fa-solid fa-circle-user fa-3x' ></i>
-		<!--  <img src = "#" width="50" height="50" class="user-img">-->
-    </div>
-    
-    <form action="reply/write" method="post" class="reply-insert-form">
-    <div class="div-align">
-			<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
-			<input class="search-box"  type="text" name="replyContent" placeholder="댓글을 남겨보세요." required>
-    </div>
-    
-    <div class="div-align">
-        <button class="navbtn navbutton1" type="submit"  style="height:50px; width:70px;">댓글</button>
-   	</div>
-	
+		<div class="div-align" >
+			 <img src = "#" width="50" height="50" class="user-img  reply-user-img">
+	    </div>
+	    
+	    <div class="div-align">
+	    <form action="reply/write" method="post" class="reply-insert-form">
+				<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
+				<input class="search-box"  type="text" name="replyContent" placeholder="댓글을 남겨보세요." required>
+	    </div>
+	    
+	    <div class="div-align">
+	        <button class="navbtn navbutton1" type="submit"  style="height:50px; width:70px;">댓글</button>
+	   	</div>
 	</form>	
 
 
@@ -211,42 +219,42 @@ ${confirmVO.confirmDate}
 	-->
 	
 	<!-- 등록된 댓글 리스트 (jQuery에서 비동기로 목록 업데이트)-->
+	<h2>댓글 <span style="color:#6c7aef">${replyList.size()}</span></h2>
+					
+				
 	<table class="table-reply-list" style="width:100%">
-		<thead>
-			<tr>
-				<td>
-					댓글 ${replyList.size()}
-				</td>
-			</tr>
-		</thead>
 		<tbody>
 			<c:forEach var="replyDto" items="${replyList}">
 				<tr class="view">
 					<td>
 						<!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-						<img src = "#" width="50" height="50" class="user-img">
+						<img src = "#" width="50" height="50" class="user-img reply-user-img">
 						${replyDto.userNick}
 						<c:if test="${replyDto.userId == confirmVO.userId}">
 							&nbsp; [작성자]
 						</c:if>
-						<br>
+						<br><br>
 				
 						<!-- 블라인드 여부에 따라 댓글 내용 다르게 표시 -->
 						<!-- 수정 버튼 클릭 시 미노출(jQuery) -->
 						<c:choose>
 							<c:when test="${replyDto.replyBlind}">
-								<pre>블라인드 처리된 게시물입니다</pre>
+								<pre style="text-indent : 1em;">블라인드 처리된 게시물입니다</pre>
 							</c:when>
 							<c:otherwise>
-								<pre>${replyDto.replyContent}</pre>
+								<pre style="text-indent : 1em;">${replyDto.replyContent}</pre>
 							</c:otherwise>
 						</c:choose>
+						<br>
+						
 						<fmt:formatDate value="${replyDto.replyDate}" pattern="yyyy-MM-dd HH:mm"/>
 						
 						<!-- 수정/삭제 버튼: 댓글 작성자 본인에게만 노출 -->
-						<c:if test="${replyDto.userId == loginId}">
-							<a class="btn-reply-edit float-right">수정</a> 
-							<a href="reply/delete?replyNo=${replyDto.replyNo}&confirmNo=${replyDto.confirmNo}" class="btn-reply-delete  float-right" data-confirm-no="${replyDto.confirmNo}" data-reply-no="${replyDto.replyNo}">삭제</a>
+						<c:if test="${replyDto.userId == loginId}"> 
+							<div class="div-align" style="float:right;">
+							<a class="btn-reply-edit">수정</a>  &nbsp;
+							<a href="reply/delete?replyNo=${replyDto.replyNo}&confirmNo=${replyDto.confirmNo}" class="btn-reply-delete" data-confirm-no="${replyDto.confirmNo}" data-reply-no="${replyDto.replyNo}">삭제</a>
+							</div>
 						</c:if>
 					</td>
 				</tr>
@@ -267,6 +275,7 @@ ${confirmVO.confirmDate}
 				</c:if>
 			</c:forEach>
 		</tbody>
+		</table>
 	</div> <!-- row 끝 -->
 </div> <!-- 컨테이너 끝 -->
 

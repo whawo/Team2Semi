@@ -269,9 +269,9 @@
 			     <div class="row chal-item">
 			         <%-- 라벨 --%>
 			        <c:if test="${chalDto.getDDay() > 0}">
-						<input class="label-wait" placeholder="모집중">
+						<input class="label-wait" placeholder="모집중">&nbsp;
 					</c:if>
-		            <input class="label-category" placeholder="${chalDto.chalTopic}">
+		            <input class="label-category" placeholder="${chalDto.chalTopic}">&nbsp;
 			     </div>
 			  </div> 
 			  </a>
