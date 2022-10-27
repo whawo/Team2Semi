@@ -649,7 +649,9 @@ select{
 
 
 /* 라벨 */
-
+#label {
+	margin-right: 10px;
+}
 .label-wait{
     border: none;
     border-radius: 3px;
