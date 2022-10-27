@@ -78,6 +78,7 @@ html{
 .mt-30 { margin-top: 30px;}
 .mt-40 { margin-top: 40px;}
 .mt-50 { margin-top: 50px;}
+.mt-92 { margin-top: 92px;} /* header 높이만큼 아래에서 시작해야 내용이 안가려짐 */
 
 .mb-10 { margin-bottom: 10px;}
 .mb-20 { margin-bottom: 20px;}
@@ -667,7 +668,9 @@ select{
 
 
 /* 라벨 */
-
+#label {
+	margin-right: 10px;
+}
 .label-wait{
     border: none;
     border-radius: 3px;

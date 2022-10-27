@@ -109,6 +109,7 @@
     </div>
 	    
 	<form action="auth" method="post">
+<<<<<<< HEAD
 		 <div class="row row-side">
              <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
             </div>

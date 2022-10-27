@@ -216,7 +216,7 @@ inner join user_img C on C.attachment_no = A.attachment_no;
 
 -- 유저가 참가 중인 챌린지 상세 조회 view 생성
 create view my_chal_detail as 
-select C.chal_title, C.chal_content, C.start_date ,C.chal_topic, P.*
+select C.chal_title, C.chal_content, C.start_date ,C.chal_topic,C.chal_person ,P.*
 from chal C inner join participant P on C.chal_no=P.chal_no;
 
 -- 인증글 이미지(confirm_img)의 첨부파일 번호 조회 뷰 생성
@@ -233,3 +233,12 @@ from confirm_img C inner join attachment A on C.attachment_no = A.attachment_no;
 create view user_info_view as 
 select U.user_id, A.* 
 from user_img U inner join attachment A on U.attachment_no = A.attachment_no;
+
+-- 참가자 총 평균 달성률 조회 뷰 생성
+create view average_get as
+             select M.*, ceil(start_date-sysdate) d_day,
+             to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,
+			 trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,
+             nvl(C.cnt, 0) cnt
+             from my_chal_detail M left outer join (select count(*) cnt, chal_no
+             from chal_confirm where chal_no = 40 group by chal_no) C on M.chal_no = C.chal_no where M.chal_no = 40;
