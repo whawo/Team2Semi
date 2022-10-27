@@ -31,6 +31,9 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
+
+
+
 	$(function() {
 		$("input[name=userEmail]").on("blur", function() {
 			var userEmail = $(this).val();
@@ -48,7 +51,7 @@
     	등록된 이메일을 입력해주세요.
     </div>
 	
-	<form action="find_id" method="post">
+	<form action="find_id" method="post" class="create-form">
 		<div class="row center">
 			<input type="text" name="userEmail" class="input" placeholder="예) id@4weeks.com"> <br> <br>
 			<span class="fail-message">이메일을 입력해주세요.</span> <br> <br>
