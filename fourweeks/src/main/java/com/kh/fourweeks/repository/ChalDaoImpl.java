@@ -648,6 +648,7 @@ public class ChalDaoImpl implements ChalDao {
 					.chalNo(rs.getInt("chal_no"))
 					.userId(rs.getString("user_id"))
 					.participantJoin(rs.getDate("participant_join"))
+					.chalPerson(rs.getInt("chal_person"))
 					.build();
 		}
 	};
