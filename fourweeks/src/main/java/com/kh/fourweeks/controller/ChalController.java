@@ -166,7 +166,33 @@ public class ChalController {
 		return "chal/mychal";
 		
 	}
-
+	
+	@GetMapping("/mychal_end")
+	public String myChalEnd(//챌린지 종료 상세 
+			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			HttpSession session,
+			Model model) {
+		//모든 유저 조회
+		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
+		//챌린지 상세 조회
+		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
+				chalMyDetailDto.getChalNo()));
+		//종료일 조회
+		model.addAttribute("chalVO", chalDao.selectEndDday(chalMyDetailDto.getChalNo()));
+		//달성률 조회
+		model.addAttribute("progressDto",
+				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(),
+						(String)session.getAttribute(SessionConstant.ID)));
+		//모든 참가자 달성률 조회
+		model.addAttribute("allProgressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
+		//참가자 인증글 목록(최신 5개)
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		//전체 참가자 평균 달성률
+		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		return "chal/mychal_end";
+	}
 	
 	@GetMapping("/insert")
 	public String insert() {

@@ -214,8 +214,8 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	}
 	
 	@Override
-	public int confirmCnt(int chalNo) {
-		String sql = "select count(*) cnt "
+	public int confirmCnt(int chalNo) {// nvl 추가
+		String sql = "select nvl(count(*),0) cnt "
 				+ "from chal_confirm "
 				+ "where chal_no = ?";
 		Object[] param = {chalNo};

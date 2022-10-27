@@ -28,14 +28,13 @@
   	
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <style>
-	body {
-		padding-top: 92px;
-	}
 	.header-fixed{
 		z-index:100;
+		border-bottom: 2px solid #d9d9d9;
 	}
 	.user-img {
 	border-radius: 50%;
+	margin-right: 0.5em; /* padding(값을 한쪽에만 주면 찌그러짐) -> margin */
 	}
 	.user-img > .user-img-position {
 	
@@ -74,7 +73,7 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="/" class="logo"><img src="/images/top_logo.png" width="60"></a>
+		<a href="/"><img src="/images/top_logo.png" width="60"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>
@@ -84,10 +83,10 @@
 		                <li><a href="/confirm/write">챌린지 인증</a></li>
 		                <li><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                <li class="right-menu">
-							<img src = "/profile/download?userId=${loginId}" width="50" height="50" class="user-img"> ${loginId}
+							<img src = "/profile/download?userId=${loginId}" width="50" height="50" class="user-img"> ${loginNick}
 							<ul>
-								<li><a href="/login">로그인</a></li>
-								<li><a href="/join">회원가입</a></li>
+								<li><a href="/mypage">마이페이지</a></li>
+								<li><a href="/logout">로그아웃</a></li>
 							</ul>
 						</li>
 					</c:when>

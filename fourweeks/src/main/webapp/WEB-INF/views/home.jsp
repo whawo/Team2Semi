@@ -216,73 +216,68 @@
 
 		</div>
 		<%-- 주제별 리스트 끝 --%>
-		<div class="row flex mt-50">
-			<div class="w-90 left">
-				<h2>지금 바로 시작하는 거야!</h2>
+		<div class="row">
+			<div class="row flex mt-50">
+				<div class="w-90 left">
+					<h2>지금 바로 시작하는 거야!</h2>
+				</div>
+			
+				<div>
+					<a href="chal/list">전체보기 <i class="fa-regular fa-plus"></i></a>
+				</div>
 			</div>
-		
-			<div>
-				<a href="chal/list">전체보기 <i class="fa-regular fa-plus"></i></a>
-			</div>
-		</div>
-	
-	<div>	
-   <c:forEach var="chalDto" items="${list}">
-	 <table>
-         <tbody>
-            <tr>  <%-- 이미지 --%>
-                <td>
-					<a href="chal/detail?chalNo=${chalDto.chalNo}">
+			
+			<!-- css: /css/commons1.css -->
+			<div class="row chal-list-container">
+		   	<c:forEach var="chalDto" items="${list}">
+		   	<a href="chal/detail?chalNo=${chalDto.chalNo}">
+			<div class="row chal-list">	
+			 	<div class="row chal-item thumbnail">
+					<%-- 이미지 --%>
+					
 						<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-					</a>
-                </td>
-            </tr>
-            
-            <tr>  <%-- 제목 --%>
-                <td><a href="chal/detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a></td>
-            </tr>
-            
-            <tr>  <%-- 인원수 --%>
-                <td>
-                <img src="/images/attend_user.png" class="img-margin">
-                ${chalDto.chalPerson}명 / 10명
-                 </td>
-            </tr>
-            
-            <c:if test="${chalDto.getDDay() == 0}">
-	            <tr> <%-- 시작일 조건 --%>
-	                <td>
-	                <img src="/images/chal_start_date.png" class="img-margin">
-	                 오늘 시작
-	                </td>
-	            </tr>
-            </c:if>
-            <c:if test="${chalDto.getDDay() > 0}">
-            	<tr> <%-- 시작일 조건 --%>
-            		<td>
-            		<img src="/images/chal_start_date.png" class="img-margin">
-            		${chalDto.getDDay()}일 뒤 시작
-            		</td>
-	            </tr>
-            </c:if>
-            <tr> <%-- 종료일 --%>
-                <td>
-                <img src="/images/chal_end_date.png" class="img-margin">
-                ~${chalDto.endDate}
-                </td>     
-            </tr>
-            
-            <tr> <%-- 라벨 --%>
-                <td>
-                <c:if test="${chalDto.getDDay() > 0}">
-					<input class="label-wait" placeholder="모집중">&nbsp; 
-				</c:if>
-                	<input class="label-category" placeholder="${chalDto.chalTopic}">
-                </td>
-            </tr>
-         </tbody>
-       </table>
-      </c:forEach>
-     </div>
+					
+		         </div>
+		         <div class="row chal-item">
+					<%-- 제목 --%>
+					<span class="home-chal-title">${chalDto.chalTitle}</span>
+		         </div>     
+		         <div class="row chal-item">
+					<%-- 인원수 --%>
+					 <img src="/images/attend_user.png" class="img-margin">
+		                ${chalDto.chalPerson}명 / 10명
+		         </div>   
+			     <%-- 시작일 조건 --%>
+		         <c:if test="${chalDto.getDDay() == 0}">
+		         <div class="row chal-item">
+			        <img src="/images/chal_start_date.png" class="img-margin">
+			                 오늘 시작
+			     </div>
+		         </c:if>
+		         <%-- 시작일 조건 --%>
+		         <c:if test="${chalDto.getDDay() > 0}">
+		         <div class="row chal-item">
+			        <img src="/images/chal_start_date.png" class="img-margin">
+			                 ${chalDto.getDDay()}일 뒤 시작
+			     </div>
+			     </c:if>
+		         <div class="row chal-item">
+			         <%-- 종료일 --%>
+			        <img src="/images/chal_end_date.png" class="img-margin">
+		                ~${chalDto.endDate}
+			     </div>
+			     <div class="row chal-item">
+			         <%-- 라벨 --%>
+			        <c:if test="${chalDto.getDDay() > 0}">
+						<input class="label-wait" placeholder="모집중">
+					</c:if>
+		            <input class="label-category" placeholder="${chalDto.chalTopic}">
+			     </div>
+			  </div> 
+			  </a>
+		      </c:forEach>
+		      </div>
+		</div>
+</div>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
-<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>

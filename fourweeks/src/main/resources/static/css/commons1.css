@@ -463,7 +463,7 @@ left:0;
 right:0;
 } */
 
-/* header-test용 */
+/* header */
 header {
 	width: 100%;
     height: 92px;
@@ -497,12 +497,17 @@ header > nav {
 	padding: 0.5em;
 	display: flex;
 	justify-content: center;
-    align-items: center;
-	
+    align-items: center;	
 }
 .dropdown-nav > li {
 	position: relative;
 	width: 120px;
+	height: 100%;
+}
+.dropdown-nav > li.right-menu {
+	justify-content: flex-end;
+	padding: 0.5em 0;
+	width: 200px;
 	height: 100%;
 }
 .dropdown-nav ul {
@@ -549,6 +554,94 @@ header.header-fixed {
     top: 0;
     left: 0;
     right: 0;
+}
+
+/* headerNo 수직 중앙 정렬용 */
+.vcenter{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 92px;
+    background-color: #ffffff;
+}
+.vcenter > div{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+}
+
+
+/* footer */
+footer {
+	width: 100%;
+    height: 150px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #d9d9d9;
+}
+footer > a {
+	width: 15%;
+}
+
+.copyright {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #707070;
+    font-size:16px;
+    text-align: center;
+}
+
+/* main-chal-list */
+.chal-list-container {
+	width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+   	justify-content: flex-start;
+    align-items: center;
+	flex-wrap: wrap;
+}
+
+.chal-list {
+	display:flex;
+	flex-direction: column;
+	width:288px;
+	height: 100%;
+	text-align: left;
+}
+.chal-list {
+	margin: 0 5px 30px 5px;
+    padding: 0;
+    list-style: none;
+    color: #3f3f3f;
+    font-size:16px;
+    text-align: center;
+}
+.chal-item {
+	margin: 0;
+    padding: 0.5em;
+	display: flex;
+    align-items: center;
+    width: 288px;
+    list-style: none;
+    font-size:16px;
+    text-align: center;
+}
+
+.home-chal-title:link, .home-chal-title:visited {
+    color: #3F3F3F;
+}
+.chal-list:hover {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+.chal-item.thumbnail {	
+	padding: 0;
 }
 
 

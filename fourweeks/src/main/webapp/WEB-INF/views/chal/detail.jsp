@@ -107,23 +107,23 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-	$(function(){
+	$(function() {
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
-		$(".chal-img").on("error", function(){
+		$(".chal-img").on("error", function() {
 			$(this).attr("src", "/images/bg_default.png");
 		});
-		
+
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
-		$(".user-img").on("error", function(){
+		$(".user-img").on("error", function() {
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
-		
+
 		//인증샷이 없으면 img 태그 가리기
-		$(".confirm-img").on("error", function(){
+		$(".confirm-img").on("error", function() {
 			$(this).addClass("no-img");
 		});
 	});
-	
+
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
 	$(window).bind("pageshow", function (event) {
         if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
@@ -148,8 +148,10 @@
 <div class="container-794">
 
 	<%-- 이미지 --%>
-	  <div class="detail-top" > 
-          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
+
+	  <div class="detail-top"> 
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
+
           <div class="chal-timer">
               <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
           </div>
