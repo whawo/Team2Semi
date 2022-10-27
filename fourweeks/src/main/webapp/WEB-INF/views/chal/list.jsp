@@ -176,7 +176,7 @@
 		font-size: 16px;
 		color: #6c7aef;
 		text-align: center;
-		margin-top: 1600px;
+		/* margin-top: 1600px; */ /* 불필요 */
 	}
 	
 	ul.page>li {
@@ -217,21 +217,19 @@
 		$(".main-img").on("error", function() {
 			$(this).attr("src", "/images/bg_default.png");
 		});
-		//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
-		$(window)
-				.bind(
-						"pageshow",
-						function(event) {
-							if (event.originalEvent.persisted
-									|| (window.performance && window.performance.navigation.type == 2)) {
-								location.href = location.href;
-							}
-						});
+		
 		// 사용자가 선택한 주제를 selected 시켜라, type이 null이면 "chal_tilte"을 찍어라
 		$("#autoSelect-type").val("${param.type}" || "chal_title");
 		// 사용자가 선택한 정렬을 selected 시켜라, alignType이 null이면 "d_day asc"를 찍어라
 		$("#autoSelect-alignType").val(
 				decodeURIComponent("${param.alignType}" || "d_day asc"));
+	});
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function(event) {
+		if (event.originalEvent.persisted
+			|| (window.performance && window.performance.navigation.type == 2)) {
+				location.href = location.href;
+		}
 	});
 	//tab
 	$(function() {
@@ -292,66 +290,58 @@
     
 		<%-- tab1 --%>
 		<div id="tab1" class="tab_content">
-    
-
-			<%-- 모집중 페이지 --%>
-			<c:forEach var="chalDto" items="${list}">
-			<table>
-				<tbody>
-					<tr> <%-- 이미지 --%>
-						<td> 
-							<a href="detail?chalNo=${chalDto.chalNo}">
-								<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
-							</a>
-						</td>	
-					</tr>
-					
-					<tr> <%-- 제목 --%>
-						<td>	<a href="detail?chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a> </td>
-					</tr>
-					
-					<tr> <%-- 인원수 --%>
-						<td>
-						<img src="/images/attend_user.png" class="img-margin">
-						${chalDto.chalPerson}명 / 10명
-						</td>
-					</tr>
-					
-					<tr> <%-- 시작일 --%>
-						<td>
-							 <img src="/images/chal_start_date.png" class="img-margin">
-							<c:if test="${chalDto.getDDay() == 0}">
-								<div>오늘 시작</div>
-							</c:if>
-							<c:if test="${chalDto.getDDay() > 0}">
-								<div>${chalDto.getDDay()}일 뒤 시작</div>
-							</c:if>
-						</td>
-					</tr>
-					
-					<tr> <%-- 종료일 --%>
-						<td>
-						 <img src="/images/chal_end_date.png" class="img-margin">
-						~${chalDto.endDate}
-						</td>
-					</tr>
-					
-					<tr> <%-- 라벨 --%>
-						<td>
-							<c:if test="${chalDto.getDDay() > -1}">
-							<input class="label-wait" placeholder="모집중">
-							</c:if>
-							<input class="label-category" placeholder="${chalDto.chalTopic}">
-						</td>
-					</tr>				
-				</tbody>
-			</table>
-			</c:forEach>
-
-			<c:if test="${vo.count == 0}">
+    		<%-- 모집중 페이지 --%>
+			<div class="row chal-list-container">
+		   	<c:forEach var="chalDto" items="${list}">
+			<div class="row chal-list">	
+			 	<div class="row chal-item thumbnail">
+					<%-- 이미지 --%>
+					<a href="detail?chalNo=${chalDto.chalNo}">
+						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
+					</a>
+		         </div>
+		         <div class="row chal-item">
+					<%-- 제목 --%>
+					<a href="detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a>
+		         </div>     
+		         <div class="row chal-item">
+					<%-- 인원수 --%>
+					 <img src="/images/attend_user.png" class="img-margin">
+		                ${chalDto.chalPerson}명 / 10명
+		         </div>   
+			     <%-- 시작일 조건 --%>
+		         <c:if test="${chalDto.getDDay() == 0}">
+		         <div class="row chal-item">
+			        <img src="/images/chal_start_date.png" class="img-margin">
+			                 오늘 시작
+			     </div>
+		         </c:if>
+		         <%-- 시작일 조건 --%>
+		         <c:if test="${chalDto.getDDay() > 0}">
+		         <div class="row chal-item">
+			        <img src="/images/chal_start_date.png" class="img-margin">
+			                 ${chalDto.getDDay()}일 뒤 시작
+			     </div>
+			     </c:if>
+		         <div class="row chal-item">
+			         <%-- 종료일 --%>
+			        <img src="/images/chal_end_date.png" class="img-margin">
+		                ~${chalDto.endDate}
+			     </div>
+			     <div class="row chal-item">
+			         <%-- 라벨 --%>
+			        <c:if test="${chalDto.getDDay() > -1}">
+						<input class="label-wait" placeholder="모집중">
+					</c:if>
+		            <input class="label-category" placeholder="${chalDto.chalTopic}">
+			     </div>
+			  </div> 
+		      </c:forEach>
+		      <c:if test="${vo.count == 0}">
 					<span class="text-center">검색 결과가 없습니다.</span>
-			</c:if>
-		</div>
+			  </c:if>
+			</div>
+	
 		<%-- 페이지 네비게이터 시작 --%>
 		<div class="row">
 		
@@ -428,31 +418,27 @@
 	<div id="tab2" class="tab_content">
 	
 		<%-- 전체 페이지 시작 --%>
-		<c:forEach var="chalDtoRecruited" items="${recruitedList}">
-		<table>
-			<tbody>
-				<tr>  <%-- 이미지 --%>
-					<td>
-						<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
+		<div class="row chal-list-container">
+			<c:forEach var="chalDtoRecruited" items="${recruitedList}">
+			<div class="row chal-list">	
+				<div class="row chal-item thumbnail">
+					<%-- 이미지 --%>
+					<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
 						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
-						</a>
-					</td>
-				</tr>
-				
-				<tr> <%-- 제목 --%>
-					<td> <a href="detail?chalNo=${chalDtoRecruited.chalNo}"> ${chalDtoRecruited.chalTitle}</a></td>
-				</tr>
-				
-				<tr>  <%-- 이미지 --%>
-					<td>
-					<img src="/images/attend_user.png" class="img-margin">
+					</a>
+		         </div>
+		         <div class="row chal-item">
+					<%-- 제목 --%>
+					<a href="detail?chalNo=${chalDtoRecruited.chalNo}"> ${chalDtoRecruited.chalTitle}</a>
+		         </div>     
+		         <div class="row chal-item">
+					<%-- 인원수 --%>
+					 <img src="/images/attend_user.png" class="img-margin">
 					${chalDtoRecruited.chalPerson}명 / 10명
-					</td>
-				</tr>
-				
-				<tr>  <%-- 시작일 --%>
-					<td>
-					<img src="/images/chal_start_date.png" class="img-margin">
+		         </div>   
+			     <%-- 시작일 조건 --%>
+		         <div class="row chal-item">
+			        <img src="/images/chal_start_date.png" class="img-margin">
 					<c:choose>
 							<c:when test="${chalDtoRecruited.getDDay() == 0}">
 								<div>오늘 시작</div>
@@ -464,19 +450,15 @@
 								<div>${chalDtoRecruited.startDate}</div>
 							</c:otherwise>
 						</c:choose>
-					</td>
-				</tr>
-				
-				<tr> <%-- 종료일 --%>
-					<td>
-					 <img src="/images/chal_end_date.png" class="img-margin">
+			     </div>
+		         <div class="row chal-item">
+			         <%-- 종료일 --%>
+			        <img src="/images/chal_end_date.png" class="img-margin">
 					~${chalDtoRecruited.endDate}
-					</td>
-				</tr>
-				
-				<tr> <%-- 라벨 --%>
-						<td>
-							<c:choose>
+			     </div>
+			     <div class="row chal-item">
+			        <%-- 라벨 --%>
+			        <c:choose>
 								<c:when test="${chalDtoRecruited.getDDay() < -28}">
 									<input class="label-status" placeholder="종료">
 								</c:when>
@@ -488,88 +470,84 @@
 								</c:otherwise>
 							</c:choose>
 							<input class="label-category" placeholder="${chalDtoRecruited.chalTopic}">
-						</td>
-					</tr>			
-				</tbody>	
-			</table>
-		</c:forEach>
-
-		
-		<c:if test="${vo.count == 0}">
+			     </div>
+			  </div> 
+		      </c:forEach>
+		      <c:if test="${vo.count == 0}">
 				<span class="text-center">검색 결과가 없습니다.</span>
-		</c:if>
-	
+				</c:if>
+			</div>
 			
-		<%-- 페이지 네비게이터 시작 --%>
-		<div class="row">
-			<ul class="page">
-			
-			<c:if test="${voRecruited.count > 0}">
-			<%-- 맨처음--%>
-				<li>
-				<c:choose>
-					<c:when test="${not voRecruited.isFirst()}">
-						<a href="list?p=${voRecruited.firstBlock()}&${voRecruited.parameter()}">&laquo;</a>
-					</c:when>
-					<c:otherwise>
-						<a href="#">&laquo;</a>
-					</c:otherwise>
-				</c:choose>
-				</li>
+			<%-- 페이지 네비게이터 시작 --%>
+			<div class="row">
+				<ul class="page">
 				
-				<%-- 이전--%>
-			<li>
-				<c:choose>
-					<c:when test="${voRecruited.hasPrev()}">
-						<a href="list?p=${voRecruited.prevBlock()}&${voRecruited.parameter()}">&lt;</a>
-					</c:when>
-					<c:otherwise>
-						<a href="#">&lt;</a>
-					</c:otherwise>
-				</c:choose>
-			</li>
-				
-				<%-- 페이지 번호--%>
-			<li>
-				<c:forEach var="i" begin="${voRecruited.startBlock()}" end="${voRecruited.endBlock()}" step="1">
+				<c:if test="${voRecruited.count > 0}">
+				<%-- 맨처음--%>
+					<li>
 					<c:choose>
-						<c:when test="${voRecruited.p == i}">
-							<a href="#">${i}</a>
+						<c:when test="${not voRecruited.isFirst()}">
+							<a href="list?p=${voRecruited.firstBlock()}&${voRecruited.parameter()}">&laquo;</a>
 						</c:when>
 						<c:otherwise>
-							<a href="list?p=${i}&${voRecruited.parameter()}">${i}</a>
+							<a href="#">&laquo;</a>
 						</c:otherwise>
 					</c:choose>
-				</c:forEach>
+					</li>
+					
+					<%-- 이전--%>
+				<li>
+					<c:choose>
+						<c:when test="${voRecruited.hasPrev()}">
+							<a href="list?p=${voRecruited.prevBlock()}&${voRecruited.parameter()}">&lt;</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#">&lt;</a>
+						</c:otherwise>
+					</c:choose>
 				</li>
-				
-				<%-- 다음--%>
-			<li>
-				<c:choose>
-					<c:when test="${voRecruited.hasNext()}">
-						<a href="list?p=${voRecruited.nextBlock()}&${voRecruited.parameter()}">&gt;</a>
-					</c:when>
-					<c:otherwise>
-						<a href="#">&gt;</a>
-					</c:otherwise>
-				</c:choose>
-			</li>
-				
-			<%-- 맨뒤 --%>
-			<li>
-				<c:choose>
-					<c:when test="${not voRecruited.isLast()}">
-						<a href="list?p=${voRecruited.lastBlock()}&${voRecruited.parameter()}">&raquo;</a>
-					</c:when>
-					<c:otherwise>
-						<a href="#">&raquo;</a>
-					</c:otherwise>
-				</c:choose>
+					
+					<%-- 페이지 번호--%>
+				<li>
+					<c:forEach var="i" begin="${voRecruited.startBlock()}" end="${voRecruited.endBlock()}" step="1">
+						<c:choose>
+							<c:when test="${voRecruited.p == i}">
+								<a href="#">${i}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="list?p=${i}&${voRecruited.parameter()}">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					</li>
+					
+					<%-- 다음--%>
+				<li>
+					<c:choose>
+						<c:when test="${voRecruited.hasNext()}">
+							<a href="list?p=${voRecruited.nextBlock()}&${voRecruited.parameter()}">&gt;</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#">&gt;</a>
+						</c:otherwise>
+					</c:choose>
 				</li>
-			</c:if>
-			</ul>
-		 </div>
+					
+				<%-- 맨뒤 --%>
+				<li>
+					<c:choose>
+						<c:when test="${not voRecruited.isLast()}">
+							<a href="list?p=${voRecruited.lastBlock()}&${voRecruited.parameter()}">&raquo;</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#">&raquo;</a>
+						</c:otherwise>
+					</c:choose>
+					</li>
+				</c:if>
+				</ul>
+			</div>
+		</div>	
 	</div>	
 </div>
  <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
-
