@@ -111,8 +111,6 @@ public class ChalUserController {
 		
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
-		
-		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chalUser/mypage";
 	}
 	

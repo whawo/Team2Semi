@@ -94,17 +94,23 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	}
 	
 	@Override
-	public List<ChalConfirmVO> myConfirmList(int chalNo, String userId) {
-		String sql = "select distinct "
-						+ "C.*, "
-						+ "U.user_nick, "
-						+ "count(R.reply_no) over(partition by C.confirm_no) reply_count "
-					+ "from chal_confirm C "
-						+ "left outer join chal_user U on C.user_id = U.user_id "
-						+ "left outer join reply R on C.confirm_no = R.confirm_no "
-					+ "where C.chal_no = ?  and U.user_id = ?"
-					+ "order by C.confirm_no desc";
-		Object[] param = {chalNo, userId};
+	public List<ChalConfirmVO> myConfirmList(ChalConfirmVO vo) {
+		String sql = "select * from("
+						+ "select TMP.*, rownum rn from("
+							+ "select distinct "
+								+ "C.*, "
+								+ "U.user_nick, "
+								+ "count(R.reply_no) over(partition by C.confirm_no) reply_count "
+							+ "from chal_confirm C "
+								+ "left outer join chal_user U on C.user_id = U.user_id "
+								+ "left outer join reply R on C.confirm_no = R.confirm_no "
+								+ "where C.chal_no = ? and U.user_id = ? "
+								+ "order by C.confirm_no desc"
+						+ ")TMP"
+					+ ")where rn between ? and ?";
+		Object[] param = {
+				vo.getChalNo(), vo.getUserId(),
+				vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listVOMapper, param);
 	}
 	
