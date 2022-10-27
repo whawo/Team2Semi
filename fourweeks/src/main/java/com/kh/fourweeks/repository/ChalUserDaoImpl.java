@@ -26,12 +26,13 @@ public class ChalUserDaoImpl implements ChalUserDao{
 				+ "chal_user"
 					+ "(user_id, user_nick, user_pw, user_email, create_date) "
 				+ "values "
-					+ "(?, ?, ?, ?, sysdate)";
+					+ "(?, ?, ?, ?, ?)";
 		Object[] param = {
 				chalUserDto.getUserId(),
 				chalUserDto.getUserNick(),
 				chalUserDto.getUserPw(),
-				chalUserDto.getUserEmail()};
+				chalUserDto.getUserEmail(),
+				chalUserDto.getCreateDate()};
 		jdbcTemplate.update(sql, param);
 	}
 	

@@ -204,17 +204,17 @@
 	<%-- jQuery 시작 --%>
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 	<script>
+		//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+		$(window).bind("pageshow", function (event) {
+	        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+	          	location.href = location.href;
+	        }
+	    });
 		$(function(){
 			//챌린지 썸네일이 없으면 기본 이미지로 대체
-			$(".list-img").on("error", function(){
+			$(".main-img").on("error", function(){
 				$(this).attr("src", "/images/bg_default.png");
 			});
-			//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
-			$(window).bind("pageshow", function (event) {
-		        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-		          	location.href = location.href;
-		        }
-		    });
 			// 사용자가 선택한 주제를 selected 시켜라, type이 null이면 "chal_tilte"을 찍어라
 			$("#autoSelect-type").val("${param.type}" || "chal_title");
 			// 사용자가 선택한 정렬을 selected 시켜라, alignType이 null이면 "d_day asc"를 찍어라
@@ -234,13 +234,13 @@
 	        });
 	    });
 	</script>
-	<div class="container-1200">
 	
+	<div class="container-1200">
 		<%-- 검색 시작 --%>
 		<form action="list">
 		 <div class="search-bar">
-			<select name="type"  class="select select-check" >
-				<option selected="selected" value="chal_title" >전체</option>
+			<select name="type"  class="select select-check" id="autoSelect-type">
+				<option value="chal_title" >전체</option>
 				<option value="운동">운동</option>
 				<option value="식습관">식습관</option>
 				<option value="생활">생활</option>
@@ -422,7 +422,8 @@
 			<tr>  <%-- 이미지 --%>
 				<td>
 					<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
-					<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
+					<img class="main-img" src="detail/download?chalNo=${chalDtoRecruited.getChalNo()}">
+					</a>
 				</td>
 			</tr>
 			
