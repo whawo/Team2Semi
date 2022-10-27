@@ -22,7 +22,7 @@
         }
         a{
         line-height:32px;
-        }
+        } 
         .p-1{
             font-size: 24px;
             font-weight: bold;
@@ -54,7 +54,7 @@
  <body>
  <div class="container-1200">
         <div class="container-590">
-            <div class="row center">
+            <div class="row center mt-92">
                 <p class="p-1">로그인이 필요한 서비스입니다.</p>
                 <p class="p-2">로그인하고 4weeks의 다양한 서비스를 즐겨보세요.</p>
             </div>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="row center">
-                <a class="largebtn btn1"  id="largebutton1" href="/login">로그인</a></button>
+                <a class="largebtn btn1"  id="largebutton1" href="/login">로그인</a>
                 <a class="largebtn btn1" id="largebutton3" href="/join">회원가입</a>
             </div>
         </div>
