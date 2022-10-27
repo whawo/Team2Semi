@@ -28,9 +28,6 @@
   	
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <style>
-	body {
-		padding-top: 92px;
-	}
 	.header-fixed{
 		z-index:100;
 		border-bottom: 2px solid #d9d9d9;
@@ -76,7 +73,7 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="/" class="logo"><img src="/images/top_logo.png" width="60"></a>
+		<a href="/"><img src="/images/top_logo.png" width="60"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>

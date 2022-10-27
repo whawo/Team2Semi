@@ -28,31 +28,20 @@
   	
 <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <style>
-	body {
-		padding-top: 92px;
-	}
-	.header-fixed{
+	.vcenter{
 		z-index:100;
 		border-bottom: 2px solid #d9d9d9;
+	}
+	.logo {
+		padding: 20px 0;
 	}
 </style>
 </head>
 <body>
-<body>
 	<header class="container-1200 header-fixed">
+		<div class="vcenter">
+		<div>
 		<a href="/" class="logo"><img src="/images/top_logo.png" width="60"></a>
-		<!-- 스타일 유지를 위해서 틀 남겨야 함 -->
-		<nav>
-			<ul class="dropdown-nav">
-				
-						<li></li>
-		  				<li></li>
-		                <li></li>
-		                <li></li>
-		                
-		           	 	<li></li>
-		           	 	<li></li>
-
-			</ul>
-		</nav>
+		</div>
+		</div>
 	</header>
