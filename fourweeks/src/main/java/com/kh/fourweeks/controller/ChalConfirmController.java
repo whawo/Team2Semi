@@ -144,7 +144,7 @@ public class ChalConfirmController {
 		model.addAttribute("confirmVO", confirmVO);
 		return "chal/confirm_edit";
 	}
-	
+
 	@PostMapping("/edit")
 	public String confirmEdit(@ModelAttribute ChalConfirmDto confirmDto,
 			@RequestParam MultipartFile attachment,
@@ -157,17 +157,24 @@ public class ChalConfirmController {
 	}
 	
 	@GetMapping("/mylist") //챌린지별 내 인증글 목록 조회
-	public String myConfirmList(@RequestParam int chalNo,
+	public String myConfirmList(@ModelAttribute (name="vo") ChalConfirmVO vo,
 			Model model,
 			HttpSession session) {
 		//챌린지 정보 조회
-		model.addAttribute("chalDto", chalDao.selectOne(chalNo));
-		model.addAttribute("chalVO", chalDao.selectEndDday(chalNo));
+		model.addAttribute("chalDto", chalDao.selectOne(vo.getChalNo()));
+		model.addAttribute("chalVO", chalDao.selectEndDday(vo.getChalNo()));
 		
 		//내 인증글 목록 조회
 		String userId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("confirmList", confirmDao.myConfirmList(chalNo, userId));
-		model.addAttribute("listCnt", confirmDao.myConfirmCnt(chalNo, userId));
+		vo.setUserId(userId);
+		//model.addAttribute("confirmList", confirmDao.myConfirmList(vo));
+		
+		//인증글 개수 조회(페이지 내비게이터, 개수 출력용)
+		int count = confirmDao.myConfirmCnt(vo.getChalNo(), userId);
+		//count도 vo에 첨부 -> model로 자동으로 넘길 수 있도록
+		vo.setCount(count);
+		model.addAttribute("confirmList", confirmDao.myConfirmList(vo));
+		model.addAttribute("listCnt", count);
 		return "chal/confirm_mylist";
 	}
 	
@@ -196,6 +203,7 @@ public class ChalConfirmController {
 	
 	@GetMapping("/all") //챌린지별 참가자 인증글 목록 조회
 	public String confirmAll(@RequestParam int chalNo,
+			@RequestParam(required = false, defaultValue = "1") int p,
 			Model model) {
 		model.addAttribute("confirmList", confirmDao.allConfirmList(chalNo));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalNo));

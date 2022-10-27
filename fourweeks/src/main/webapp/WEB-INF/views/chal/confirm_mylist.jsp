@@ -318,8 +318,6 @@ ${vo}
 	<!-- 페이지 내비게이터 -->
 	<div class="row center">
 	<ul class="page">
-	
-
 	<!-- 맨처음 -->
 		<li>
 			<c:choose>
@@ -381,7 +379,6 @@ ${vo}
 				</c:otherwise>
 			</c:choose>
 		</li>
-
 	</ul>
   </div>  
 	

@@ -138,8 +138,6 @@ public class ChalController {
 		//참가여부 
 		model.addAttribute("participantDto", chalDao.selectParticipantOne(chalDto.getChalNo(),
 				(String)session.getAttribute(SessionConstant.ID)));
-		
-		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chal/detail";
 	}
 	
