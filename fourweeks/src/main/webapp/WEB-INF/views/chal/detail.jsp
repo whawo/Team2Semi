@@ -61,9 +61,14 @@
 	     width: 100%; 
 	     height: 60px;
       }
+      #largebutton1{
+        background-color: #6c7aef;  
+        color: white;
+        }
        /* 챌린지 이미지 */
        .detail-top-img {
            position: relative;
+           margin-top : 50px;
            width : 790px;
            height: 400px;
            border-radius: 10px;
@@ -94,6 +99,10 @@
          margin-top: 0px;
          margin-bottom: -19px;
      }
+     #largebutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+	}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -121,6 +130,16 @@
           	location.href = location.href;
         }
     });
+	//참가하기 여부 
+       $(".confirm-form").click(function(e){
+           var choice = confirm("정말 참가하시겠습니까?");
+           if(choice) {
+               return true; //통과
+           }
+           else {
+               return false; //차단
+           }
+       });
 </script>
 
 <form action ="insert" method="post" >
@@ -129,7 +148,7 @@
 <div class="container-794">
 
 	<%-- 이미지 --%>
-	  <div class="detail-top"> 
+	  <div class="detail-top" > 
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
           <div class="chal-timer">
               <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
@@ -176,15 +195,15 @@
 	
 	 <%-- 버튼 --%>
 	<div>
-		<c:choose>
-				<c:when test="${participantDto==null && chalDto.getChalPerson()<10}">
-					<button class="largebtn" type="submit" id="largebutton1">참가하기</button>
-				</c:when>
-				<c:otherwise>
-				<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
-					<button class="largebtn" type="submit" id="largebutton1" disabled>참가하기</button>
-				</c:otherwise>
-		</c:choose>
+			<c:choose>
+					<c:when test="${participantDto==null && chalDto.getChalPerson()<10}">
+						<button class="largebtn" type="submit" id="largebutton1">참가하기</button>
+					</c:when>
+					<c:otherwise>
+					<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
+						<button class="largebtn" type="submit" id="largebutton1-1" disabled>참가하기</button>
+					</c:otherwise>
+			</c:choose>
 	</div>
 	
 	 <div>

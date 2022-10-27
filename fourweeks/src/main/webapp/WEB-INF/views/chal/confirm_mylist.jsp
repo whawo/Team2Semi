@@ -24,13 +24,13 @@
 		display: none;
 	}
 	.confirm-img {
-        border-radius: 10px !important;
+        border-radius: 10px;
 		width: 90px;
         height: 90px;
 
 	}
 	div {
-	border : 1px solid transparent; 
+	border : 1px solid  transparent; 
 	 /* border : 1px solid gray;*/
 	}
 	/*헤더에 밀려 글자가 우측으로 정렬되므로 margin 부여 */
@@ -186,6 +186,18 @@
     .label-align {
         display: inline-block;
     }
+	.confirm-empty {
+		height : 100px;
+		display: flex;
+		align-items:center; 
+		justify-content: center;
+	}
+	h3 {
+		margin : 40px 0;
+	}
+	.user-img {
+	border-radius: 50%;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -209,8 +221,8 @@
     });
 </script>
 
-<div class="container-794">
-${vo}
+<div class="container-794 container-margin">
+
 	<h2>내 인증글</h2>
 
 	<h3>챌린지 정보</h3>
@@ -312,7 +324,16 @@ ${vo}
               	</div>					
 		 	</div> <!-- 인증글, 사진 목록 끝 -->			
 		</c:forEach>
+
+	<div  class="confirm-empty">
+		 <c:if test="${listCnt == 0}">
+	      		<span>작성한 인증글이 없습니다</span>
+	      </c:if>
+	 </div>
+
       </div> <!-- 인증글 목록 끝 -->    
+      
+      
      </a>
 
 	<!-- 페이지 내비게이터 -->
