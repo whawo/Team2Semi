@@ -85,9 +85,9 @@
     <a href ="/confirm/write"><button>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
 </ul>
     <ul class="tabs">
-        <li class="active" rel="tab1">참가중</li>
-        <li rel="tab2">완료</li>
-        <li rel="tab3">개설</li>
+        <li class="active" rel="tab1">${chalDto.size()}<br>참가중</li>
+        <li rel="tab2">${chalEndDto.size()}<br>완료</li>
+        <li rel="tab3">${createDto.size()}<br>개설</li><!-- 각 갯수 구현 tab위에 뜨게하는건 방법을 모르겠승 -->
     </ul>
      <div class="tab_container">
         <!-- #tab1 -->
@@ -106,6 +106,12 @@
 		</c:when>
 		<c:when test="${chalDto.getEndDDay() < 0}">
 			종료
+		</c:when>
+		<c:when test="${chalDto.getDDay() == 1}">
+			내일부터 시작
+		</c:when>
+				<c:when test="${chalDto.getDDay() == 0">
+			오늘 시작
 		</c:when>
 		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
 		<c:otherwise>
@@ -137,12 +143,12 @@
     <div id="tab2" class="tab_content">
 <c:forEach var="chalEndDto" items="${chalEndDto}">
 <div>
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}"><img src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
+		<a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"><img src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
     </a>
                            챌린지 종료
 	
 	<div>
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}"> ${chalEndDto.chalTitle}</a>
+		<a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"> ${chalEndDto.chalTitle}</a>
 	</div><br>
 	<div>${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div><br>
 	<div>${chalEndDto.getChalTopic()}</div>
