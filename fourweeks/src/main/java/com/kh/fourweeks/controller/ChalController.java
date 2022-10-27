@@ -188,11 +188,11 @@ public class ChalController {
 		//참가자 인증글 목록(최신 5개)
 		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
-		
+		//전체 참가자 평균 달성률
+		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chal/mychal_end";
-		
 	}
-
 	
 	@GetMapping("/insert")
 	public String insert() {
