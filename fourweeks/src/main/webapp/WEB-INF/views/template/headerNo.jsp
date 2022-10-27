@@ -33,6 +33,7 @@
 	}
 	.header-fixed{
 		z-index:100;
+		border-bottom: 2px solid #d9d9d9;
 	}
 </style>
 </head>

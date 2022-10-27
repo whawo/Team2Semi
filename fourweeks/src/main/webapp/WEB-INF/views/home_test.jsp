@@ -227,7 +227,6 @@
 				</div>
 			</div>
 			
-			<!-- css: /css/commons1.css -->
 			<div class="row chal-list-container">
 		   	<c:forEach var="chalDto" items="${list}">
 			<div class="row chal-list">	
