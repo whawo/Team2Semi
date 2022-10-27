@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- 템플릿 페이지인 header.jsp를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="4weeks" name="title"/>
 </jsp:include>
@@ -226,61 +225,64 @@
 				<a href="chal/list">전체보기 <i class="fa-regular fa-plus"></i></a>
 			</div>
 		</div>
-		<!-- <div class="row mt-50">
-			<h2>지금 바로 시작하는 거야!<a href="chal/list" class="float-right" style="margin:0">전체보기</a></h2>
-		</div>
-	 -->
-		<div class="row">	
-			<c:forEach var="chalDto" items="${list}">
-			 <table>
-		         <tbody>
-		            <tr>  <%-- 이미지 --%>
-		                <td>
-								<a href="chal/detail?chalNo=${chalDto.chalNo}">
-									<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-								</a>
-		                </td>
-		            </tr>
-		            
-		            <tr>  <%-- 제목 --%>
-		                <td><a href="chal/detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a></td>
-		            </tr>
-		            
-		            <tr>  <%-- 인원수 --%>
-		                <td>
-		                <img src="/images/attend_user.png" class="img-margin">
-		                ${chalDto.chalPerson}명 / 10명
-		                 </td>
-		            </tr>
-		            
-		            <tr> <%-- 시작일 --%>
-		                <td>
-		                <img src="/images/chal_start_date.png" class="img-margin">
-		                 ${chalDto.getDDay()}일뒤 시작
-		                </td>
-		            </tr>
-		            
-		            <tr> <%-- 종료일 --%>
-		                <td>
-		                <img src="/images/chal_end_date.png" class="img-margin">
-		                ~${chalDto.endDate}
-		                </td>     
-		            </tr>
-		            
-		            <tr> <%-- 라벨 --%>
-		                <td>
-		                <c:if test="${chalDto.getDDay() > 0}">
-							<input class="label-wait" id="label" placeholder="모집중">
-						</c:if>
-		                	<input class="label-category" id="label" placeholder="${chalDto.chalTopic}">
-		                </td>
-		            </tr>
-		         </tbody>
-		       </table>
-		      </c:forEach>
-		</div>
-    </div>
-		<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>
+	
+	<div>	
+   <c:forEach var="chalDto" items="${list}">
+	 <table>
+         <tbody>
+            <tr>  <%-- 이미지 --%>
+                <td>
+					<a href="chal/detail?chalNo=${chalDto.chalNo}">
+						<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
+					</a>
+                </td>
+            </tr>
+            
+            <tr>  <%-- 제목 --%>
+                <td><a href="chal/detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a></td>
+            </tr>
+            
+            <tr>  <%-- 인원수 --%>
+                <td>
+                <img src="/images/attend_user.png" class="img-margin">
+                ${chalDto.chalPerson}명 / 10명
+                 </td>
+            </tr>
+            
+            <c:if test="${chalDto.getDDay() == 0}">
+	            <tr> <%-- 시작일 조건 --%>
+	                <td>
+	                <img src="/images/chal_start_date.png" class="img-margin">
+	                 오늘 시작
+	                </td>
+	            </tr>
+            </c:if>
+            <c:if test="${chalDto.getDDay() > 0}">
+            	<tr> <%-- 시작일 조건 --%>
+            		<td>
+            		<img src="/images/chal_start_date.png" class="img-margin">
+            		${chalDto.getDDay()}일 뒤 시작
+            		</td>
+	            </tr>
+            </c:if>
+            <tr> <%-- 종료일 --%>
+                <td>
+                <img src="/images/chal_end_date.png" class="img-margin">
+                ~${chalDto.endDate}
+                </td>     
+            </tr>
+            
+            <tr> <%-- 라벨 --%>
+                <td>
+                <c:if test="${chalDto.getDDay() > 0}">
+					<input class="label-wait" placeholder="모집중">
+				</c:if>
+                	<input class="label-category" placeholder="${chalDto.chalTopic}">
+                </td>
+            </tr>
+         </tbody>
+       </table>
+      </c:forEach>
+     </div>
 
-
-
+<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>

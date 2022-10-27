@@ -34,9 +34,15 @@
 	.header-fixed{
 		z-index:100;
 	}
+	.user-img {
+	border-radius: 50%;
+	}
+	.user-img > .user-img-position {
+	
+	}
 </style>
-<!--Start of Tawk.to Script-->
 <script type="text/javascript">
+	// 채팅 API 소스 코드
 	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 	(function(){
 	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -47,11 +53,11 @@
 	s0.parentNode.insertBefore(s1,s0);
 	})();
 </script>
-<!--End of Tawk.to Script-->
+
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
+//프로필 이미지가 없으면 기본 아이콘으로 대체
 	$(function(){
-		//프로필 이미지가 없으면 기본 아이콘으로 대체
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
@@ -63,9 +69,9 @@
           	location.href = location.href;
         }
     });
-
 </script>
 </head>
+
 <body>
 	<header class="container-1200 header-fixed">
 		<a href="/" class="logo"><img src="/images/top_logo.png" width="60"></a>
