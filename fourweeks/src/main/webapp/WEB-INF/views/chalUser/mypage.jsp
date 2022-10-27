@@ -110,7 +110,7 @@
 		<c:when test="${chalDto.getDDay() == 1}">
 			내일부터 시작
 		</c:when>
-				<c:when test="${chalDto.getDDay() == 0">
+				<c:when test="${chalDto.getDDay() == 0}">
 			오늘 시작
 		</c:when>
 		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
