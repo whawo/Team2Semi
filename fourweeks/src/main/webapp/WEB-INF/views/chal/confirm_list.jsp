@@ -68,6 +68,57 @@
 		<br><br><br>
 	</c:forEach>
 	
-	<!-- 페이징 -->
+	<!-- 페이지 내비게이터 -->
+	<div class="row center mt-40 mb-40">
+		<!-- 이전 -->
+		<c:choose>
+			<c:when test="${not vo.isFirst()}">
+				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.firstBlock()}"><i class="fa-solid fa-angles-left"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angles-left"></i></a>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${vo.hasPrev()}">
+				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.prevBlock()}"><i class="fa-solid fa-angle-left"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angle-left"></i></a>
+			</c:otherwise>
+		</c:choose>
+		
+		<!-- 숫자 -->
+		<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
+			<c:choose>
+				<c:when test="${vo.p == i}">
+					<a href="#">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="all?chalNo=${vo.getChalNo()}&p=${i}">${i}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+		<c:choose>
+			<c:when test="${vo.hasNext()}">
+				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.nextBlock()}"><i class="fa-solid fa-angle-right"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angle-right"></i></a>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${not vo.isLast()}">
+				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.lastBlock()}"><i class="fa-solid fa-angles-right"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angles-right"></i></a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
