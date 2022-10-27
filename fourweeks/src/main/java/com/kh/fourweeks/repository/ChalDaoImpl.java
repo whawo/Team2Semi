@@ -629,6 +629,7 @@ public class ChalDaoImpl implements ChalDao {
 						.userId(rs.getString("user_id"))
 						.participantJoin(rs.getDate("participant_join"))
 						.chalTopic(rs.getString("chal_topic"))
+						.chalPerson(rs.getInt("chal_person"))
 						.build();
 			}else {
 				return null;
@@ -714,6 +715,5 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo, chalNo};
 		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}
-	
 	
 }

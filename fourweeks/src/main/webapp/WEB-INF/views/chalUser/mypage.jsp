@@ -82,17 +82,34 @@
 		<li>${myDto.getUserNick()}</li>
 	<li>${myDto.userEmail}</li>
 	<li><a href="mypage/edit/auth">계정 관리</a></li><br><br><br><br><br><br><br><br><br>
-    <a href ="/confirm/write"><button>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
 </ul>
     <ul class="tabs">
         <li class="active" rel="tab1">${chalDto.size()}<br>참가중</li>
         <li rel="tab2">${chalEndDto.size()}<br>완료</li>
         <li rel="tab3">${createDto.size()}<br>개설</li><!-- 각 갯수 구현 tab위에 뜨게하는건 방법을 모르겠승 -->
     </ul>
+    
      <div class="tab_container">
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
         <!-- #tab1 -->
         <div id="tab1" class="tab_content">
 
+        <c:choose>
+<c:when test="${chalEndDto.size() == 0}">
+<h2>참가중인 챌린지가 없습니다.</h2>
+<a href ="/confirm/write"><button disabled>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
+</c:when>
+
+<c:otherwise>
 <c:forEach var="chalDto" items="${chalDto}">
 <div>
 		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"><img src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
@@ -110,7 +127,7 @@
 		<c:when test="${chalDto.getDDay() == 1}">
 			내일부터 시작
 		</c:when>
-				<c:when test="${chalDto.getDDay() == 0">
+				<c:when test="${chalDto.getDDay() == 0}">
 			오늘 시작
 		</c:when>
 		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
@@ -136,13 +153,35 @@
 				 </c:otherwise>
 				 </c:choose>
 </c:forEach>
-
+</c:otherwise>
+</c:choose>
         </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
           <!-- #tab2 --> 
     <div id="tab2" class="tab_content">
+        <c:choose>
+<c:when test="${chalEndDto.size() == 0}">
+<h2>완료된 챌린지가 없습니다.</h2>
+<a href ="/confirm/write"><button disabled>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
+</c:when>
+
+<c:otherwise>
+
+    <a href ="/confirm/write"><button>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
 <c:forEach var="chalEndDto" items="${chalEndDto}">
 <div>
+
 		<a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"><img src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
     </a>
                            챌린지 종료
@@ -156,16 +195,59 @@
 				 pattern="0" value="${chalEndDto.cnt*100/28}"/>%
 				 <a href="/confirm/mylist?chalNo=${chalEndDto.chalNo}"><button>내 인증글</button></a>
 </c:forEach>
-
+</c:otherwise>
+</c:choose>
     </div> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <div id="tab3" class="tab_content">
+            <c:choose>
+<c:when test="${chalEndDto.size() == 0}">
+<h2>개설한 챌린지가 없습니다.</h2>
+<a href ="/confirm/write"><button disabled>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
+</c:when>
 
+<c:otherwise>
+<a href ="/confirm/write"><button>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
         <c:forEach var="createDto" items="${createDto}">
 <div>
+
 		<a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}"><img src="chal/detail/download?chalNo=${createDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
     </a>
-                           챌린지 종료
+                        <c:choose>
+		<c:when test="${createDto.getEndDDay() > 0 && createDto.getEndDDay() < 28}">
+			${createDto.getEndDDay()}일 뒤 종료
+		</c:when>
+		<c:when test="${createDto.getEndDDay() == 0}">
+			오늘 종료
+		</c:when>
+		<c:when test="${createDto.getEndDDay() < 0}">
+			종료
+		</c:when>
+		<c:when test="${createDto.getDDay() == 1}">
+			내일부터 시작
+		</c:when>
+				<c:when test="${createDto.getDDay() == 0}">
+			오늘 시작
+		</c:when>
+		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+		<c:otherwise>
+			${createDto.getDDay()}일 뒤 시작
+		</c:otherwise>
+	</c:choose>
 	<div>
 		<a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}"> ${createDto.chalTitle}</a>
 	</div><br>
@@ -176,7 +258,23 @@
 				 <a href="/confirm/mylist?chalNo=${createDto.chalNo}"><button>내 인증글</button></a>
 </c:forEach> 
 
+
+</c:otherwise>
+</c:choose>
+
+
     </div> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+    
+    
+    
 </div>
 
 </body>
