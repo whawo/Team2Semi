@@ -230,16 +230,17 @@
 			<!-- css: /css/commons1.css -->
 			<div class="row chal-list-container">
 		   	<c:forEach var="chalDto" items="${list}">
+		   	<a href="chal/detail?chalNo=${chalDto.chalNo}">
 			<div class="row chal-list">	
 			 	<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
-					<a href="chal/detail?chalNo=${chalDto.chalNo}">
+					
 						<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
-					</a>
+					
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
-					<a href="chal/detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a>
+					<span class="home-chal-title">${chalDto.chalTitle}</span>
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
@@ -273,6 +274,7 @@
 		            <input class="label-category" placeholder="${chalDto.chalTopic}">
 			     </div>
 			  </div> 
+			  </a>
 		      </c:forEach>
 		      </div>
 		</div>

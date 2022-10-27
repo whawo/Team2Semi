@@ -602,23 +602,27 @@ footer > a {
 	margin: 0 5px 30px 5px;
     padding: 0;
     list-style: none;
-    color: #6C7AEF;
+    color: #3f3f3f;
     font-size:16px;
     text-align: center;
 }
 .chal-item {
 	margin: 0;
-    padding: 0;
-    list-style: none;
-    color: #6C7AEF;
-    font-size:16px;
-    text-align: center;
-}
-.chal-item {
-	padding: 0.5em;
+    padding: 0.5em;
 	display: flex;
     align-items: center;
     width: 288px;
+    list-style: none;
+    font-size:16px;
+    text-align: center;
+}
+
+.home-chal-title:link, .home-chal-title:visited {
+    color: #3F3F3F;
+}
+.chal-list:hover {
+    color: #6C7AEF;
+    font-weight: bold;
 }
 .chal-item.thumbnail {	
 	padding: 0;

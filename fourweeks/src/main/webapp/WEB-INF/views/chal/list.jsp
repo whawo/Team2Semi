@@ -293,16 +293,15 @@
     		<%-- 모집중 페이지 --%>
 			<div class="row chal-list-container">
 		   	<c:forEach var="chalDto" items="${list}">
+		   	<a href="detail?chalNo=${chalDto.chalNo}">
 			<div class="row chal-list">	
 			 	<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
-					<a href="detail?chalNo=${chalDto.chalNo}">
 						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
-					</a>
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
-					<a href="detail?chalNo=${chalDto.chalNo}" class="home-chal-title">${chalDto.chalTitle}</a>
+					<span class="home-chal-title">${chalDto.chalTitle}</span>
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
@@ -336,6 +335,7 @@
 		            <input class="label-category" placeholder="${chalDto.chalTopic}">
 			     </div>
 			  </div> 
+			  </a>
 		      </c:forEach>
 		      <c:if test="${vo.count == 0}">
 					<span class="text-center">검색 결과가 없습니다.</span>
@@ -420,16 +420,16 @@
 		<%-- 전체 페이지 시작 --%>
 		<div class="row chal-list-container">
 			<c:forEach var="chalDtoRecruited" items="${recruitedList}">
+			<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
 			<div class="row chal-list">	
 				<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
-					<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
 						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
-					</a>
+					
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
-					<a href="detail?chalNo=${chalDtoRecruited.chalNo}"> ${chalDtoRecruited.chalTitle}</a>
+					<span class="home-chal-title"> ${chalDtoRecruited.chalTitle}</span>
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
@@ -468,10 +468,11 @@
 								<c:otherwise>
 									<input class="label-wait" placeholder="모집중">
 								</c:otherwise>
-							</c:choose>
-							<input class="label-category" placeholder="${chalDtoRecruited.chalTopic}">
+					</c:choose>
+						<input class="label-category" placeholder="${chalDtoRecruited.chalTopic}">
 			     </div>
 			  </div> 
+			  </a>
 		      </c:forEach>
 		      <c:if test="${vo.count == 0}">
 				<span class="text-center">검색 결과가 없습니다.</span>
