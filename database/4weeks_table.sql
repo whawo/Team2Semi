@@ -216,7 +216,7 @@ inner join user_img C on C.attachment_no = A.attachment_no;
 
 -- 유저가 참가 중인 챌린지 상세 조회 view 생성
 create view my_chal_detail as 
-select C.chal_title, C.chal_content, C.start_date ,C.chal_topic, P.*
+select C.chal_title, C.chal_content, C.start_date ,C.chal_topic,C.chal_person ,P.*
 from chal C inner join participant P on C.chal_no=P.chal_no;
 
 -- 인증글 이미지(confirm_img)의 첨부파일 번호 조회 뷰 생성
