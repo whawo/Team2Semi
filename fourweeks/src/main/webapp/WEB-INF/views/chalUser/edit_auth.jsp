@@ -12,62 +12,121 @@
    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
 <style>
+/* 
+	디자인 수정해야할 것: 
+	- 취소 확인 버튼 일렬로 ..  --> 이거 다시 수정 폰트 사이즈 맞추면됨 
+	- 푸터는 왜 같이 움직이는가... ;;
+ */
+
     div{
-		 border: 1px dotted transparent;
+		 border: 1px dotted gray;
+		 /*transparent  */
     }
         body{
             font-family: sans-serif;
         }
-        a{
-        line-height:32px;
+        /* row 모음  */
+	   .row-down{
+        margin: 50px 0 50px 300px;
         }
-        .p-1{
-            font-size: 24px;
-            font-weight: bold;
-            color: #3F3F3F;
-            margin-top:50px;
-            margin-bottom:22px;
+        .row-side{
+        margin-left:160px;
         }
-        .p-2{
+        /* p and span 모음  */
+          p{
+            color:#3f3f3f;
             font-size: 12px;
-            color:#3F3F3F;
-            margin-bottom: 50px;
+            /* 컨테이너에 따라 달라질 수 있으니 알아서 수동 조절하쇼 */
+            /* margin: 상 하 좌 우  */
+            margin: 20px 0px 20px 0px;
+            line-height: 2%;
+        }
+        .p2{
+            padding-bottom: 50px;
+        }
+            .sp-1{
+        font-size: 14px;
+        font-weight: 700;
+          color: #3F3F3F;
+        }
+        .sp-2{
+         font-size: 14px;
+        font-weight: 700;
+          color: #3F3F3F;
+          margin-right: 32px;
+        }
+        .divi{  
+            margin: 3px 4px 0 4px;
+            width: 1px;
+            height: 12px;
+            text-indent: -999em;
+            border-right: solid 1px #ccc;
 
+            display: inline-block;
+            zoom: 1;
+            text-align: left;
+            vertical-align: middle;
         }
-        .btn1{
-            margin-top: 40px;
+        /*  input 박스 모음 */
+        .id-box{
+        border: 1px solid  transparent;
+        width:500px;
+        padding-left: 50px;
         }
-        .fa{
-            color:black
-        }
-        .color{
-            color: #425F57;
+        .pw-box{
+        width: 390px;
+         padding-left: 20px;
         }
         
+        	/* 버튼 모음 */
+        .cancel-btn{
+        width:180px;
+        height: 50px;
+        }
+        ok-btn{
+        width: 200px;
+        height:66px;
+        }
+        /* 에러  */
+        .error{
+        color:#eb6f7f;
+        padding-left: 65px;
+        }
+    
+    /*  disabled */
+	input[name="userId"]:disabled{
+		background-color:transparent;
+	}
+   
 </style>
-
- <div class="container-794">
-	 <div class="row center">
-	     <p class="p-1">비밀번호 인증</p>
-	     <p class="p-2">정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</p>
-	 </div>
+<div class="row container-1200">
+ <div class="row container-794 row-down">
+	<div class="row center">
+        <h2>비밀번호 인증 </h2>
+         <p class="p1"> 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.<p>
+    </div>
 	    
 	<form action="auth" method="post">
-		<div class="row center">
-			<input type="hidden" name="userId" value="${userDto.userId}">
- 		     아이디 : ${userDto.userId}
-		     <br><br>
-		     비밀번호 : <input type="text" name="userPw" required placeholder="8~16자의 영문/숫자">
-		     <br>
-		     <c:if test="${param.error != null}">
-			     <span>비밀번호를 다시 확인해주세요.</span>
+		 <div class="row row-side">
+             <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
+            </div>
+            
+		<div class="row row-side">
+            <span class="sp-2">비밀번호</span><input type="password" name="userPw" class="input short-text-box short-hover pw-box"  placeholder="8~16자의 영문/숫자" autocomplete="off"><br>
+           <c:if test="${param.error != null}">
+			     <span class="error">비밀번호를 다시 확인해주세요.</span>
 		     </c:if>
-		     <br><br>
-		     <a id = "largebuttotn3" href="/mypage">취소</a>
-		     <button type="submit">확인</button>
+            </div>
+            
+            <div class="row center">
+            	<a href="/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
+				<button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
+			 </div>
+			 
+		</form>
 		</div>
-	</form>
-</div>
+	</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
