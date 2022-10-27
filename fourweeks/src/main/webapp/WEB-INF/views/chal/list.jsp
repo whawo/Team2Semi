@@ -326,7 +326,7 @@
 				<tr> <%-- 라벨 --%>
 					<td>
 						<c:if test="${chalDto.getDDay() > -1}">
-						<input class="label-wait" placeholder="모집중">
+						<input class="label-wait" placeholder="모집중">&nbsp; 
 						</c:if>
 						<input class="label-category" placeholder="${chalDto.chalTopic}">
 					</td>
@@ -340,10 +340,8 @@
 		</c:if>
 
 	<%-- 페이지 네비게이터 시작 --%>
-	<div class="row">
-	
+<div class="row">
 	<ul class="page">
-	
 	<c:if test="${vo.count > 0}">
 	<%-- 맨처음--%>
 		<li>
@@ -465,13 +463,13 @@
 					<td>
 						<c:choose>
 							<c:when test="${chalDtoRecruited.getDDay() < -28}">
-								<input class="label-status" placeholder="종료">
+								<input class="label-status" placeholder="종료">&nbsp; 
 							</c:when>
 							<c:when test="${chalDtoRecruited.getDDay() < 0}">
-								<input class="label-progress" placeholder="진행중">
+								<input class="label-progress" placeholder="진행중">&nbsp; 
 							</c:when>
 							<c:otherwise>
-								<input class="label-wait" placeholder="모집중">
+								<input class="label-wait" placeholder="모집중">&nbsp; 
 							</c:otherwise>
 						</c:choose>
 						<input class="label-category" placeholder="${chalDtoRecruited.chalTopic}">

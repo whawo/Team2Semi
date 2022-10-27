@@ -20,7 +20,7 @@
    
 <style>
 	div{
-	    border: 0.2px dotted gray;
+	/*border: 0.2px dotted gray;*/ 
        margin: 40px 0px;
       }
       .chal-title {
@@ -65,197 +65,196 @@
        }
 
         /* tab menu */
-        ul.tabs {
-        color: #AAAAAA;
-        position:relative;
-        float:left;
-        list-style: none;
-        width: 100%;
-        margin:0px 0px 30px 8px;
-        padding: 0;
-        }
+     ul.tabs {
+     color: #AAAAAA;
+     position:relative;
+     float:left;
+     list-style: none;
+     width: 100%;
+     margin:0px 0px 30px 8px;
+     padding: 0;
+     }
 
-        ul.tabs li {
-        float: left;
-        border-bottom : 2px solid#AAAAAA;
-        text-align:center;
-        cursor: pointer;
-        width:50%;
-        padding: 0;
-        line-height: 50px;
-        height:50px;
-        }
-        ul.tabs li.active {
-        border-bottom-color : #6c7aef;
-        color: #6c7aef;
-        font-weight:bold;
-        }
+     ul.tabs li {
+     float: left;
+     border-bottom : 2px solid#AAAAAA;
+     text-align:center;
+     cursor: pointer;
+     width:50%;
+     padding: 0;
+     line-height: 50px;
+     height:50px;
+     }
+     ul.tabs li.active {
+     border-bottom-color : #6c7aef;
+     color: #6c7aef;
+     font-weight:bold;
+     }
 
-        .tab_container {
-        position:relative;
-        float:left;
-        width:100%;
-        
-        /*padding:30px;*/
-        }
+     .tab_container {
+     position:relative;
+     float:left;
+     width:100%;
+     margin-top:0;
+     }
 
-        .tab_content {
-            border: none;
-        }
-         /* progressbar */
-         progress {
-        -webkit-appearance: none;    /* 기존 bar style 숨김*/
-        appearance: none;
-        }
-        progress::-webkit-progress-bar {
-          width: 790px;   /*bar 전체 길이 */
-          height: 15px;   /*bar 두께 */
-          background-color: #e5e6f9;  
-          border: none;
-          border-radius: 20px;
-        } 
-        progress::-webkit-progress-value {
-          background-color:  #6c7aef;
-          border-radius: 20px;
-        }
-        .bar-percent {
-          font-weight: bold;
-          font-size: 20px;
-          margin: 5px 0;
-          padding: 0 5px;
-          color: #6c7aef;
-        }
-        /* 다단배치 */
-        .first {
-          display: flex;
-          flex-direction: row;
-        }
-        .first > div {
-          flex-grow: 1;
-        }
-        .flexbox {
-          margin: 0px;
-        }
-        /* 아코디언메뉴 */
-        li {
-        list-style: none;
-        margin-left: -0.5em;
-        }
-        .acc-btn {
-        border-radius: 4px;
-        cursor: pointer;
-        height: 42px;
-        width:100%;
-        border-top:none;
-        }
-        .side-menu-scroll-on{
-        margin-left: 80px;
-        }
-        .acc-btn strong{
-        color: #6c7aef;
-        font-size: 1.1em;
-        margin:12px 10px;
-        display: inline-block;
-        }
-        .selected{
-        color:#6c7aef !important;
-        }
-        .acc-btn .stats-title-img {
-        border-right: 1px solid #e5e5e5;
-        float: left;
-        padding:4px;
-        width: 41px;
-        }
+     .tab_content {
+         border: none;
+     }
+      /* progressbar */
+      progress {
+     -webkit-appearance: none;    /* 기존 bar style 숨김*/
+     appearance: none;
+     }
+     progress::-webkit-progress-bar {
+       width: 790px;   /*bar 전체 길이 */
+       height: 15px;   /*bar 두께 */
+       background-color: #e5e6f9;  
+       border: none;
+       border-radius: 20px;
+     } 
+     progress::-webkit-progress-value {
+       background-color:  #6c7aef;
+       border-radius: 20px;
+     }
+     .bar-percent {
+       font-weight: bold;
+       font-size: 20px;
+       margin: 5px 0;
+       padding: 0 5px;
+       color: #6c7aef;
+     }
+     /* 다단배치 */
+     .first {
+       display: flex;
+       flex-direction: row;
+     }
+     .first > div {
+       flex-grow: 1;
+     }
+     .flexbox {
+       margin: 0px;
+     }
+     /* 아코디언메뉴 */
+     li {
+	     list-style: none;
+	     margin-left: -0.5em;
+     }
+     .acc-btn {
+	     border-radius: 4px;
+	     cursor: pointer;
+	     height: 42px;
+	     width:100%;
+	     border-top:none;
+     }
+     .side-menu-scroll-on{
+     	margin-left: 80px;
+     }
+     .acc-btn strong{
+	     color: #6c7aef;
+	     font-size: 1.1em;
+	     margin:12px 10px;
+	     display: inline-block;
+     }
+     .selected{
+     	color:#6c7aef !important;
+     }
+     .acc-btn .stats-title-img {
+	     border-right: 1px solid #e5e5e5;
+	     float: left;
+	     padding:4px;
+	     width: 41px;
+     }
 
-        .acc-btn .stats-tab-img-area{
-        float:right;
-        width:133px;
-        height:100%;
-        text-align: right;
-        padding:12px 0;
-        margin : 0px;
-        }
-        .acc-btn .stats-tab-img-area > img{
-        width:15px;
-        height:15px;
-        }
+     .acc-btn .stats-tab-img-area{
+	     float:right;
+	     width:133px;
+	     height:100%;
+	     text-align: right;
+	     padding:12px 0;
+	     margin : 0px;
+     }
+     .acc-btn .stats-tab-img-area > img{
+	     width:15px;
+	     height:15px;
+     }
 
-        .acc-content-inner {
-        padding:15px 0px;
-        }
+     .acc-content-inner {
+     	padding:15px 0px;
+     }
 
-        li.acc-content {
-        height:auto;
-        width:100%;
-        margin:0 auto;
-        overflow:hidden;
-        }
-        .openContent{
-        height:0px !important;
-        }
-        /* pagenavigation */
-        ul.page{
-        list-style: none;  /*li 점 없애기*/
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        color: #6c7aef;
-        text-align: center;   
-        }
-        ul.page > li{
-         display: inline-block; /*일렬로 정렬*/
-         border: 1px solid transparent; /*투명한 네모 상자 */
-         border-radius: 30%;
-         padding: 0em; /*사이 간격*/
-         line-height: -0.5em; /*글자 표시 높이*/
-         margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
-         min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
-         text-align: center; /*상자안에 글자 중앙에 */
-         cursor: pointer;
-         width: 24px;
-         height: 24px;
-        }
-        /* pagenavigation 번호에 커서대면 나타내는 표시  */
-        ul.page > li:hover,
-        ul.page > li > a:hover{
-        border-color: #6c7aef; /*커서 대면 상자표시*/
-        background-color: #6c7aef;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        }
-        ul.page > li > a {
-        display:block;
-        width: 100%;
-        color: #6c7aef;
-        text-decoration: none;
-        font-weight: bold;
-        }
-        .detail-top-img {
-        position: relative;
-        width : 790px;
-        height: 400px;
-        border-radius: 10px;
-        }
-        .chal-timer{
-        position: absolute;
-        margin: -50px 0;
-        background-color: #707A89;
-        background : rgba(112, 122, 137, 0.7);
-        color: white;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        height: 50px;
-        width: 790px;
-        /* 타이머 폰트 가운데 */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-        .chal-timer-font {
-        font-size: 20px;
-        }
-    }
+     li.acc-content {
+	     height:auto;
+	     width:100%;
+	     margin:0 auto;
+	     overflow:hidden;
+     }
+     .openContent{
+     	height:0px !important;
+     }
+     /* pagenavigation */
+     ul.page{
+	     list-style: none;  /*li 점 없애기*/
+	     margin: 0;
+	     padding: 0;
+	     font-size: 16px;
+	     color: #6c7aef;
+	     text-align: center;   
+     }
+     ul.page > li{
+	      display: inline-block; /*일렬로 정렬*/
+	      border: 1px solid transparent; /*투명한 네모 상자 */
+	      border-radius: 30%;
+	      padding: 0em; /*사이 간격*/
+	      line-height: -0.5em; /*글자 표시 높이*/
+	      margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
+	      min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
+	      text-align: center; /*상자안에 글자 중앙에 */
+	      cursor: pointer;
+	      width: 24px;
+	      height: 24px;
+     }
+     /* pagenavigation 번호에 커서대면 나타내는 표시  */
+     ul.page > li:hover,
+     ul.page > li > a:hover{
+	     border-color: #6c7aef; /*커서 대면 상자표시*/
+	     background-color: #6c7aef;
+	     color: white;
+	     font-weight: bold;
+	     cursor: pointer;
+     }
+     ul.page > li > a {
+	     display:block;
+	     width: 100%;
+	     color: #6c7aef;
+	     text-decoration: none;
+	     font-weight: bold;
+     }
+     .detail-top-img {
+	     position: relative;
+	     width : 790px;
+	     height: 400px;
+	     border-radius: 10px;
+     }
+     .chal-timer{
+	     position: absolute;
+	     margin: -50px 0;
+	     background-color: #707A89;
+	     background : rgba(112, 122, 137, 0.7);
+	     color: white;
+	     border-bottom-left-radius: 10px;
+	     border-bottom-right-radius: 10px;
+	     height: 50px;
+	     width: 790px;
+	     /* 타이머 폰트 가운데 */
+	     display: flex;
+	     justify-content: center;
+	     align-items: center;
+     }
+     .chal-timer-font {
+     	font-size: 20px;
+     }
+   }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
