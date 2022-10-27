@@ -86,7 +86,7 @@
         border: 1px solid transparent; /*투명한 네모 상자 */
         border-radius: 30%;
         padding: -0.5em; /*사이 간격*/
-        line-height: -0.5em; /*글자 표시 높이*/
+        line-height: 0.5em; /*글자 표시 높이*/
         margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
         min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
         text-align: center; /*상자안에 글자 중앙에 */
