@@ -37,7 +37,7 @@
 	}
 	.user-img {
 	border-radius: 50%;
-	padding-right: 0.5em;
+	margin-right: 0.5em; /* padding(값을 한쪽에만 주면 찌그러짐) -> margin */
 	}
 	.user-img > .user-img-position {
 	
