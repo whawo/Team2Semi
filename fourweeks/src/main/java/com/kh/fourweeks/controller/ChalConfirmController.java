@@ -202,11 +202,12 @@ public class ChalConfirmController {
 	}
 	
 	@GetMapping("/all") //챌린지별 참가자 인증글 목록 조회
-	public String confirmAll(@RequestParam int chalNo,
-			@RequestParam(required = false, defaultValue = "1") int p,
+	public String confirmAll(@ModelAttribute (name="vo") ChalConfirmVO vo,
 			Model model) {
-		model.addAttribute("confirmList", confirmDao.allConfirmList(chalNo));
-		model.addAttribute("listCnt", confirmDao.confirmCnt(chalNo));
+		int count = confirmDao.confirmCnt(vo.getChalNo());
+		vo.setCount(count);
+		model.addAttribute("listCnt", count);
+		model.addAttribute("confirmList", confirmDao.allConfirmList(vo));
 		return "chal/confirm_list";
 	}
 	
