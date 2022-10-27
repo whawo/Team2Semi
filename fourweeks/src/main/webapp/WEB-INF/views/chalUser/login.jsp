@@ -14,6 +14,10 @@
 
     <style>
         /* 
+        10.27
+        - 새로고침시 밑에 에러 메세지가 노출됨 
+        - 아이디 치는 input창 안에 컬러가 생김 뭥야
+        
         	10.26
         	디자인 수정:
         	- 에러 메세지 글자 줄바꿈 해야됨 ㅇ 
@@ -106,12 +110,11 @@
             
             <form action="login" method="post">
             <div class="row">
-                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required
-                	<c:if test="${param.userId != null}">value="${param.userId}"</c:if>>
+                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디"  <c:if test="${param.userId != null}">value="${param.userId}"</c:if> autocomplete="off">
                 
             </div>
             <div class="row">
-                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호" required >
+                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호"  autocomplete="off">
             </div>
             <div class="row">
                 <button type="submit" class="largebtn w-100" id="largebutton1">로그인</button>
