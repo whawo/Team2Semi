@@ -19,13 +19,20 @@
 
     <style>
         /* 
+        
+        	10.27
+        	추가 수정한 것 : 
+        	- 마지막 취소 버튼 홈으로 이동 넣음
+        	- 헬퍼 텍스트 박스 밑으로 옮김 
+        	- 챌린지 예상 종료일 label 크기 높이가 안먹ㅇ므 씨바 
+        	
         	10.26
         	디자인 수정해야할 것: 
-        	- 6번 챌린지 대표 이미지 삭제 사진변경 안에 글자 위치 맞춰야함 -> 여러번 했었는데 안되면 그냥 border높이를 올리는 걸로 ...
-        	- input박스 안에 달력 넣어야 함.  
-        	- 챌린지 예상 종료일 + 28일 해셔 나와야함 
+        	- 6번 챌린지 대표 이미지 삭제 사진변경 안에 글자 위치 맞춰야함 -> 여러번 했었는데 안되면 그냥 border높이를 올리는 걸로 ... 
+        	- input박스 안에 달력 넣어야 함.   
+        	- 챌린지 예상 종료일 + 28일 해셔  나와야함 ㅇ   
         	- 챌린지 필 수 값 입력 안할시 에러 떠야함 
-        	- 챌린지 예상 종료일과 날짜가 맞아야함 
+        	- 챌린지 예상 종료일과 날짜가 맞아야함  ㅇ 
         
         	10.25
         	DB 수정해야할 것: 해결 완료  
@@ -93,10 +100,18 @@
         /* 
             라디오 버튼 관련 1번 
             라디오와 라벨 간격 띄우려면 basic.css 가시오 
-         */
-        label{
+        */ 
+       /*   label{
             margin: 17px 0 10px;
             padding-left: 30px;
+        }  */
+        .lab-1{
+        margin: 17px 0 10px;
+        padding-left:30px;
+        }
+        .lab-2{
+         margin: 17px 0 10px;
+        padding-left:30px;
         }
        .p0{
            font-size: 30px;
@@ -134,10 +149,6 @@
          	font-size: 12px;
             color: #3f3f3f;
             margin-bottom: 30px;   /* [참가인원]과 확인했어요 사이 간격 */
-        }
-
-        .lab{ /* 라디오 버튼 사이 간격 */
-          
         }
         .rad{
             vertical-align: -11px;
@@ -178,39 +189,21 @@
             font-weight: bold;
         }
         /* 캘린더  */
-        .sp-1{
-            display: block;
-            /* padding: 13px 0; */
-            height:60px;
-            margin-top:16px;
-        		padding-left: 105px;  /* 예상 종료일 가운데 맞추는 것.. 훗날 수정 */
-            background-color: #e5e6f9;
-            border: 1px solid #e5e6f9;
-            border-radius: 0.5em;
-            font-size: 14px;
-            color: #6c7aef;
-            font-weight: 700;
-            text-decoration: none;
-			white-space: nowrap;
+       .date-box{
+       background-color: #e5e6f9;
+        border: 1px solid #e5e6f9;
+        border-radius: 0.5em;
+         font-size: 14px;
+          color: #6c7aef;
+          font-weight: 700;
         }
-        i{
-            font-size:normal;
+        date-bx{
+          width:600px;
+        height:58px;
         }
-        .c-end{
-            display: inline-block;
-            width: 60px;
-            height: 12px;
-            background-position: -139px -300px;
-            background-repeat: no-repeat;
-            vertical-align: top;
-            margin: 2px 5px 0 0;
-        }
-        .end-date{
-        font-size:20px;
-        padding: 20px 20px;
-        }
+        .date-calendar,
         #result-1{
-        	padding-left:20px;
+        	display: inline;
         }
         /* 체크박스 */
         .chk-1{
@@ -278,20 +271,42 @@
         .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 80px;
         }
-      .fail-message {
-		display: none;
-	}
-	
-	.input.fail ~ .fail-message {
-		display: block;
-		font-size:12px;
-	    color: #eb6f7f;
-	}
-	
-	.input ~ .find-error {
-		font-size:12px;
-	    color: #eb6f7f;
-	}
+       /* 메세지는 숨김처리 */
+        .success-message,
+        .fail-message { 
+            display: none;
+        }
+
+        .success-message {
+            color:green;
+        }
+        .fail-message {
+            color:red;
+        }
+
+        /* 입력창의 상태에 따라 특정 메세지를 표시 */
+        .input.success {
+            border-color: green;
+        }
+        .input.success ~ .success-message {
+            display: block;
+        }
+        .input.fail {
+            border-color: red;
+        }
+        .input.fail ~ .fail-message {
+            display: block;
+        }
+        /* 헬퍼 텍스트 위치  */
+        .helper-text-40{
+        	padding-left:570px;
+        }
+         .helper-text-300{
+        	padding-left:564px;
+        }
+         .helper-text-500{
+        	padding-left:564px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
@@ -420,63 +435,129 @@
      });
  */
   
-
-		 $(".create-form").submit(function(){
-	
-     $("input[name=chalTitle]").blur();
-
-     //모든 input을 검사하도록 강제실행했으므로
-     //“모두 success이거나, fail이 없거나” 중에 한 가지 방식으로 코드 구현해서 전송하도록 처리
-     //console.log($(".input.fail").length);
-     if($(".input.fail".length > 0)) {
-         return false;
-     } 
-
- });
- 
-	$(function() {
-		$("input[name=chalTitle]").on("blur", function() {
-			var chalTitle = $(this).val();
-			$(this).removeClass("fail");
-			if (!userEmail) {
-				$(this).addClass("fail");
-			}
+/* 
+	$(".create-form").submit(function(){
+		$("input[name=chalTitle]").blur();
+	     if($(".input.fail".length > 0)) {
+		$(function() {
+			$("input[name=chalTitle]").on("blur", function() {
+				var chalTitle = $(this).val();
+				$(this).removeClass("fail");
+				if (!chalTitle) {
+					$(this).addClass("fail");
+				}
+			});
+	         return false;
 		});
-	});
+	   } 
+
+ });  */
+ 
+$(function(){
+     $("input[name=chalTitle]").blur(function(){
+         var text = $(this).val();
+         var regex = /^[가-힣a-zA-z0-9]{1,39}$/;
+         var judge = regex.test(text);
+         console.log(judge);
+         $(this).removeClass("success fail");
+         if(text){
+             $(this).addClass("success");
+         }else{
+             $(this).addClass("fail");
+         }
+     });
+     
+     $("textarea[name=howConfirm]").blur(function(){
+         var text = $(this).val();
+         var regex = /^[가-힣a-zA-z0-9]{1,299}$/;
+         var judge = regex.test(text);
+         console.log(judge);
+         $(this).removeClass("success fail");
+         if(text){
+             $(this).addClass("success");
+         }else{
+             $(this).addClass("fail");
+         }
+     });
+     
+     $("input[name=startDate]").blur(function(){
+         var text = $(this).val();
+         $(this).removeClass("success fail");
+         if(text){
+             $(this).addClass("success");
+         }else{
+             $(this).addClass("fail");
+         }
+     });
+     
+		 $("input[type=checkbox]:chcked").blur(function(){
+         var text = $(this).val();
+         $(this).removeClass("success fail");
+         if(text){
+             $(this).addClass("success");
+         }else{
+             $(this).addClass("fail");
+         }
+     });
+		 
+		    $("textarea[name=chalContent]").blur(function(){
+		         var text = $(this).val("");
+		         $(this).removeClass("success fail");
+		         if(text){
+		             $(this).addClass("success");
+		         }
+		     });
+		     
+     
+     $(".create-form").submit(function(){
+    	 $("input[name=chalTitle]").blur();
+    	 $("textarea[name=howConfirm]").blur();
+    	 $("input[name=startDate]").blur();
+         $("input[type=checkbox]:chcked").blur();
+         $("textarea[name=chalContent]").blur;
+         if($(".input.fail").length > 0){
+        	 	$("input[name=chalTitle]").focus();
+             return false;
+         }
+     });
+ }); 
+
+ 
 
 </script>
 <body>
 	<div class="container-1200">
-        <form action="create" method="post" enctype="multipart/form-data" class="create-form">
 	           <div class="row">
 	                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
 	
 	                <div class="row checks small">
-	                <input class="lab"  id="ex_rd1" name="chalTopic" type="radio" value="운동" checked><label for="ex_rd1">운동</label><br>
-	                <input class="lab"  id="ex_rd2" name="chalTopic" type="radio" value="생활"><label for="ex_rd2">생활</label><br>
-	                <input class="lab"  id="ex_rd3" name="chalTopic" type="radio" value="정서"><label for="ex_rd3">정서</label><br>
-	                <input class="lab"  id="ex_rd4" name="chalTopic" type="radio" value="취미"><label for="ex_rd4">취미</label><br>
-	                <input class="lab"  id="ex_rd5" name="chalTopic" type="radio" value="학습"><label for="ex_rd5">학습</label><br>
-	                <input class="lab"  id="ex_rd6" name="chalTopic" type="radio" value="환경"><label for="ex_rd6">환경</label><br>
-	                <input class="lab"  id="ex_rd7" name="chalTopic" type="radio" value="그 외"><label for="ex_rd7">그 외</label><br>
+	                <input class="lab"  id="ex_rd1" name="chalTopic" type="radio" value="운동" checked><label for="ex_rd1" class="lab-1">운동</label><br>
+	                <input class="lab"  id="ex_rd2" name="chalTopic" type="radio" value="생활"><label for="ex_rd2" class="lab-1">생활</label><br>
+	                <input class="lab"  id="ex_rd3" name="chalTopic" type="radio" value="정서"><label for="ex_rd3" class="lab-1">정서</label><br>
+	                <input class="lab"  id="ex_rd4" name="chalTopic" type="radio" value="취미"><label for="ex_rd4" class="lab-1">취미</label><br>
+	                <input class="lab"  id="ex_rd5" name="chalTopic" type="radio" value="학습"><label for="ex_rd5" class="lab-1">학습</label><br>
+	                <input class="lab"  id="ex_rd6" name="chalTopic" type="radio" value="환경"><label for="ex_rd6" class="lab-1">환경</label><br>
+	                <input class="lab"  id="ex_rd7" name="chalTopic" type="radio" value="그 외"><label for="ex_rd7" class="lab-1">그 외</label><br>
 	                </div>
 	             
 	            </div>
 	
+        <form action="create" method="post" enctype="multipart/form-data" class="create-form"  autocomplete="off">
 	            <div class="row">
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"><br>
 	                <span  class="helper-text-40 helper-css">0</span> /40
-	                <span class="fail-message">이메일을 입력해주세요.</span> 
+	                 <span class="fail-message">필수값애옹 </span>
 	                </div>
 	            </div>
 	
 	            <div class="row">
 	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300" ></textarea>
+	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300" ></textarea><br>
 	                <span  class="helper-text-300 helper-css">0</span> /300
+	                <span class="fail-message">필수값애옹 </span>
 	            </div>
 	
 	        <div class="row">
@@ -486,18 +567,11 @@
 	                <div class="row">
 	                    <i class="fa-solid fa-calendar-days"></i>
 	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" >
+	                    <span class="fail-message">필수값애옹 </span>
 	                </div>
 	
 	                <div class="row date-calendar">
-	                    <h2 class="blind"> 챌린지 예상 종료일</h2>
-	                    <span class="sp-1 calendar">
-	                    <i class="c-end">
-	                        <span class="blind">캘린더</span>
-	                    </i>
-	                 	<p class="end-date"> 
-	                 	챌린지 예상 종료일 <p id="result-1"></p>
-	                 	</p> 
-	                </span>
+	                	<label class="date-box date-bx">챌린지 예상 종료일 <span id="result-1"></span></label> 
 	                </div>
 	
 	            </div>
@@ -508,10 +582,11 @@
 	                <p class="p2-1">[모집 방식] 선착순 자동 마감</p>
 	                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
 	                <div class="row chk-line">
-	                <label class="line" >
+	                <label class="line lab-2" >
 	                    <input type="checkbox" >
 	                    <span class="chk-1"></span>
 	                    <span class="chk-2">확인했어요!</span>
+	                    <span class="fail-message">필수값애옹 </span>
 	                </label>    
 	            </div>
 	            </div>
@@ -532,16 +607,16 @@
 	            <div class="row row-7 row-padding">
 	                <p class="p1-1" >7. 챌린지를 소개해주세요.(선택)</p>
 	                <p class="p2">다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.</p>
-	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
+	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea><br>
 	                <span  class="helper-text-500 helper-css">0</span> /500
 	            </div>
 	            
 	            <div class="row center"> 
-	                <a  class="smallbtn cancel-btn" id="smallbutton3">취소</a>
+	                <a href="/" class="smallbtn cancel-btn" id="smallbutton3">취소</a>
 	                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
 	            </div>
-        	</div>    
         </form>    
+        	</div>    
 	</div>
 </body>     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
