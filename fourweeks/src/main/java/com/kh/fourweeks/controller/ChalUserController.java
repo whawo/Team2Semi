@@ -110,6 +110,8 @@ public class ChalUserController {
 		model.addAttribute("chalEndDto" , chalUserDao.selectEndAllMyDetail(userId));
 		//내가 개설한 챌린지 조회
 		model.addAttribute("createDto" , chalUserDao.selectCreateAllMyDetail(userId));
+		//전체 참가자 평균 달성률
+		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
