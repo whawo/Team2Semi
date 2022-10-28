@@ -12,6 +12,7 @@ import com.kh.fourweeks.repository.ChalReportDao;
 import com.kh.fourweeks.vo.HalfStartVO;
 import com.kh.fourweeks.vo.MonthlyTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
+import com.kh.fourweeks.vo.UserJoinedVO;
 
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
@@ -28,8 +29,7 @@ public class AdminReportRestController {
 	@GetMapping("/chal/half")
 	public List<HalfStartVO> halfCnt() {
 		return chalReportDao.halfCnt(); 
-	}
-	
+	}	
 	@GetMapping("/chal/topic_last")
 	public List<MonthlyTopicVO> topicLastMonth() {
 		return chalReportDao.topicLastMonth(); 
@@ -38,5 +38,10 @@ public class AdminReportRestController {
 	@GetMapping("/chal/topic_this")
 	public List<MonthlyTopicVO> topicThisMonth() {
 		return chalReportDao.topicThisMonth(); 
+	}
+  
+  @GetMapping("/chal/user")
+	public List<UserJoinedVO> userCnt() {
+		return chalReportDao.joinedCnt();
 	}
 }

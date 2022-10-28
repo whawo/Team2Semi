@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.fourweeks.vo.HalfStartVO;
 import com.kh.fourweeks.vo.MonthlyTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
+import com.kh.fourweeks.vo.UserJoinedVO;
 
 @Repository
 public class ChalReportDaoImpl implements ChalReportDao {
@@ -77,7 +78,6 @@ public class ChalReportDaoImpl implements ChalReportDao {
 						+ "order by start_month asc";
 		return jdbcTemplate.query(sql, halfMapper);
 	}
-	
 	private RowMapper<MonthlyTopicVO> monthlyMapper = (rs, idx) -> {
 		return MonthlyTopicVO.builder()
 				.chalTopic(rs.getString("chal_topic"))
@@ -112,4 +112,18 @@ public class ChalReportDaoImpl implements ChalReportDao {
 					+ "order by chal_topic asc";
 		return jdbcTemplate.query(sql, monthlyMapper);
 	}
-}
+  
+   private RowMapper<UserJoinedVO> joinedMapper = (rs, idx) -> {
+      return UserJoinedVO.builder()
+          .joinDate(rs.getString("join_date"))
+          .userCount(rs.getInt("user_count"))
+          .build();
+  };
+
+
+    @Override
+    public List<UserJoinedVO> joinedCnt() {
+      String sql = "select to_char(D.dt, 'yyyy-mm') as join_date, nvl(sum(J.cnt), 0) user_count from (select to_char(create_date, 'yyyy-mm-dd') as join_date, count(*) cnt from chal_user where create_date between to_date('2020-01-01', 'yyyy-mm-dd') and to_date('2022-12-31', 'yyyy-mm-dd') group by create_date) J, (select to_date('2022-01-01', 'yyyy-mm-dd') + level - 1 as dt from dual connect by level <= (sysdate - to_date('2022-01-01', 'yyyy-mm-dd') + 1)) D where D.dt = J.join_date(+) group by to_char(D.dt, 'yyyy-mm') order by to_char(D.dt, 'yyyy-mm')";
+      return jdbcTemplate.query(sql, joinedMapper);
+    }
+  }

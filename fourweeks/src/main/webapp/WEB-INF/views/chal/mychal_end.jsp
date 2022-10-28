@@ -80,7 +80,7 @@
     
 		<ul class="list">
             달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${progressDto*100/28}"/>%
+				 pattern="0" value="${progressDto*100/28}"/>
 		</ul>
 
         </div>
@@ -91,7 +91,8 @@
 			<h2>총 참가자 정보</h2><br> 
              평균 달성률 : 
              <fmt:formatNumber type="number" 
-				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>
+
 			<br><br><br>
 			총 ${chalDto.getChalPerson()}명 참가<br><br>
 			100% 달성  &nbsp;&nbsp; ${perfectDto.size()}명<br>

@@ -275,7 +275,7 @@
 			     </div>
 			     <div class="row chal-item">
 			         <%-- 라벨 --%>
-			        <c:if test="${chalDto.getDDay() > 0}">
+			        <c:if test="${chalDto.getDDay() > -1}">
 						<input class="label-wait" placeholder="모집중">
 					</c:if>
 		            <input class="label-category" placeholder="${chalDto.chalTopic}">
