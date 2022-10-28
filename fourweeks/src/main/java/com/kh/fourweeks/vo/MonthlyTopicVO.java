@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class MonthlyTopicVO {
 	private String chalTopic;
-	private int chal_cnt;
+	private int chalCnt;
 }
