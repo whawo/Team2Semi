@@ -89,7 +89,7 @@
 	    <div id="tab2" class="tab_content">
 			<table class="table table-border">
 			<h2>총 참가자 정보</h2><br> 
-			
+			${listCnt*100/28}%
 			<br><br><br>
 			총 ${chalDto.getChalPerson()}명 참가
 				<tbody>
