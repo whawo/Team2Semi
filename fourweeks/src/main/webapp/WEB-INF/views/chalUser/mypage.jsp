@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="마이페이지" name="title" />
+   <jsp:param value="마이페이지" name="title" />
 </jsp:include>
 <!DOCTYPE html>
 <html lang="ko">
@@ -78,10 +78,10 @@
 </head>
 <body>
         <ul class="list">
-	<li><img src="/profile/download?userId=${myDto.userId}" width="50" height="50" class="user-img"></li>
-		<li>${myDto.getUserNick()}</li>
-	<li>${myDto.userEmail}</li>
-	<li><a href="mypage/edit/auth">계정 관리</a></li><br><br><br><br><br><br><br><br><br>
+   <li><img src="/profile/download?userId=${myDto.userId}" width="50" height="50" class="user-img"></li>
+      <li>${myDto.getUserNick()}</li>
+   <li>${myDto.userEmail}</li>
+   <li><a href="mypage/edit/auth">계정 관리</a></li><br><br><br><br><br><br><br><br><br>
 </ul>
     <ul class="tabs">
         <li class="active" rel="tab1">${chalDto.size()}<br>참가중</li>
@@ -104,7 +104,7 @@
         <div id="tab1" class="tab_content">
 
         <c:choose>
-<c:when test="${chalEndDto.size() == 0}">
+<c:when test="${chalDto.size() == 0}">
 <h2>참가중인 챌린지가 없습니다.</h2>
 <a href ="/confirm/write"><button disabled>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
 </c:when>
@@ -112,46 +112,46 @@
 <c:otherwise>
 <c:forEach var="chalDto" items="${chalDto}">
 <div>
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"><img src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
+      <a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"><img src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
     </a>
-					<c:choose>
-		<c:when test="${chalDto.getEndDDay() > 0 && chalDto.getEndDDay() < 28}">
-			${chalDto.getEndDDay()}일 뒤 종료
-		</c:when>
-		<c:when test="${chalDto.getEndDDay() == 0}">
-			오늘 종료
-		</c:when>
-		<c:when test="${chalDto.getEndDDay() < 0}">
-			종료
-		</c:when>
-		<c:when test="${chalDto.getDDay() == 1}">
-			내일부터 시작
-		</c:when>
-				<c:when test="${chalDto.getDDay() == 0}">
-			오늘 시작
-		</c:when>
-		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
-		<c:otherwise>
-			${chalDto.getDDay()}일 뒤 시작
-		</c:otherwise>
-	</c:choose>
-	
-	<div>
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"> ${chalDto.chalTitle}</a>
-	</div><br>
-	<div>${chalDto.getStartDate()}~${chalDto.getEndDate()}</div><br>
-	<div>${chalDto.getChalTopic()}</div>
+               <c:choose>
+      <c:when test="${chalDto.getEndDDay() > 0 && chalDto.getEndDDay() < 28}">
+         ${chalDto.getEndDDay()}일 뒤 종료
+      </c:when>
+      <c:when test="${chalDto.getEndDDay() == 0}">
+         오늘 종료
+      </c:when>
+      <c:when test="${chalDto.getEndDDay() < 0}">
+         종료
+      </c:when>
+      <c:when test="${chalDto.getDDay() == 1}">
+         내일부터 시작
+      </c:when>
+            <c:when test="${chalDto.getDDay() == 0}">
+         오늘 시작
+      </c:when>
+      <%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+      <c:otherwise>
+         ${chalDto.getDDay()}일 뒤 시작
+      </c:otherwise>
+   </c:choose>
+   
+   <div>
+      <a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"> ${chalDto.chalTitle}</a>
+   </div><br>
+   <div>${chalDto.getStartDate()}~${chalDto.getEndDate()}</div><br>
+   <div>${chalDto.getChalTopic()}</div>
 현재 달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${chalDto.cnt*100/28}"/>%
-				 <c:choose>
-					<c:when test="${chalDto.getDDay()>0}">
-					<button disabled>내 인증글</button>
-				 </c:when>
-				 <c:otherwise>
-				 <a href="/confirm/mylist?chalNo=${chalDto.chalNo}"><button>
-				 내 인증글</button></a>
-				 </c:otherwise>
-				 </c:choose>
+             pattern="0" value="${chalDto.cnt*100/28}"/>%
+             <c:choose>
+               <c:when test="${chalDto.getDDay()>0}">
+               <button disabled>내 인증글</button>
+             </c:when>
+             <c:otherwise>
+             <a href="/confirm/mylist?chalNo=${chalDto.chalNo}"><button>
+             내 인증글</button></a>
+             </c:otherwise>
+             </c:choose>
 </c:forEach>
 </c:otherwise>
 </c:choose>
@@ -182,18 +182,18 @@
 <c:forEach var="chalEndDto" items="${chalEndDto}">
 <div>
 
-		<a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"><img src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
+      <a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"><img src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
     </a>
                            챌린지 종료
-	
-	<div>
-		<a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"> ${chalEndDto.chalTitle}</a>
-	</div><br>
-	<div>${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div><br>
-	<div>${chalEndDto.getChalTopic()}</div>
+   
+   <div>
+      <a href="chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}"> ${chalEndDto.chalTitle}</a>
+   </div><br>
+   <div>${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div><br>
+   <div>${chalEndDto.getChalTopic()}</div>
 최종 달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${chalEndDto.cnt*100/28}"/>%
-				 <a href="/confirm/mylist?chalNo=${chalEndDto.chalNo}"><button>내 인증글</button></a>
+             pattern="0" value="${chalEndDto.cnt*100/28}"/>%
+             <a href="/confirm/mylist?chalNo=${chalEndDto.chalNo}"><button>내 인증글</button></a>
 </c:forEach>
 </c:otherwise>
 </c:choose>
@@ -225,56 +225,42 @@
         <c:forEach var="createDto" items="${createDto}">
 <div>
 
-		<a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}"><img src="chal/detail/download?chalNo=${createDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
+      <a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}"><img src="chal/detail/download?chalNo=${createDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
     </a>
                         <c:choose>
-		<c:when test="${createDto.getEndDDay() > 0 && createDto.getEndDDay() < 28}">
-			${createDto.getEndDDay()}일 뒤 종료
-		</c:when>
-		<c:when test="${createDto.getEndDDay() == 0}">
-			오늘 종료
-		</c:when>
-		<c:when test="${createDto.getEndDDay() < 0}">
-			종료
-		</c:when>
-		<c:when test="${createDto.getDDay() == 1}">
-			내일부터 시작
-		</c:when>
-				<c:when test="${createDto.getDDay() == 0}">
-			오늘 시작
-		</c:when>
-		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
-		<c:otherwise>
-			${createDto.getDDay()}일 뒤 시작
-		</c:otherwise>
-	</c:choose>
-	<div>
-		<a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}"> ${createDto.chalTitle}</a>
-	</div><br>
-	<div>${createDto.getStartDate()}~${createDto.getEndDate()}</div><br>
-	<div>${createDto.getChalTopic()}</div>
+      <c:when test="${createDto.getEndDDay() > 0 && createDto.getEndDDay() < 28}">
+         ${createDto.getEndDDay()}일 뒤 종료
+      </c:when>
+      <c:when test="${createDto.getEndDDay() == 0}">
+         오늘 종료
+      </c:when>
+      <c:when test="${createDto.getEndDDay() < 0}">
+         종료
+      </c:when>
+      <c:when test="${createDto.getDDay() == 1}">
+         내일부터 시작
+      </c:when>
+            <c:when test="${createDto.getDDay() == 0}">
+         오늘 시작
+      </c:when>
+      <%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+      <c:otherwise>
+         ${createDto.getDDay()}일 뒤 시작
+      </c:otherwise>
+   </c:choose>
+   <div>
+      <a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}"> ${createDto.chalTitle}</a>
+   </div><br>
+   <div>${createDto.getStartDate()}~${createDto.getEndDate()}</div><br>
+   <div>${createDto.getChalTopic()}</div>
   달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${createDto.cnt*100/28}"/>%
-				 <a href="/confirm/mylist?chalNo=${createDto.chalNo}"><button>내 인증글</button></a>
+             pattern="0" value="${createDto.cnt*100/28}"/>%
+             <a href="/confirm/mylist?chalNo=${createDto.chalNo}"><button>내 인증글</button></a>
 </c:forEach> 
-
 
 </c:otherwise>
 </c:choose>
-
-
     </div> 
- 
- 
- 
- 
- 
- 
- 
-     
-    
-    
-    
 </div>
 
 </body>
