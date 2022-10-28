@@ -89,6 +89,9 @@
 	    <div id="tab2" class="tab_content">
 			<table class="table table-border">
 				<tbody>
+				  평균 달성률 : 
+             <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
 					<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<tr>
 						<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
