@@ -3,49 +3,291 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="챌린지 상세" name="title" />
+	<jsp:param value="챌린지 종료" name="title" />
 </jsp:include>
    
 <style>
-    ul.tabs {
-    color: #AAAAAA;
-    position:relative;
-    float:left;
-    list-style: none;
-    width: 100%;
-    margin:0px 0px 30px 0px;
-    padding: 0;
-    }
+    a {
+		color : black;
+	}
+	div, table, td{
+	/*border: 0.2px dotted gray;*/ 
+	   border: 0.2px dotted gray;
+       margin: 40px 0px;
+      }
+      .chal-title {
+          font-size: 29px;
+          font-weight: bold;
+      }
 
-    ul.tabs li {
-    float: left;
-    border-bottom : 2px solid#AAAAAA;
-    text-align:center;
-    cursor: pointer;
-    width:50%;
-    padding: 0;
-    line-height: 50px;
-    height:50px;
-    }
-    ul.tabs li.active {
-    border-bottom-color : #6c7aef;
-    color: #6c7aef;
-    font-weight:bold;
-    }
+       span {
+          font-size: 26px;
+          vertical-align: middle;
+      }
 
-    .tab_container {
-    position:relative;
-    float:left;
-    width:100%;
-    padding:30px;
-    }
+      .img-margin {
+          margin-right: 10px;
+          height: 24px;
+      }
+      .border-line {
+          border: 3px solid #AAAAAA;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+      }
 
-    .tab_content {
-        border: none;
+      .largebtn {
+          border: none;
+          font-size: 20px;
+          padding: 0.75em;
+          cursor: pointer;
+          display: inline-block;
+          text-align: center;
+          text-decoration: none;
+          border-radius: 0.5em;
+          width: 100%;
+          height: 60px;
+      }
+       #largebutton3{
+           border:solid;
+           border-color: #6c7aef;
+           border-width: 2px 2px 2px 2px;
+           background-color: white;
+           color: #6c7aef;
+       }
+
+        /* tab menu */
+     ul.tabs {
+     color: #AAAAAA;
+     position:relative;
+     float:left;
+     list-style: none;
+     width: 100%;
+     margin:0px 0px 30px 8px;
+     padding: 0;
+     }
+
+     ul.tabs li {
+     float: left;
+     border-bottom : 2px solid#AAAAAA;
+     text-align:center;
+     cursor: pointer;
+     width:50%;
+     padding: 0;
+     line-height: 50px;
+     height:50px;
+     }
+     ul.tabs li.active {
+     border-bottom-color : #6c7aef;
+     color: #6c7aef;
+     font-weight:bold;
+     }
+
+     .tab_container {
+     position:relative;
+     float:left;
+     width:100%;
+     margin-top:0;
+     }
+
+     .tab_content {
+         border: none;
+     }
+      /* progressbar */
+      progress {
+     -webkit-appearance: none;    /* 기존 bar style 숨김*/
+     appearance: none;
+     }
+     progress::-webkit-progress-bar {
+       width: 790px;   /*bar 전체 길이 */
+       height: 15px;   /*bar 두께 */
+       background-color: #e5e6f9;  
+       border: none;
+       border-radius: 20px;
+     } 
+     progress::-webkit-progress-value {
+       background-color:  #6c7aef;
+       border-radius: 20px;
+     }
+     .bar-percent {
+       font-weight: bold;
+       font-size: 20px;
+       margin: 5px 0;
+       padding: 0 5px;
+       color: #6c7aef;
+     }
+     /* 다단배치 */
+     .first {
+       display: flex;
+       flex-direction: row;
+     }
+     .first > div {
+       flex-grow: 1;
+     }
+     .flexbox {
+       margin: 0px;
+     }
+     /* 아코디언메뉴 */
+     li {
+	     list-style: none;
+	     margin-left: -0.5em;
+     }
+     .acc-btn {
+	     border-radius: 4px;
+	     cursor: pointer;
+	     height: 42px;
+	     width:100%;
+	     border-top:none;
+     }
+     .side-menu-scroll-on{
+     	margin-left: 80px;
+     }
+     .acc-btn strong{
+	     color: #6c7aef;
+	     font-size: 1.1em;
+	     margin:12px 10px;
+	     display: inline-block;
+     }
+     .selected{
+     	color:#6c7aef !important;
+     }
+     .acc-btn .stats-title-img {
+	     border-right: 1px solid #e5e5e5;
+	     float: left;
+	     padding:4px;
+	     width: 41px;
+     }
+
+     .acc-btn .stats-tab-img-area{
+	     float:right;
+	     width:133px;
+	     height:100%;
+	     text-align: right;
+	     padding:12px 0;
+	     margin : 0px;
+     }
+     .acc-btn .stats-tab-img-area > img{
+	     width:15px;
+	     height:15px;
+     }
+
+     .acc-content-inner {
+     	padding:15px 0px;
+     }
+
+     li.acc-content {
+	     height:auto;
+	     width:100%;
+	     margin:0 auto;
+	     overflow:hidden;
+     }
+     .openContent{
+     	height:0px !important;
+     }
+     /* pagenavigation */
+     ul.page{
+	     list-style: none;  /*li 점 없애기*/
+	     margin: 0;
+	     padding: 0;
+	     font-size: 16px;
+	     color: #6c7aef;
+	     text-align: center;   
+     }
+     ul.page > li{
+	      display: inline-block; /*일렬로 정렬*/
+	      border: 1px solid transparent; /*투명한 네모 상자 */
+	      border-radius: 30%;
+	      padding: 0em; /*사이 간격*/
+	      line-height: -0.5em; /*글자 표시 높이*/
+	      margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
+	      min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
+	      text-align: center; /*상자안에 글자 중앙에 */
+	      cursor: pointer;
+	      width: 24px;
+	      height: 24px;
+     }
+     /* pagenavigation 번호에 커서대면 나타내는 표시  */
+     ul.page > li:hover,
+     ul.page > li > a:hover{
+	     border-color: #6c7aef; /*커서 대면 상자표시*/
+	     background-color: #6c7aef;
+	     color: white;
+	     font-weight: bold;
+	     cursor: pointer;
+     }
+     ul.page > li > a {
+	     display:block;
+	     width: 100%;
+	     color: #6c7aef;
+	     text-decoration: none;
+	     font-weight: bold;
+     }
+     .detail-top-img {
+	     position: relative;
+	     width : 790px;
+	     height: 400px;
+	     border-radius: 10px;
+     }
+     .chal-timer{
+	     position: absolute;
+	     margin: -50px 0;
+	     background-color: #707A89;
+	     background : rgba(112, 122, 137, 0.7);
+	     color: white;
+	     border-bottom-left-radius: 10px;
+	     border-bottom-right-radius: 10px;
+	     height: 50px;
+	     width: 790px;
+	     /* 타이머 폰트 가운데 */
+	     display: flex;
+	     justify-content: center;
+	     align-items: center;
+     }
+     .chal-timer-font {
+     	font-size: 20px;
+     }
+   	 .div-align {
+   		display : inline-block;
+   	}
+	.notice-border {
+        border-bottom: 1px solid #E7E7E7;
+        height: 60px;
+        /* 글자 세로 가운데 */
+        display: flex;
+        align-items: center;
+        margin : 0;
+ 	}
+ 	.confirm-empty {
+		height : 100px;
+		display: flex;
+		align-items:center; 
+		justify-content: center;
+	}
+	 .confirm-title-css {
+        font-weight: bold;
+        margin: 10px 0;
     }
+    .confirm-content-css {
+        line-height: 1.7em;
+        margin: 15px 0;
+        vertical-align: middle;
+    }
+    .confirm-border {
+        border-bottom: 1px solid #E7E7E7;
+        padding : 5px;
+    }
+   	.confirm-img.no-img {
+		display: none;
+	}
+	.confirm-img {
+        border-radius: 10px;
+		width: 90px;
+        height: 90px;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
+//tab
     $(function () {
     $(".tab_content").hide();
     $(".tab_content:first").show();
@@ -58,16 +300,67 @@
     $("#" + activeTab).show();
     });
 });
+  //아코디언 메뉴
+    $(document).on('touchstart click', '.acc-btn', function(){
+    $(this).next('.acc-content').toggleClass('openContent');
+    clickPolice = false;
+    if(!clickPolice){
+        clickPolice = true;
+    $(this).find('strong').toggleClass('selected');//메뉴의 타이틀 글자색
+
+       var $statsArrow = $(this).find('.stats-tab-img');//화살표방향바꾸게하기(열고닫기 버튼)
+        var src = ($statsArrow .attr('src') == '/images/arrow-down.png')
+           ? '/images/arrow-up.png'
+           : '/images/arrow-down.png';
+
+        $statsArrow .attr('src', src);
+      }
+ });
+	$(function(){
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function(){
+			$(this).attr("src", "/images/bg_default.png");
+		});
+		
+		//인증샷이 없으면 img 태그 가리기
+		$(".confirm-img").on("error", function(){
+			$(this).addClass("no-img");
+		});
+	});
+	
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
+    });
 </script>
+
 <div class="container-794">
-	<ul class="list">
-		<li>챌린지 이미지 :<img
-			src="detail/download?chalNo=${chalDto.getChalNo()}"></li>
-		<li>챌린지 제목 : ${chalDto.getChalTitle()}</li>
-		<li>챌린지 시작일: ${chalDto.getStartDate()}~${chalVO.endDate}</li>
-		<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button>챌린지 바로가기</button></a><br>
-	</ul>
-			
+
+<%-- 이미지 --%>
+	  <div class="detail-top" style="margin-top:20px"> 
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
+          <div class="chal-timer">
+              <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
+          </div>
+      </div>
+ 
+        <%-- 챌린지 제목 --%>
+	<div> 
+		<span class="chal-title">${chalDto.getChalTitle()}</span>
+	</div>
+	
+	<%-- 시작일 --%>
+	<div>  
+		<span><img src="/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
+	</div>
+
+	<div>
+	 	<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button class="largebtn" type="submit" id="largebutton3">챌린지 바로가기</button></a>
+	</div>	
+
+<!-- tab title -->
     <ul class="tabs">
         <li class="active" rel="tab1">내 인증 현황</li>
         <li rel="tab2">참가자 인증 현황</li>
@@ -75,29 +368,155 @@
     
     <div class="tab_container">
     
-        <!-- #tab1 -->
-        <div id="tab1" class="tab_content">
-    
-		<ul class="list">
-            달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${progressDto*100/28}"/>%
-		</ul>
-
-        </div>
+        <!-- tab1 시작-->
+    	<div id="tab1" class="tab_content">
+        
+	        <h2>달성률</h2>
+	                <!--progress bar--> 
+	                 <div>
+	                    <div class="bar-percent"> <fmt:formatNumber type="number" 
+					 		pattern="0" value="${progressDto*100/28}"/>%</div>
+	                    <progress max="100" value="<fmt:formatNumber type="number" 
+					 		pattern="0" value="${progressDto*100/28}"/>"></progress>
+	                </div>
+ 
+	                <!-- 
+                테스트용 progress bar  숫자 바꾸면 진행률 확인가능
+                <div>
+                    <div class="bar-percent">35%</div>
+                    <progress max="100" value="35"></progress>
+                </div>                 
+                   -->
+                   
+	         <h2>인증 현황</h2>
+	         
+	          <table width="600" style="margin-left: auto; margin-right: auto;">
+                    <thead class="row center">
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                        </tr>
+                    </thead>
+                    <tbody class="row center">
+                        <tr>
+                            <td> <i class="fa-solid fa-circle-check"></i> </td>
+                            <td> <i class="fa-solid fa-circle-check"></i> </td>
+                            <td> <i class="fa-solid fa-circle-check"></i> </td>
+                            <td> <i class="fa-regular fa-circle-check"></i> </td>
+                            <td> <i class="fa-regular fa-circle-check"></i>  </td>
+                            <td> <i class="fa-regular fa-circle-check"></i> </td>
+                            <td> <i class="fa-regular fa-circle-check"></i> </td>
+                        </tr>
+                    </tbody>
+                    <thead class="row center">
+                        <tr>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                        </tr>
+                    </thead>
+                    <tbody class="row center">
+                        <tr>
+                			<td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                        </tr>
+                    </tbody>
+                    <thead class="row center">
+                        <tr>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                            <th>18</th>
+                            <th>19</th>
+                            <th>20</th>
+                            <th>21</th>
+                        </tr>
+                    </thead>
+                    <tbody class="row center">
+                        <tr>
+     						<td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                        </tr>
+                    </tbody>
+                    <thead class="row center">
+                        <tr>
+                            <th>22</th>
+                            <th>23</th>
+                            <th>24</th>
+                            <th>25</th>
+                            <th>26</th>
+                            <th>27</th>
+                            <th>28</th>
+                        </tr>
+                    </thead>
+                    <tbody class="row center">
+                        <tr>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                            <td>?</td>
+                        </tr>
+                    </tbody>
+                </table>
+         </div> 
+         <!-- tab1 끝 -->
 
         <!-- #tab2 --> 
 	    <div id="tab2" class="tab_content">
+	    
 			<table class="table table-border">
-			<h2>총 참가자 정보</h2><br> 
-             평균 달성률 : 
-             <fmt:formatNumber type="number" 
-				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
-			<br><br><br>
-			총 ${chalDto.getChalPerson()}명 참가<br><br>
-			100% 달성  &nbsp;&nbsp; ${perfectDto.size()}명<br>
-			85%이상 달성 &nbsp;&nbsp; ${allProgressDto.size()}명<br>
-			85%미만 달성 &nbsp;&nbsp;${failDto.size()}명
+			<h2>총 참가자 정보</h2>
 			
+			<!--progress bar-->    	   
+	      	<div>
+               <div class="bar-percent"> <fmt:formatNumber type="number" 
+		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
+               <progress max="100" value="<fmt:formatNumber type="number" 
+		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
+            </div>
+            
+            <h2>총 ${chalDto.getChalPerson()}명 참가</h2>
+            
+            <table width="600" style="margin-left: auto; margin-right: auto;">
+               <tbody class="row center" style="text-align:left">
+                        <tr>
+                            <th>100% 달성</th>
+                            <td> ${perfectDto.size()}명</td>
+                            <td rowspan='3'>차트넣기</td>
+                        </tr>
+                         <tr>
+                            <th>85%이상 달성</th>
+                            <td>${allProgressDto.size()}명</td>
+                        </tr>
+                        <tr>
+                            <th>85%미만 달성</th>
+                            <td>${failDto.size()}명</td>
+                        </tr>
+                   </tbody>
+               </table>
+
 				<tbody>
 				<h2>챌린지 성공 (${allProgressDto.size()}명)</h2>
 					<c:forEach var="allProgressDto" items="${allProgressDto}">
@@ -107,7 +526,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-	    </div> 
+	
 
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row left">
@@ -148,6 +567,7 @@
 			</a>
 			<br><br><br>
 		</c:forEach>
+		</div> 
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -19,6 +19,9 @@
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
    
 <style>
+	a {
+		color : black;
+	}
 	div{
 	/*border: 0.2px dotted gray;*/ 
 	   border: 0.2px dotted transparent;
@@ -497,16 +500,16 @@
         <!-- tab2 시작 --> 
 	    <div id="tab2" class="tab_content">
 
-	    
+	      
 	     <h2>달성률</h2>
 	     	<!--progress bar-->    	   
 	      	   <div>
                <div class="bar-percent"> <fmt:formatNumber type="number" 
-					pattern="0" value="${progressDto*100/28}"/>%</div>
+		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
                <progress max="100" value="<fmt:formatNumber type="number" 
-					pattern="0" value="${progressDto*100/28}"/>"></progress>
+		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
                </div>
-              
+
 		 <!--<div> 인증현황 추가 예정 
 			참가자들 달성률 : 
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
@@ -514,6 +517,10 @@
 				 pattern="0" value="${allProgressDto.cnt*100/28}"/>%
 			</c:forEach>
 		</div>-->
+		
+		평균 달성률 : 
+          <fmt:formatNumber type="number" 
+		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
 	     
 	     <h2>인증 현황</h2> <!-- 추가 예정 -->
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
@@ -530,17 +537,8 @@
                          인증현황         
                        </section>
                       </li>
-                   </c:forEach>
-                   
-			<table class="table table-border">
-				<tbody>
-				  평균 달성률 : 
-             <fmt:formatNumber type="number" 
-				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
-					
-				</tbody>
-			</table>
-
+               </c:forEach>               
+				
 
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row div-align">
