@@ -145,6 +145,7 @@
 	.home-chal-title {
 		font-weight: bold;
 		font-size: 22px;
+		text-align: left;
 	}
 	
 	/* table 왼쪽 나란히 정렬 */
@@ -207,6 +208,12 @@
 		color: #6c7aef;
 		text-decoration: none;
 		font-weight: bold;
+	}
+	.ellipsis {
+	  width: 288px;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;  /* 말줄임 적용 */
 	}
 </style>
 	
@@ -301,7 +308,7 @@
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
-					<span class="home-chal-title">${chalDto.chalTitle}</span>
+					<span class="home-chal-title ellipsis">${chalDto.chalTitle}</span>
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
@@ -430,7 +437,7 @@
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
-					<span class="home-chal-title"> ${chalDtoRecruited.chalTitle}</span>
+					<span class="home-chal-title ellipsis"> ${chalDtoRecruited.chalTitle}</span>
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>

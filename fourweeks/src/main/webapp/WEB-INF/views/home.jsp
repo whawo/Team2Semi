@@ -127,6 +127,7 @@
 	.home-chal-title {
 		font-weight: bold;
 		font-size : 22px;
+		text-align: left;
 	}
 
 	 /* table 왼쪽 나란히 정렬 */
@@ -144,6 +145,12 @@
 
 	.select-hidden {
 		display:none;
+	}	
+	.ellipsis {
+	  width: 288px;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;  /* 말줄임 적용 */
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -240,7 +247,7 @@
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
-					<span class="home-chal-title">${chalDto.chalTitle}</span>
+					<span class="home-chal-title ellipsis">${chalDto.chalTitle}</span>
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
