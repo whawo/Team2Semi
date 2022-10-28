@@ -69,7 +69,6 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
-        
     }
      /* pagenavigation */
      ul.page{
@@ -221,9 +220,9 @@
     });
 </script>
 
-<div class="container-794 container-margin">
+<div class="container-794">
 
-	<h2>내 인증글</h2>
+	<h2 style="margin-top : 100px;">내 인증글</h2>
 
 	<h3>챌린지 정보</h3>
 
@@ -240,17 +239,17 @@
 	<div>  <!-- label -->
 		<c:choose>
 		<c:when test="${chalVO.endDday > 0 && chalVO.endDday < 28}">
-			<input class="label-status" placeholder="${chalVO.endDday}일 뒤 종료">			
+			<input class="label-status" placeholder="${chalVO.endDday}일 뒤 종료" disabled>			
 		</c:when>
 		<c:when test="${chalVO.endDday == 0}">
-			<input class="label-status" placeholder="오늘 종료">			
+			<input class="label-status" placeholder="오늘 종료" disabled>			
 		</c:when>
 		<c:when test="${chalVO.endDday < 0}">
-			<input class="label-status" placeholder="종료">		
+			<input class="label-status" placeholder="종료" disabled>		
 		</c:when>
 		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
 		<c:otherwise>
-    		<input class="label-status" placeholder="${chalVO.getDDay()}일 뒤 시작">
+    		<input class="label-status" placeholder="${chalVO.getDDay()}일 뒤 시작" disabled>
 		</c:otherwise>
 		</c:choose>	
     </div>
@@ -266,16 +265,16 @@
 	 <div class="label-align"> <!-- 챌린지 종류-->
      <c:choose>
 		<c:when test="${chalDto.chalTopic == '그 외'}">
-			<input class="label-category" placeholder="기타"> 
+			<input class="label-category" placeholder="기타" disabled> 
 		</c:when>
 		<c:otherwise>	
-		 	<input class="label-category" placeholder="${chalDto.chalTopic}"> 
+		 	<input class="label-category" placeholder="${chalDto.chalTopic}" disabled> 
 		</c:otherwise>
 	</c:choose>
 	 </div>
 	 
 	 <div class="label-align"> <!-- 달성률 -->
-         <input class="label-achieve" placeholder="현재 달성률 ??%"> <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
+         <input class="label-achieve" placeholder="현재 달성률 ??%" disabled> <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
      </div>            
 </a>
 </div> <!-- 2단 끝 -->
@@ -295,7 +294,7 @@
      <!-- 관리자글 -->
      <div class="notice-border">
      	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-            <input class="label-notice" placeholder="공지">&nbsp; 인증글 업로드 오류 해결 방법 안내
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 인증글 업로드 오류 해결 방법 안내
      </div>     
      
      <!--인증글 목록-->
@@ -330,11 +329,8 @@
 	      		<span>작성한 인증글이 없습니다</span>
 	      </c:if>
 	 </div>
-
-      </div> <!-- 인증글 목록 끝 -->    
-      
-      
-     </a>
+    </div> <!-- 인증글 목록 끝 -->    
+   </a>
 
 	<!-- 페이지 내비게이터 -->
 	<div class="row center">
@@ -400,5 +396,7 @@
 		</li>
 	</div>
 </div>	
+
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

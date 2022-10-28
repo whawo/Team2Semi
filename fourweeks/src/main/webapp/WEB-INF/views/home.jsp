@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -276,9 +276,9 @@
 			     <div class="row chal-item">
 			         <%-- 라벨 --%>
 			        <c:if test="${chalDto.getDDay() > 0}">
-						<input class="label-wait" placeholder="모집중">&nbsp;
+						<input class="label-wait" placeholder="모집중" disabled>&nbsp;
 					</c:if>
-		            <input class="label-category" placeholder="${chalDto.chalTopic}">&nbsp;
+		            	<input class="label-category" placeholder="${chalDto.chalTopic}" disabled>&nbsp;
 			     </div>
 			  </div> 
 			  </a>

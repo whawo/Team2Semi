@@ -21,6 +21,7 @@
 <style>
 	div{
 	/*border: 0.2px dotted gray;*/ 
+	   border: 0.2px dotted transparent;
        margin: 40px 0px;
       }
       .chal-title {
@@ -254,7 +255,45 @@
      .chal-timer-font {
      	font-size: 20px;
      }
-   }
+   	 .div-align {
+   		display : inline-block;
+   	}
+	.notice-border {
+        border-bottom: 1px solid #E7E7E7;
+        height: 60px;
+        /* 글자 세로 가운데 */
+        display: flex;
+        align-items: center;
+        margin : 0;
+ 	}
+ 	.confirm-empty {
+		height : 100px;
+		display: flex;
+		align-items:center; 
+		justify-content: center;
+	}
+	 .confirm-title-css {
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    .confirm-content-css {
+        line-height: 1.7em;
+        margin: 15px 0;
+        vertical-align: middle;
+    }
+    .confirm-border {
+        border-bottom: 1px solid #E7E7E7;
+        padding : 5px;
+    }
+   	.confirm-img.no-img {
+		display: none;
+	}
+	.confirm-img {
+        border-radius: 10px;
+		width: 90px;
+        height: 90px;
+	}
+	
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -280,19 +319,37 @@
     $(this).find('strong').toggleClass('selected');//메뉴의 타이틀 글자색
 
        var $statsArrow = $(this).find('.stats-tab-img');//화살표방향바꾸게하기(열고닫기 버튼)
-        var src = ($statsArrow .attr('src') == './semi-image/arrow-down.png')
-           ? './semi-image/arrow-up.png'
-           : './semi-image/arrow-down.png';
+        var src = ($statsArrow .attr('src') == '/images/arrow-down.png')
+           ? '/images/arrow-up.png'
+           : '/images/arrow-down.png';
 
         $statsArrow .attr('src', src);
       }
  });
+	$(function(){
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function(){
+			$(this).attr("src", "/images/bg_default.png");
+		});
+		
+		//인증샷이 없으면 img 태그 가리기
+		$(".confirm-img").on("error", function(){
+			$(this).addClass("no-img");
+		});
+	});
+	
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
+    });
 </script>
 
 <div class="container-794">
 
 	<%-- 이미지 --%>
-	  <div class="detail-top"> 
+	  <div class="detail-top" style="margin-top:120px"> 
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
           <div class="chal-timer">
               <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
@@ -332,7 +389,7 @@
 	                    <progress max="100" value="<fmt:formatNumber type="number" 
 					 		pattern="0" value="${progressDto*100/28}"/>"></progress>
 	                </div>
-	                
+ 
 	                <!-- 
                 테스트용 progress bar  숫자 바꾸면 진행률 확인가능
                 <div>
@@ -441,69 +498,91 @@
 	    <div id="tab2" class="tab_content">
 	    
 	     <h2>달성률</h2>
+	     	<!--progress bar-->    	   
+	      	   <div>
+               <div class="bar-percent"> <fmt:formatNumber type="number" 
+					pattern="0" value="${progressDto*100/28}"/>%</div>
+               <progress max="100" value="<fmt:formatNumber type="number" 
+					pattern="0" value="${progressDto*100/28}"/>"></progress>
+               </div>
+              
+		 <!--<div> 인증현황 추가 예정 
+			참가자들 달성률 : 
+			<c:forEach var="allProgressDto" items="${allProgressDto}">
+				${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
+				 pattern="0" value="${allProgressDto.cnt*100/28}"/>%
+			</c:forEach>
+		</div>-->
 	     
-	     <!--progress bar-->    	                
-	       <!-- 테스트용 progress bar  숫자 바꾸면 진행률 확인가능
-                <div>
-                    <div class="bar-percent">35%</div>
-                    <progress max="100" value="35"></progress>
-                </div>           
-              -->      
-                   
-			<table class="table table-border">
-				<tbody>
-					<c:forEach var="allProgressDto" items="${allProgressDto}">
-					<tr>
-						<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
-						 pattern="0" value="${allProgressDto.cnt*100/28}"/>%</td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-	     
-
+	     <h2>인증 현황</h2> <!-- 추가 예정 -->
+			<c:forEach var="allProgressDto" items="${allProgressDto}">
+                    <li class="acc-btn" id="menu1">
+                        <strong class="selected">${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
+				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%</strong>
+                        <div class="stats-tab-img-area">
+                           <img src="/images/arrow-up.png" alt="stats tab arrow" class="stats-tab-img"/>
+                        </div>
+                     </li>
+                      
+                      <li class="acc-content">
+                       <section class="acc-content-inner">
+                         인증현황         
+                       </section>
+                      </li>
+                   </c:forEach>
 
 		<!-- 인증글 목록(최신 max 5개) -->
-		<div class="row left">
-			최신 인증글
+		<div class="row div-align">
+			<h2>인증글</h2>
 		</div>
-		<div class="row right">
+		
+		<div class="row div-align float-right">
 			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
 		</div>
 		<br><br>
 		
+		<!-- 관리자글 -->
+     	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
+     <div class="notice-border">
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
+     </div>     
 		
-		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-		[공지] 글 제목
-		<br><br>
-		[공지] 글 제목
-		<br><br>
-		[공지] 글 제목
-		<br><br>
-	
-		<c:forEach var="list" items="${confirmList}">
-			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-			<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-			<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
-			<br><br>
-			${list.confirmTitle}
-			<br>
-			${list.confirmContent}
-			<br>
-			<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-			<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
-			${list.userNick}
-			&nbsp; 
-			${list.confirmDate} 
-			&nbsp; 
-			<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-			&nbsp;
-			<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-			&nbsp; 
-			<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</a>
-			<br><br><br>
+<!-- confirm_mylist와 동일 -->		  
+      <!--인증글 목록-->
+	<c:forEach var="list" items="${confirmList}">
+	<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+      <div class="confirm-border">
+           <div class="confirm-title-css"> <!-- 챌린지 제목 -->
+           	${list.confirmTitle} 
+           </div>
+            
+            <div class="row first"> <!-- 인증 사진, 내용 -->   
+            	<div class="confirm-content-css">         
+					${list.confirmContent}
+					<br><br>
+					${list.confirmDate} 
+					&nbsp; 
+					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+					&nbsp;
+					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+					&nbsp; 
+					<i class="fa-regular fa-comment"></i> ${list.replyCount}
+				</div>
+
+				<div class="confirm-content-css">
+           			<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img">
+              	</div>					
+		 	</div> <!-- 인증글, 사진 목록 끝 -->			
 		</c:forEach>
+
+		<div  class="confirm-empty">
+			 <c:if test="${listCnt == 0}">
+		      		<span style="font-size : 14px;">작성한 인증글이 없습니다</span>
+		      </c:if>
+		 </div>
+	    </div> <!-- 인증글 목록 끝 -->     
+     </a>
+	
 	</div>
 </div>
 </div> 

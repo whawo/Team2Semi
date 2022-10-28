@@ -145,13 +145,13 @@
 </script>
 
 <form action ="insert" method="post" >
-	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}">
+	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}" disabled>
 	
 <div class="container-794">
 
 	<%-- 이미지 --%>
 
-	  <div class="detail-top"> 
+	  <div class="detail-top" style="margin-top:100px;"> 
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
 
           <div class="chal-timer">
@@ -172,7 +172,7 @@
 	<%-- 시작일 --%>
 	<div>  
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
-		<input class="label-status label-status-start" placeholder="${chalVO.getDDay()}일뒤 시작">
+		<input class="label-status label-status-start" placeholder="${chalVO.getDDay()}일뒤 시작" disabled>
 	</div>
 	
 	 <%-- 종료일 --%>
@@ -185,16 +185,16 @@
 	<div> 
 		<c:choose>
 			<c:when test="${chalDtoRecruited.getDDay() < -28}">
-				<input class="label-status" placeholder="종료">
+				<input class="label-status" placeholder="종료" disabled>
 			</c:when>
 			<c:when test="${chalDtoRecruited.getDDay() < 0}">
-				<input class="label-progress" placeholder="진행중">
+				<input class="label-progress" placeholder="진행중" disabled>
 			</c:when>
 			<c:otherwise>
-				<input class="label-wait" placeholder="모집중">
+				<input class="label-wait" placeholder="모집중" disabled>
 			</c:otherwise>
 		</c:choose>
-		<input class="label-category" placeholder="${chalDto.chalTopic}">
+		<input class="label-category" placeholder="${chalDto.chalTopic}" disabled>
 	</div>
 	
 	 <%-- 버튼 --%>
