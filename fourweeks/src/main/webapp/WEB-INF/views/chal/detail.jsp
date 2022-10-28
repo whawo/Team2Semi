@@ -252,7 +252,7 @@
 					</c:when>
 					<c:otherwise>
 					<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
-						<button class="largebtn" type="submit" id="largebutton1-1" disabled>참가하기</button>
+						<button class="largebtn" type="submit" id="largebutton1-1"   style="pointer-events: none" disabled>참가하기</button>
 					</c:otherwise>
 			</c:choose>
 	</div>

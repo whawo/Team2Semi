@@ -188,6 +188,9 @@
 	                <a href="edit?confirmNo=${confirmVO.confirmNo}"><button class="navbtn navbutton1" type="submit">수정하기</button></a>
 	        </c:if>
         </div>
+        
+	<!-- 기본 이벤트 차단 -->
+	<!-- 로그인한 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요	-->
 	
 	<!-- 댓글 CRUD 비동기 처리 예정 -->
 	<!-- 댓글 입력 -->
@@ -205,23 +208,11 @@
 	        <button class="navbtn navbutton1" type="submit"  style="height:50px; width:70px;">댓글</button>
 	   	</div>
 	</form>	
-
-
-	<!-- 기본 이벤트 차단 -->
-	<!-- 로그인한 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요
-	<img src = "#" width="50" height="50" class="user-img">
-	<form action="reply/write" method="post" class="reply-insert-form">
-		<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
-		<input type="text" name="replyContent" placeholder="댓글을 남겨보세요." required>
-		<button type="submit">댓글</button>
-	</form>
-	<br><br>
-	-->
+	
 	
 	<!-- 등록된 댓글 리스트 (jQuery에서 비동기로 목록 업데이트)-->
 	<h2>댓글 <span style="color:#6c7aef">${replyList.size()}</span></h2>
 					
-				
 	<table class="table-reply-list" style="width:100%">
 		<tbody>
 			<c:forEach var="replyDto" items="${replyList}">
