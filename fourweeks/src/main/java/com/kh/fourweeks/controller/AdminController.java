@@ -63,4 +63,9 @@ public class AdminController {
 	public String chalReport(@ModelAttribute ChalDto chalDto) {
 		return "admin/chal_report";
 	}
+	
+	@GetMapping("/report/user")
+	public String userReport() {
+		return "admin/user_report";
+	}
 }

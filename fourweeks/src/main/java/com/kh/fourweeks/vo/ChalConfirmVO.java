@@ -4,11 +4,13 @@ import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@NoArgsConstructor @AllArgsConstructor @Builder
+@Getter @Setter
 public class ChalConfirmVO {
 	private int confirmNo;
 	private int chalNo;
@@ -25,6 +27,7 @@ public class ChalConfirmVO {
 	//페이징
 	private int p = 1;
 	private int size = 10;
+	
 	@ToString.Include
 	public int endRow(){
 		return p * size;
