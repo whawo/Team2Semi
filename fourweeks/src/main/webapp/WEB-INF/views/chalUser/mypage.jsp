@@ -110,6 +110,7 @@
 </c:when>
 
 <c:otherwise>
+<a href ="/confirm/write"><button>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
 <c:forEach var="chalDto" items="${chalDto}">
 <div>
 		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}"><img src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="200" height="200" class="chal-img"></div>
