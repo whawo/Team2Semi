@@ -192,7 +192,7 @@ public class ChalController {
 		model.addAttribute("confirmList", confirmDao.allConfirmTopN(vo));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		//전체 참가자 평균 달성률
-		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+//		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		System.out.println(model+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "chal/mychal_end";
 	}
