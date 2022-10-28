@@ -114,7 +114,7 @@
 		<div class="row left">
 			최신 인증글
 		</div>
-		<div class="row right">
+		<div class=t"row right">
 			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
 		</div>
 		<br><br>
