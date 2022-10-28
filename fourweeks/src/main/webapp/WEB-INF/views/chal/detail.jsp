@@ -131,15 +131,17 @@
         }
     });
 	//참가하기 여부 
-       $(".confirm-form").click(function(e){
-           var choice = confirm("정말 참가하시겠습니까?");
-           if(choice) {
-               return true; //통과
-           }
-           else {
-               return false; //차단
-           }
-       });
+     $(function(){
+        $(".confirm-form").click(function(e){
+            var choice = confirm("정말 참가하시겠습니까?");
+            if(choice) {
+                return true; //통과
+            }
+            else {
+                return false; //차단
+            }
+        });
+    });
 </script>
 
 <form action ="insert" method="post" >

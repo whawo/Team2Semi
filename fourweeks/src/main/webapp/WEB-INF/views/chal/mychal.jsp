@@ -325,7 +325,7 @@
     	<div id="tab1" class="tab_content">
         
 	        <h2>달성률</h2>
-	                <!--progress bar-->     
+	                <!--progress bar--> 
 	                 <div>
 	                    <div class="bar-percent"> <fmt:formatNumber type="number" 
 					 		pattern="0" value="${progressDto*100/28}"/>%</div>
@@ -443,13 +443,13 @@
 	     <h2>달성률</h2>
 	     
 	     <!--progress bar-->    	                
-	       <!-- 테스트용 progress bar  숫자 바꾸면 진행률 확인가능--> 
+	       <!-- 테스트용 progress bar  숫자 바꾸면 진행률 확인가능
                 <div>
                     <div class="bar-percent">35%</div>
                     <progress max="100" value="35"></progress>
-                </div>                
+                </div>           
+              -->      
                    
-	     <!-- 수정 예정 
 			<table class="table table-border">
 				<tbody>
 					<c:forEach var="allProgressDto" items="${allProgressDto}">
@@ -460,7 +460,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			-->           
+	     
 
 
 		<!-- 인증글 목록(최신 max 5개) -->
@@ -471,6 +471,8 @@
 			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
 		</div>
 		<br><br>
+		
+		
 		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
 		[공지] 글 제목
 		<br><br>
