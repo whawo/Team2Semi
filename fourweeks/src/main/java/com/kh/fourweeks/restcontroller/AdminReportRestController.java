@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.fourweeks.repository.ChalReportDao;
 import com.kh.fourweeks.vo.HalfStartVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
+import com.kh.fourweeks.vo.UserJoinedVO;
 
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
@@ -28,4 +29,9 @@ public class AdminReportRestController {
 	public List<HalfStartVO> halfCnt() {
 		return chalReportDao.halfCnt(); 
 	}
+	@GetMapping("/chal/user")
+	public List<UserJoinedVO> userCnt() {
+		return chalReportDao.joinedCnt();
+	}
+	
 }
