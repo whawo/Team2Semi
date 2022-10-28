@@ -153,7 +153,7 @@
 		
 		<c:choose>
 			<c:when test="${not vo.isLast()}">
-				<a href="lmylist?chalNo=${chalDto.chalNo}&p=${vo.lastBlock()}"><i class="fa-solid fa-angles-right"></i></a>
+				<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.lastBlock()}"><i class="fa-solid fa-angles-right"></i></a>
 			</c:when>
 			<c:otherwise>
 				<a href="#"><i class="fa-solid fa-angles-right"></i></a>
