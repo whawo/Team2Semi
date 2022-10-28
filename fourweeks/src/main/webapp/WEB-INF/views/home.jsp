@@ -127,6 +127,7 @@
 	.home-chal-title {
 		font-weight: bold;
 		font-size : 22px;
+		text-align: left;
 	}
 
 	 /* table 왼쪽 나란히 정렬 */
@@ -146,7 +147,7 @@
 		display:none;
 	}	
 	.ellipsis {
-	  width: 200px;
+	  width: 288px;
 	  white-space: nowrap;
 	  overflow: hidden;
 	  text-overflow: ellipsis;  /* 말줄임 적용 */
