@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AdminDto;
+import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.repository.AdminDao;
 
 @Controller
@@ -56,5 +57,10 @@ public class AdminController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		return "redirect:login";
+	}
+	
+	@GetMapping("/report/chal")
+	public String chalReport(@ModelAttribute ChalDto chalDto) {
+		return "admin/chal_report";
 	}
 }

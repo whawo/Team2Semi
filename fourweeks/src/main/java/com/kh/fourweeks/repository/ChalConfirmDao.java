@@ -25,7 +25,7 @@ public interface ChalConfirmDao {
 	ChalConfirmVO read(int confirmNo); //인증글 상세 조회+조회수 증가
 	boolean updateReadcount(int confirmNo); //인증글 조회수 증가
 	
-	List<ChalConfirmVO> allConfirmList(int chalNo); //챌린지별 참가자 전체 인증글 목록 조회
-	List<ChalConfirmVO> allConfirmTopN(int chalNo, int begin, int end); //챌린지별 참가자 전체 인증글 topN개 조회
+	List<ChalConfirmVO> allConfirmList(ChalConfirmVO vo); //챌린지별 참가자 전체 인증글 목록 조회
+	List<ChalConfirmVO> allConfirmTopN(ChalConfirmVO vo); //챌린지별 참가자 전체 인증글 topN개 조회
 	int confirmCnt(int chalNo); //참가자 인증글 개수 조회
 }
