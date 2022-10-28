@@ -186,8 +186,12 @@ public class ChalController {
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(),
 						(String)session.getAttribute(SessionConstant.ID)));
-		//모든 참가자 달성률 조회
-		model.addAttribute("allProgressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
+		//모든 성공한 달성률 조회
+		model.addAttribute("allProgressDto" , chalDao.selectSuccessAllProgress(chalMyDetailDto.getChalNo()));
+		//모든 실패한 달성률 조회
+		model.addAttribute("failDto" , chalDao.selectFailAllProgress(chalMyDetailDto.getChalNo()));
+		//모든 100프로 달성자 조회
+		model.addAttribute("perfectDto" , chalDao.selectPerfectAllProgress(chalMyDetailDto.getChalNo()));
 		//참가자 인증글 목록(최신 5개)
 		model.addAttribute("confirmList", confirmDao.allConfirmTopN(vo));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));

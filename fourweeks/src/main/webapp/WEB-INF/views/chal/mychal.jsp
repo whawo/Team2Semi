@@ -496,6 +496,7 @@
 
         <!-- tab2 시작 --> 
 	    <div id="tab2" class="tab_content">
+
 	    
 	     <h2>달성률</h2>
 	     	<!--progress bar-->    	   
@@ -530,6 +531,16 @@
                        </section>
                       </li>
                    </c:forEach>
+                   
+			<table class="table table-border">
+				<tbody>
+				  평균 달성률 : 
+             <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
+					
+				</tbody>
+			</table>
+
 
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row div-align">

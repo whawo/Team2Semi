@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AdminDto;
-import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.repository.AdminDao;
+import com.kh.fourweeks.repository.ChalReportDao;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminHomeController {
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private ChalReportDao chalReportDao;
 	
 	@GetMapping("/home")
 	public String home(Model model,
@@ -60,7 +63,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/report/chal")
-	public String chalReport(@ModelAttribute ChalDto chalDto) {
+	public String chalReport(Model model) {
+		model.addAttribute("halfCnt", chalReportDao.halfCnt());
 		return "admin/chal_report";
 	}
 }

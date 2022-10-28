@@ -1,4 +1,4 @@
-package com.kh.fourweeks.controller;
+package com.kh.fourweeks.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

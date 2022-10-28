@@ -1,4 +1,4 @@
-package com.kh.fourweeks.controller;
+package com.kh.fourweeks.restcontroller;
 
 import java.util.List;
 
