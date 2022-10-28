@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.fourweeks.repository.ChalReportDao;
 import com.kh.fourweeks.vo.HalfStartVO;
+import com.kh.fourweeks.vo.MonthlyTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
 
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
@@ -27,5 +28,15 @@ public class AdminReportRestController {
 	@GetMapping("/chal/half")
 	public List<HalfStartVO> halfCnt() {
 		return chalReportDao.halfCnt(); 
+	}
+	
+	@GetMapping("/chal/topic_last")
+	public List<MonthlyTopicVO> topicLastMonth() {
+		return chalReportDao.topicLastMonth(); 
+	}
+	
+	@GetMapping("/chal/topic_this")
+	public List<MonthlyTopicVO> topicThisMonth() {
+		return chalReportDao.topicThisMonth(); 
 	}
 }
