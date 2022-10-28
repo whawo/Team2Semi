@@ -215,7 +215,7 @@
 
     <div id="tab3" class="tab_content">
             <c:choose>
-<c:when test="${chalEndDto.size() == 0}">
+<c:when test="${createDto.size() == 0}">
 <h2>개설한 챌린지가 없습니다.</h2>
 <a href ="/confirm/write"><button disabled>챌린지 인증</button></a><a href ="/chal/create"> <button>챌린지 개설</button></a>
 </c:when>
