@@ -6,8 +6,50 @@
 </jsp:include> 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
+	a{
+		color : black;
+	}
 	.confirm-img.no-img {
 		display: none;
+	}
+	div {
+		/*border : 1px solid gray; */
+		border : 1px solid transparent;
+	}
+	 .notice-border {
+        border-bottom: 1px solid #E7E7E7;
+        height: 60px;
+        /* 글자 세로 가운데 */
+        display: flex;
+        align-items: center;
+        position : relative;
+    }
+    .confirm-title-css {
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    .confirm-content-css {
+        line-height: 1.7em;
+        margin: 15px 0;
+        vertical-align: middle;
+    }
+    .confirm-border {
+        border-bottom: 1px solid #E7E7E7;
+        padding : 5px;
+        height : 200px;
+    }
+   .user-img {
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+	}
+	.confirm-img {
+        border-radius: 10px;
+		width: 90px;
+        height: 90px;
+	}
+	.div-align {
+		display : inline-block;
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -32,41 +74,51 @@
     });
 
 </script>
-	참가자 인증글
-	<br><br>
-	전체(${listCnt})
-	<br><br>
-	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-	[공지] 글 제목
-	<br><br>
-	[공지] 글 제목
-	<br><br>
-	[공지] 글 제목
-	<br><br>
 
+<div class="container-794">
+
+	<h2>참가자 인증글</h2>
+
+	<h3>전체(${listCnt})</h3>
+	
+	<!-- 관리자글 -->
+     <div class="notice-border">
+     	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 인증글 업로드 오류 해결 방법 안내
+     </div>      
+
+ <!--인증글 목록-->
 	<c:forEach var="list" items="${confirmList}">
-		<a href="detail?confirmNo=${list.confirmNo}">
-		<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-		<img src = "detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
-		<br><br>
-		${list.confirmTitle}
-		<br>
-		${list.confirmContent}
-		<br>
-		<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-		<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
-		${list.userNick}
-		&nbsp; 
-		${list.confirmDate} 
-		&nbsp; 
-		<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-		&nbsp;
-		<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-		&nbsp; 
-		<i class="fa-regular fa-comment"></i> ${list.replyCount}
-		</a>
-		<br><br><br>
-	</c:forEach>
+	<a href="detail?confirmNo=${list.confirmNo}">
+	
+	  <div class="confirm-border" >
+          <!-- 챌린지 제목 -->
+          <div class="confirm-title-css" style="position:relative">
+           	${list.confirmTitle} 
+          </div>
+          	<br><br>
+          	
+       	    <!-- 인증 사진, 내용 -->   
+            <div class="div-align">
+				${list.confirmContent}
+				<br><br><br><br><br><br>
+				<!-- 프로필, 닉네임 -->
+				<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+				<span>${list.userNick}</span>	
+				&nbsp; 
+				${list.confirmDate} 
+				&nbsp; 
+				<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+				&nbsp;
+				<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+				&nbsp; 
+				<i class="fa-regular fa-comment"></i> ${list.replyCount}
+			</div>
+		       <img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
+			</div>	
+		  </a>
+		</c:forEach>
+<!-- 인증글, 사진 목록 끝 -->			
 	
 	<!-- 페이지 내비게이터 -->
 	<div class="row center mt-40 mb-40">
@@ -120,5 +172,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+</div> <!-- container끝 -->
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

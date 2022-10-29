@@ -249,6 +249,7 @@
      }
    	 .div-align {
    		display : inline-block;
+   		margin:0;
    	}
 	.notice-border {
         border-bottom: 1px solid #E7E7E7;
@@ -286,6 +287,11 @@
         border-radius: 10px;
 		width: 90px;
         height: 90px;
+	}
+	   .user-img {
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
 	}
     /* chart*/
    .chart-size {
@@ -591,7 +597,7 @@
 		
 		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
 		  <div class="notice-border">
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기>
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
      	  </div>     
      	  
     <!-- confirm_mylist와 동일 -->
@@ -610,7 +616,7 @@
                
                <div class="div-align">
 					${list.confirmContent}
-					<br><br><br><br><br><br>
+					<br><br><br><br><br>
 					${list.confirmDate} 
 					&nbsp; 
 					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
