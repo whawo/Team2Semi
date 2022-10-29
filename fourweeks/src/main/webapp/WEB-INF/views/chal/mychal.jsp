@@ -504,25 +504,15 @@
 	     <h2>달성률</h2>
 	     	<!--progress bar-->    	   
 	      	   <div>
-               <div class="bar-percent"> <fmt:formatNumber type="number" 
+               <div class="bar-percent"> 평균달성률 :  <fmt:formatNumber type="number" 
 		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
-               <progress max="100" value="<fmt:formatNumber type="number" 
+               <progress max="100" value=" <fmt:formatNumber type="number" 
 		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
                </div>
-
-		 <!--<div> 인증현황 추가 예정 
-			참가자들 달성률 : 
-			<c:forEach var="allProgressDto" items="${allProgressDto}">
-				${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${allProgressDto.cnt*100/28}"/>%
-			</c:forEach>
-		</div>-->
-		
-		평균 달성률 : 
-          <fmt:formatNumber type="number" 
-		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
-	     
+		     
 	     <h2>인증 현황</h2> <!-- 추가 예정 -->
+	     
+	     <!-- 아코디언메뉴 -->
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
                     <li class="acc-btn" id="menu1">
                         <strong class="selected">${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
@@ -553,7 +543,7 @@
 		<!-- 관리자글 -->
      	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
      <div class="notice-border">
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기>
      </div>     
 		
 <!-- confirm_mylist와 동일 -->		  
@@ -582,6 +572,7 @@
            			<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img">
               	</div>					
 		 	</div> <!-- 인증글, 사진 목록 끝 -->			
+     		</a>
 		</c:forEach>
 
 		<div  class="confirm-empty">
@@ -590,7 +581,6 @@
 		      </c:if>
 		 </div>
 	    </div> <!-- 인증글 목록 끝 -->     
-     </a>
 	
 	</div>
 </div>

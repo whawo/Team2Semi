@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 종료" name="title" />
 </jsp:include>
@@ -12,7 +13,7 @@
 	}
 	div, table, td{
 	/*border: 0.2px dotted gray;*/ 
-	   border: 0.2px dotted gray;
+	   border: 0.2px dotted  transparent;
        margin: 40px 0px;
       }
       .chal-title {
@@ -58,36 +59,36 @@
 
         /* tab menu */
      ul.tabs {
-     color: #AAAAAA;
-     position:relative;
-     float:left;
-     list-style: none;
-     width: 100%;
-     margin:0px 0px 30px 8px;
-     padding: 0;
+	     color: #AAAAAA;
+	     position:relative;
+	     float:left;
+	     list-style: none;
+	     width: 100%;
+	     margin:0px 0px 30px 8px;
+	     padding: 0;
      }
 
      ul.tabs li {
-     float: left;
-     border-bottom : 2px solid#AAAAAA;
-     text-align:center;
-     cursor: pointer;
-     width:50%;
-     padding: 0;
-     line-height: 50px;
-     height:50px;
+	     float: left;
+	     border-bottom : 2px solid#AAAAAA;
+	     text-align:center;
+	     cursor: pointer;
+	     width:50%;
+	     padding: 0;
+	     line-height: 50px;
+	     height:50px;
      }
      ul.tabs li.active {
-     border-bottom-color : #6c7aef;
-     color: #6c7aef;
-     font-weight:bold;
+	     border-bottom-color : #6c7aef;
+	     color: #6c7aef;
+	     font-weight:bold;
      }
 
      .tab_container {
-     position:relative;
-     float:left;
-     width:100%;
-     margin-top:0;
+	     position:relative;
+	     float:left;
+	     width:100%;
+	     margin-top:0;
      }
 
      .tab_content {
@@ -95,8 +96,8 @@
      }
       /* progressbar */
       progress {
-     -webkit-appearance: none;    /* 기존 bar style 숨김*/
-     appearance: none;
+	     -webkit-appearance: none;    /* 기존 bar style 숨김*/
+	     appearance: none;
      }
      progress::-webkit-progress-bar {
        width: 790px;   /*bar 전체 길이 */
@@ -275,6 +276,8 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
+        height : 200px;
+        margin:0;
     }
    	.confirm-img.no-img {
 		display: none;
@@ -284,8 +287,15 @@
 		width: 90px;
         height: 90px;
 	}
+    /* chart*/
+   .chart-size {
+       width: 100px;
+       height: 100px;
+   }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+  <!--chartjs-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
 //tab
     $(function () {
@@ -333,6 +343,46 @@
         if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
           	location.href = location.href;
         }
+    });
+	
+	//chart 비동기 통신으로 수정할 예정
+    $(function(){
+            const ctx = document.querySelector('#myChart');
+            const myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['100%', '85%이상', '85%미만'],
+            datasets: [{
+                label: '# of Votes',
+                data: [4, 5, 1], 
+                backgroundColor: [
+                    'rgb(108,122,239)',
+                    'rgb(167,176,233)',
+                    'rgb(229,230,249)'
+                ],
+                cutout: "70%", //도넛안의 원 크기
+                borderWidth: 0 
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins:{
+                legend: {
+                    display: false //범례 제거
+                }
+            },
+            responsive: false, 
+            scales: {xAxes: [{
+                stacked:true, //축 제거
+            }] 
+        },
+        hover: {mode: null} //hover모드제거
+        }   
+      });
     });
 </script>
 
@@ -489,22 +539,22 @@
 			<table class="table table-border">
 			<h2>총 참가자 정보</h2>
 			
-			<!--progress bar-->    	   
-	      	<div>
-               <div class="bar-percent"> <fmt:formatNumber type="number" 
-		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
-               <progress max="100" value="<fmt:formatNumber type="number" 
-		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
-            </div>
+			<!--progress bar--> 
+	                 <div> 
+	                    <div class="bar-percent"> 평균 달성률 : <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
+	                    <progress max="100" value="<fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
+	                </div>
+
             
             <h2>총 ${chalDto.getChalPerson()}명 참가</h2>
             
-            <table width="600" style="margin-left: auto; margin-right: auto;">
+            <table width="150" >
                <tbody class="row center" style="text-align:left">
                         <tr>
                             <th>100% 달성</th>
                             <td> ${perfectDto.size()}명</td>
-                            <td rowspan='3'>차트넣기</td>
                         </tr>
                          <tr>
                             <th>85%이상 달성</th>
@@ -516,58 +566,71 @@
                         </tr>
                    </tbody>
                </table>
+                                           <!-- 차트 -->
+                             <div style="margin:0" >
+                        		<canvas id="myChart" class="chart-size"></canvas>
+                    		</div>
 
-				<tbody>
+
 				<h2>챌린지 성공 (${allProgressDto.size()}명)</h2>
-					<c:forEach var="allProgressDto" items="${allProgressDto}">
-					<tr>
-						<td>${allProgressDto.userNick}&nbsp; 달성률 : ${allProgressDto.average}
-					</tr>
+					<c:forEach var="allProgressDto" items="${allProgressDto}">	
+						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
 					</c:forEach>
-				</tbody>
-			</table>
-	
+					<br>
 
 		<!-- 인증글 목록(최신 max 5개) -->
-		<div class="row left">
-			최신 인증글
+		<div class="row div-align">
+			<h2>인증글</h2>
 		</div>
-		<div class=t"row right">
+		
+		<div class="row div-align float-right">
 			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
 		</div>
 		<br><br>
+		
+		
 		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-		[공지] 글 제목
-		<br><br>
-		[공지] 글 제목
-		<br><br>
-		[공지] 글 제목
-		<br><br>
-	
-		<c:forEach var="list" items="${confirmList}">
+		  <div class="notice-border">
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기>
+     	  </div>     
+     	  
+    <!-- confirm_mylist와 동일 -->
+		<!-- 인증글 목록 -->
+			<c:forEach var="list" items="${confirmList}">
 			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-			<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-			<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
-			<br><br>
-			${list.confirmTitle}
-			<br>
-			${list.confirmContent}
-			<br>
-			<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
+			
+			<div class="confirm-border" >
+          	<!-- 챌린지 제목 -->
+          	<div class="confirm-title-css" style="position:relative">
+           		${list.confirmTitle} 
+          	</div>
+          	<br><br>
+          	
+          	 <!-- 인증 사진, 내용 -->   
+               
+               <div class="div-align">
+					${list.confirmContent}
+					<br><br><br><br><br><br>
+					${list.confirmDate} 
+					&nbsp; 
+					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+					&nbsp;
+					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+					&nbsp; 
+					<i class="fa-regular fa-comment"></i> ${list.replyCount}
+				</div>
+					<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
+           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
+              </div>					
+			<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요
 			<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
 			${list.userNick}
 			&nbsp; 
-			${list.confirmDate} 
-			&nbsp; 
-			<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-			&nbsp;
-			<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-			&nbsp; 
-			<i class="fa-regular fa-comment"></i> ${list.replyCount}
+			-->
 			</a>
-			<br><br><br>
-		</c:forEach>
-		</div> 
+			</c:forEach>
+		  </div> 
+		</div>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

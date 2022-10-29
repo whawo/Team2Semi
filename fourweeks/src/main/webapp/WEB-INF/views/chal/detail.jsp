@@ -130,18 +130,6 @@
           	location.href = location.href;
         }
     });
-	//참가하기 여부 
-     $(function(){
-        $(".confirm-form").click(function(e){
-            var choice = confirm("정말 참가하시겠습니까?");
-            if(choice) {
-                return true; //통과
-            }
-            else {
-                return false; //차단
-            }
-        });
-    });
 </script>
 
 <form action ="insert" method="post" >
@@ -180,17 +168,6 @@
           </div>
       </div>
       
-      
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
 	<%-- 챌린지 제목 --%>
 	<div> 
 		<span class="chal-title">${chalDto.getChalTitle()}</span>
@@ -206,21 +183,6 @@
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 		<input class="label-status label-status-start" placeholder="${chalVO.getDDay()}일뒤 시작" disabled>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	 <%-- 종료일 --%>
 	<div>

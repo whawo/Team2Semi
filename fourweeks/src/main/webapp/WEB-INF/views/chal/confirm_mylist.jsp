@@ -26,8 +26,7 @@
 	.confirm-img {
         border-radius: 10px;
 		width: 90px;
-        height: 90px;
-
+		height: 90px;
 	}
 	div {
 	border : 1px solid  transparent; 
@@ -56,6 +55,7 @@
         /* 글자 세로 가운데 */
         display: flex;
         align-items: center;
+        position : relative;
     }
     .confirm-title-css {
         font-weight: bold;
@@ -69,6 +69,7 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
+        height : 200px;
     }
      /* pagenavigation */
      ul.page{
@@ -197,6 +198,9 @@
 	.user-img {
 	border-radius: 50%;
 	}
+	.div-align {
+		display : inline-block;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -274,7 +278,8 @@
 	 </div>
 	 
 	 <div class="label-align"> <!-- 달성률 -->
-         <input class="label-achieve" placeholder="현재 달성률 ??%" disabled> <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
+	 <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
+         <input class="label-achieve" placeholder="현재 달성률 ??%" disabled> 
      </div>            
 </a>
 </div> <!-- 2단 끝 -->
@@ -300,15 +305,18 @@
      <!--인증글 목록-->
 	<c:forEach var="list" items="${confirmList}">
 	<a href="detail?confirmNo=${list.confirmNo}">
-      <div class="confirm-border">
-           <div class="confirm-title-css"> <!-- 챌린지 제목 -->
+      <div class="confirm-border" >
+          <!-- 챌린지 제목 -->
+          <div class="confirm-title-css" style="position:relative">
            	${list.confirmTitle} 
-           </div>
+          </div>
+          	<br><br>
             
-            <div class="row first"> <!-- 인증 사진, 내용 -->   
-            	<div class="confirm-content-css">         
+             <!-- 인증 사진, 내용 -->   
+               
+               <div class="div-align">
 					${list.confirmContent}
-					<br><br>
+					<br><br><br><br><br><br>
 					${list.confirmDate} 
 					&nbsp; 
 					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
@@ -316,12 +324,11 @@
 					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 					&nbsp; 
 					<i class="fa-regular fa-comment"></i> ${list.replyCount}
-				</div>
-
-				<div class="confirm-content-css">
-           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img">
-              	</div>					
-		 	</div> <!-- 인증글, 사진 목록 끝 -->			
+			</div>
+           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
+              </div>					
+ 				<!-- 인증글, 사진 목록 끝 -->			
+	    </a>
 		</c:forEach>
 
 	<div  class="confirm-empty">
@@ -330,61 +337,50 @@
 	      </c:if>
 	 </div>
     </div> <!-- 인증글 목록 끝 -->    
-   </a>
 
-	<!-- 페이지 내비게이터 -->
-	<div class="row center">
-	<ul class="page">
-	<!-- 맨처음 -->
-		<li>
-			<c:choose>
-				<c:when test="${not vo.isFirst()}">
-					<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.firstBlock()}"><i class="fa-solid fa-angles-left"></i></a>
-				</c:when>
-				<c:otherwise>
-					<a href="#"><i class="fa-solid fa-angles-left"></i></a>
-				</c:otherwise>
-			</c:choose>
-		</li>
-		
+<!-- 페이지 내비게이터 -->
+	<div class="row center mt-40 mb-40">
 		<!-- 이전 -->
-		<li>
-			<c:choose>
-				<c:when test="${vo.hasPrev()}">
-					<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.prevBlock()}"><i class="fa-solid fa-angle-left"></i></a>
-				</c:when>
-				<c:otherwise>
-					<a href="#"><i class="fa-solid fa-angle-left"></i></a>
-				</c:otherwise>
-			</c:choose>
-		</li>
+		<c:choose>
+			<c:when test="${not vo.isFirst()}">
+				<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.firstBlock()}"><i class="fa-solid fa-angles-left"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angles-left"></i></a>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${vo.hasPrev()}">
+				<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.prevBlock()}"><i class="fa-solid fa-angle-left"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angle-left"></i></a>
+			</c:otherwise>
+		</c:choose>
 		
 		<!-- 숫자 -->
-		<li>
-			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-					<c:choose>
-						<c:when test="${vo.p == i}">
-							<a href="#">${i}</a>
-						</c:when>
-						<c:otherwise>
-							<a href="mylist?chalNo=${chalDto.chalNo}&p=${i}">${i}</a>
-						</c:otherwise>
-					</c:choose>
-			</c:forEach>
-		</li>
-		
-		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-		<li>
+		<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
 			<c:choose>
-				<c:when test="${vo.hasNext()}">
-					<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.nextBlock()}"><i class="fa-solid fa-angle-right"></i></a>
+				<c:when test="${vo.p == i}">
+					<a href="#">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="#"><i class="fa-solid fa-angle-right"></i></a>
+					<a href="mylist?chalNo=${chalDto.chalNo}&p=${i}">${i}</a>
 				</c:otherwise>
 			</c:choose>
-		</li>
-		<li>
+		</c:forEach>
+		
+		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+		<c:choose>
+			<c:when test="${vo.hasNext()}">
+				<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.nextBlock()}"><i class="fa-solid fa-angle-right"></i></a>
+			</c:when>
+			<c:otherwise>
+				<a href="#"><i class="fa-solid fa-angle-right"></i></a>
+			</c:otherwise>
+		</c:choose>
+		
 		<c:choose>
 			<c:when test="${not vo.isLast()}">
 				<a href="mylist?chalNo=${chalDto.chalNo}&p=${vo.lastBlock()}"><i class="fa-solid fa-angles-right"></i></a>
@@ -393,7 +389,6 @@
 				<a href="#"><i class="fa-solid fa-angles-right"></i></a>
 			</c:otherwise>
 		</c:choose>
-		</li>
 	</div>
 </div>	
 
