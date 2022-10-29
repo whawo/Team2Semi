@@ -4,6 +4,16 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="참가자 인증글" name="title"/>
 </jsp:include> 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+   href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+   rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
 	a{
@@ -51,6 +61,41 @@
 	.div-align {
 		display : inline-block;
 	}
+	ul.pagenation {
+  		list-style:none;
+
+		margin: 0;
+        padding: 0;
+    }
+    ul.pagenation > li {
+    	display: inline-block;
+    	text-align:center;
+    }
+    ul.pagenation > li > a {
+		float:left;
+		margin:3px;
+		width:30px;
+	    height: 30px;
+		color:#6c7aef;
+		font-weight:bold;
+	    font-size: 12px;
+		border:1px solid transparent;
+	    border-radius: 30%;
+		text-decoration:none;
+	    line-height : 2.3em;
+	}
+	.on {
+		color: white !important;
+		border:1px solid#6c7aef;
+		background-color:#6c7aef;
+	}
+   	ul.pagenation > li > a:hover, 
+   	ul.pagenation > li > a:focus {
+		color: white;
+		border:1px solid#6c7aef;
+		background-color:#6c7aef;
+	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -121,34 +166,37 @@
 <!-- 인증글, 사진 목록 끝 -->			
 	
 	<!-- 페이지 내비게이터 -->
-	<div class="row center mt-40 mb-40">
+	<div class="row center mt-40 mb-40 row">
 		<!-- 이전 -->
+	<ul class=" pagenation">
 		<c:choose>
 			<c:when test="${not vo.isFirst()}">
-				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.firstBlock()}"><i class="fa-solid fa-angles-left"></i></a>
+				<li><a href="all?chalNo=${vo.getChalNo()}&p=${vo.firstBlock()}">&laquo;</a></li>
 			</c:when>
 			<c:otherwise>
-				<a href="#"><i class="fa-solid fa-angles-left"></i></a>
+				<li><a href="#">&laquo;</a></li>
 			</c:otherwise>
 		</c:choose>
-		
+	
+	
 		<c:choose>
 			<c:when test="${vo.hasPrev()}">
-				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.prevBlock()}"><i class="fa-solid fa-angle-left"></i></a>
+				<li><a href="all?chalNo=${vo.getChalNo()}&p=${vo.prevBlock()}">&lt;</a></li>
 			</c:when>
 			<c:otherwise>
-				<a href="#"><i class="fa-solid fa-angle-left"></i></a>
+				<li><a href="#">&lt;</a></li>
 			</c:otherwise>
 		</c:choose>
-		
+	
+	
 		<!-- 숫자 -->
 		<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
 			<c:choose>
 				<c:when test="${vo.p == i}">
-					<a href="#">${i}</a>
+					<li><a href="#" class="on">${i}</a></li>
 				</c:when>
 				<c:otherwise>
-					<a href="all?chalNo=${vo.getChalNo()}&p=${i}">${i}</a>
+					<li><a href="all?chalNo=${vo.getChalNo()}&p=${i}">${i}</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -156,21 +204,22 @@
 		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 		<c:choose>
 			<c:when test="${vo.hasNext()}">
-				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.nextBlock()}"><i class="fa-solid fa-angle-right"></i></a>
+				<li><a href="all?chalNo=${vo.getChalNo()}&p=${vo.nextBlock()}"><i class="fa-solid fa-angle-right"></i></a></li>
 			</c:when>
 			<c:otherwise>
-				<a href="#"><i class="fa-solid fa-angle-right"></i></a>
+				<li><a href="#">&gt;</a></li>
 			</c:otherwise>
 		</c:choose>
-		
+
 		<c:choose>
 			<c:when test="${not vo.isLast()}">
-				<a href="all?chalNo=${vo.getChalNo()}&p=${vo.lastBlock()}"><i class="fa-solid fa-angles-right"></i></a>
+				<li><a href="all?chalNo=${vo.getChalNo()}&p=${vo.lastBlock()}">&raquo;</a></li>
 			</c:when>
 			<c:otherwise>
-				<a href="#"><i class="fa-solid fa-angles-right"></i></a>
+				<li><a href="#">&raquo;</a></li>
 			</c:otherwise>
 		</c:choose>
+	  </ul>
 	</div>
 </div> <!-- container끝 -->
 	
