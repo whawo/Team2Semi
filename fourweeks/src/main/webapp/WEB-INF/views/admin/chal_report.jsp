@@ -17,7 +17,12 @@
     <link rel="stylesheet" type="text/css" href="/css_admin/commons.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
     <style>
-        
+        #topicLastMonth {
+            padding: 30px;
+        }
+        #topicThisMonth {
+            padding: 30px;
+        }
     </style>
     <!-- jquery 라이브러리 -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
