@@ -67,4 +67,10 @@ public class AdminHomeController {
 		model.addAttribute("halfCnt", chalReportDao.halfCnt());
 		return "admin/chal_report";
 	}
+	
+	@GetMapping("/report/user")
+	public String userReport(Model model) {
+		model.addAttribute("userCnt", chalReportDao.joinedCnt());
+		return "admin/user_report";
+	}
 }
