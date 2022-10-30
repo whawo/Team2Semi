@@ -44,4 +44,9 @@ public class AdminReportRestController {
 	public List<UserJoinedVO> userCnt() {
 		return chalReportDao.joinedCnt();
 	}
+	
+	@GetMapping("/chal/today_confirm_rate")
+	public double todayConfirmRate() {
+		return chalReportDao.todayConfirmRate();
+	}
 }
