@@ -17,4 +17,6 @@ public interface AttachmentDao {
 	int selectChalImg(int chalNo); //챌린지 번호로 첨부파일 번호 조회
 	
 	AttachmentDto userImgInfo(String userId); //아이디로 첨부파일 정보 조회
+	int selectNoticeImg(int noticeNo);
+	AttachmentDto noticeImgInfo(int noticeNo);
 }
