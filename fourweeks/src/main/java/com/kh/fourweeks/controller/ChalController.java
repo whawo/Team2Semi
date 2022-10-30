@@ -166,7 +166,6 @@ public class ChalController {
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		
 		return "chal/mychal";
-		
 	}
 	
 	@GetMapping("/mychal_end")

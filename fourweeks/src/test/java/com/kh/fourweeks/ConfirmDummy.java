@@ -17,11 +17,11 @@ public class ConfirmDummy {
 	
 	@Test
 	public void before() {
-		for(int i=1; i < 22; i++) 
+		for(int i=1; i < 20; i++) 
 			confirmDao.write(ChalConfirmDto.builder()
-					.confirmNo(i+260)
-					.chalNo(61)
-					.userId("biobio1234")
+					.confirmNo(i+300)
+					.chalNo(161)
+					.userId("user1234")
 					.confirmTitle(i+"일차")
 					.confirmContent("day"+i+"인증")
 					.build());

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="4weeks" name="title"/>
+	<jsp:param value="전체 챌린지" name="title"/>
 </jsp:include>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

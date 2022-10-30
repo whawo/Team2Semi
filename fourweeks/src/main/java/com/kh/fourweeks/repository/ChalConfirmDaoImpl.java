@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
+import com.kh.fourweeks.vo.ConfirmDaysVO;
 
 @Repository
 public class ChalConfirmDaoImpl implements ChalConfirmDao {
@@ -223,5 +224,18 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 				+ "where chal_no = ?";
 		Object[] param = {chalNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	private RowMapper<ConfirmDaysVO> myConfirmDaysMapper = (rs, idx) -> {
+		return ConfirmDaysVO.builder()
+				.confirmDays(rs.getInt("confirm_days"))
+				.build();
+	};
+	
+	@Override
+	public List<ConfirmDaysVO> myConfirmDays(int chalNo, String userId) {
+		String sql = "select trunc(f.confirm_date - c.start_date + 1) confirm_days from chal_confirm f left outer join chal c on f.chal_no = c.chal_no where f.chal_no = ? and f.user_id = ?";
+		Object[] param = {chalNo, userId};
+		return jdbcTemplate.query(sql, myConfirmDaysMapper, param);
 	}
 }
