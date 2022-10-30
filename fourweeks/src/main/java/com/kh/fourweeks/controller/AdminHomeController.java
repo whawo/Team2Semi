@@ -34,8 +34,8 @@ public class AdminHomeController {
 	@Autowired
 	private AdminDao adminDao;
 	
-	@Autowired
-	private ChalReportDao chalReportDao;
+	//@Autowired
+	//private ChalReportDao chalReportDao;
 	
 	
 	@Autowired
@@ -52,7 +52,6 @@ public class AdminHomeController {
 	@GetMapping("/home")
 	public String home(Model model,
 			HttpSession session) {
-		
 		return "admin/home";
 	}
 	
@@ -88,14 +87,12 @@ public class AdminHomeController {
 	}
 	
 	@GetMapping("/report/chal")
-	public String chalReport(Model model) {
-		model.addAttribute("halfCnt", chalReportDao.halfCnt());
+	public String chalReport() {
 		return "admin/chal_report";
 	}
 	
 	@GetMapping("/report/user")
-	public String userReport(Model model) {
-		model.addAttribute("userCnt", chalReportDao.joinedCnt());
+	public String userReport() {
 		return "admin/user_report";
 	}
 	

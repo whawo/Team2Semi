@@ -6,6 +6,7 @@ import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
+import com.kh.fourweeks.vo.ConfirmDaysVO;
 
 public interface ChalConfirmDao {
 	//인증글 쓰기(+수정) 관련 메소드
@@ -32,4 +33,6 @@ public interface ChalConfirmDao {
 	boolean updateNotice(NoticeDto noticeDto);
 	void confirmAttachment(int confirmNo, int attachmentNo);
 	void noticeAttachment(int noticeNo, int attachmentNo);
+	
+	List<ConfirmDaysVO> myConfirmDays(int chalNo, String userId); //챌린지 번호와 유저 아이디로 작성된 인증글 n일차로 조회 
 }

@@ -41,7 +41,7 @@
 	<header class="container-1200 header-fixed">
 		<div class="vcenter">
 		<div>
-		<a href="/" class="logo"><img src="/images/top_logo.png" width="60"></a>
+		<a href="/" class="logo"><img src="/images/top_logo.png" width="100"></a>
 		</div>
 		</div>
 	</header>

@@ -40,7 +40,7 @@ public class AdminReportRestController {
 		return chalReportDao.topicThisMonth(); 
 	}
   
-  @GetMapping("/chal/user")
+	@GetMapping("/chal/user")
 	public List<UserJoinedVO> userCnt() {
 		return chalReportDao.joinedCnt();
 	}

@@ -509,6 +509,7 @@ header > nav {
 	padding: 0.5em 0;
 	width: auto;
 	height: 100%;
+	min-width: 120px;
 }
 .dropdown-nav ul {
     position: absolute;

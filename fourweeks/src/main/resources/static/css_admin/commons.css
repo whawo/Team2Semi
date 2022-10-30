@@ -8,6 +8,7 @@
     - css에서는 계산식이 모든 브라우저에서 작동하지 않음
     - 미리 예상 가능한 크기를 준비해두면 편하게 쓸 수 있지 않을까?
 */
+.container-200{width:200px; margin: 0 auto;}
 .container-300{width:300px; margin: 0 auto;}
 .container-400{width:400px; margin:0 auto;}
 .container-600{width:600px; margin:0 auto;}
@@ -636,4 +637,12 @@ flex > div > a:link, flex > div > a:visited {
 
 .p-20 {
 	padding: 0 20px 0 0;
+}
+
+/* 사이드바(aside) 적용 시 내용 위치 */
+#dashboard{
+    position: absolute;
+    top: 0;
+    left: 200px;
+    right: 0;
 }

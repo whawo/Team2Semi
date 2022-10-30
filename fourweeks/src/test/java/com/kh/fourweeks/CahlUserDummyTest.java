@@ -31,8 +31,8 @@ public class CahlUserDummyTest {
 				chalUserDao.join(ChalUserDto.builder()
 						.userId("abc" + ranId)
 						.userNick("abc" + ranId)
-						.userPw("asd34350!!")
-						.userEmail("asd@naver.com")
+						.userPw("abc" + ranId)
+						.userEmail("asd"+ranId+"@naver.com")
 						.createDate(java.sql.Date.valueOf(dateStr))
 						.build());
 			if(dateStr.equals(end)) {
