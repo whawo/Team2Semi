@@ -1,4 +1,4 @@
-   <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -46,10 +46,29 @@
     .confirm-img.no-img {
 		display: none;
 	}
-    .days.is-confirm {
-    	color:red;
-    	font-weight: bold;
-    }
+	.my-confirm {
+		width: 380px;
+		margin: 9px auto;
+		text-align:center;
+	}
+	.my-confirm li {
+		margin: 3px 0;
+		padding: 0.5em;
+		display: inline-block;
+		justify-content: center;
+	    align-items: center;
+	    width: 50px;
+	    height: 82px;
+	    font-size:16px;
+	    list-style: none;
+	    line-height: 34px;
+	}
+	.not-yet {
+		color: #d9d9d9;
+	}
+	.is-confirm > i {
+		color: #6C7AEF;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -110,9 +129,9 @@
 				}
 				
 				//searchResult를 인덱스로 갖는 li에 스타일 적용
+				$(".my-confirm li").removeClass("is-confirm");
 				for(var i = 0; i < searchResult.length; i++) {
-					//console.log(i+"번째: "+searchResult[i]);
-					$(".my-confirm li").eq(searchResult[i]).css("background-color", "#A8B0E9");
+					$(".my-confirm li").eq(searchResult[i]).addClass("is-confirm");
 				}
 			}
 		});
@@ -145,19 +164,22 @@
         <!-- #tab1 -->
         <div id="tab1" class="tab_content">
     
-		<ul class="list">
-            <li>
-	            달성률 : <fmt:formatNumber type="number" pattern="0" value="${progressDto*100/28}"/>%
-			</li>
-		</ul>
-		<ul>
-			<li>내 인증 현황</li>
-		</ul>	
-		<ul class="my-confirm">
-			<c:forEach var="days" begin="1" end="28" step="1">
-				<li>${days}</li>
-			</c:forEach>
-		</ul>
+			<ul class="list">
+	            <li>
+		            달성률 : <fmt:formatNumber type="number" pattern="0" value="${progressDto*100/28}"/>%
+				</li>
+			</ul>
+			<br><br>
+			<ul>
+				<li><h2>내 인증 현황</h2></li>
+			</ul>	
+			<div class="container-400">
+				<ul class="my-confirm">
+					<c:forEach var="days" begin="1" end="28" step="1">
+						<li> ${days} <br> <i class="fa-solid fa-circle-check fa-2x not-yet"></i></li>
+					</c:forEach>
+				</ul>
+			</div>
         </div>
 
         <!-- #tab2 --> 
@@ -177,6 +199,7 @@
 			</table>
 	    </div> 
 
+	<br><br><br><br>
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row left">
 			최신 인증글
