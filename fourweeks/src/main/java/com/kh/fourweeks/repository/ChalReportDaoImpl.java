@@ -1,18 +1,23 @@
 package com.kh.fourweeks.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.vo.HalfStartVO;
+import com.kh.fourweeks.vo.JoinedAndLeaveVO;
 import com.kh.fourweeks.vo.MonthlyTopicVO;
 import com.kh.fourweeks.vo.PartByTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
 import com.kh.fourweeks.vo.UserJoinedVO;
+import com.kh.fourweeks.vo.UserLeaveVO;
 
 @Repository
 public class ChalReportDaoImpl implements ChalReportDao {
@@ -114,18 +119,68 @@ public class ChalReportDaoImpl implements ChalReportDao {
 		return jdbcTemplate.query(sql, monthlyMapper);
 	}
   
-   private RowMapper<UserJoinedVO> joinedMapper = (rs, idx) -> {
+	
+	private RowMapper<UserJoinedVO> joinedMapper = (rs, idx) -> {
       return UserJoinedVO.builder()
           .joinDate(rs.getString("join_date"))
-          .userCount(rs.getInt("user_count"))
+	      .userCount(rs.getInt("user_count"))
           .build();
-  };
+	};
+  
+  	private RowMapper<UserLeaveVO> leaveMapper = (rs, idx) -> {
+	  return UserLeaveVO.builder()
+	          .leaveDate(rs.getString("leave_date"))
+	          .leaveCount(rs.getInt("leave_count"))
+	          .build();
+  	};
 
 
+  	private ResultSetExtractor<JoinedAndLeaveVO> joinedAndLeaveExtractor = (rs) -> {
+		if(rs.next()) {
+			return JoinedAndLeaveVO.builder()
+					.joinedCnt(rs.getInt("joined_cnt"))
+					.leaveCnt(rs.getInt("leave_cnt"))
+					.build();
+			
+		} else {
+			return null;
+		}
+	};
+  
     @Override
     public List<UserJoinedVO> joinedCnt() {
       String sql = "select to_char(D.dt, 'yyyy-mm') as join_date, nvl(sum(J.cnt), 0) user_count from (select to_char(create_date, 'yyyy-mm-dd') as join_date, count(*) cnt from chal_user where create_date between to_date('2020-01-01', 'yyyy-mm-dd') and to_date('2022-12-31', 'yyyy-mm-dd') group by create_date) J, (select to_date('2022-01-01', 'yyyy-mm-dd') + level - 1 as dt from dual connect by level <= (sysdate - to_date('2022-01-01', 'yyyy-mm-dd') + 1)) D where D.dt = J.join_date(+) group by to_char(D.dt, 'yyyy-mm') order by to_char(D.dt, 'yyyy-mm')";
       return jdbcTemplate.query(sql, joinedMapper);
+    }
+    
+    @Override
+    public List<UserLeaveVO> leaveCnt() {
+    	String sql = "select "
+    			+ "to_char(D.dt, 'yyyy-mm') as leave_date, "
+    			+ "nvl(sum(L.cnt), 0) leave_count "
+    			+ "from ("
+    			+ "select "
+    			+ "to_char(leave_date, 'yyyy-mm-dd') as leave_date, "
+    			+ "count(*) cnt "
+    			+ "from "
+    			+ "leave_count "
+    			+ "where "
+    			+ "leave_date between to_date('2020-01-01', 'yyyy-mm-dd') and to_date('2022-12-31', 'yyyy-mm-dd') group by leave_date) L, ("
+    			+ "select "
+    			+ "to_date('2022-01-01', 'yyyy-mm-dd') + level - 1 as dt "
+    			+ "from "
+    			+ "dual connect by level <= (sysdate - to_date('2022-01-01', 'yyyy-mm-dd') + 1)) D where D.dt = L.leave_date(+)"
+    			+ "group by to_char(D.dt, 'yyyy-mm') order by to_char(D.dt, 'yyyy-mm')";
+    	return jdbcTemplate.query(sql, leaveMapper);
+    }
+    
+    @Override
+    public JoinedAndLeaveVO todaysInfoOfUsers() {
+    	String sql = "select"
+    			+ "(select count(*) joined_cnt from chal_user where to_char(create_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')) joined_cnt, "
+    			+ "(select count(*) leave_cnt from leave_count where to_char(leave_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')) leave_cnt "
+    			+ "from dual";
+    	return jdbcTemplate.query(sql, joinedAndLeaveExtractor);
     }
     
     private RowMapper<PartByTopicVO> partMapper = (rs, idx) -> {

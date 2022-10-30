@@ -137,6 +137,60 @@
 				});
 			}
 		});
+		
+		$.ajax({
+			//오늘 가입/탈퇴자수 차트
+			url : "http://localhost:8888/admin/rest/report/chal/today_user",
+			method : "get",
+			dataType : "json",
+			async : false,
+			success : function(resp) {
+				var values = [];
+				values.push(resp.joinedCnt);
+				values.push(resp.leaveCnt);
+
+				//차트 생성
+				const ctx = document.querySelector("#joinedAndLeave");
+				const myChart = new Chart(ctx, {
+					type : 'bar',
+					data : {
+						labels : [ "가입회원", "탈퇴회원" ],
+						datasets : [ {
+							data : values,
+							backgroundColor : [
+							'rgba(108, 122, 239, 0.2)',
+							'rgba(54, 162, 235, 0.2)' ],
+							borderColor : [
+							'rgb(108, 122, 239)', 
+							'rgb(54, 162, 235)' ],
+							borderWidth : 1
+						} ]
+					},
+					options : {
+						scales : {
+							y : {
+								type : 'linear',
+								ticks : {
+									stepSize : 1
+								}
+							}
+						},
+						plugins : {
+							legend : {
+								display: false
+							},
+							title : {
+								display : true,
+								text : moment().format("YY.MM.DD(ddd)"),
+								padding: {
+				                    bottom: 20
+				                }
+							}
+						}
+					}
+				});
+			}
+		});
 	});
 </script>
 </head>
@@ -148,7 +202,7 @@
 					<h3>오늘 가입/탈퇴자 수</h3>
 				</div>
 				<div class="row">
-					<canvas id="#"></canvas>
+					<canvas id="joinedAndLeave"></canvas>
 				</div>
 			</div>
 			<div class="row float-left w-33 p-20">
