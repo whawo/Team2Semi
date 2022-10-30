@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.fourweeks.repository.ChalReportDao;
 import com.kh.fourweeks.vo.HalfStartVO;
 import com.kh.fourweeks.vo.MonthlyTopicVO;
+import com.kh.fourweeks.vo.PartByTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
 import com.kh.fourweeks.vo.UserJoinedVO;
 
@@ -49,4 +50,9 @@ public class AdminReportRestController {
 	public double todayConfirmRate() {
 		return chalReportDao.todayConfirmRate();
 	}
+	
+	@GetMapping("/chal/part_topic")
+	public List<PartByTopicVO> partByTopic() {
+		return chalReportDao.partAvgThisMonth();
+	};
 }
