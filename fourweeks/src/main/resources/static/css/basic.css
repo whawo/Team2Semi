@@ -11,6 +11,9 @@ html{
 
 
 /* 컨테이너 사이즈 (container-size) */
+.container-100 { width:100px; margin:0 auto; }
+.container-150 { width:150px; margin:0 auto; }
+.container-200 { width:200px; margin:0 auto; }
 .container-300 { width:300px; margin:0 auto; }
 .container-350 { width:350px; margin:0 auto; }
 .container-400 { width:400px; margin:0 auto; }
