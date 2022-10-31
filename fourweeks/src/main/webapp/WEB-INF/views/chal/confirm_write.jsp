@@ -361,9 +361,14 @@
      </head>
      <body>
         <div class="row-0 container-1200">
+<c:choose>
+	<c:when test="${chalList.size() == 0}">
+		참가 중인 챌린지가 없습니다.
+		<a href="/chal/list">챌린지 둘러보기</a>
+	</c:when>
+	<c:otherwise>
 <form action="write" method="post" enctype="multipart/form-data" class="con-form">
             <div class="row row-1 mt-92">
-
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
                     <option id="select" selected="selected" value="" >선택</option>
