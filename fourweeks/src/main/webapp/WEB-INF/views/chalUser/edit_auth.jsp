@@ -92,7 +92,7 @@
         /* 에러  */
         .error{
         color:#eb6f7f;
-        padding-left: 65px;
+        padding-left: 80px;
         }
     
     /*  disabled */
@@ -103,14 +103,14 @@
 </style>
 <div class="row container-1200">
  <div class="row container-794 row-down">
-	<div class="row center">
+	<div class="row center mt-92">
         <h2>비밀번호 인증 </h2>
          <p class="p1"> 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.<p>
     </div>
 	    
 	<form action="auth" method="post">
-<<<<<<< HEAD
 		 <div class="row row-side">
+			 <input type="hidden" name="userId" value="${userDto.userId}">
              <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
             </div>
             
@@ -122,7 +122,7 @@
             </div>
             
             <div class="row center">
-            	<a href="/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
+            	<button href="/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
 				<button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
 			 </div>
 			 
