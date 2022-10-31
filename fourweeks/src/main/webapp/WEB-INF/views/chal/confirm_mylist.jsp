@@ -265,73 +265,72 @@
 
 	<h3>챌린지 정보</h3>
 
-<!--3칸 다단-->
-<div class="row first" style="margin-bottom: 60px;">
-<!-- 해당 영역클릭 시, 챌린지 상세로 이동하도록 처리 -->
-<a href="/chal/detail?chalNo=${chalDto.chalNo}">
- <!--챌린지 개설이미지 -->
-	<div>  <!-- 1단 -->
-		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img">
-	</div>
+	<!--3칸 다단-->
+	<div class="row first" style="margin-bottom: 60px;">
+		<!-- 해당 영역클릭 시, 챌린지 상세로 이동하도록 처리 -->
+		<a href="/chal/detail?chalNo=${chalDto.chalNo}">
+		 <!--챌린지 개설이미지 -->
+			<div>  <!-- 1단 -->
+				<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img">
+			</div>
+		
+			<div>  <!-- 2단 시작 -->
+				<div>  <!-- label -->
+					<c:choose>
+					<c:when test="${chalVO.endDday > 0 && chalVO.endDday < 28}">
+						<span class="label label-status" >${chalVO.endDday}일 뒤 종료</span>			
+					</c:when>
+					<c:when test="${chalVO.endDday == 0}">
+						<span class="label label-status" >오늘 종료</span>			
+					</c:when>
+					<c:when test="${chalVO.endDday < 0}">
+						<span class="label label-status" >종료</span>	
+					</c:when>
+					<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+					<c:otherwise>
+			    		<span class="label label-status" >${chalVO.getDDay()}일 뒤 시작</span>
+					</c:otherwise>
+					</c:choose>	
+			    </div>
+		    
+			    <div>  <!-- 챌린지 제목 -->
+			        <h3>${chalDto.chalTitle}</h3>
+			    </div>
+			    
+			     <div style="margin: 20px 0;"> <!-- 챌린지 기간 -->
+			         <span>${chalDto.startDate} ~ ${chalVO.endDate}</span>
+			     </div>
+		
+				 <div class="label-align"> <!-- 챌린지 종류-->
+				     <c:choose>
+						<c:when test="${chalDto.chalTopic == '그 외'}">
+							<span class="label label-category" >기타</span>
+						</c:when>
+						<c:otherwise>	
+							<span class="label label-category" >${chalDto.chalTopic}</span>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			 
+				 <div class="label-align"> <!-- 달성률 -->
+				 <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
+				 	 <span class="label label-achieve" >현재 달성률 ??%</span>
+			     </div>            
+			</div> <!-- 2단 끝 -->
+		</a>
 
-<div>  <!-- 2단 시작 -->
-	<div>  <!-- label -->
-		<c:choose>
-		<c:when test="${chalVO.endDday > 0 && chalVO.endDday < 28}">
-			<span class="label label-status" >${chalVO.endDday}일 뒤 종료</span>			
-		</c:when>
-		<c:when test="${chalVO.endDday == 0}">
-			<span class="label label-status" >오늘 종료</span>			
-		</c:when>
-		<c:when test="${chalVO.endDday < 0}">
-			<span class="label label-status" >종료</span>	
-		</c:when>
-		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
-		<c:otherwise>
-    		<span class="label label-status" >${chalVO.getDDay()}일 뒤 시작</span>
-		</c:otherwise>
-		</c:choose>	
-    </div>
-    
-    <div>  <!-- 챌린지 제목 -->
-        <h3>${chalDto.chalTitle}</h3>
-    </div>
-    
-     <div style="margin: 20px 0;"> <!-- 챌린지 기간 -->
-         <span>${chalDto.startDate} ~ ${chalVO.endDate}</span>
-     </div>
+			<div> <!-- 3단 시작 -->
+				<div class="row "> <!-- 인증하기 버튼 -->
+				<!-- 인증 화면에서 해당 챌린지가 선택된 상태가 될 수 있도록 챌린지 번호 전달 -->
+				<!-- 챌린지 시작 전에 인증하기 버튼 비활성화(jquery) -->
+		
+			 	<button class="navbtn" type="submit" id="navbutton1"><a href="write?chalNo=${chalDto.chalNo}" class="btn navbtn" id="navbutton1">인증하기</a></button>
+			</div> <!-- 3단 끝 -->
+	</div> <!-- 다단 끝 -->
 
-	 <div class="label-align"> <!-- 챌린지 종류-->
-     <c:choose>
-		<c:when test="${chalDto.chalTopic == '그 외'}">
-			<span class="label label-category" >기타</span>
-		</c:when>
-		<c:otherwise>	
-			<span class="label label-category" >${chalDto.chalTopic}</span>
-		</c:otherwise>
-	</c:choose>
-	 </div>
-	 
-	 <div class="label-align"> <!-- 달성률 -->
-	 <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
-	 	 <span class="label label-achieve" >현재 달성률 ??%</span>
-     </div>            
-</a>
-</div> <!-- 2단 끝 -->
-
-<div> <!-- 3단 시작 -->
-	 <div class="row "> <!-- 인증하기 버튼 -->
-	<!-- 인증 화면에서 해당 챌린지가 선택된 상태가 될 수 있도록 챌린지 번호 전달 -->
-	<!-- 챌린지 시작 전에 인증하기 버튼 비활성화(jquery) -->
-
-
-	 	<button class="navbtn" type="submit" id="navbutton1"><a href="write?chalNo=${chalDto.chalNo}" class="btn navbtn" id="navbutton1">인증하기</a></button>
-	 </div>
-</div> <!-- 3단 끝 -->
-</div> <!-- 다단 끝 -->
-
+	<div>
  	<!-- 인증글  목록/공지-->
-       <h3>전체(${listCnt})</h3>
+    <h3>전체(${listCnt})</h3>
        
      <!-- 관리자글 -->
      <div class="notice-border">
@@ -340,33 +339,33 @@
      </div>     
      
      <!--인증글 목록-->
-	<c:forEach var="list" items="${confirmList}">
-	<a href="detail?confirmNo=${list.confirmNo}">
-      <div class="confirm-border" >
-          <!-- 챌린지 제목 -->
-          <div class="confirm-title-css" style="position:relative">
-           	${list.confirmTitle} 
-          </div>
-          	<br><br>
-            
-             <!-- 인증 사진, 내용 -->   
-               
-               <div class="div-align">
-					${list.confirmContent}
-					<br><br><br><br><br><br>
-					${list.confirmDate} 
-					&nbsp; 
-					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-					&nbsp;
-					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-					&nbsp; 
-					<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</div>
-           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
-              </div>					
- 				<!-- 인증글, 사진 목록 끝 -->			
-	    </a>
-		</c:forEach>
+		<div class="confirm-border" >
+			<a href="detail?confirmNo=${list.confirmNo}">
+			<c:forEach var="list" items="${confirmList}">
+	          <!-- 챌린지 제목 -->
+	          <div class="confirm-title-css" style="position:relative">
+	           	${list.confirmTitle} 
+	          </div>
+	          	<br><br>
+	            
+	             <!-- 인증 사진, 내용 -->   
+	               
+	               <div class="div-align">
+						${list.confirmContent}
+						<br><br><br><br><br><br>
+						${list.confirmDate} 
+						&nbsp; 
+						<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+						&nbsp;
+						<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+						&nbsp; 
+						<i class="fa-regular fa-comment"></i> ${list.replyCount}
+					</div>
+	           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
+	 				<!-- 인증글, 사진 목록 끝 -->			
+			</c:forEach>
+			</a>
+		</div>					
 
 	<div  class="confirm-empty">
 		 <c:if test="${listCnt == 0}">
@@ -375,6 +374,7 @@
 	 </div>
     </div> <!-- 인증글 목록 끝 -->    
 
+<c:if test="${listCnt != 0}">
 <!-- 페이지 내비게이터 -->
 	<div class="row center mt-40 mb-40">
 		<!-- 이전 -->
@@ -427,10 +427,11 @@
 					<li><a href="#">&raquo;</a></li>
 				</c:otherwise>
 			</c:choose>
+		</ul>
 	</div>
 	</c:if>
 </div>	
-
+</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

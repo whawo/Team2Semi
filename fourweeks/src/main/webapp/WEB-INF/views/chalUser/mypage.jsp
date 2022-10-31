@@ -304,17 +304,28 @@ border-radius:0.5em;
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
-
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+	    
+	  	//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function(){
+			$(this).attr("src", "/images/bg_default.png");
+		});
+	});
+	  //뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
     });
-});
     </script>
 
 </head>
