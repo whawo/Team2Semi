@@ -16,66 +16,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
 
 <style>
-        /* 
-       	10.31 
-       	- 제목 40자 넘어감 
-       	- 폼 이벤트 방지는 되는데 개설하기가 대신 안됨  
-        
-        
-        	10.27
-        	추가 수정한 것 : 
-        	- 마지막 취소 버튼 홈으로 이동 넣음
-        	- 헬퍼 텍스트 박스 밑으로 옮김 
-        	- 챌린지 예상 종료일 label 크기 높이가 안먹ㅇ므 씨바 
-        	
-        	10.26
-        	디자인 수정해야할 것: 
-        	- 6번 챌린지 대표 이미지 삭제 사진변경 안에 글자 위치 맞춰야함 -> 여러번 했었는데 안되면 그냥 border높이를 올리는 걸로 ... 
-        	- input박스 안에 달력 넣어야 함.   
-        	- 챌린지 예상 종료일 + 28일 해셔  나와야함 ㅇ   
-        	- 챌린지 필 수 값 입력 안할시 에러 떠야함 
-        	- 챌린지 예상 종료일과 날짜가 맞아야함  ㅇ 
-        
-        	10.25
-        	DB 수정해야할 것: 해결 완료  
-        	- form 위치 확인  
-        	- submit 버튼은 한개여야 함 
-        	- name 확인 
-        	
-       		10.24
-       		DB 수정해야할 것: 
-       		-  2번 hover 재설정하기 ㅇ 
-       		- lightpick 4번 날짜 뜨기 완료 ㅇ  
-       		- moment +day = 날짜 + 28일 찾아보세요.
-       		- 사진 삭제 누르면 갑자기 라이트픽 날짜 선택하라고 가버림..??
-       
-        		10.22
-        		디자인 수정해야할 것: 
-        		- hover 반응이 없음 or 늦음
-        		- 챌린지 2번 border 박스가 input에 넣지 않는 이상 .. 만들어지지 않음.
-        		- 헬퍼 텍스트 구현하기 ㅇ 
-        		- 체크박스 크기 재조정 ㅇ 
-        		- 종료일 나오는 곳 글자 가운데로  ㅇ --> 나중에 디비 나오면 다시 조정하기 
-        		
-        		
-            10.21 
-            디자인 수정해야할 것:
-            - 각 hover 재설정 하기 
-            - radio 버튼 맛감 ㅇ
-            - 이미지 이제까지 만든 거 적용 시키기 ㅇ 
-            - text제한 수 두기 
-            - 경고문 빨간거 뜨기 
-            - 챌린지 시작인 인풋 박스에 그림 넣기   
 
-            DB 수정해야할 것: 
-            - 미리보기 사진의 경우에는 이미지 지우는 src를 삭제하자. 
-            - src를 삭제하자 
-            - 39번 //시나리오 부분 참고하세요 
-            - 필수값이 입력안되었을때 날라가지 말 것. 
-
-
-
-        */
         div{
             border: 1px dotted transparent;
             display: block;
@@ -103,10 +44,6 @@
             라디오 버튼 관련 1번 
             라디오와 라벨 간격 띄우려면 basic.css 가시오 
         */ 
-       /*   label{
-            margin: 17px 0 10px;
-            padding-left: 30px;
-        }  */
         .lab-1{
         margin: 17px 0 10px;
         padding-left:30px;
@@ -190,18 +127,22 @@
             margin-inline-end: 0px;
             font-weight: bold;
         }
+        #short-text-box{
+          border: 2px solid #DDDDDD;
+        }
         /* 캘린더  */
        .date-box{
-       background-color: #e5e6f9;
-        border: 1px solid #e5e6f9;
+       background-color: transparent;
+        border: 1px solid transparent;
         border-radius: 0.5em;
-         font-size: 14px;
+         font-size: 16px;
           color: #6c7aef;
           font-weight: 700;
         }
         date-bx{
-          width:600px;
+         width:600px;
         height:58px;
+        padding: 5px 10px;
         }
         .date-calendar,
         #result-1{
@@ -289,186 +230,101 @@
 	    color: #eb6f7f;
 	}
   
-
-  
-    /* 헬퍼 텍스트 위치  */
-    .helper-text-40{
-    	padding-left:570px;
-    }
-     .helper-text-300{
-    	padding-left:564px;
-    }
-     .helper-text-500{
-    	padding-left:564px;
+    
+    input[name="startDate"]::placeholder{
+    color: #3f3f3f;
     }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
 <script type="text/javascript">
-     $(function(){
-         var picker1 = new Lightpick({
-             //field는 datepicker은 적용 대상을 설정하는 공간 
-             field:document.querySelector(".single-date-picker"),
-             
-             minDate:moment(), // 오늘자 선택 가능
-             minDate:moment().add(4,'day'), // 오늘 + 5일
-
-			 format:"YYYY-MM-DD",
-            firstDay:0, // 시작일 일요일부터 
-            singleDate:true, // 날짜 한개만 선택
-
-             // (+옵션) 표시되는 달의 개수를 지정 
-             numberOfMonths:1, //1개의 달씩 보여줘라 
+$(function(){
+    var picker1 = new Lightpick({
+        //field는 datepicker은 적용 대상을 설정하는 공간 
+        field:document.querySelector(".single-date-picker"),
         
-             // 날짜 출력하기 
-             onSelect: function(date){
-             	/* document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD"); */
-             	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
-             	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
-             }
-		});
-        // 오늘 날짜 기본값으로 자동 선택
-        picker1.setDate(moment());
-	});
-
-
-   // 이미지 
-   $(function(){
-           $("[name=attachment]").change(function(e){
-               //input[type=file] 태그에는 files라는 속성이 존재
-               console.log(this.files);
-               if(this.files.length > 0){
-                   //읽는 도구
-                   var reader = new FileReader();
-
-
-                    //읽을 때 해야할 작업
-                    reader.onload = function(e){
-                        //읽은 내용 정보가 e에 들어 있음
-                        var preview = document.getElementById("preview")
-                        $(".preview").attr("src", e.target.result);
-                    };
-                    reader.readAsDataURL(this.files[0]);//읽어라
-                }
-                // 사진 변경하기 
-                var inputImage = document.getElementById("input-image")
-                inputImage.addEventListener(function(e){
-                    $("[name=attachment]")(e.target)
-                });
-            });
-            $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
-            });
-     });
-    
-    //help-text
-     $(function(){
-            $(".helper-text1").on("input", function(){
-                var text = $(this).val();
-                $(this).next().text(text.length);
-                if(text.length > 40){
-                    $(this).next();
-                }
-                else {
-                    $(this).next().css("color", "#3f3f3f");
-                }
-            });
-        });
-    
-     $(function(){
-         $(".helper-text2").on("input", function(){
-             var text = $(this).val();
-             $(this).next().text(text.length);
-             if(text.length > 300){
-                 $(this).next();
-             }
-             else {
-                 $(this).next().css("color", "#3f3f3f");
-             }
-         });
-     });
-     
-     $(function(){
-         $(".helper-text3").on("input", function(){
-             var text = $(this).val();
-             $(this).next().text(text.length);
-             if(text.length > 500){
-                 $(this).next();
-             }
-             else {
-                 $(this).next().css("color", "#3f3f3f");
-             }
-         });
-     });
-
-     $(function () {
-         $(".create-form").submit(function(){
-         	$("input[name=chalTitle]").blur();
-         	$("textarea[name=howConfirm]").blur();
-         	$("input[name=startDate]").blur();
-         	$("input[type=checkbox]").blur();
-         	if($(".input.fail".length > 0)) {
-                 return false;
-             }
-         });
-         
-         $("input[name=chalTitle]").on("blur", function(){
-         	var chalTitle = $(this).val();
-         	$(this).removeClass("fail");
-         	if(!chalTitle) {
-         		$(this).addClass("fail").focus();
-         	}
-         });
-         
-         $("textarea[name=howConfirm]").on("blur", function(){
-          	var howConfirm = $(this).val();
-          	$(this).removeClass("fail");
-          	if(!howConfirm) {
-          		$(this).addClass("fail");
-          	}
-          });
-         
-          $("input[name=startDate]").on("blur", function(){
-          	var startDate = $(this).val();
-          	$(this).removeClass("fail");
-          	if(!startDate) {
-          		$(this).addClass("fail");
-          	}
-          }); 
-         
-         $("input[type=checkbox]").on("blur", function(){
-          	var checkbox = $(this).val();
-          	$(this).removeClass("fail");
-          	if(checkbox:checked) {
-          		$(this).addClass("fail");
-          	}
-          });
-     }); 
-
-	 $(".create-form").submit(function(){
-	
-     	$("input[name=chalTitle]").blur();
-
-     //모든 input을 검사하도록 강제실행했으므로
-     //“모두 success이거나, fail이 없거나” 중에 한 가지 방식으로 코드 구현해서 전송하도록 처리
-     //console.log($(".input.fail").length);
-     if($(".input.fail".length > 0)) {
-         return false;
-     } 
-
- 	});
- 
-	$(function() {
-		$("input[name=chalTitle]").on("blur", function() {
-			var chalTitle = $(this).val();
-			$(this).removeClass("fail");
-			if (!userEmail) {
-				$(this).addClass("fail");
-			}
-		});
-	});
-	
+        minDate:moment(), // 오늘자 선택 가능
+        minDate:moment().add(4,'day'), // 오늘 + 5일
+		 format:"YYYY-MM-DD",
+        firstDay:0, // 시작일 일요일부터 
+        singleDate:true, // 날짜 한개만 선택
+        // (+옵션) 표시되는 달의 개수를 지정 
+        numberOfMonths:1, //2개의 달씩 보여줘라 
+   
+        // 날짜 출력하기 
+        onSelect: function(date){
+        	/* document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD"); */
+        	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
+        	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
+        }
+    });
+     // 오늘 날짜 기본값으로 자동 선택
+    picker1.setDate(moment()); 
+});
+// 이미지 
+$(function(){
+       $("[name=attachment]").change(function(e){
+           //input[type=file] 태그에는 files라는 속성이 존재
+           console.log(this.files);
+           if(this.files.length > 0){
+               //읽는 도구
+               var reader = new FileReader();
+               //읽을 때 해야할 작업
+               reader.onload = function(e){
+                   //읽은 내용 정보가 e에 들어 있음
+                   var preview = document.getElementById("preview")
+                   $(".preview").attr("src", e.target.result);
+               };
+               reader.readAsDataURL(this.files[0]);//읽어라
+           }
+           // 사진 변경하기 
+           var inputImage = document.getElementById("input-image")
+           inputImage.addEventListener(function(e){
+               $("[name=attachment]")(e.target)
+           });
+       });
+       $("button[name=thumbnail-delete]").click(function(){
+           $(".preview").attr("src", "/images/bg_default.png");
+       });
+   });
+//help-text
+$(function(){
+       $(".helper-text1").on("input", function(){
+           var text = $(this).val();
+           $(this).next().text(text.length);
+           if(text.length > 40){
+               $(this).next();
+           }
+           else {
+               $(this).next().css("color", "#3f3f3f");
+           }
+       });
+   });
+$(function(){
+    $(".helper-text2").on("input", function(){
+        var text = $(this).val();
+        $(this).next().text(text.length);
+        if(text.length > 300){
+            $(this).next();
+        }
+        else {
+            $(this).next().css("color", "#3f3f3f");
+        }
+    });
+});
+$(function(){
+    $(".helper-text3").on("input", function(){
+        var text = $(this).val();
+        $(this).next().text(text.length);
+        if(text.length > 500){
+            $(this).next();
+        }
+        else {
+            $(this).next().css("color", "#3f3f3f");
+        }
+    });
+});
 	window.onbeforeunload = function(e) {
 	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
 	    e.returnValue = dialogText;
@@ -498,11 +354,8 @@
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-<<<<<<< HEAD
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus helper-text1 alert-notice" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off">
-=======
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off">
->>>>>>> refs/remotes/origin/main
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus helper-text1 alert-notice" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off" maxlength="40">
+
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                 <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
@@ -510,7 +363,7 @@
 	
 	            <div class="row">
 	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300" ></textarea><br>
+	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" maxlength="300" ></textarea>
 	                <span  class="helper-text-300 helper-css">0</span> /300
 	                <span class="fail-message">필수 항목 입니다. </span>
 	            </div>
@@ -520,8 +373,7 @@
 	                <p class="p2">개설일로부터 5일 이내에 시작해야 해요.</p>
 	
 	                <div class="row">
-	                    <i class="fa-solid fa-calendar-days"></i>
-	                    <input type="text" class="single-date-picker" id="short-text-box"  name="startDate" autocomplete="off">
+	                    <input type="text" class="single-date-picker short-hover date-box" id="short-text-box"  name="startDate" autocomplete="off" placeholder="챌린지 시작일을 정해주세요!">
 	                    <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
 	
