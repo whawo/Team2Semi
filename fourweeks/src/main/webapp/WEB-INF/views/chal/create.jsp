@@ -7,17 +7,15 @@
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
 
- 
- 
- 	<link rel="stylesheet" type="text/css" href="/css/basic.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
 
-    <style>
+<style>
         /* 
         
         	10.27
@@ -288,22 +286,21 @@
 	}
   
   
-        /* 헬퍼 텍스트 위치  */
-        .helper-text-40{
-        	padding-left:570px;
-        }
-         .helper-text-300{
-        	padding-left:564px;
-        }
-         .helper-text-500{
-        	padding-left:564px;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
-    <script type="text/javascript">
-    
+    /* 헬퍼 텍스트 위치  */
+    .helper-text-40{
+    	padding-left:570px;
+    }
+     .helper-text-300{
+    	padding-left:564px;
+    }
+     .helper-text-500{
+    	padding-left:564px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
+<script type="text/javascript">
      $(function(){
          var picker1 = new Lightpick({
              //field는 datepicker은 적용 대상을 설정하는 공간 
@@ -316,7 +313,7 @@
              singleDate:true, // 날짜 한개만 선택
 
              // (+옵션) 표시되는 달의 개수를 지정 
-             numberOfMonths:1, //2개의 달씩 보여줘라 
+             numberOfMonths:1, //1개의 달씩 보여줘라 
         
              // 날짜 출력하기 
              onSelect: function(date){
@@ -324,10 +321,10 @@
              	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
              	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
              }
-         });
-         // 오늘 날짜 기본값으로 자동 선택
-         picker1.setDate(moment());
-     });
+		});
+        // 오늘 날짜 기본값으로 자동 선택
+        picker1.setDate(moment());
+	});
 
     // 이미지 
     $(function(){
@@ -355,7 +352,7 @@
             $("button[name=thumbnail-delete]").click(function(){
                 $(".preview").attr("src", "/images/bg_default.png");
             });
-        });
+     });
     
     //help-text
      $(function(){
@@ -370,6 +367,7 @@
                 }
             });
         });
+    
      $(function(){
          $(".helper-text2").on("input", function(){
              var text = $(this).val();
@@ -382,6 +380,7 @@
              }
          });
      });
+     
      $(function(){
          $(".helper-text3").on("input", function(){
              var text = $(this).val();
@@ -394,8 +393,6 @@
              }
          });
      });
-
-
 
      $(function () {
          $(".create-form").submit(function(){
@@ -439,13 +436,7 @@
           		$(this).addClass("fail");
           	}
           });
-         
-         
      });
-
-     
-     
-     
 </script>
 <body>
 	<div class="container-1200">
@@ -470,7 +461,7 @@
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"><br>
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off">
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                 <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
@@ -489,7 +480,7 @@
 	
 	                <div class="row">
 	                    <i class="fa-solid fa-calendar-days"></i>
-	                    <input type="text" class="single-date-picker" id="short-text-box"  name="startDate" >
+	                    <input type="text" class="single-date-picker" id="short-text-box"  name="startDate" autocomplete="off">
 	                    <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
 	
@@ -538,8 +529,7 @@
 	                <a href="/" class="smallbtn cancel-btn" id="smallbutton3">취소</a>
 	                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
 	            </div>
-        </form>    
-        	</div>    
-	</div>
+		</form>    
+	</div>    
 </body>     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

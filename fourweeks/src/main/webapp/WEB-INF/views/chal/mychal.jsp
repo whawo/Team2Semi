@@ -69,36 +69,36 @@
 
         /* tab menu */
      ul.tabs {
-     color: #AAAAAA;
-     position:relative;
-     float:left;
-     list-style: none;
-     width: 100%;
-     margin:0px 0px 30px 8px;
-     padding: 0;
+	     color: #AAAAAA;
+	     position:relative;
+	     float:left;
+	     list-style: none;
+	     width: 100%;
+	     margin:0px 0px 30px 8px;
+	     padding: 0;
      }
 
      ul.tabs li {
-     float: left;
-     border-bottom : 2px solid#AAAAAA;
-     text-align:center;
-     cursor: pointer;
-     width:50%;
-     padding: 0;
-     line-height: 50px;
-     height:50px;
+	     float: left;
+	     border-bottom : 2px solid#AAAAAA;
+	     text-align:center;
+	     cursor: pointer;
+	     width:50%;
+	     padding: 0;
+	     line-height: 50px;
+	     height:50px;
      }
      ul.tabs li.active {
-     border-bottom-color : #6c7aef;
-     color: #6c7aef;
-     font-weight:bold;
+	     border-bottom-color : #6c7aef;
+	     color: #6c7aef;
+	     font-weight:bold;
      }
 
      .tab_container {
-     position:relative;
-     float:left;
-     width:100%;
-     margin-top:0;
+	     position:relative;
+	     float:left;
+	     width:100%;
+	     margin-top:0;
      }
 
      .tab_content {
@@ -129,11 +129,11 @@
      }
      /* 다단배치 */
      .first {
-       display: flex;
-       flex-direction: row;
+		display: flex;
+		flex-direction: row;
      }
      .first > div {
-       flex-grow: 1;
+		flex-grow: 1;
      }
      .flexbox {
        margin: 0px;
@@ -244,6 +244,7 @@
     .confirm-img.no-img {
 		display: none;
 	}
+
     .days.is-confirm {
     	color:red;
     	font-weight: bold;
@@ -255,6 +256,30 @@
 	}
 	.nick-size {
 		font-size :  15px;
+	}
+
+	.my-confirm {
+		width: 380px;
+		margin: 9px auto;
+		text-align:center;
+	}
+	.my-confirm li {
+		margin: 3px 0;
+		padding: 0.5em;
+		display: inline-block;
+		justify-content: center;
+	    align-items: center;
+	    width: 50px;
+	    height: 82px;
+	    font-size:16px;
+	    list-style: none;
+	    line-height: 34px;
+	}
+	.not-yet {
+		color: #d9d9d9;
+	}
+	.is-confirm > i {
+		color: #6C7AEF;
 	}
 
 </style>
@@ -318,9 +343,9 @@
 				}
 				
 				//searchResult를 인덱스로 갖는 li에 스타일 적용
+				$(".my-confirm li").removeClass("is-confirm");
 				for(var i = 0; i < searchResult.length; i++) {
-					//console.log(i+"번째: "+searchResult[i]);
-					$(".my-confirm li").eq(searchResult[i]).css("background-color", "#A8B0E9");
+					$(".my-confirm li").eq(searchResult[i]).addClass("is-confirm");
 				}
 			}
 		});
@@ -432,6 +457,7 @@
                </c:forEach>               
 				<br>
 
+	<br><br><br><br>
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row div-align">
 			<h2>인증글</h2>
@@ -489,7 +515,6 @@
 		      </c:if>
 		 </div>
 	    </div> <!-- 인증글 목록 끝 -->     
-	
 	</div>
 </div>
 </div> 

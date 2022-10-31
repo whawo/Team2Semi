@@ -196,7 +196,7 @@
 		margin : 40px 0;
 	}
 	.user-img {
-	border-radius: 50%;
+		border-radius: 50%;
 	}
 	.div-align {
 		display : inline-block;
@@ -323,6 +323,7 @@
 	 <div class="row "> <!-- 인증하기 버튼 -->
 	<!-- 인증 화면에서 해당 챌린지가 선택된 상태가 될 수 있도록 챌린지 번호 전달 -->
 	<!-- 챌린지 시작 전에 인증하기 버튼 비활성화(jquery) -->
+
 	 	<button class="navbtn" type="submit" id="navbutton1"><a href="write?chalNo=${chalDto.chalNo}" class="btn navbtn" id="navbutton1">인증하기</a></button>
 	 </div>
 </div> <!-- 3단 끝 -->
@@ -426,6 +427,7 @@
 				</c:otherwise>
 			</c:choose>
 	</div>
+	</c:if>
 </div>	
 
 

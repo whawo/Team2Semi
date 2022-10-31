@@ -179,7 +179,6 @@
 			</c:otherwise>
 		</c:choose>
 	
-	
 		<c:choose>
 			<c:when test="${vo.hasPrev()}">
 				<li><a href="all?chalNo=${vo.getChalNo()}&p=${vo.prevBlock()}">&lt;</a></li>
@@ -223,5 +222,4 @@
 	  </ul>
 	</div>
 </div> <!-- container끝 -->
-	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
