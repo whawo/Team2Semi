@@ -459,6 +459,18 @@
 </script>
 
 <div class="container-794">
+<<<<<<< HEAD
+<%-- 이미지 --%>
+	  <div class="detail-top" style="margin-top:20px"> 
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
+          <div class="chal-timer">
+              <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
+          </div>
+      </div>
+ 
+        <%-- 챌린지 제목 --%>
+	<div> 
+=======
 
 
 	<%-- 이미지 --%>
@@ -473,6 +485,7 @@
 
 	<%-- 챌린지 제목 --%>
 	<div>
+>>>>>>> refs/remotes/origin/HEAD
 		<span class="chal-title">${chalDto.getChalTitle()}</span>
 	</div>
 
