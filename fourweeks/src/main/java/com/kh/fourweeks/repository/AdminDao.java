@@ -14,7 +14,7 @@ public interface AdminDao {
 	
 	NoticeVO selectNoticeOne(int noticeNo); // 공지글 하나 조회
 	
-	List<NoticeVO> selectNoticeAll( NoticeListSearchVO vo); // 공지글 전체 조회
+	List<NoticeVO> selectNoticeAll(NoticeListSearchVO vo); // 공지글 전체 조회
 	
 	List<NoticeVO> selectNoticeSearch(NoticeListSearchVO vo); //공지글 검색
 	
