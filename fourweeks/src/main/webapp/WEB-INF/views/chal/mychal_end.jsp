@@ -474,7 +474,6 @@
 </script>
 
 <div class="container-794">
-<<<<<<< HEAD
 
 <%-- 이미지 --%>
 	  <div class="detail-top" style="margin-top:20px"> 
@@ -579,6 +578,7 @@
 					<!-- 프로필사진추가 필요 -->
 						<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
 						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
+					</c:forEach>
 
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row div-align">
