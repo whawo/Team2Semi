@@ -127,13 +127,7 @@ background-color:transparent;
 }); */
 
 $(function () {
-	// form이 전송될 때 내부의 입력창을 모두 trigger 처리
-    $(".edit-form").submit(function(){
-    	$("input[name=userPw]").blur();
-    	if($(".input.fail".length > 0)) {
-            return false;
-        }
-    });
+	
     
     $("input[name=userPw]").on("blur", function(){
     	var userPw = $(this).val();
@@ -149,12 +143,22 @@ $(function () {
     	var pw1= $("input[name=userPw]").val();
     	var pw2 = $("#repeatPw").val();
     	var con = pw1  == pw2;
-    	$(con).removeClass("fail");
+    	$(this).removeClass("fail");
     	if(!con) {
     		$(this).addClass("fail");
     	}
     });
     
+	 // form이 전송될 때 내부의 입력창을 모두 trigger 처리
+    $(".edit-form").submit(function(){
+    	$("input[name=userPw]").blur();
+    	console.log($(".input.fail").length);
+    	if($(".input.fail".length == 0)) {
+            return true;
+        }else{
+        	return false;
+        }
+    });
 });
 
      
@@ -168,18 +172,19 @@ $(function () {
 	<form action="pw" method="post" class="edit-form">
 		<div class="row  center row-id">
 			<span class="sp-1">아이디</span><input class="input short-text-box id-box" name="userId"  value="${userDto.userId}" disabled>
+			<input class="input short-text-box id-box" name="userId"  value="${userDto.userId}" type="hidden">
 		</div>	
 		<div class="row center">
-		<span class="sp-2">새 비밀번호 </span><input name="userPw" class="input short-text-box short-hover pw-box1"  type="password"   placeholder="8~16자의 영문/숫자"><br>
+			<span class="sp-2">새 비밀번호 </span><input name="userPw" class="input short-text-box short-hover pw-box1"  type="password"   placeholder="8~16자의 영문/숫자"><br>
 		     <span class="fail-message sp-4">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
 		</div>
-	<div class="row ">
-		     <span class="sp-3">새 비밀번호 확인 </span><input class="input short-text-box short-hover pw-box2"  type="password" placeholder="8~16자의 영문/숫자"  id="repeatPw"><br>
-		     <span class="fail-message sp-5">비밀번호가 일치하지 않습니다.</span>
-	</div>
-	<div class="row center">
-		     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3"><a  href="/mypage">취소</a></button>
-		     <button class="save-btn" type="submit">변경</button>
+		<div class="row ">
+			     <span class="sp-3">새 비밀번호 확인 </span><input class="input short-text-box short-hover pw-box2"  type="password" placeholder="8~16자의 영문/숫자"  id="repeatPw"><br>
+			     <span class="fail-message sp-5">비밀번호가 일치하지 않습니다.</span>
+		</div>
+		<div class="row center">
+			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3"><a href="/mypage">취소</a></button>
+			     <button class="save-btn" type="submit">변경</button>
 		</div>
 	</form>
 </div>
