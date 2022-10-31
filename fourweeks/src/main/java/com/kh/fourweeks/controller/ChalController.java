@@ -30,6 +30,7 @@ import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 
@@ -144,6 +145,7 @@ public class ChalController {
 	@GetMapping("/mychal")
 	public String myChal(//챌린지 상세 
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			@ModelAttribute (name="vo") ChalConfirmVO vo,
 			HttpSession session,
 			Model model) {
 		//모든 유저 조회
@@ -160,16 +162,16 @@ public class ChalController {
 		//모든 참가자 달성률 조회
 		model.addAttribute("allProgressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
 		//참가자 인증글 목록(최신 5개)
-		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(vo));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		
 		return "chal/mychal";
-		
 	}
 	
 	@GetMapping("/mychal_end")
 	public String myChalEnd(//챌린지 종료 상세 
 			@ModelAttribute ChalMyDetailDto chalMyDetailDto,
+			@ModelAttribute (name="vo") ChalConfirmVO vo,
 			HttpSession session,
 			Model model) {
 		//모든 유저 조회
@@ -183,16 +185,19 @@ public class ChalController {
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(),
 						(String)session.getAttribute(SessionConstant.ID)));
-		//모든 참가자 달성률 조회
-		model.addAttribute("allProgressDto" , chalDao.selectAllProgress(chalMyDetailDto.getChalNo()));
+		//모든 성공한 달성률 조회
+		model.addAttribute("allProgressDto" , chalDao.selectSuccessAllProgress(chalMyDetailDto.getChalNo()));
+		//모든 실패한 달성률 조회
+		model.addAttribute("failDto" , chalDao.selectFailAllProgress(chalMyDetailDto.getChalNo()));
+		//모든 100프로 달성자 조회
+		model.addAttribute("perfectDto" , chalDao.selectPerfectAllProgress(chalMyDetailDto.getChalNo()));
 		//참가자 인증글 목록(최신 5개)
-		model.addAttribute("confirmList", confirmDao.allConfirmTopN(chalMyDetailDto.getChalNo(), 1, 5));
+		model.addAttribute("confirmList", confirmDao.allConfirmTopN(vo));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
-		
+		//전체 참가자 평균 달성률
+		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		return "chal/mychal_end";
-		
 	}
-
 	
 	@GetMapping("/insert")
 	public String insert() {

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="마이페이지" name="title" />
+   <jsp:param value="마이페이지" name="title" />
 </jsp:include>
 <!DOCTYPE html>
 <html lang="ko">
@@ -319,6 +319,7 @@ border-radius:0.5em;
 
 </head>
 <body>
+
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
@@ -412,12 +413,26 @@ border-radius:0.5em;
 				 </c:choose>
 </div>
 				 </div>
+
+ 
 </c:forEach>
 </c:otherwise>
 </c:choose>
         </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
           <!-- #tab2 --> 
+
 <div id="tab2" class="row row-9 tab_content">
 
 <c:choose>
@@ -484,12 +499,13 @@ border-radius:0.5em;
 				 </c:choose>
 </div>
 				 </div>
+
 </c:forEach>
 </c:otherwise>
 </c:choose>
     </div> 
     
-    
+
 
 <div id="tab3" class=" row row-9 tab_content">
 
@@ -560,6 +576,7 @@ border-radius:0.5em;
 				 </div>
 
 </c:forEach> 
+
 
 
 </c:otherwise>

@@ -140,9 +140,41 @@
 	  <div class="detail-top"> 
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
           <div class="chal-timer">
-              <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
+              <span class="chal-timer-font"> 
+        <c:choose>
+		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
+			${chalVO.getEndDday()}일 뒤 종료
+		</c:when>
+		<c:when test="${chalVO.getEndDday() == 0}">
+			오늘 종료
+		</c:when>
+		<c:when test="${chalVO.getEndDday() < 0}">
+			종료
+		</c:when>
+		<c:when test="${chalVO.getDDay() == 1}">
+			내일부터 시작
+		</c:when>
+				<c:when test="${chalVO.getDDay() == 0}">
+			오늘 시작
+		</c:when>
+		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+		<c:otherwise>
+			${chalVO.getDDay()}일 뒤 시작
+		</c:otherwise>
+	    </c:choose>  / 타이머로 변경하기 </span>
           </div>
       </div>
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
       
 	<%-- 챌린지 제목 --%>
 	<div> 
@@ -159,6 +191,8 @@
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 		<input class="label-status label-status-start" placeholder="${chalVO.getDDay()}일뒤 시작">
 	</div>
+	<!-- 여기 조건 추가해야함 placeholder에 어떻게 조건을 넣지 -->
+	
 	
 	 <%-- 종료일 --%>
 	<div>
@@ -173,6 +207,9 @@
 				<input class="label-status" placeholder="종료">
 			</c:when>
 			<c:when test="${chalDtoRecruited.getDDay() < 0}">
+				<input class="label-progress" placeholder="진행중">
+			</c:when>
+					<c:when test="${chalDtoRecruited.getDDay() == 0}">
 				<input class="label-progress" placeholder="진행중">
 			</c:when>
 			<c:otherwise>

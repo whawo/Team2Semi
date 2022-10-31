@@ -43,21 +43,88 @@
     .tab_content {
         border: none;
     }
+    .confirm-img.no-img {
+		display: none;
+	}
+    .days.is-confirm {
+    	color:red;
+    	font-weight: bold;
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+		
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function(){
+			$(this).attr("src", "/images/bg_default.png");
+		});
+	  
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+		
+		//인증샷이 없으면 img 태그 가리기
+		$(".confirm-img").on("error", function(){
+			$(this).addClass("no-img");
+		});
+		
+		$.ajax({
+			//내 인증글 작성 일차를 리스트로 가져오기
+			url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
+			method : "get",
+			dataType : "json",
+			//async : false,
+			success : function(resp) {
+				//가져온 리스트를 배열로 만들기
+				var values = [];
+                for(var i = 0; i < resp.length; i++) {
+                	values.push(resp[i].confirmDays);
+                }
+                //console.log(values);
+                
+                //1~28일 배열 생성(인덱스 조회용)
+                var arrDays = [];
+        		for (var i = 1; i <= 28; i++) {
+        			arrDays.push(i);
+        		}
+        		
+        		//1~28일 배열에서 내 인증글 작성 일차와 일치하는 인덱스를 searchResult 배열에 저장
+				var searchResult = [];
+				for(var i = 0; i < arrDays.length; i++){
+					var index = arrDays.indexOf(values[i]);
+					if (index != -1) {
+					    searchResult.push(index);
+					};
+				}
+				
+				//searchResult를 인덱스로 갖는 li에 스타일 적용
+				for(var i = 0; i < searchResult.length; i++) {
+					//console.log(i+"번째: "+searchResult[i]);
+					$(".my-confirm li").eq(searchResult[i]).css("background-color", "#A8B0E9");
+				}
+			}
+		});
+	});
 
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
-    });
-});
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function(event) {
+		if (event.originalEvent.persisted
+			|| (window.performance && window.performance.navigation.type == 2)) {
+				location.href = location.href;
+		}
+	});
 </script>
 <div class="container-794">
 	<ul class="list">
@@ -79,16 +146,27 @@
         <div id="tab1" class="tab_content">
     
 		<ul class="list">
-            달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${progressDto*100/28}"/>%
+            <li>
+	            달성률 : <fmt:formatNumber type="number" pattern="0" value="${progressDto*100/28}"/>%
+			</li>
 		</ul>
-
+		<ul>
+			<li>내 인증 현황</li>
+		</ul>	
+		<ul class="my-confirm">
+			<c:forEach var="days" begin="1" end="28" step="1">
+				<li>${days}</li>
+			</c:forEach>
+		</ul>
         </div>
 
         <!-- #tab2 --> 
 	    <div id="tab2" class="tab_content">
 			<table class="table table-border">
 				<tbody>
+				  평균 달성률 : 
+             <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%
 					<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<tr>
 						<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 

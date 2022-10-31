@@ -80,7 +80,7 @@
     
 		<ul class="list">
             달성률 : <fmt:formatNumber type="number" 
-				 pattern="0" value="${progressDto*100/28}"/>%
+				 pattern="0" value="${progressDto*100/28}"/>
 		</ul>
 
         </div>
@@ -88,13 +88,22 @@
         <!-- #tab2 --> 
 	    <div id="tab2" class="tab_content">
 			<table class="table table-border">
-			<h2>총 참가자 정보</h2><br>
-			평균 달성률 : 
+			<h2>총 참가자 정보</h2><br> 
+             평균 달성률 : 
+             <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>
+
+			<br><br><br>
+			총 ${chalDto.getChalPerson()}명 참가<br><br>
+			100% 달성  &nbsp;&nbsp; ${perfectDto.size()}명<br>
+			85%이상 달성 &nbsp;&nbsp; ${allProgressDto.size()}명<br>
+			85%미만 달성 &nbsp;&nbsp;${failDto.size()}명
+			
 				<tbody>
+				<h2>챌린지 성공 (${allProgressDto.size()}명)</h2>
 					<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<tr>
-						<td>${allProgressDto.userNick}&nbsp; 달성률 : <fmt:formatNumber type="number" 
-						 pattern="0" value="${allProgressDto.cnt*100/28}"/>%</td>
+						<td>${allProgressDto.userNick}&nbsp; 달성률 : ${allProgressDto.average}
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -105,7 +114,7 @@
 		<div class="row left">
 			최신 인증글
 		</div>
-		<div class="row right">
+		<div class=t"row right">
 			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
 		</div>
 		<br><br>

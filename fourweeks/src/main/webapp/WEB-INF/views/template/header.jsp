@@ -55,7 +55,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-//프로필 이미지가 없으면 기본 아이콘으로 대체
+	//프로필 이미지가 없으면 기본 아이콘으로 대체
 	$(function(){
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
@@ -73,7 +73,7 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="/"><img src="/images/top_logo.png" width="60"></a>
+		<a href="/"><img src="/images/top_logo.png" width="100"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>
@@ -95,9 +95,14 @@
 		  				<li><a href="/need_login">챌린지 개설</a></li>
 		                <li><a href="/need_login">챌린지 인증</a></li>
 		                <li><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
-		                
-		           	 	<li><a href="/join">회원가입</a></li>
-		           	 	<li><a href="/login" >로그인</a></li>
+		                <li class="right-menu">
+							로그인
+							<ul>
+								<li><a href="/login">로그인</a></li>
+								<li><a href="/join">회원가입</a></li>
+							</ul>
+						</li>
+		           	 	
 					</c:otherwise>
 				</c:choose>	
 			</ul>

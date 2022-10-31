@@ -17,6 +17,7 @@ import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
+import com.kh.fourweeks.vo.ChalProgressSuccessVO;
 import com.kh.fourweeks.vo.ChalProgressVO;
 @Repository
 
@@ -29,6 +30,13 @@ public class ChalDaoImpl implements ChalDao {
 		String sql = "select chal_seq.nextval from dual";
 		int chalNo = jdbcTemplate.queryForObject(sql, int.class);
 		return chalNo;
+	}
+	
+	@Override
+	public int noticeSeq() {
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		return noticeNo;
 	}
 	
 	@Override
@@ -59,6 +67,14 @@ public class ChalDaoImpl implements ChalDao {
 	public void chalAttachment(int chalNo, int attachmentNo) {
 		String sql = "insert into chal_img(chal_no, attachment_no) values(?, ?)";
 		Object[] param = {chalNo, attachmentNo};
+		
+		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public void noticeAttachment(int noticeNo, int attachmentNo) {
+		String sql = "insert into notice_img(notice_no, attachment_no) values(?, ?)";
+		Object[] param = {noticeNo, attachmentNo};
 		
 		jdbcTemplate.update(sql, param);
 	}
@@ -629,6 +645,7 @@ public class ChalDaoImpl implements ChalDao {
 						.userId(rs.getString("user_id"))
 						.participantJoin(rs.getDate("participant_join"))
 						.chalTopic(rs.getString("chal_topic"))
+						.chalPerson(rs.getInt("chal_person"))
 						.build();
 			}else {
 				return null;
@@ -700,6 +717,16 @@ public class ChalDaoImpl implements ChalDao {
 					.build();
 		}
 	};
+	
+	private RowMapper<ChalProgressSuccessVO> allSuccessProgressMapper = new RowMapper<ChalProgressSuccessVO>() {
+		@Override
+		public ChalProgressSuccessVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return  ChalProgressSuccessVO.builder()
+					.userNick(rs.getString("user_nick"))
+					.average(rs.getInt("average"))
+					.build();
+		}
+	};
 
 	@Override
 	public List<ChalProgressVO> selectAllProgress(int chalNo) {
@@ -714,6 +741,48 @@ public class ChalDaoImpl implements ChalDao {
 		Object[] param = {chalNo, chalNo};
 		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}
-	
+
+	@Override
+	public List<ChalProgressSuccessVO> selectSuccessAllProgress(int chalNo) {
+		
+		String sql = "select * from"
+				+ " (select trunc(count(C.confirm_no)*100/28) average,U.user_nick from participant P"
+				+ " left outer join (select * from chal_confirm where chal_no = ?) C"
+				+ " on P.user_id = C.user_id left outer join chal_user U on"
+				+ " P.user_id = U.user_id where P.chal_no = ? group by U.user_nick)"
+				+ "  where average > 85";
+		
+		Object[] param = {chalNo, chalNo};
+		
+		return jdbcTemplate.query(sql, allSuccessProgressMapper,param);
+	}
+
+	@Override
+	public List<ChalProgressSuccessVO> selectFailAllProgress(int chalNo) {
+		String sql = "select * from"
+				+ " (select nvl(trunc(count(C.confirm_no)*100/28), 0) average,U.user_nick from participant P"
+				+ " left outer join (select * from chal_confirm where chal_no = ?) C"
+				+ " on P.user_id = C.user_id left outer join chal_user U on"
+				+ " P.user_id = U.user_id where P.chal_no = ? group by U.user_nick)"
+				+ "  where average < 85";
+		
+		Object[] param = {chalNo, chalNo};
+		
+		return jdbcTemplate.query(sql, allSuccessProgressMapper,param);
+	}
+
+	@Override
+	public List<ChalProgressSuccessVO> selectPerfectAllProgress(int chalNo) {
+		String sql = "select * from"
+				+ " (select nvl(trunc(count(C.confirm_no)*100/28), 0) average, U.user_nick from participant P"
+				+ " left outer join (select * from chal_confirm where chal_no = ?) C"
+				+ " on P.user_id = C.user_id left outer join chal_user U on"
+				+ " P.user_id = U.user_id where P.chal_no = ? group by U.user_nick)"
+				+ "  where average = 100 ";
+		
+		Object[] param = {chalNo, chalNo};
+		
+		return jdbcTemplate.query(sql, allSuccessProgressMapper,param);
+	}
 	
 }

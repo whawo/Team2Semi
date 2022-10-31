@@ -110,9 +110,23 @@ public class AttachmentDaoImpl implements AttachmentDao{
 	}
 	
 	@Override
+	public int selectNoticeImg(int noticeNo) {
+		String sql = "select attachment_no from notice_img_view where notice_no = ?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
 	public AttachmentDto confirmImgInfo(int confirmNo) {
 		String sql = "select * from confirm_info_view where confirm_no = ?";
 		Object[] param = {confirmNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
+	@Override
+	public AttachmentDto noticeImgInfo(int noticeNo) {
+		String sql = "select * from notice_info_view where notice_no = ?";
+		Object[] param = {noticeNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 

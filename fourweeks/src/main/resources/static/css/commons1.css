@@ -507,8 +507,9 @@ header > nav {
 .dropdown-nav > li.right-menu {
 	justify-content: flex-end;
 	padding: 0.5em 0;
-	width: 200px;
+	width: auto;
 	height: 100%;
+	min-width: 120px;
 }
 .dropdown-nav ul {
     position: absolute;

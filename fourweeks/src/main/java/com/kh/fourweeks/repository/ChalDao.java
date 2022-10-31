@@ -3,12 +3,12 @@ import java.util.List;
 
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
-import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.ParticipantDto;
 import com.kh.fourweeks.vo.ChalDetailVO;
 import com.kh.fourweeks.vo.ChalListSearchRecruitedVO;
 import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
+import com.kh.fourweeks.vo.ChalProgressSuccessVO;
 import com.kh.fourweeks.vo.ChalProgressVO;
 
 public interface ChalDao {
@@ -36,8 +36,13 @@ public interface ChalDao {
 	//챌린지 참가자 진행률 조회 메소드
 	List<ChalProgressVO> selectAllProgress(int chalNo);
 	
-
-	
+	//챌린지 성공 참가자 진행률 조회 메소드
+	 List<ChalProgressSuccessVO> selectSuccessAllProgress(int chalNo);
+	//챌린지 실패 참가자 진행률 조회 메소드
+	 List<ChalProgressSuccessVO> selectFailAllProgress(int chalNo);
+	 
+	//챌린지 완벽 참가자 진행률 조회 메소드
+     List<ChalProgressSuccessVO> selectPerfectAllProgress(int chalNo);
     // 모집중 조회+검색
   	List<ChalListVO> selectList(ChalListSearchVO vo); // 유저의 반응에 따라 메소드를 판정
   	List<ChalListVO> list(ChalListSearchVO vo); // keyword, type, recruited가 null일때 실행됨
@@ -68,6 +73,8 @@ public interface ChalDao {
     public boolean updateChalPerson(int chalNo);
     List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
     ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
+	int noticeSeq();
+	void noticeAttachment(int noticeNo, int attachmentNo);
 	
 	
 }
