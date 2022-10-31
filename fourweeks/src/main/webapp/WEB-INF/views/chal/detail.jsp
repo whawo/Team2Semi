@@ -7,6 +7,7 @@
 	<jsp:param value="챌린지 상세" name="title" />
 </jsp:include>
 
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -20,87 +21,88 @@
 
 <style>
 	div {
-		/* border: 1px dotted gray; */
-		border: 1px solid transparent;
-		margin: 40px 0px;
-		vertical-align: bottom;
-	}
-	
-	#chal_img {
-		margin-left: 0px;
-		height: 400px;
-		width: 790px;
-		border-radius: 10px;
-	}
-	
-	.chal-title {
-		font-size: 29px;
-		font-weight: bold;
-	}
-	
-	span {
-		font-size: 26px;
-		vertical-align: top;
-	}
-	
-	.img-margin {
-		margin-right: 10px;
-		height: 24px;
-	}
-	
-	.border-line {
-		border: 3px solid #AAAAAA;
-		border-top: none;
-		border-left: none;
-		border-right: none;
-	}
-	
-	.largebtn {
-		border: none;
-		font-size: 20px;
-		padding: 0.75em;
-		cursor: pointer;
-		display: inline-block;
-		text-align: center;
-		text-decoration: none;
-		border-radius: 0.5em;
-		width: 100%;
-		height: 60px;
-	}
-	/* 챌린지 이미지 */
-	.detail-top-img {
-		position: relative;
-		width: 790px;
-		height: 400px;
-		border-radius: 10px;
-	}
-	/* 챌린지 타이머 */
-	.chal-timer {
-		position: absolute;
-		margin: -50px 0;
-		background-color: #707A89;
-		background: rgba(112, 122, 137, 0.7);
-		color: white;
-		border-bottom-left-radius: 10px;
-		border-bottom-right-radius: 10px;
-		height: 50px;
-		width: 790px;
-		/* 타이머 폰트 가운데 */
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	
-	.chal-timer-font {
-		font-size: 20px;
-	}
-	
-	.user-img {
-		width: 50px;
-		height: 50px;
-		border-radius: 50%;
-		margin-top: 0px;
-		margin-bottom: -19px;
+	/* border: 1px dotted gray; */
+	      border: 1px solid transparent;
+	      margin : 40px 0px;
+	      vertical-align: bottom;
+      }
+     #chal_img {
+         margin-left : 0px;
+         height : 400px;
+         width: 790px; 
+         border-radius: 10px;
+     }
+     .chal-title {
+         font-size: 29px;
+         font-weight: bold;
+     }
+     span {
+         font-size: 26px;
+         vertical-align: top;
+     }
+     .img-margin {
+        margin-right: 10px;
+        height: 24px;
+     }
+     .border-line {
+         border: 3px solid #AAAAAA;
+         border-top: none;
+         border-left: none;
+         border-right: none;
+     }
+      .largebtn{
+	     border: none;
+	     font-size: 20px;
+	     padding: 0.75em;
+	     cursor: pointer;
+	     display: inline-block;
+	     text-align: center;
+	     text-decoration: none;
+	     border-radius: 0.5em;
+	     width: 100%; 
+	     height: 60px;
+      }
+      #largebutton1{
+        background-color: #6c7aef;  
+        color: white;
+        }
+       /* 챌린지 이미지 */
+       .detail-top-img {
+           position: relative;
+           margin-top : 50px;
+           width : 790px;
+           height: 400px;
+           border-radius: 10px;
+       }
+       /* 챌린지 타이머 */
+     .chal-timer{
+         position: absolute;
+         margin: -50px 0;
+         background-color: #707A89;
+         background : rgba(112, 122, 137, 0.7);
+         color: white;
+         border-bottom-left-radius: 10px;
+         border-bottom-right-radius: 10px;
+         height: 50px;
+         width: 790px;
+         /* 타이머 폰트 가운데 */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+       }
+       .chal-timer-font {
+           font-size: 20px;
+       }
+     .user-img {
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;
+         margin-top: 0px;
+         margin-bottom: -19px;
+     }
+     #largebutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
 	}
 </style>
 
@@ -132,13 +134,15 @@
 </script>
 
 <form action ="insert" method="post" >
-	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}">
+	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}" disabled>
 	
 <div class="container-794">
 
 	<%-- 이미지 --%>
-	  <div class="detail-top"> 
+
+	  <div class="detail-top" style="margin-top:100px;"> 
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
+
           <div class="chal-timer">
               <span class="chal-timer-font"> 
         <c:choose>
@@ -165,17 +169,6 @@
           </div>
       </div>
       
-      
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
 	<%-- 챌린지 제목 --%>
 	<div> 
 		<span class="chal-title">${chalDto.getChalTitle()}</span>
@@ -189,11 +182,11 @@
 	<%-- 시작일 --%>
 	<div>  
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
-		<input class="label-status label-status-start" placeholder="${chalVO.getDDay()}일뒤 시작">
+		<span class="label label-status" >${chalVO.getDDay()}일뒤 시작</span>
 	</div>
+
 	<!-- 여기 조건 추가해야함 placeholder에 어떻게 조건을 넣지 -->
-	
-	
+
 	 <%-- 종료일 --%>
 	<div>
 		<img src="/images/chal_end_date.png" class="img-margin">
@@ -204,32 +197,32 @@
 	<div> 
 		<c:choose>
 			<c:when test="${chalDtoRecruited.getDDay() < -28}">
-				<input class="label-status" placeholder="종료">
+				<span class="label label-status" >종료</span>
 			</c:when>
 			<c:when test="${chalDtoRecruited.getDDay() < 0}">
-				<input class="label-progress" placeholder="진행중">
+				<span class="label label-ing" >진행중</span>
 			</c:when>
 					<c:when test="${chalDtoRecruited.getDDay() == 0}">
-				<input class="label-progress" placeholder="진행중">
+				<span class="label label-ing" >진행중</span>
 			</c:when>
 			<c:otherwise>
-				<input class="label-wait" placeholder="모집중">
+				<span class="label label-wait" >모집중</span>
 			</c:otherwise>
 		</c:choose>
-		<input class="label-category" placeholder="${chalDto.chalTopic}">
+		<span class="label label-category" >진행중</span>
 	</div>
 	
 	 <%-- 버튼 --%>
 	<div>
-		<c:choose>
-				<c:when test="${participantDto==null && chalDto.getChalPerson()<10}">
-					<button class="largebtn" type="submit" id="largebutton1">참가하기</button>
-				</c:when>
-				<c:otherwise>
-				<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
-					<button class="largebtn" type="submit" id="largebutton1" disabled>참가하기</button>
-				</c:otherwise>
-		</c:choose>
+			<c:choose>
+					<c:when test="${participantDto==null && chalDto.getChalPerson()<10}">
+						<button class="largebtn" type="submit" id="largebutton1">참가하기</button>
+					</c:when>
+					<c:otherwise>
+					<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
+						<button class="largebtn" type="submit" id="largebutton1-1"   style="pointer-events: none" disabled>참가하기</button>
+					</c:otherwise>
+			</c:choose>
 	</div>
 	
 	 <div>
@@ -258,7 +251,6 @@
 	<div> 
 		${chalDto.getHowConfirm()}
 	</div>
-		
 		
 <!-- 
 		<ul class="list">
@@ -299,7 +291,7 @@
 		</ul>
 	</div>
  -->
- 
+
 	<!-- 버튼 비활성화 및 모집마감 버튼 생성 해야함 -->
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	
