@@ -199,7 +199,7 @@
 		<div class="row float-container">
 			<div class="row float-left w-33 p-20">
 				<div class="row center">
-					<h3>오늘 가입/탈퇴자 수</h3>
+					<h3>오늘 가입자/탈퇴자 수</h3>
 				</div>
 				<div class="row">
 					<canvas id="joinedAndLeave"></canvas>

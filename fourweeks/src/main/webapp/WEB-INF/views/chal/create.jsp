@@ -249,7 +249,6 @@ $(function(){
 		 format:"YYYY-MM-DD",
         firstDay:0, // 시작일 일요일부터 
         singleDate:true, // 날짜 한개만 선택
-
         // (+옵션) 표시되는 달의 개수를 지정 
         numberOfMonths:1, //2개의 달씩 보여줘라 
    
@@ -263,7 +262,6 @@ $(function(){
      // 오늘 날짜 기본값으로 자동 선택
     picker1.setDate(moment()); 
 });
-
 // 이미지 
 $(function(){
        $("[name=attachment]").change(function(e){
@@ -272,7 +270,6 @@ $(function(){
            if(this.files.length > 0){
                //읽는 도구
                var reader = new FileReader();
-
                //읽을 때 해야할 작업
                reader.onload = function(e){
                    //읽은 내용 정보가 e에 들어 있음
@@ -291,7 +288,6 @@ $(function(){
            $(".preview").attr("src", "/images/bg_default.png");
        });
    });
-
 //help-text
 $(function(){
        $(".helper-text1").on("input", function(){
@@ -329,7 +325,11 @@ $(function(){
         }
     });
 });
-
+	window.onbeforeunload = function(e) {
+	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
+	    e.returnValue = dialogText;
+	    return dialogText;
+	};
 </script>
 <body>
 	<div class="container-1200">
@@ -354,7 +354,8 @@ $(function(){
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off" maxlength="40">
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus helper-text1 alert-notice" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off" maxlength="40">
+
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                 <span class="fail-message">필수 항목 입니다. </span>
 	                </div>

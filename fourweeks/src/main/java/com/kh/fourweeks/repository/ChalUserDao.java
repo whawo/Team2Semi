@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.fourweeks.entity.ChalCreateMyDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.LeaveCountDto;
 
 public interface ChalUserDao {
 	void join(ChalUserDto chalUserDto); // 회원가입 메소드
@@ -14,6 +15,7 @@ public interface ChalUserDao {
 	ChalUserDto findPw(String userId, String userEmail); // 아이디, 이메일로 비밀번호 조회
 	boolean updateLoginTime(String userId); // 로그인 시각 자동갱신 메소드
 	boolean delete(String userId); // 탈퇴(테이블 데이터 삭제)
+	void leaveCounting(LeaveCountDto leaveCountDto); // 탈퇴수 카운팅 메소드
 	
 
 	//프로필 수정용 메소드
