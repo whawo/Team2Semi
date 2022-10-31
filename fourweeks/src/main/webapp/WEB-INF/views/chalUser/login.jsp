@@ -121,7 +121,7 @@
                 
             </div>
             <div class="row">
-                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호"  autocomplete="off">
+                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1-1" placeholder="비밀번호"  autocomplete="off">
             </div>
             <div class="row">
                 <button type="submit" class="largebtn w-100" id="largebutton1">로그인</button>
