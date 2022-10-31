@@ -271,32 +271,23 @@
         .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 80px;
         }
-       /* 메세지는 숨김처리 */
-        .success-message,
-        .fail-message { 
-            display: none;
-        }
-
-        .success-message {
-            color:green;
-        }
-        .fail-message {
-            color:red;
-        }
-
-        /* 입력창의 상태에 따라 특정 메세지를 표시 */
-        .input.success {
-            border-color: green;
-        }
-        .input.success ~ .success-message {
-            display: block;
-        }
-        .input.fail {
-            border-color: red;
-        }
-        .input.fail ~ .fail-message {
-            display: block;
-        }
+  
+  		/* 에러 */
+  			.fail-message {
+		display: none;
+	}
+	.input.fail ~ .fail-message {
+		display: block;
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+	
+	.input ~ .find-error {
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+  
+  
         /* 헬퍼 텍스트 위치  */
         .helper-text-40{
         	padding-left:570px;
@@ -334,8 +325,8 @@
              	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
              }
          });
-        /*  // 오늘 날짜 기본값으로 자동 선택
-         picker1.setDate(moment()); */
+         // 오늘 날짜 기본값으로 자동 선택
+         picker1.setDate(moment());
      });
 
     // 이미지 
@@ -404,129 +395,62 @@
          });
      });
 
-// 모르겠다 required 꾸며서 할란다 
-  /*    //  회원가입 폼 제어 + 오류 메세지 
-     $(function(){
-        $(".create-btn").click(function(){
-            var chal2 = document.getElementById("chal-2");
-            var chal3 = document.getElementById("chal-3");
-            var chal4 = document.getElementById("chal-4");
-            var chal4 = document.getElementById("chal-5");
-            if(chal2){
-                // 얘는 정규식이 있는것도 아니고 성공 실패를 어캐 나놤노이ㅏㅁㄴ 
-                $(".chal-2").attr("input", "").focus();
-                return false;
-            }
-            else if(chal3){
-                $(".chal-3").attr("input", "");
-                return false;
-            }
-            else if(chal4){
-                $(".chal-4").attr("input","");
-                return false;
-            }
-            else if(chal-5){
-                $("chal-5").attr("input","");
-                return false;
-            }else{
-                return true;
-            }
-        });
-     });
- */
-  
-/* 
-	$(".create-form").submit(function(){
-		$("input[name=chalTitle]").blur();
-	     if($(".input.fail".length > 0)) {
-		$(function() {
-			$("input[name=chalTitle]").on("blur", function() {
-				var chalTitle = $(this).val();
-				$(this).removeClass("fail");
-				if (!chalTitle) {
-					$(this).addClass("fail");
-				}
-			});
-	         return false;
-		});
-	   } 
 
- });  */
- 
-$(function(){
-     $("input[name=chalTitle]").blur(function(){
-         var text = $(this).val();
-         var regex = /^[가-힣a-zA-z0-9]{1,39}$/;
-         var judge = regex.test(text);
-         console.log(judge);
-         $(this).removeClass("success fail");
-         if(text){
-             $(this).addClass("success");
-         }else{
-             $(this).addClass("fail");
-         }
-     });
-     
-     $("textarea[name=howConfirm]").blur(function(){
-         var text = $(this).val();
-         var regex = /^[가-힣a-zA-z0-9]{1,299}$/;
-         var judge = regex.test(text);
-         console.log(judge);
-         $(this).removeClass("success fail");
-         if(text){
-             $(this).addClass("success");
-         }else{
-             $(this).addClass("fail");
-         }
-     });
-     
-     $("input[name=startDate]").blur(function(){
-         var text = $(this).val();
-         $(this).removeClass("success fail");
-         if(text){
-             $(this).addClass("success");
-         }else{
-             $(this).addClass("fail");
-         }
-     });
-     
-		 $("input[type=checkbox]:chcked").blur(function(){
-         var text = $(this).val();
-         $(this).removeClass("success fail");
-         if(text){
-             $(this).addClass("success");
-         }else{
-             $(this).addClass("fail");
-         }
-     });
-		 
-		    $("textarea[name=chalContent]").blur(function(){
-		         var text = $(this).val("");
-		         $(this).removeClass("success fail");
-		         if(text){
-		             $(this).addClass("success");
-		         }
-		     });
-		     
-     
-     $(".create-form").submit(function(){
-    	 $("input[name=chalTitle]").blur();
-    	 $("textarea[name=howConfirm]").blur();
-    	 $("input[name=startDate]").blur();
-         $("input[type=checkbox]:chcked").blur();
-         $("textarea[name=chalContent]").blur;
-         if($(".input.fail").length > 0){
-        	 	$("input[name=chalTitle]").focus();
-             return false;
-         }
-     });
- }); 
 
- 
+     $(function () {
+         $(".create-form").submit(function(){
+         	$("input[name=chalTitle]").blur();
+         	$("textarea[name=howConfirm]").blur();
+         	$("input[name=startDate]").blur();
+         	$("input[type=checkbox]").blur();
+         	if($(".input.fail".length > 0)) {
+                 return false;
+             }
+         });
+         
+         $("input[name=chalTitle]").on("blur", function(){
+         	var chalTitle = $(this).val();
+         	$(this).removeClass("fail");
+         	if(!chalTitle) {
+         		$(this).addClass("fail").focus();
+         	}
+         });
+         
+         $("textarea[name=howConfirm]").on("blur", function(){
+          	var howConfirm = $(this).val();
+          	$(this).removeClass("fail");
+          	if(!howConfirm) {
+          		$(this).addClass("fail");
+          	}
+          });
+         
+          $("input[name=startDate]").on("blur", function(){
+          	var startDate = $(this).val();
+          	$(this).removeClass("fail");
+          	if(!startDate) {
+          		$(this).addClass("fail");
+          	}
+          }); 
+         
+         $("input[type=checkbox]").on("blur", function(){
+          	var checkbox = $(this).val();
+          	$(this).removeClass("fail");
+          	if(checkbox:checked) {
+          		$(this).addClass("fail");
+          	}
+          });
+         
+         
+     });
 
+     
+     
+     
 </script>
 <body>
 	<div class="container-1200">
+        <form action="create" method="post" enctype="multipart/form-data" class="create-form"  autocomplete="off">
+        
 	           <div class="row">
 	                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
 	
@@ -542,14 +466,13 @@ $(function(){
 	             
 	            </div>
 	
-        <form action="create" method="post" enctype="multipart/form-data" class="create-form"  autocomplete="off">
 	            <div class="row">
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
 	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"><br>
 	                <span  class="helper-text-40 helper-css">0</span> /40
-	                 <span class="fail-message">필수값애옹 </span>
+	                 <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
 	            </div>
 	
@@ -557,7 +480,7 @@ $(function(){
 	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
 	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"maxlength="300" ></textarea><br>
 	                <span  class="helper-text-300 helper-css">0</span> /300
-	                <span class="fail-message">필수값애옹 </span>
+	                <span class="fail-message">필수 항목 입니다. </span>
 	            </div>
 	
 	        <div class="row">
@@ -566,8 +489,8 @@ $(function(){
 	
 	                <div class="row">
 	                    <i class="fa-solid fa-calendar-days"></i>
-	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" >
-	                    <span class="fail-message">필수값애옹 </span>
+	                    <input type="text" class="single-date-picker" id="short-text-box"  name="startDate" >
+	                    <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
 	
 	                <div class="row date-calendar">
@@ -586,7 +509,7 @@ $(function(){
 	                    <input type="checkbox" >
 	                    <span class="chk-1"></span>
 	                    <span class="chk-2">확인했어요!</span>
-	                    <span class="fail-message">필수값애옹 </span>
+	                    <span class="fail-message">필수 항목 입니다. </span>
 	                </label>    
 	            </div>
 	            </div>
