@@ -32,7 +32,7 @@
 	margin-left: 158px;
 	}
 	.row-3{
-	margin-left: 91px;
+	margin-left: 102px;
 	}
 	
 	/* p 모음 */
@@ -123,7 +123,7 @@
 	</form>
 
 	<section class="row center row-3">
-		<a class="find" href="/find_pw">비밀번호 찾기</a>
+		<a class="find" href="/find_id">아이디 찾기</a>
 		<em class="divi">|</em>
 		<a class="find" href="/join">회원가입</a>
 	</section>
