@@ -14,6 +14,13 @@
 
     <style>
         /* 
+        	10.28 구현 끝 
+        
+        
+        10.27
+        - 새로고침시 밑에 에러 메세지가 노출됨 
+        - 아이디 치는 input창 안에 컬러가 생김 뭥야
+        
         	10.26
         	디자인 수정:
         	- 에러 메세지 글자 줄바꿈 해야됨 ㅇ 
@@ -58,7 +65,11 @@
             text-align: left;
             vertical-align: middle;
         }
-
+        .row-1{
+        }
+		.row-2{
+		margin-left: 40px;
+		}
         .login-p1,
         .login-p2{
             font-size: 12px;
@@ -82,7 +93,7 @@
         color: #eb6f7f;
         }
         .margin-move{
-       margin: 80px 0 0 505px;
+       margin: 70px 0 0 505px;
         }
         
         /*  에러 메세지 줄바]꿈 */
@@ -98,7 +109,7 @@
       <body>
 <div class="row container-1200">
         <div class="container-400 margin-move">
-            <div class="row center">
+            <div class="row center row-1" >
                 <h1>로그인</h1>
                 <p class="login-p1">가입하신 아이디와 비밀번호를 입력해주세요</p>
                    <p class="login-p2"> 비밀번호는 대소문자를 구분합니다.</p>
@@ -106,12 +117,11 @@
             
             <form action="login" method="post">
             <div class="row">
-                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디" required
-                	<c:if test="${param.userId != null}">value="${param.userId}"</c:if>>
+                <input type="text" name="userId" class="input short-text-box short-hover" id="text-box1" placeholder="아이디"  <c:if test="${param.userId != null}">value="${param.userId}"</c:if> autocomplete="off">
                 
             </div>
             <div class="row">
-                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호" required >
+                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호"  autocomplete="off">
             </div>
             <div class="row">
                 <button type="submit" class="largebtn w-100" id="largebutton1">로그인</button>
@@ -126,7 +136,7 @@
 		</c:if>
 		 
             </form>
-            <section class="row center">
+            <section class="row center row-2">
                 <a class="find" href="/find_pw">비밀번호 찾기</a>
                 <em class="divi">|</em>
                 <a class="find" href="/find_id">아이디 찾기</a>
