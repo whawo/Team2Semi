@@ -134,7 +134,7 @@
 </script>
 
 <form action ="insert" method="post" >
-	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}" disabled>
+	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}" >
 	
 <div class="container-794">
 
@@ -184,15 +184,7 @@
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 		<span class="label label-status" >${chalVO.getDDay()}일뒤 시작</span>
 	</div>
-<<<<<<< HEAD
-	
-	
-	
-=======
-
->>>>>>> refs/remotes/origin/HEAD
 	<!-- 여기 조건 추가해야함 placeholder에 어떻게 조건을 넣지 -->
-<<<<<<< HEAD
 	<!-- 이거!!! 넣으면 돼요 -->
 	 <c:choose>
 		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
@@ -215,13 +207,7 @@
 			${chalVO.getDDay()}일 뒤 시작
 		</c:otherwise>
 	    </c:choose>
-	    
-	    
-	    
-	    
-=======
 
->>>>>>> refs/remotes/origin/HEAD
 	 <%-- 종료일 --%>
 	<div>
 		<img src="/images/chal_end_date.png" class="img-margin">
