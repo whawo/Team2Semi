@@ -1,4 +1,4 @@
-   <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -46,10 +46,29 @@
     .confirm-img.no-img {
 		display: none;
 	}
-    .days.is-confirm {
-    	color:red;
-    	font-weight: bold;
-    }
+	.my-confirm {
+		width: 380px;
+		margin: 9px auto;
+		text-align:center;
+	}
+	.my-confirm li {
+		margin: 3px 0;
+		padding: 0.5em;
+		display: inline-block;
+		justify-content: center;
+	    align-items: center;
+	    width: 50px;
+	    height: 82px;
+	    font-size:16px;
+	    list-style: none;
+	    line-height: 34px;
+	}
+	.not-yet {
+		color: #d9d9d9;
+	}
+	.is-confirm > i {
+		color: #6C7AEF;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -110,9 +129,9 @@
 				}
 				
 				//searchResult를 인덱스로 갖는 li에 스타일 적용
+				$(".my-confirm li").removeClass("is-confirm");
 				for(var i = 0; i < searchResult.length; i++) {
-					//console.log(i+"번째: "+searchResult[i]);
-					$(".my-confirm li").eq(searchResult[i]).css("background-color", "#A8B0E9");
+					$(".my-confirm li").eq(searchResult[i]).addClass("is-confirm");
 				}
 			}
 		});
@@ -145,19 +164,22 @@
         <!-- #tab1 -->
         <div id="tab1" class="tab_content">
     
-		<ul class="list">
-            <li>
-	            달성률 : <fmt:formatNumber type="number" pattern="0" value="${progressDto*100/28}"/>%
-			</li>
-		</ul>
-		<ul>
-			<li>내 인증 현황</li>
-		</ul>	
-		<ul class="my-confirm">
-			<c:forEach var="days" begin="1" end="28" step="1">
-				<li>${days}</li>
-			</c:forEach>
-		</ul>
+			<ul class="list">
+	            <li>
+		            달성률 : <fmt:formatNumber type="number" pattern="0" value="${progressDto*100/28}"/>%
+				</li>
+			</ul>
+			<br><br>
+			<ul>
+				<li><h2>내 인증 현황</h2></li>
+			</ul>	
+			<div class="container-400">
+				<ul class="my-confirm">
+					<c:forEach var="days" begin="1" end="28" step="1">
+						<li> ${days} <br> <i class="fa-solid fa-circle-check fa-2x not-yet"></i></li>
+					</c:forEach>
+				</ul>
+			</div>
         </div>
 
         <!-- #tab2 --> 
@@ -177,6 +199,7 @@
 			</table>
 	    </div> 
 
+	<br><br><br><br>
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row left">
 			최신 인증글
@@ -192,30 +215,40 @@
 		<br><br>
 		[공지] 글 제목
 		<br><br>
-	
-		<c:forEach var="list" items="${confirmList}">
-			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-			<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-			<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
-			<br><br>
-			${list.confirmTitle}
-			<br>
-			${list.confirmContent}
-			<br>
-			<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-			<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
-			${list.userNick}
-			&nbsp; 
-			${list.confirmDate} 
-			&nbsp; 
-			<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-			&nbsp;
-			<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-			&nbsp; 
-			<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</a>
-			<br><br><br>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${listCnt != 0}">
+				<c:forEach var="list" items="${confirmList}">
+					<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+					<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
+					<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
+					<br><br>
+					${list.confirmTitle}
+					<br>
+					${list.confirmContent}
+					<br>
+					<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
+					<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
+					${list.userNick}
+					&nbsp; 
+					${list.confirmDate} 
+					&nbsp; 
+					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+					&nbsp;
+					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+					&nbsp; 
+					<i class="fa-regular fa-comment"></i> ${list.replyCount}
+					</a>
+					<br><br><br>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<h1>
+					작성된
+					<br>
+					인증글이 없습니다.
+				</h1>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

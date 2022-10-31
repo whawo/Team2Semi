@@ -208,11 +208,9 @@
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-    
-    </style>
-     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-     <script type="text/javascript">
-     
+</style>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
      $(function() {
  		$("select[name=chalTitle]").on("change", function(){
  			//선택된 챌린지 번호를 input type=hidden에 추가
@@ -320,16 +318,26 @@
     	    });
     	    
     	});
-
-     </script>
-     </head>
-     <body>
-        <div class="container-1200">
-<form action="write" method="post" enctype="multipart/form-data" class="con-form">
+</script>
+</head>
+<body>
+<div class="container-1200">
+	<c:choose>
+		<c:when test="${chalList.size() == 0}">
+			<h1>
+				참가 중인
+				<br>
+				챌린지가 없습니다.
+			</h1>
+			<br> 
+			<a href="/chal/list">챌린지 둘러보기</a>
+		</c:when>
+		<c:otherwise>
+		<form action="write" method="post" enctype="multipart/form-data" class="con-form">
             <div class="row">
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
-                    <option id="select" selected="selected" value="1"  value="" >전체</option>
+                    <option id="select" selected="selected" value="" >선택</option>
                     <c:forEach var="list" items="${chalList}">
                         <option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
                       </c:forEach>
@@ -383,6 +391,8 @@
                 <button class="smallbtn cancel-btn" type="button" id="smallbutton3">취소</button>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
             </div>
-            </form>
-        </div>
-     </body>
+ 		</form>
+		</c:otherwise>
+	</c:choose>
+</div>
+</body>
