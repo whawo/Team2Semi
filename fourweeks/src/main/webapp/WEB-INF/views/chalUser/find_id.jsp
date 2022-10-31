@@ -17,10 +17,14 @@
 <style>
 
 /* row 모음 */
+.row-0{
+padding-bottom: 40px;
+}
 .row-1{
 margin-left: 91px;
 }
 .row-2{
+margin-top: 10px;
 padding-left: 323px;
 }
 
@@ -91,7 +95,7 @@ font-size:12px;
 	<p class="p1">아이디 찾기</p>
 	</div>
 	
-	<div class="row center">
+	<div class="row-0 center">
     	<p class="p2">등록된 이메일을 입력해주세요.</p>
     </div>
 	

@@ -25,7 +25,7 @@
 
   */
     div{
-		 border: 1px dotted gray;
+		 border: 1px dotted transparent;
     }
         body{
             font-family: sans-serif;
@@ -34,6 +34,9 @@
 /*  row 모음 */
 .row-id{
  margin-left: 100px;
+}
+.row-4{
+margin-top: 50px;
 }
         
 /* 스팬 모음 */
@@ -93,42 +96,24 @@ padding-left: 223px;
 	    color: #eb6f7f;
 	}
  
- 
  /*  disabled */
 input[name="userId"]:disabled{
 background-color:transparent;
 }
+
+.save-btn{
+width:427px;
+margin-left: 10px;
+}
+
+
 </style>
      <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">    
- 	/* 비밀번호 검사식 */
-	// 식은 맞는데 왜 넘어가지? 
-/*$(function(){
-        //form에 submit 이벤트 설정
-        $(".edit-form").submit(function(){
-        // 정규식 검사하기 
-        var newPw = $("input[name=userPw]").val();
-        var regex = /^[a-zA-Z0-9]{8,16}$/;
-        var judge = regex.test(newPw);
-        console.log("jud" + judge);
-        if(judge == true){
-            return true;
-        }else{
-            return false;
-        }
-        var conPw = $("#repaetPw").val();
-        if(newPw != conPw){
-            return false;
-            // 여기서 넘어가면 안되는데 자꾸 마이페이지로 넘어간다. 
-            // 개발자도구에서 네트워크 확인해보면 페이로드 페이지 자체가 없음.. 흠... vs코드에서는 작동 잘되었음. 
-        }
-    });
-
-}); */
 
 $(function () {
 	
-    
+
     $("input[name=userPw]").on("blur", function(){
     	var userPw = $(this).val();
     	 var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;
@@ -182,8 +167,10 @@ $(function () {
 			     <span class="sp-3">새 비밀번호 확인 </span><input class="input short-text-box short-hover pw-box2"  type="password" placeholder="8~16자의 영문/숫자"  id="repeatPw"><br>
 			     <span class="fail-message sp-5">비밀번호가 일치하지 않습니다.</span>
 		</div>
-		<div class="row center">
-			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3"><a href="/mypage">취소</a></button>
+
+		<div class="row row-4 center">
+			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3" onclick="location.href='/mypage';">취소</button>
+
 			     <button class="save-btn" type="submit">변경</button>
 		</div>
 	</form>

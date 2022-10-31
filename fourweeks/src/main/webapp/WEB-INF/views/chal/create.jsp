@@ -17,6 +17,10 @@
 
 <style>
         /* 
+       	10.31 
+       	- 제목 40자 넘어감 
+       	- 폼 이벤트 방지는 되는데 개설하기가 대신 안됨  
+        
         
         	10.27
         	추가 수정한 것 : 
@@ -73,7 +77,7 @@
 
         */
         div{
-            border: 1px dotted gray;
+            border: 1px dotted transparent;
             display: block;
         }
         body {margin: 10px; font-size: 13px}
@@ -285,6 +289,7 @@
 	    color: #eb6f7f;
 	}
   
+
   
     /* 헬퍼 텍스트 위치  */
     .helper-text-40{
@@ -308,9 +313,10 @@
              
              minDate:moment(), // 오늘자 선택 가능
              minDate:moment().add(4,'day'), // 오늘 + 5일
+
 			 format:"YYYY-MM-DD",
-             firstDay:0, // 시작일 일요일부터 
-             singleDate:true, // 날짜 한개만 선택
+            firstDay:0, // 시작일 일요일부터 
+            singleDate:true, // 날짜 한개만 선택
 
              // (+옵션) 표시되는 달의 개수를 지정 
              numberOfMonths:1, //1개의 달씩 보여줘라 
@@ -326,14 +332,16 @@
         picker1.setDate(moment());
 	});
 
-    // 이미지 
-    $(function(){
-            $("[name=attachment]").change(function(e){
-                //input[type=file] 태그에는 files라는 속성이 존재
-                console.log(this.files);
-                if(this.files.length > 0){
-                    //읽는 도구
-                    var reader = new FileReader();
+
+   // 이미지 
+   $(function(){
+           $("[name=attachment]").change(function(e){
+               //input[type=file] 태그에는 files라는 속성이 존재
+               console.log(this.files);
+               if(this.files.length > 0){
+                   //읽는 도구
+                   var reader = new FileReader();
+
 
                     //읽을 때 해야할 작업
                     reader.onload = function(e){
@@ -437,6 +445,7 @@
           	}
           });
      });
+
 </script>
 <body>
 	<div class="container-1200">
