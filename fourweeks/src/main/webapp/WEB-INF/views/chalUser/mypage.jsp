@@ -294,7 +294,7 @@ height: 100px;
 .img-1{
 border-radius: 0.5em;
 }
-/* input 모음  */
+/* input 모음  */ 
 .label-wait,
 .label-progress,
 .label-category{
