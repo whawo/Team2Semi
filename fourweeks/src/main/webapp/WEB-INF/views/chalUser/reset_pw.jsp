@@ -70,18 +70,18 @@
 			<input type="hidden" name="userId" value="${userDto.userId}">
  		     아이디 : ${userDto.userId}
 		     <br><br>
-		     새 비밀번호 : <input type="password" name="userPw" required placeholder="8~16자의 영문/숫자">
+		     새 비밀번호 : <input type="password" name="newPw" required placeholder="8~16자의 영문/숫자">
 		     <br>
 		     <span class="fail-message">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
 		     <br><br>
-		     새 비밀번호 확인 : <input type="password" required>
-		     <br><br>
-		     <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
-		     
+		     새 비밀번호 확인 : <input type="password" name="newPwCheck" required>
 		     <br><br>
 		     <button type="submit">변경</button>
 		</div>
 	</form>
+    <c:if test="${param.error != null}">
+    	<span class="fail-message">비밀번호를 다시 입력해주세요.</span>
+   	</c:if>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

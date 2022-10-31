@@ -234,15 +234,17 @@ public class ChalUserController {
 		return "chalUser/find_pw";
 	}
 	
-	@PostMapping("/find_pw")
+	@PostMapping("/find_pw") // 비밀번호 찾기
 	public String findPw(
 			Model model, 
 			@RequestParam String userId,
-			@RequestParam String userEmail) {
+			@RequestParam String userEmail,
+			RedirectAttributes attr) {
 		ChalUserDto userDto = chalUserDao.findPw(userId, userEmail);
 		if(userDto != null) {			
 			model.addAttribute("userDto", userDto);
-			return "chalUser/reset_pw";
+			attr.addAttribute("userId", userId);
+			return "redirect:reset_pw";
 		} else {			
 			return "redirect:find_pw?error";
 		}
@@ -250,15 +252,23 @@ public class ChalUserController {
 	
 	@GetMapping("/reset_pw") // 비밀번호 재설정
 	public String resetPw(Model model,
-			@RequestParam String userId) {
+			@RequestParam(required = false) String userId) {
 		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
 		return "chalUser/reset_pw";
 	}
 	
 	@PostMapping("/reset_pw") 
-	public String resetPw(@ModelAttribute ChalUserDto inputDto,
-			RedirectAttributes attr) {
-		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
-		return "redirect:/login";
+	public String resetPw(
+			@RequestParam(required = false) String userId,
+			@RequestParam String newPw,
+			@RequestParam String newPwCheck
+			) {
+		boolean check = newPw.equals(newPwCheck);
+		if(check) {
+			chalUserDao.updatePw(newPw, userId);
+			return "redirect:login";
+		} else {
+			return "redirect:reset_pw?error";
+		}
 	}
 }
