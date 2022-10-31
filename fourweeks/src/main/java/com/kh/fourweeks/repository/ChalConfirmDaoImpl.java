@@ -9,10 +9,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
-import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
 import com.kh.fourweeks.vo.ConfirmDaysVO;
+import com.kh.fourweeks.vo.NoticeVO;
 
 @Repository
 public class ChalConfirmDaoImpl implements ChalConfirmDao {
@@ -62,7 +62,7 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	}
 	
 	@Override
-	public boolean updateNotice(NoticeDto noticeDto) {
+	public boolean updateNotice(NoticeVO noticeDto) {
 		String sql = "update notice set "
 				+ "notice_title = ?, notice_content = ?, "
 				+ "notice_modified = sysdate "

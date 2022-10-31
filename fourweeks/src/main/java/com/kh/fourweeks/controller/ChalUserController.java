@@ -27,6 +27,7 @@ import com.kh.fourweeks.entity.LeaveCountDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
+import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalUserService;
@@ -47,6 +48,9 @@ public class ChalUserController {
 
 	@Autowired
 	private ChalConfirmDao confirmDao;
+	
+	@Autowired
+	private ChalDao chalDao;	
 	
 	@GetMapping("/join")
 	public String join() {
@@ -198,6 +202,9 @@ public class ChalUserController {
 			@ModelAttribute LeaveCountDto leaveCountDto) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		if(chalUserDao.delete(userId)) {
+			//내가 개설하고 나만 참가 중인(참가자=1명) 챌린지 삭제
+			chalDao.deleteChalOnlyMe(userId);
+			
 			session.removeAttribute(SessionConstant.ID);
 			chalUserDao.leaveCounting(leaveCountDto); // 탈퇴수 카운팅 메소드
 			return "chalUser/leave";

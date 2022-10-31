@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="가입 완료" name="title"/>
 </jsp:include>
-	<link rel="stylesheet" type="text/css" href="/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="/css/basic.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -14,6 +14,9 @@
 
     <style>
         /* 
+        	10.31 
+        	- 로그인 버튼 클릭시 로그인 페이지로 이동 구현 
+        
             10.21
         	- 로그인 에러 구현 완료 
             10.20 
@@ -68,7 +71,7 @@
             </div>
 
             <div class="row center">
-                <button class="largebtn btn1" type="button" id="largebutton1"><a href="/login">로그인</a></button>
+                <button class="largebtn btn1" type="button" id="largebutton1" onclick="location.href='/login';">로그인</button>
             </div>
         </div>
      </body>
