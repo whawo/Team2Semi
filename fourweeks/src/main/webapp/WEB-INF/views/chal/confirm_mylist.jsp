@@ -87,27 +87,39 @@
 	<br><br>
 	[공지] 글 제목
 	<br><br>
-
-	<c:forEach var="list" items="${confirmList}">
-		<a href="detail?confirmNo=${list.confirmNo}">
-		<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-		<img src = "detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
-		<br><br>
-		${list.confirmTitle}
-		<br>
-		${list.confirmContent}
-		<br>
-		${list.confirmDate} 
-		&nbsp; 
-		<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-		&nbsp;
-		<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-		&nbsp; 
-		<i class="fa-regular fa-comment"></i> ${list.replyCount}
-		</a>
-		<br><br><br>
-	</c:forEach>
 	
+	<c:choose>
+		<c:when test="${listCnt != 0}">
+			<c:forEach var="list" items="${confirmList}">
+				<a href="detail?confirmNo=${list.confirmNo}">
+				<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
+				<img src = "detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
+				<br><br>
+				${list.confirmTitle}
+				<br>
+				${list.confirmContent}
+				<br>
+				${list.confirmDate} 
+				&nbsp; 
+				<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+				&nbsp;
+				<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+				&nbsp; 
+				<i class="fa-regular fa-comment"></i> ${list.replyCount}
+				</a>
+				<br><br><br>
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<h1>
+				작성한
+				<br>
+				인증글이 없습니다.
+			</h1>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:if test="${listCnt != 0}">
 	<!-- 페이지 내비게이터 -->
 	<div class="row center mt-40 mb-40">
 		<!-- 이전 -->
@@ -160,5 +172,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	</c:if>
 </div>	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

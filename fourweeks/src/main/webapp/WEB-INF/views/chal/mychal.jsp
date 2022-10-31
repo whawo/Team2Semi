@@ -215,30 +215,40 @@
 		<br><br>
 		[공지] 글 제목
 		<br><br>
-	
-		<c:forEach var="list" items="${confirmList}">
-			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-			<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-			<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
-			<br><br>
-			${list.confirmTitle}
-			<br>
-			${list.confirmContent}
-			<br>
-			<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-			<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
-			${list.userNick}
-			&nbsp; 
-			${list.confirmDate} 
-			&nbsp; 
-			<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-			&nbsp;
-			<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-			&nbsp; 
-			<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</a>
-			<br><br><br>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${listCnt != 0}">
+				<c:forEach var="list" items="${confirmList}">
+					<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+					<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
+					<img src="/confirm/detail/download?confirmNo=${list.confirmNo}" width="120" height="90" class="confirm-img">
+					<br><br>
+					${list.confirmTitle}
+					<br>
+					${list.confirmContent}
+					<br>
+					<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
+					<img src = "/profile/download?userId=${list.userId}" width="50" height="50" class="user-img">
+					${list.userNick}
+					&nbsp; 
+					${list.confirmDate} 
+					&nbsp; 
+					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+					&nbsp;
+					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+					&nbsp; 
+					<i class="fa-regular fa-comment"></i> ${list.replyCount}
+					</a>
+					<br><br><br>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<h1>
+					작성된
+					<br>
+					인증글이 없습니다.
+				</h1>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

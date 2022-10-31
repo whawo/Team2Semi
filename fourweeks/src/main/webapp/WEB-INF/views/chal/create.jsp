@@ -310,7 +310,7 @@
              singleDate:true, // 날짜 한개만 선택
 
              // (+옵션) 표시되는 달의 개수를 지정 
-             numberOfMonths:1, //2개의 달씩 보여줘라 
+             numberOfMonths:1, //1개의 달씩 보여줘라 
         
              // 날짜 출력하기 
              onSelect: function(date){
@@ -318,9 +318,9 @@
              	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
              	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
              }
-         });
-        /*  // 오늘 날짜 기본값으로 자동 선택
-         picker1.setDate(moment()); */
+		});
+        // 오늘 날짜 기본값으로 자동 선택
+        picker1.setDate(moment());
      });
 
     // 이미지 
@@ -467,7 +467,7 @@
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off">
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                <span class="fail-message">이메일을 입력해주세요.</span> 
 	                </div>
@@ -485,7 +485,7 @@
 	
 	                <div class="row">
 	                    <i class="fa-solid fa-calendar-days"></i>
-	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" >
+	                    <input type="text" class="single-date-picker" id="short-text-box chal-4"  name="startDate" autocomplete="off">
 	                </div>
 	
 	                <div class="row date-calendar">
