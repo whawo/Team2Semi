@@ -21,7 +21,7 @@
  */
 
     div{
-		 border: 1px dotted gray;
+		 border: 1px dotted transparent;
 		 /*transparent  */
     }
         body{
@@ -33,6 +33,9 @@
         }
         .row-side{
         margin-left:160px;
+        }
+        .row-3{
+        margin-top: 40px;
         }
         /* p and span 모음  */
           p{
@@ -121,8 +124,8 @@
 		     </c:if>
             </div>
             
-            <div class="row center">
-            	<button href="/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
+            <div class="row row-3 center">
+            	<button type="button" onclick="location.href='/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
 				<button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
 			 </div>
 			 
