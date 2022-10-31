@@ -68,7 +68,7 @@
             </div>
 
             <div class="row center">
-                <button class="largebtn btn1" type="button" id="largebutton1"><a href="/login">로그인</a></button>
+                <button class="largebtn btn1" type="button" id="largebutton1" onclick="location.href='/login';">로그인</button>
             </div>
         </div>
      </body>
