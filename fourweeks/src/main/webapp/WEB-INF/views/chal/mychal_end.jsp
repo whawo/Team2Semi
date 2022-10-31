@@ -610,6 +610,7 @@
           	
           	 <!-- 인증 사진, 내용 -->   
                
+               
                <div class="div-align" >
 					${list.confirmContent}
 					<br><br><br><br><br>

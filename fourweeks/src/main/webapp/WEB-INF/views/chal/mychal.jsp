@@ -503,6 +503,7 @@
 						&nbsp; 
 						<i class="fa-regular fa-comment"></i> ${list.replyCount}
 
+
 				</div>
            			<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
               	</div><!-- 인증글, 사진 목록 끝 -->			
