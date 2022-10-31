@@ -32,6 +32,29 @@
           /*   border: 1px dotted gray; */
             display: block;
         }
+        
+        /* row 모음 */
+        .row-0{
+        margin-left: 120px;
+        }
+        .row-1{
+        margin-top: 60px;
+        }
+        .row-2{
+        margin-bottom: 50px;
+        }
+        .row-3{
+       	padding-top: 20px;
+        }
+        .row-4{
+        padding-top: 40px;
+        }
+        .row-5{
+        padding-top: 50px;
+        }
+        .row-7{
+        margin-top: 50px;
+        }
 
         input::placeholder,
         textarea::placeholder{
@@ -193,11 +216,36 @@
        .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 20px;
         }
+        
+      /* 에러 모음 */
+ 		.fail-message {
+		display: none;
+	}
+	.input.fail ~ .fail-message {
+		display: block;
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+	
+	.input ~ .find-error {
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+
+	
+	/* sp 모음 */
+	.sp-2{
+	padding-left: 570px;
+	}
+	.sp-3{
+	padding-left: 560px;
+	}
     
     </style>
      <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">
      
+
      $(function() {
  		$("select[name=chalTitle]").on("change", function(){
  			//선택된 챌린지 번호를 input type=hidden에 추가
@@ -268,16 +316,57 @@
              }
          });
      });
+     
+ /* 
+		폼 이벤트 방지인데 ... 폼 이벤트를 방지하면 버튼이 안눌림.. ! 
+		$(function () {
+    		// form이 전송될 때 내부의 입력창을 모두 trigger 처리
+    	    $(".con-form").submit(function(){
+    	    	//$("input[name=chalTitle]").blur();
+    	    	$("input[name=confirmTitle]").blur();
+    	    	$("input[name=confirmContent]").blur();
+    	    	if($(".input.fail".length > 0)) {
+    	            return false;
+    	        }
+    	    });
+    	    
+    	    $("select[name=chalTitle]").on("blur", function(){
+    	    	var chalTitle = $(this).val();
+    	    	$(this).removeClass("fail");
+    	    	if(!judge) {
+    	    		$(this).addClass("fail").focus();
+    	    	}
+    	    }); 
+    	    
+    	    $("input[name=confirmTitle]").on("blur", function(){
+    	    	var confirmTitle= $("input[name=confirmTitle]").val();
+    	    	$(this).removeClass("fail");
+    	    	if(!confirmTitle) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	    $("textarea[name=confirmContent]").on("blur", function(){
+    	    	var confirmContent= $("input[name=confirmTitle]").val();
+    	    	$(this).removeClass("fail");
+    	    	if(!confirmContent) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
 
+    	}); 
+ */
      </script>
      </head>
      <body>
-        <div class="container-1200">
-<form action="write" method="post" enctype="multipart/form-data">
-            <div class="row">
+        <div class="row-0 container-1200">
+<form action="write" method="post" enctype="multipart/form-data" class="con-form">
+            <div class="row row-1 mt-92">
+
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
-                    <option id="select" selected="selected" value="1"  value="" >전체</option>
+                    <option id="select" selected="selected" value="" >선택</option>
                     <c:forEach var="list" items="${chalList}">
                         <option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
                       </c:forEach>
@@ -285,7 +374,7 @@
                 <input type="hidden" name="chalNo">
             </div>
             
-            <div class="row">
+          <div class="row row-2">
               <!--   <span class="sp-1 calendar how-confirm"  >
                     <i class="c-end">
                         <span class="blind">캘린더</span>
@@ -298,21 +387,23 @@
                <!--  </span> -->
             </div>
 
-            <div class="row">
+            <div class="row row-3">
                 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" required autocomplete="off">
-                <span  class="helper-text-40 helper-css">0</span> /40
+                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40"><br>
+                <span  class="helper-text-40 helper-css sp-2">0</span> /40
+                  <span class="fail-message">필수 항목 입니다.</span>
             </div>
 
-            <div class="row">
+            <div class="row row-4">
                 <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
                 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
-                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" required autocomplete="off"></textarea>
-                <span  class="helper-text-40 helper-css">0</span> /300
+                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off" maxlength="300"></textarea><br>
+                <span  class="helper-text-40 helper-css sp-3">0</span> /300
+                  <span class="fail-message">필수 항목 입니다.</span>
             </div>
 
-            <div class="row">
+            <div class="row row-5">
                 <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
                 <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
                 <div class="row">
@@ -329,6 +420,8 @@
                 <button class="smallbtn cancel-btn" type="button" id="smallbutton3">취소</button>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
             </div>
-            </form>
-        </div>
-     </body>
+ 		</form>
+		</c:otherwise>
+	</c:choose>
+</div>
+</body>

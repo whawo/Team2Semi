@@ -33,10 +33,6 @@ public class AdminHomeController {
 	@Autowired
 	private AdminDao adminDao;
 	
-	//@Autowired
-	//private ChalReportDao chalReportDao;
-	
-	
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
@@ -45,8 +41,6 @@ public class AdminHomeController {
 	
 	@Autowired
 	private ChalService chalService;
-	
-	
 	
 	@GetMapping("/home")
 	public String home(Model model,
@@ -116,7 +110,7 @@ public class AdminHomeController {
 		int noticeNo = chalService.notice(noticeDto, attachment);
 		
 		attr.addAttribute("noticeNo", noticeNo);
-		return "redirect:list";
+		return "redirect:detail";
 	}
 	
 	@GetMapping("/list")

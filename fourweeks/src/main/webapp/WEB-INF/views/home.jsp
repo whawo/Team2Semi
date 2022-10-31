@@ -1,9 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="4weeks" name="title"/>
 </jsp:include>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+   href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+   rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
 <style>
 	div, img, select, input, table, td {		   
@@ -230,7 +241,7 @@
 				</div>
 			
 				<div>
-					<a href="chal/list">전체보기 <i class="fa-regular fa-plus"></i></a>
+					<a href="chal/list" style="color:#6c7aef">전체보기 <i class="fa-solid fa-circle-chevron-right"></i></a>
 				</div>
 			</div>
 			
@@ -276,14 +287,16 @@
 			     <div class="row chal-item">
 			         <%-- 라벨 --%>
 			        <c:if test="${chalDto.getDDay() > -1}">
-						<input class="label-wait" placeholder="모집중">
+						<span class="label label-wait" >모집중</span>
 					</c:if>
-		            <input class="label-category" placeholder="${chalDto.chalTopic}">
+		            	<span class="label label-category ">${chalDto.chalTopic}</span>
 			     </div>
 			  </div> 
 			  </a>
 		      </c:forEach>
+		      
 		      </div>
 		</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
