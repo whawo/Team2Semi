@@ -48,7 +48,7 @@
  <body>
         <div class="container-590">
             <div class="row center">
-                <p class="p-1">다음에 또 만나요!</p>
+              <h1>다음에 또 만나요!</h1>
                 <p class="p-2">좋은 습관을 쭉 이어나가실 수 있도록 당신을 응원합니다.</p>
             </div>
             

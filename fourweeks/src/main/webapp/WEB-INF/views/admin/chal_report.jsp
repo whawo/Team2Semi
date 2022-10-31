@@ -296,6 +296,7 @@
 					<canvas id="startEndToday"></canvas>
 				</div>
 			</div>
+			
 			<div class="row float-left w-50">
 				<div class="row center">
 					<h3>최근 6개월 시작 챌린지 수</h3>

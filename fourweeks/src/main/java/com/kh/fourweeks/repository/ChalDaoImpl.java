@@ -33,6 +33,13 @@ public class ChalDaoImpl implements ChalDao {
 	}
 	
 	@Override
+	public int noticeSeq() {
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		return noticeNo;
+	}
+	
+	@Override
 	public void insert(ChalDto chalDto) {
 		String sql = "insert into chal("
 				+ "chal_no, user_id, chal_title, "
@@ -60,6 +67,14 @@ public class ChalDaoImpl implements ChalDao {
 	public void chalAttachment(int chalNo, int attachmentNo) {
 		String sql = "insert into chal_img(chal_no, attachment_no) values(?, ?)";
 		Object[] param = {chalNo, attachmentNo};
+		
+		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public void noticeAttachment(int noticeNo, int attachmentNo) {
+		String sql = "insert into notice_img(notice_no, attachment_no) values(?, ?)";
+		Object[] param = {noticeNo, attachmentNo};
 		
 		jdbcTemplate.update(sql, param);
 	}

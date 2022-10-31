@@ -193,11 +193,24 @@
        .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
             padding-top: 20px;
         }
-    
-    </style>
-     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-     <script type="text/javascript">
-     
+        
+      /* 에러 모음 */
+ 		.fail-message {
+		display: none;
+	}
+	.input.fail ~ .fail-message {
+		display: block;
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+	
+	.input ~ .find-error {
+		font-size:12px;
+	    color: #eb6f7f;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
      $(function() {
  		$("select[name=chalTitle]").on("change", function(){
  			//선택된 챌린지 번호를 input type=hidden에 추가
@@ -268,7 +281,43 @@
              }
          });
      });
-
+     
+     $(function () {
+    		// form이 전송될 때 내부의 입력창을 모두 trigger 처리
+    	    $(".con-form").submit(function(){
+    	    	//$("input[name=chalTitle]").blur();
+    	    	$("input[name=confirmTitle]").blur();
+    	    	$("input[name=confirmContent]").blur();
+    	    	if($(".input.fail".length > 0)) {
+    	            return false;
+    	        }
+    	    });
+    	    
+    /* 	    $("select[name=chalTitle]").on("blur", function(){
+    	    	var chalTitle = $(this).val();
+    	    	$(this).removeClass("fail");
+    	    	if(!judge) {
+    	    		$(this).addClass("fail").focus();
+    	    	}
+    	    }); */
+    	    
+    	    $("input[name=confirmTitle]").on("blur", function(){
+    	    	var confirmTitle= $("input[name=confirmTitle]").val();
+    	    	$(this).removeClass("fail");
+    	    	if(!confirmTitle) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	    $("textarea[name=confirmContent]").on("blur", function(){
+    	    	var confirmContent= $("input[name=confirmTitle]").val();
+    	    	$(this).removeClass("fail");
+    	    	if(!confirmContent) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	});
 </script>
 </head>
 <body>
@@ -284,63 +333,65 @@
 			<a href="/chal/list">챌린지 둘러보기</a>
 		</c:when>
 		<c:otherwise>
-		<form action="write" method="post" enctype="multipart/form-data">
-	            <div class="row">
-	                <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
-	                <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
-	                    <option id="select" selected="selected" value="" >선택</option>
-	                    <c:forEach var="list" items="${chalList}">
-	                        <option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
-	                      </c:forEach>
-	                </select>
-	                <input type="hidden" name="chalNo">
-	            </div>
-	            
-	            <div class="row">
-	              <!--   <span class="sp-1 calendar how-confirm"  >
-	                    <i class="c-end">
-	                        <span class="blind">캘린더</span>
-	                    </i> -->
-	                    <input class=" sp-1 calendar how-confirm" disabled>
-	                    <!-- 자동으로 맞춰서 늘어나세요 ~  -->
-	                  <!--   ✅ 인증 방법
-	                    선택된 챌린지의 인증방법을 자동으로 불러오는 영역이고 인증 방법은 최대 300자까지 설정할수 있으므로 여역만큼 칸이 늘어남  -->
-	                    <!-- textarea rows="5" readonly></textarea> -->
-	               <!--  </span> -->
-	            </div>
-	
-	            <div class="row">
-	                <p class="p1">2. 인증글 제목을 입력해주세요.</p>
-	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-	                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" required autocomplete="off">
-	                <span  class="helper-text-40 helper-css">0</span> /40
-	            </div>
-	
-	            <div class="row">
-	                <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
-	                <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
-	                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" required autocomplete="off"></textarea>
-	                <span  class="helper-text-40 helper-css">0</span> /300
-	            </div>
-	
-	            <div class="row">
-	                <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
-	                <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
-	                <div class="row">
-	                    <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
-	                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
-	                    <div class="row img-btns">
-	                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-	                        <button class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
-	                    </div>
-	                </div>
-	            </div>
-	
-	            <div class="row-7 center">
-	                <button class="smallbtn cancel-btn" type="button" id="smallbutton3">취소</button>
-	                <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
-	            </div>
-			</form>
+		<form action="write" method="post" enctype="multipart/form-data" class="con-form">
+            <div class="row">
+                <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
+                <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
+                    <option id="select" selected="selected" value="" >선택</option>
+                    <c:forEach var="list" items="${chalList}">
+                        <option value="${list.chalNo}" data-chalTitle="${list.chalTitle}" data-howConfirm="${list.howConfirm}">${list.chalTitle}</option>
+                      </c:forEach>
+                </select>
+                <input type="hidden" name="chalNo">
+            </div>
+            
+            <div class="row">
+              <!--   <span class="sp-1 calendar how-confirm"  >
+                    <i class="c-end">
+                        <span class="blind">캘린더</span>
+                    </i> -->
+                    <input class=" sp-1 calendar how-confirm" disabled>
+                    <!-- 자동으로 맞춰서 늘어나세요 ~  -->
+                  <!--   ✅ 인증 방법
+                    선택된 챌린지의 인증방법을 자동으로 불러오는 영역이고 인증 방법은 최대 300자까지 설정할수 있으므로 여역만큼 칸이 늘어남  -->
+                    <!-- textarea rows="5" readonly></textarea> -->
+               <!--  </span> -->
+            </div>
+
+            <div class="row">
+                <p class="p1">2. 인증글 제목을 입력해주세요.</p>
+                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
+                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off"><br>
+                <span  class="helper-text-40 helper-css">0</span> /40
+                  <span class="fail-message">필수 항목 입니다.</span>
+            </div>
+
+            <div class="row">
+                <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
+                <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
+                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off"></textarea><br>
+                <span  class="helper-text-40 helper-css">0</span> /300
+                  <span class="fail-message">필수 항목 입니다.</span>
+            </div>
+
+            <div class="row">
+                <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
+                <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
+                <div class="row">
+                    <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
+                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
+                    <div class="row img-btns">
+                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
+                        <button class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-7 center">
+                <button class="smallbtn cancel-btn" type="button" id="smallbutton3">취소</button>
+                <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
+            </div>
+ 		</form>
 		</c:otherwise>
 	</c:choose>
 </div>

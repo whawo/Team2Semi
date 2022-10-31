@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.fourweeks.repository.ChalReportDao;
 import com.kh.fourweeks.vo.HalfStartVO;
+import com.kh.fourweeks.vo.JoinedAndLeaveVO;
 import com.kh.fourweeks.vo.MonthlyTopicVO;
 import com.kh.fourweeks.vo.PartByTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
 import com.kh.fourweeks.vo.UserJoinedVO;
+import com.kh.fourweeks.vo.UserLeaveVO;
 
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
@@ -40,12 +42,17 @@ public class AdminReportRestController {
 	public List<MonthlyTopicVO> topicThisMonth() {
 		return chalReportDao.topicThisMonth(); 
 	}
+	
+	@GetMapping("/chal/today_user")
+	public JoinedAndLeaveVO todayUserCnt() {
+		return chalReportDao.todaysInfoOfUsers();
+	}
   
 	@GetMapping("/chal/user")
 	public List<UserJoinedVO> userCnt() {
 		return chalReportDao.joinedCnt();
 	}
-	
+
 	@GetMapping("/chal/today_confirm_rate")
 	public double todayConfirmRate() {
 		return chalReportDao.todayConfirmRate();
@@ -55,4 +62,9 @@ public class AdminReportRestController {
 	public List<PartByTopicVO> partByTopic() {
 		return chalReportDao.partAvgThisMonth();
 	};
+	
+	@GetMapping("/chal/leave_user")
+	public List<UserLeaveVO> leaveCnt() {
+		return chalReportDao.leaveCnt();
+	}
 }

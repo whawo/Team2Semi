@@ -73,6 +73,8 @@ public interface ChalDao {
     public boolean updateChalPerson(int chalNo);
     List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
     ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
+	int noticeSeq();
+	void noticeAttachment(int noticeNo, int attachmentNo);
 	
     //탈퇴 시, 내가 개설하고 나만 참가 중인(참가자=1명) 챌린지 삭제
     void deleteChalOnlyMe (String userId); 

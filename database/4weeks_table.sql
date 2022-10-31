@@ -242,3 +242,15 @@ create view average_get as
              nvl(C.cnt, 0) cnt
              from my_chal_detail M left outer join (select count(*) cnt, chal_no
              from chal_confirm where chal_no = 40 group by chal_no) C on M.chal_no = C.chal_no where M.chal_no = 40;
+
+-- 공지글 이미지(notice_img)의 첨부파일 번호 조회 뷰 생성
+create view notice_img_view as 
+select N.notice_no, A.attachment_no 
+from notice_img N inner join attachment A on N.attachment_no = A.attachment_no;
+
+
+-- 공지글 이미지(notice_img) 파일 정보 조회 뷰 생성
+create view notice_info_view as 
+select N.notice_no, A.* 
+from notice_img N inner join attachment A on N.attachment_no = A.attachment_no;	     
+	     

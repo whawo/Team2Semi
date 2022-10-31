@@ -188,7 +188,7 @@ html{
 
     /* 높이와 너비는 상황에 따라 맞게 비율 설정 */
     width: 100%;
-    height: 60px;
+    height: 58px;
 }
 
 
@@ -292,7 +292,6 @@ html{
     color: #ebebed;
 }
 .navbtn{
-    border: none;
     font-size: 16px;
     padding: 0.75em;/*글자 크기의 0.75배*/
     cursor: pointer;
@@ -337,14 +336,29 @@ html{
     color:#6c7aef
 }
 
+/*  추가 버튼들  */
+   .save-btn{
+     border: none;
+    font-size: 16px;
+    padding: 0.75em;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+
+	background-color: #6c7aef;
+    color: white;
+    
+    /* 높이와 너비는 상황에 따라 맞게 비율 설정 */
+    width: 300px;
+    height: 50px;
+   }
+
 
 
 /*  TAB 부분 수정할거 몇개 있음  */
 
-p{
-    font-size: 20px;
-    color: #6c7aef;
-}
 .p-hover:hover{
     font-weight: bold;
 }
@@ -663,7 +677,7 @@ select{
     height: 30px;
     background-color:  #FBE9DD;
     /* color: #F2A574; */
-    text-align: center;
+    /* text-align: center; */
     font-size: 13px;
     font-weight: bold;
 }
@@ -780,21 +794,23 @@ select{
         }
         ul.page > li{
             display: inline-block; /*일렬로 정렬*/
-            border: 1px solid transparent; /*투명한 네모 상자 */
             border-radius: 30%;
-            padding: 0.5em; /*사이 간격*/
+            padding: 0.1em; /* 사이 간격 */
             line-height: 1.7em; /*글자 표시 높이*/
-            margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
-            min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
+            margin: 0.8em; /*글자 사이 간격 이거는 사이사이 간격*/
+            min-width: 0.5em; /*글자 사이 간격 더 크게 + border도 크게 */
             text-align: center; /*상자안에 글자 중앙에 */
             cursor: pointer;
-            width: 24px;
-            height: 24px;
+            width: 35px;
+            height: 35px;
+            line-height: -11;
+             cursor: pointer;
         }
         /* 번호에 커서대면 나타내는 표시  */
-        ul.page > li:hover,
+		ul.page > li:hover,
         ul.page > li > a:hover{
             border-color: #6c7aef; /*커서 대면 상자표시*/
+             border-radius: 30%;
             background-color: #6c7aef;
             color: white;
             font-weight: bold;
@@ -808,3 +824,91 @@ select{
             text-decoration: none;
             font-weight: bold;
         }
+        
+        
+        /* footer */
+footer {
+	width: 100%;
+    height: 150px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #d9d9d9;
+}
+footer > a {
+	width: 15%;
+}
+
+.copyright {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #707070;
+    font-size:16px;
+    text-align: center;
+}
+        
+        /* main-chal-list */
+.chal-list-container {
+	width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+   	justify-content: flex-start;
+    align-items: center;
+	flex-wrap: wrap;
+}
+
+.chal-list {
+	display:flex;
+	flex-direction: column;
+	width:288px;
+	height: 100%;
+	text-align: left;
+}
+.chal-list {
+	margin: 0 5px 30px 5px;
+    padding: 0;
+    list-style: none;
+    color: #3f3f3f;
+    font-size:16px;
+    text-align: center;
+}
+.chal-item {
+	margin: 0;
+    padding: 0.5em;
+	display: flex;
+    align-items: center;
+    width: 288px;
+    list-style: none;
+    font-size:16px;
+    text-align: center;
+}
+
+.home-chal-title:link, .home-chal-title:visited {
+    color: #3F3F3F;
+}
+.chal-list:hover {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+.chal-item.thumbnail {	
+	padding: 0;
+}
+
+
+/* |  */
+     .divi{  
+            margin: 3px 4px 0 4px;
+            width: 1px;
+            height: 12px;
+            text-indent: -999em;
+            border-right: solid 1px #ccc;
+
+            display: inline-block;
+            zoom: 1;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
