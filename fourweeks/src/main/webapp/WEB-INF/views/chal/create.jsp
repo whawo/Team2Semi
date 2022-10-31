@@ -19,6 +19,10 @@
 
     <style>
         /* 
+       	10.31 
+       	- 제목 40자 넘어감 
+       	- 폼 이벤트 방지는 되는데 개설하기가 대신 안됨  
+        
         
         	10.27
         	추가 수정한 것 : 
@@ -75,7 +79,7 @@
 
         */
         div{
-            border: 1px dotted gray;
+            border: 1px dotted transparent;
             display: block;
         }
         body {margin: 10px; font-size: 13px}
@@ -287,7 +291,6 @@
 	    color: #eb6f7f;
 	}
   
-  
         /* 헬퍼 텍스트 위치  */
         .helper-text-40{
         	padding-left:570px;
@@ -304,147 +307,98 @@
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
     <script type="text/javascript">
     
-     $(function(){
-         var picker1 = new Lightpick({
-             //field는 datepicker은 적용 대상을 설정하는 공간 
-             field:document.querySelector(".single-date-picker"),
-             
-             minDate:moment(), // 오늘자 선택 가능
-             minDate:moment().add(4,'day'), // 오늘 + 5일
-			 format:"YYYY-MM-DD",
-             firstDay:0, // 시작일 일요일부터 
-             singleDate:true, // 날짜 한개만 선택
-
-             // (+옵션) 표시되는 달의 개수를 지정 
-             numberOfMonths:1, //2개의 달씩 보여줘라 
-        
-             // 날짜 출력하기 
-             onSelect: function(date){
-             	/* document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD"); */
-             	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
-             	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
-             }
-         });
-         // 오늘 날짜 기본값으로 자동 선택
-         picker1.setDate(moment());
-     });
-
-    // 이미지 
     $(function(){
-            $("[name=attachment]").change(function(e){
-                //input[type=file] 태그에는 files라는 속성이 존재
-                console.log(this.files);
-                if(this.files.length > 0){
-                    //읽는 도구
-                    var reader = new FileReader();
+        var picker1 = new Lightpick({
+            //field는 datepicker은 적용 대상을 설정하는 공간 
+            field:document.querySelector(".single-date-picker"),
+            
+            minDate:moment(), // 오늘자 선택 가능
+            minDate:moment().add(4,'day'), // 오늘 + 5일
+			 format:"YYYY-MM-DD",
+            firstDay:0, // 시작일 일요일부터 
+            singleDate:true, // 날짜 한개만 선택
 
-                    //읽을 때 해야할 작업
-                    reader.onload = function(e){
-                        //읽은 내용 정보가 e에 들어 있음
-                        var preview = document.getElementById("preview")
-                        $(".preview").attr("src", e.target.result);
-                    };
-                    reader.readAsDataURL(this.files[0]);//읽어라
-                }
-                // 사진 변경하기 
-                var inputImage = document.getElementById("input-image")
-                inputImage.addEventListener(function(e){
-                    $("[name=attachment]")(e.target)
-                });
-            });
-            $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
-            });
+            // (+옵션) 표시되는 달의 개수를 지정 
+            numberOfMonths:1, //2개의 달씩 보여줘라 
+       
+            // 날짜 출력하기 
+            onSelect: function(date){
+            	/* document.getElementById("result-1").innerHTML = date.format("YYYY-MM-DD"); */
+            	document.getElementById("result-1").innerHTML = date.add(28, 'days').format("YYYY-MM-DD");
+            	//console.log(date.add(5, 'days').format('YYYY-MM-DD'));
+            }
         });
-    
-    //help-text
-     $(function(){
-            $(".helper-text1").on("input", function(){
-                var text = $(this).val();
-                $(this).next().text(text.length);
-                if(text.length > 40){
-                    $(this).next();
-                }
-                else {
-                    $(this).next().css("color", "#3f3f3f");
-                }
-            });
+        // 오늘 날짜 기본값으로 자동 선택
+        picker1.setDate(moment());
+    });
+
+   // 이미지 
+   $(function(){
+           $("[name=attachment]").change(function(e){
+               //input[type=file] 태그에는 files라는 속성이 존재
+               console.log(this.files);
+               if(this.files.length > 0){
+                   //읽는 도구
+                   var reader = new FileReader();
+
+                   //읽을 때 해야할 작업
+                   reader.onload = function(e){
+                       //읽은 내용 정보가 e에 들어 있음
+                       var preview = document.getElementById("preview")
+                       $(".preview").attr("src", e.target.result);
+                   };
+                   reader.readAsDataURL(this.files[0]);//읽어라
+               }
+               // 사진 변경하기 
+               var inputImage = document.getElementById("input-image")
+               inputImage.addEventListener(function(e){
+                   $("[name=attachment]")(e.target)
+               });
+           });
+           $("button[name=thumbnail-delete]").click(function(){
+               $(".preview").attr("src", "/images/bg_default.png");
+           });
+       });
+   
+   //help-text
+    $(function(){
+           $(".helper-text1").on("input", function(){
+               var text = $(this).val();
+               $(this).next().text(text.length);
+               if(text.length > 40){
+                   $(this).next();
+               }
+               else {
+                   $(this).next().css("color", "#3f3f3f");
+               }
+           });
+       });
+    $(function(){
+        $(".helper-text2").on("input", function(){
+            var text = $(this).val();
+            $(this).next().text(text.length);
+            if(text.length > 300){
+                $(this).next();
+            }
+            else {
+                $(this).next().css("color", "#3f3f3f");
+            }
         });
-     $(function(){
-         $(".helper-text2").on("input", function(){
-             var text = $(this).val();
-             $(this).next().text(text.length);
-             if(text.length > 300){
-                 $(this).next();
-             }
-             else {
-                 $(this).next().css("color", "#3f3f3f");
-             }
-         });
-     });
-     $(function(){
-         $(".helper-text3").on("input", function(){
-             var text = $(this).val();
-             $(this).next().text(text.length);
-             if(text.length > 500){
-                 $(this).next();
-             }
-             else {
-                 $(this).next().css("color", "#3f3f3f");
-             }
-         });
-     });
+    });
+    $(function(){
+        $(".helper-text3").on("input", function(){
+            var text = $(this).val();
+            $(this).next().text(text.length);
+            console.log("te" + text.length);
+            if(text.length > 500){
+                $(this).next();
+            }
+            else {
+                $(this).next().css("color", "#3f3f3f");
+            }
+        });
+    });
 
-
-
-     $(function () {
-         $(".create-form").submit(function(){
-         	$("input[name=chalTitle]").blur();
-         	$("textarea[name=howConfirm]").blur();
-         	$("input[name=startDate]").blur();
-         	$("input[type=checkbox]").blur();
-         	if($(".input.fail".length > 0)) {
-                 return false;
-             }
-         });
-         
-         $("input[name=chalTitle]").on("blur", function(){
-         	var chalTitle = $(this).val();
-         	$(this).removeClass("fail");
-         	if(!chalTitle) {
-         		$(this).addClass("fail").focus();
-         	}
-         });
-         
-         $("textarea[name=howConfirm]").on("blur", function(){
-          	var howConfirm = $(this).val();
-          	$(this).removeClass("fail");
-          	if(!howConfirm) {
-          		$(this).addClass("fail");
-          	}
-          });
-         
-          $("input[name=startDate]").on("blur", function(){
-          	var startDate = $(this).val();
-          	$(this).removeClass("fail");
-          	if(!startDate) {
-          		$(this).addClass("fail");
-          	}
-          }); 
-         
-         $("input[type=checkbox]").on("blur", function(){
-          	var checkbox = $(this).val();
-          	$(this).removeClass("fail");
-          	if(checkbox:checked) {
-          		$(this).addClass("fail");
-          	}
-          });
-         
-         
-     });
-
-     
-     
      
 </script>
 <body>
