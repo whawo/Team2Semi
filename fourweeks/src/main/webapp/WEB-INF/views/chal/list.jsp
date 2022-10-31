@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="4weeks" name="title"/>
+	<jsp:param value="전체 챌린지" name="title"/>
 </jsp:include>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -220,8 +220,8 @@
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".main-img").on("error", function() {
 			$(this).attr("src", "/images/bg_default.png");
+
 		});
-		
 		// 사용자가 선택한 주제를 selected 시켜라, type이 null이면 "chal_tilte"을 찍어라
 		$("#autoSelect-type").val("${param.type}" || "chal_title");
 		// 사용자가 선택한 정렬을 selected 시켜라, alignType이 null이면 "d_day asc"를 찍어라
@@ -239,7 +239,6 @@
 	$(function() {
 		$(".tab_content").hide();
 		$(".tab_content:first").show();
-
 		$("ul.tabs li").click(function() {
 			$("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
 			$(this).addClass("active").css("color", "#6c7aef");
@@ -254,8 +253,8 @@
 	<%-- 검색 시작 --%>
 	<form action="list">
 		 <div class="search-bar">
-			<select name="type"  class="select select-check" >
-				<option selected="selected" value="chal_title" >전체</option>
+			<select name="type"  class="select select-check" id="autoSelect-type">
+				<option value="chal_title" >전체</option>
 				<option value="운동">운동</option>
 				<option value="식습관">식습관</option>
 				<option value="생활">생활</option>
@@ -437,6 +436,7 @@
 					<c:choose>
 							<c:when test="${chalDtoRecruited.getDDay() == 0}">
 								<div>오늘 시작</div>
+
 							</c:when>
 							<c:when test="${chalDtoRecruited.getDDay() < 0}">
 								<input class="label-progress" placeholder="진행중" disabled>&nbsp; 

@@ -296,57 +296,93 @@
 		width: 90px;
         height: 90px;
 	}
-	
+
+    .confirm-img.no-img {
+		display: none;
+	}
+    .days.is-confirm {
+    	color:red;
+    	font-weight: bold;
+    }
+>>>>>>> refs/remotes/origin/main
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 //tab
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
-
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
-    });
-});
-    //아코디언 메뉴
-    $(document).on('touchstart click', '.acc-btn', function(){
-    $(this).next('.acc-content').toggleClass('openContent');
-    clickPolice = false;
-    if(!clickPolice){
-        clickPolice = true;
-    $(this).find('strong').toggleClass('selected');//메뉴의 타이틀 글자색
-
-       var $statsArrow = $(this).find('.stats-tab-img');//화살표방향바꾸게하기(열고닫기 버튼)
-        var src = ($statsArrow .attr('src') == '/images/arrow-down.png')
-           ? '/images/arrow-up.png'
-           : '/images/arrow-down.png';
-
-        $statsArrow .attr('src', src);
-      }
- });
-	$(function(){
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+		
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function(){
 			$(this).attr("src", "/images/bg_default.png");
+		});
+	  
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
 		
 		//인증샷이 없으면 img 태그 가리기
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
 		});
+		
+		$.ajax({
+			//내 인증글 작성 일차를 리스트로 가져오기
+			url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
+			method : "get",
+			dataType : "json",
+			//async : false,
+			success : function(resp) {
+				//가져온 리스트를 배열로 만들기
+				var values = [];
+                for(var i = 0; i < resp.length; i++) {
+                	values.push(resp[i].confirmDays);
+                }
+                //console.log(values);
+                
+                //1~28일 배열 생성(인덱스 조회용)
+                var arrDays = [];
+        		for (var i = 1; i <= 28; i++) {
+        			arrDays.push(i);
+        		}
+        		
+        		//1~28일 배열에서 내 인증글 작성 일차와 일치하는 인덱스를 searchResult 배열에 저장
+				var searchResult = [];
+				for(var i = 0; i < arrDays.length; i++){
+					var index = arrDays.indexOf(values[i]);
+					if (index != -1) {
+					    searchResult.push(index);
+					};
+				}
+				
+				//searchResult를 인덱스로 갖는 li에 스타일 적용
+				for(var i = 0; i < searchResult.length; i++) {
+					//console.log(i+"번째: "+searchResult[i]);
+					$(".my-confirm li").eq(searchResult[i]).css("background-color", "#A8B0E9");
+				}
+			}
+		});
 	});
-	
+
+
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
-	$(window).bind("pageshow", function (event) {
-        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-          	location.href = location.href;
-        }
-    });
+	$(window).bind("pageshow", function(event) {
+		if (event.originalEvent.persisted
+			|| (window.performance && window.performance.navigation.type == 2)) {
+				location.href = location.href;
+		}
+	});
+
 </script>
 
 <div class="container-794">
@@ -380,11 +416,12 @@
     </ul>
     
     <div class="tab_container">
-    
+
         <!-- tab1 시작-->
     	<div id="tab1" class="tab_content">
         
 	        <h2>달성률</h2>
+	        
 	                <!--progress bar--> 
 	                 <div>
 	                    <div class="bar-percent"> <fmt:formatNumber type="number" 
@@ -403,104 +440,19 @@
                    
 	         <h2>인증 현황</h2>
 	         
-	          <table width="600" style="margin-left: auto; margin-right: auto;">
-                    <thead class="row center">
-                        <tr>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-                            <td> <i class="fa-solid fa-circle-check"></i> </td>
-                            <td> <i class="fa-solid fa-circle-check"></i> </td>
-                            <td> <i class="fa-solid fa-circle-check"></i> </td>
-                            <td> <i class="fa-regular fa-circle-check"></i> </td>
-                            <td> <i class="fa-regular fa-circle-check"></i>  </td>
-                            <td> <i class="fa-regular fa-circle-check"></i> </td>
-                            <td> <i class="fa-regular fa-circle-check"></i> </td>
-                        </tr>
-                    </tbody>
-                    <thead class="row center">
-                        <tr>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>10</th>
-                            <th>11</th>
-                            <th>12</th>
-                            <th>13</th>
-                            <th>14</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-                			<td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                        </tr>
-                    </tbody>
-                    <thead class="row center">
-                        <tr>
-                            <th>15</th>
-                            <th>16</th>
-                            <th>17</th>
-                            <th>18</th>
-                            <th>19</th>
-                            <th>20</th>
-                            <th>21</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-     						<td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                        </tr>
-                    </tbody>
-                    <thead class="row center">
-                        <tr>
-                            <th>22</th>
-                            <th>23</th>
-                            <th>24</th>
-                            <th>25</th>
-                            <th>26</th>
-                            <th>27</th>
-                            <th>28</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                        </tr>
-                    </tbody>
-                </table>
+	     <ul class="my-confirm">
+			<c:forEach var="days" begin="1" end="28" step="1">
+				<li>${days}</li>
+			</c:forEach>
+		</ul>
+
          </div> 
          <!-- tab1 끝 -->
                
 
         <!-- tab2 시작 --> 
 	    <div id="tab2" class="tab_content">
-
-	      
+  
 	     <h2>달성률</h2>
 	     	<!--progress bar-->    	   
 	      	   <div>

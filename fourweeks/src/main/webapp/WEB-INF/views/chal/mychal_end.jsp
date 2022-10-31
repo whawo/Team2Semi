@@ -424,6 +424,7 @@
     
     <div class="tab_container">
     
+
         <!-- tab1 시작-->
     	<div id="tab1" class="tab_content">
         
@@ -446,96 +447,6 @@
                    
 	         <h2>인증 현황</h2>
 	         
-	          <table width="600" style="margin-left: auto; margin-right: auto;">
-                    <thead class="row center">
-                        <tr>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-                            <td> <i class="fa-solid fa-circle-check"></i> </td>
-                            <td> <i class="fa-solid fa-circle-check"></i> </td>
-                            <td> <i class="fa-solid fa-circle-check"></i> </td>
-                            <td> <i class="fa-regular fa-circle-check"></i> </td>
-                            <td> <i class="fa-regular fa-circle-check"></i>  </td>
-                            <td> <i class="fa-regular fa-circle-check"></i> </td>
-                            <td> <i class="fa-regular fa-circle-check"></i> </td>
-                        </tr>
-                    </tbody>
-                    <thead class="row center">
-                        <tr>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>10</th>
-                            <th>11</th>
-                            <th>12</th>
-                            <th>13</th>
-                            <th>14</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-                			<td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                        </tr>
-                    </tbody>
-                    <thead class="row center">
-                        <tr>
-                            <th>15</th>
-                            <th>16</th>
-                            <th>17</th>
-                            <th>18</th>
-                            <th>19</th>
-                            <th>20</th>
-                            <th>21</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-     						<td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                        </tr>
-                    </tbody>
-                    <thead class="row center">
-                        <tr>
-                            <th>22</th>
-                            <th>23</th>
-                            <th>24</th>
-                            <th>25</th>
-                            <th>26</th>
-                            <th>27</th>
-                            <th>28</th>
-                        </tr>
-                    </thead>
-                    <tbody class="row center">
-                        <tr>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                            <td>?</td>
-                        </tr>
-                    </tbody>
-                </table>
          </div> 
          <!-- tab1 끝 -->
 
@@ -543,8 +454,9 @@
 	    <div id="tab2" class="tab_content">
 	    
 			<table class="table table-border">
+
 			<h2>총 참가자 정보</h2>
-			
+		
 			<!--progress bar--> 
 	                 <div> 
 	                    <div class="bar-percent"> 평균 달성률 : <fmt:formatNumber type="number" 

@@ -183,7 +183,9 @@
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 		<input class="label-status label-status-start" placeholder="${chalVO.getDDay()}일뒤 시작" disabled>
 	</div>
-	
+
+	<!-- 여기 조건 추가해야함 placeholder에 어떻게 조건을 넣지 -->
+
 	 <%-- 종료일 --%>
 	<div>
 		<img src="/images/chal_end_date.png" class="img-margin">
@@ -198,6 +200,9 @@
 			</c:when>
 			<c:when test="${chalDtoRecruited.getDDay() < 0}">
 				<input class="label-progress" placeholder="진행중" disabled>
+			</c:when>
+					<c:when test="${chalDtoRecruited.getDDay() == 0}">
+				<input class="label-progress" placeholder="진행중">
 			</c:when>
 			<c:otherwise>
 				<input class="label-wait" placeholder="모집중" disabled>

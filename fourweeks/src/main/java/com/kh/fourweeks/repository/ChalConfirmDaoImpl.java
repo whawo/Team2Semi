@@ -9,8 +9,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
+import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
+import com.kh.fourweeks.vo.ConfirmDaysVO;
 
 @Repository
 public class ChalConfirmDaoImpl implements ChalConfirmDao {
@@ -24,6 +26,14 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		return confirmNo;
 	}
 
+	@Override
+	public int noticeSequence() {
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		return noticeNo;
+	}
+	
+	
 	@Override
 	public void write(ChalConfirmDto confirmDto) {
 		String sql = "insert into chal_confirm("
@@ -51,6 +61,17 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	@Override
+	public boolean updateNotice(NoticeDto noticeDto) {
+		String sql = "update notice set "
+				+ "notice_title = ?, notice_content = ?, "
+				+ "notice_modified = sysdate "
+				+ "where notice_no = ?";
+		Object[] param = {noticeDto.getNoticeTitle(), 
+				noticeDto.getNoticeContent(), noticeDto.getNoticeNo()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
 	private RowMapper<ConfirmAbleChalListVO> mapper = (rs, idx) -> {
 		return ConfirmAbleChalListVO.builder()
 				.userId(rs.getString("user_id"))
@@ -72,9 +93,17 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	}
 
 	@Override
-	public void confirmAttachment(int confirmNo, int attachmentNo, String userId) {
-		String sql = "insert into confirm_img(confirm_no, attachment_no, user_id) values(?, ?, ?)";
-		Object[] param = {confirmNo, attachmentNo, userId};
+	public void confirmAttachment(int confirmNo, int attachmentNo) {
+		String sql = "insert into confirm_img(confirm_no, attachment_no) values(?, ?)";
+		Object[] param = {confirmNo, attachmentNo};
+		
+		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public void noticeAttachment(int noticeNo, int attachmentNo) {
+		String sql = "insert into notice_img(notice_no, attachment_no) values(?, ?)";
+		Object[] param = {noticeNo, attachmentNo};
 		
 		jdbcTemplate.update(sql, param);
 	}
@@ -223,5 +252,18 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 				+ "where chal_no = ?";
 		Object[] param = {chalNo};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	private RowMapper<ConfirmDaysVO> myConfirmDaysMapper = (rs, idx) -> {
+		return ConfirmDaysVO.builder()
+				.confirmDays(rs.getInt("confirm_days"))
+				.build();
+	};
+	
+	@Override
+	public List<ConfirmDaysVO> myConfirmDays(int chalNo, String userId) {
+		String sql = "select trunc(f.confirm_date - c.start_date + 1) confirm_days from chal_confirm f left outer join chal c on f.chal_no = c.chal_no where f.chal_no = ? and f.user_id = ?";
+		Object[] param = {chalNo, userId};
+		return jdbcTemplate.query(sql, myConfirmDaysMapper, param);
 	}
 }

@@ -73,6 +73,8 @@ public interface ChalDao {
     public boolean updateChalPerson(int chalNo);
     List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
     ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
+	int noticeSeq();
+	void noticeAttachment(int noticeNo, int attachmentNo);
 	
 	
 }

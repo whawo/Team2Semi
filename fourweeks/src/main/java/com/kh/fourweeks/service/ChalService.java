@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
+import com.kh.fourweeks.entity.NoticeDto;
 
 public interface ChalService {
 	int create(ChalDto chalDto, MultipartFile attachment) 
@@ -19,4 +20,14 @@ public interface ChalService {
 	
 	int confirmEdit(ChalConfirmDto confirmDto, MultipartFile attachment)
 			throws IllegalStateException, IOException; //인증글 수정+인증샷;
+	
+	
+	int notice(NoticeDto noticeDto, MultipartFile attachment) 
+			throws IllegalStateException, IOException;
+
+	int noticeCreate(NoticeDto noticeDto, MultipartFile attachment) throws IllegalStateException, IOException;
+
+	boolean removeNotice(int noticeNo);
+
+	int noticeEdit(NoticeDto noticeDto, MultipartFile attachment) throws IllegalStateException, IOException;
 }
