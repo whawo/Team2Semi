@@ -3,10 +3,10 @@ package com.kh.fourweeks.repository;
 import java.util.List;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
-import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
 import com.kh.fourweeks.vo.ConfirmDaysVO;
+import com.kh.fourweeks.vo.NoticeVO;
 
 public interface ChalConfirmDao {
 	//인증글 쓰기(+수정) 관련 메소드
@@ -30,7 +30,7 @@ public interface ChalConfirmDao {
 	List<ChalConfirmVO> allConfirmList(ChalConfirmVO vo); //챌린지별 참가자 전체 인증글 목록 조회
 	List<ChalConfirmVO> allConfirmTopN(ChalConfirmVO vo); //챌린지별 참가자 전체 인증글 topN개 조회
 	int confirmCnt(int chalNo); //참가자 인증글 개수 조회
-	boolean updateNotice(NoticeDto noticeDto);
+	boolean updateNotice(NoticeVO noticeDto);
 	void confirmAttachment(int confirmNo, int attachmentNo);
 	void noticeAttachment(int noticeNo, int attachmentNo);
 	

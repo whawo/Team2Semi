@@ -10,12 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AdminDao;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.vo.NoticeVO;
 
 @Service
 public class ChalServiceImpl implements ChalService {
@@ -156,7 +156,7 @@ public class ChalServiceImpl implements ChalService {
 	}
 	
 	@Override
-	public int noticeCreate(NoticeDto noticeDto, MultipartFile attachment) throws IllegalStateException, IOException {
+	public int noticeCreate(NoticeVO noticeDto, MultipartFile attachment) throws IllegalStateException, IOException {
 		//번호 미리 생성
 		int noticeNo = chalDao.noticeSeq();
 		noticeDto.setNoticeNo(noticeNo);
@@ -192,7 +192,7 @@ public class ChalServiceImpl implements ChalService {
 	
 	//공지글 이미지 조회
 	@Override
-	public int notice(NoticeDto noticeDto, MultipartFile attachment)
+	public int notice(NoticeVO noticeDto, MultipartFile attachment)
 			throws IllegalStateException, IOException {
 		//번호 미리 생성
 		int noticeNo = confirmDao.noticeSequence();
@@ -242,7 +242,7 @@ public class ChalServiceImpl implements ChalService {
 	}
 	
 	@Override
-	public int noticeEdit(NoticeDto noticeDto, MultipartFile attachment)
+	public int noticeEdit(NoticeVO noticeDto, MultipartFile attachment)
 			throws IllegalStateException, IOException {
 		if(confirmDao.updateNotice(noticeDto)) {
 			//인증글 수정 후 파일이 있다면 등록(attachment) & 저장 & 연결(confirm_img)

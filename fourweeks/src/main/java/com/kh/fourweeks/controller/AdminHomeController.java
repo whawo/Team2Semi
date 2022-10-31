@@ -20,13 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AdminDto;
-import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.repository.AdminDao;
 import com.kh.fourweeks.repository.AttachmentDao;
-import com.kh.fourweeks.repository.ChalReportDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
+import com.kh.fourweeks.vo.NoticeListSearchVO;
+import com.kh.fourweeks.vo.NoticeVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -51,7 +50,11 @@ public class AdminHomeController {
 	
 	@GetMapping("/home")
 	public String home(Model model,
-			HttpSession session) {
+			HttpSession session,
+			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
+		int count = adminDao.count(vo);
+		//count도 vo에 첨부 -> model로 자동으로 넘길 수 있도록
+		vo.setCount(count);
 		return "admin/home";
 	}
 	
@@ -103,7 +106,7 @@ public class AdminHomeController {
 	}
 	
 	@PostMapping("/write")
-	public String insert(@ModelAttribute NoticeDto noticeDto,
+	public String insert(@ModelAttribute NoticeVO noticeDto,
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
@@ -117,22 +120,22 @@ public class AdminHomeController {
 	}
 	
 	@GetMapping("/list")
-	public String list(@ModelAttribute NoticeDto noticeDto,
+	public String list(@ModelAttribute NoticeVO noticeDto,
 			@RequestParam(required = false) String keyword,
+			@ModelAttribute(name="vo") NoticeListSearchVO vo,
 			Model model) {
-		boolean isSearch = keyword != null;
-		if(isSearch) {//검색
-			model.addAttribute("list", adminDao.selectNoticeAll(keyword));
-		}
-		else {//목록
-			model.addAttribute("list", adminDao.selectNoticeAll());
-		}
+		
+		int count = adminDao.count(vo);
+		//count도 vo에 첨부 -> model로 자동으로 넘길 수 있도록
+		vo.setCount(count);
+		
+		model.addAttribute("list", adminDao.selectList(vo));
 		return "admin/list";
 		
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@ModelAttribute NoticeDto noticeDto,
+	public String detail(@ModelAttribute NoticeVO noticeDto,
 			Model model) {
 		
 		model.addAttribute("detailDto", adminDao.selectNoticeOne(noticeDto.getNoticeNo()));
@@ -144,7 +147,7 @@ public class AdminHomeController {
 	@GetMapping("/detail/download")//공지글 상세 이미지 조회
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> detailDownload(
-			@ModelAttribute NoticeDto noticeDto
+			@ModelAttribute NoticeVO noticeDto
 		) throws IOException {
 		//공지글 번호로 첨부파일 번호 찾기
 		int attachmentNo = attachmentDao.selectNoticeImg(noticeDto.getNoticeNo());
@@ -162,7 +165,7 @@ public class AdminHomeController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute NoticeDto noticeDto,
+	public String edit(@ModelAttribute NoticeVO noticeDto,
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			Model model) throws IllegalStateException, IOException {

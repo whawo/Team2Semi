@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class NoticeDto {
-
-	int noticeNo;
-	String adminId;
-	String noticeTitle;
-	String noticeContent;
-	Date noticeTime;
-	Date noticeModified;
-	
+	private int noticeNo;
+	private String adminId;
+	private String noticeTitle;
+	private String noticeContent;
+	private Date noticeTime;
+	private Date noticeModified;
+	private String keyword;
 }
