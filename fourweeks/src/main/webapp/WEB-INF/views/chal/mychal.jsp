@@ -36,7 +36,6 @@
           font-size: 26px;
           vertical-align: middle;
       }
-
       .img-margin {
           margin-right: 10px;
           height: 24px;
@@ -139,63 +138,7 @@
      .flexbox {
        margin: 0px;
      }
-     /* 아코디언메뉴 */
-     li {
-	     list-style: none;
-	     margin-left: -0.5em;
-     }
-     .acc-btn {
-	     border-radius: 4px;
-	     cursor: pointer;
-	     height: 42px;
-	     width:100%;
-	     border-top:none;
-     }
-     .side-menu-scroll-on{
-     	margin-left: 80px;
-     }
-     .acc-btn strong{
-	     color: #6c7aef;
-	     font-size: 1.1em;
-	     margin:12px 10px;
-	     display: inline-block;
-     }
-     .selected{
-     	color:#6c7aef !important;
-     }
-     .acc-btn .stats-title-img {
-	     border-right: 1px solid #e5e5e5;
-	     float: left;
-	     padding:4px;
-	     width: 41px;
-     }
 
-     .acc-btn .stats-tab-img-area{
-	     float:right;
-	     width:133px;
-	     height:100%;
-	     text-align: right;
-	     padding:12px 0;
-	     margin : 0px;
-     }
-     .acc-btn .stats-tab-img-area > img{
-	     width:15px;
-	     height:15px;
-     }
-
-     .acc-content-inner {
-     	padding:15px 0px;
-     }
-
-     li.acc-content {
-	     height:auto;
-	     width:100%;
-	     margin:0 auto;
-	     overflow:hidden;
-     }
-     .openContent{
-     	height:0px !important;
-     }
      /* pagenavigation */
      ul.page{
 	     list-style: none;  /*li 점 없애기*/
@@ -287,6 +230,7 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
+         height : 230px;
     }
    	.confirm-img.no-img {
 		display: none;
@@ -304,7 +248,15 @@
     	color:red;
     	font-weight: bold;
     }
->>>>>>> refs/remotes/origin/main
+     .user-img {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	}
+	.nick-size {
+		font-size :  15px;
+	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -472,23 +424,13 @@
 		     
 	     <h2>인증 현황</h2> <!-- 추가 예정 -->
 	     
-	     <!-- 아코디언메뉴 -->
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
-                    <li class="acc-btn" id="menu1">
-                        <strong class="selected">${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
-				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%</strong>
-                        <div class="stats-tab-img-area">
-                           <img src="/images/arrow-up.png" alt="stats tab arrow" class="stats-tab-img"/>
-                        </div>
-                     </li>
-                      
-                      <li class="acc-content">
-                       <section class="acc-content-inner">
-                         인증현황         
-                       </section>
-                      </li>
+
+                        ${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
+				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%
+
                </c:forEach>               
-				
+				<br>
 
 		<!-- 인증글 목록(최신 max 5개) -->
 		<div class="row div-align">
@@ -503,35 +445,41 @@
 		<!-- 관리자글 -->
      	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
      <div class="notice-border">
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
+     		<span class="label label-notice" >공지</span> 공지글 추가하기
      </div>     
 		
 <!-- confirm_mylist와 동일 -->		  
       <!--인증글 목록-->
 	<c:forEach var="list" items="${confirmList}">
 	<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+	
       <div class="confirm-border">
-           <div class="confirm-title-css"> <!-- 챌린지 제목 -->
+       <!-- 챌린지 제목 -->
+           <div class="confirm-title-css" style="position:relative">
            	${list.confirmTitle} 
            </div>
+            <br><br>
             
-            <div class="row first"> <!-- 인증 사진, 내용 -->   
-            	<div class="confirm-content-css">         
+            <div class="div-align"> <!-- 인증 사진, 내용 -->   
+      
 					${list.confirmContent}
-					<br><br>
-					${list.confirmDate} 
-					&nbsp; 
-					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-					&nbsp;
-					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-					&nbsp; 
-					<i class="fa-regular fa-comment"></i> ${list.replyCount}
-				</div>
+					<br><br><br><br><br><br>
+						
+						<!-- 프로필, 닉네임 -->
+						<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+						<span class="nick-size">${list.userNick}</span>	
+						&nbsp; 
+						${list.confirmDate} 
+						&nbsp; 
+						<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+						&nbsp;
+						<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+						&nbsp; 
+						<i class="fa-regular fa-comment"></i> ${list.replyCount}
 
-				<div class="confirm-content-css">
-           			<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img">
-              	</div>					
-		 	</div> <!-- 인증글, 사진 목록 끝 -->			
+				</div>
+           			<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
+              	</div><!-- 인증글, 사진 목록 끝 -->			
      		</a>
 		</c:forEach>
 

@@ -5,6 +5,17 @@
 	<jsp:param value="4weeks" name="title"/>
 </jsp:include>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+   href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+   rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
 <style>
 	div, img, select, input, table, td {		   
 		/*border: 1px dotted gray; */
@@ -275,10 +286,10 @@
 			     </div>
 			     <div class="row chal-item">
 			         <%-- 라벨 --%>
-			        <c:if test="${chalDto.getDDay() > 0}">
-						<input class="label-wait" placeholder="모집중" disabled>&nbsp;
+			        <c:if test="${chalDto.getDDay() > -1}">
+						<span class="label label-wait" >모집중</span>
 					</c:if>
-		            	<input class="label-category" placeholder="${chalDto.chalTopic}" disabled>&nbsp;
+		            	<span class="label label-category ">${chalDto.chalTopic}</span>
 			     </div>
 			  </div> 
 			  </a>

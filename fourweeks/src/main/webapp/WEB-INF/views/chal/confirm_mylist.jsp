@@ -278,17 +278,17 @@
 	<div>  <!-- label -->
 		<c:choose>
 		<c:when test="${chalVO.endDday > 0 && chalVO.endDday < 28}">
-			<input class="label-status" placeholder="${chalVO.endDday}일 뒤 종료" disabled>			
+			<span class="label label-status" >${chalVO.endDday}일 뒤 종료</span>			
 		</c:when>
 		<c:when test="${chalVO.endDday == 0}">
-			<input class="label-status" placeholder="오늘 종료" disabled>			
+			<span class="label label-status" >오늘 종료</span>			
 		</c:when>
 		<c:when test="${chalVO.endDday < 0}">
-			<input class="label-status" placeholder="종료" disabled>		
+			<span class="label label-status" >종료</span>	
 		</c:when>
 		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
 		<c:otherwise>
-    		<input class="label-status" placeholder="${chalVO.getDDay()}일 뒤 시작" disabled>
+    		<span class="label label-status" >${chalVO.getDDay()}일 뒤 시작</span>
 		</c:otherwise>
 		</c:choose>	
     </div>
@@ -304,17 +304,17 @@
 	 <div class="label-align"> <!-- 챌린지 종류-->
      <c:choose>
 		<c:when test="${chalDto.chalTopic == '그 외'}">
-			<input class="label-category" placeholder="기타" disabled> 
+			<span class="label label-category" >기타</span>
 		</c:when>
 		<c:otherwise>	
-		 	<input class="label-category" placeholder="${chalDto.chalTopic}" disabled> 
+			<span class="label label-category" >${chalDto.chalTopic}</span>
 		</c:otherwise>
 	</c:choose>
 	 </div>
 	 
 	 <div class="label-align"> <!-- 달성률 -->
 	 <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
-         <input class="label-achieve" placeholder="현재 달성률 ??%" disabled> 
+	 	 <span class="label label-achieve" >현재 달성률 ??%</span>
      </div>            
 </a>
 </div> <!-- 2단 끝 -->
@@ -334,7 +334,7 @@
      <!-- 관리자글 -->
      <div class="notice-border">
      	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 인증글 업로드 오류 해결 방법 안내
+            <span class="label label-notice" >공지</span> 공지글 추가하기
      </div>     
      
      <!--인증글 목록-->

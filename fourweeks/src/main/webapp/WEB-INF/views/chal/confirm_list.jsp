@@ -96,6 +96,7 @@
 		background-color:#6c7aef;
 	}
 
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -129,7 +130,7 @@
 	<!-- 관리자글 -->
      <div class="notice-border">
      	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 인증글 업로드 오류 해결 방법 안내
+            <span class="label label-notice" >공지</span> 공지글 추가하기
      </div>      
 
  <!--인증글 목록-->

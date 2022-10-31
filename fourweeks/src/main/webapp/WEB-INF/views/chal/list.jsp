@@ -333,9 +333,9 @@
 			     <div class="row chal-item">
 			         <%-- 라벨 --%>
 			        <c:if test="${chalDto.getDDay() > -1}">
-						<input class="label-wait" placeholder="모집중" disabled>&nbsp; 
+						<span class="label label-wait" >모집중</span>
 					</c:if>
-		            <input class="label-category" placeholder="${chalDto.chalTopic}" disabled>
+		            <span class="label label-category" >${chalDto.chalTopic}</span>
 			     </div>
 			  </div> 
 			  </a>
@@ -439,10 +439,10 @@
 
 							</c:when>
 							<c:when test="${chalDtoRecruited.getDDay() < 0}">
-								<input class="label-progress" placeholder="진행중" disabled>&nbsp; 
+								<span class="label label-ing">진행중</span>
 							</c:when>
 							<c:otherwise>
-								<input class="label-wait" placeholder="모집중" disabled>&nbsp; 
+								<span class="label label-wait">모집중</span>
 								<div>${chalDtoRecruited.startDate}</div>
 							</c:otherwise>
 						</c:choose>
@@ -456,16 +456,16 @@
 			        <%-- 라벨 --%>
 			        <c:choose>
 								<c:when test="${chalDtoRecruited.getDDay() < -28}">
-									<input class="label-status" placeholder="종료" disabled>&nbsp; 
+									<span class="label label-status">종료</span>
 								</c:when>
 								<c:when test="${chalDtoRecruited.getDDay() < 0}">
-									<input class="label-progress" placeholder="진행중" disabled>&nbsp; 
+									<span class="label label-ing">진행중</span>
 								</c:when>
 								<c:otherwise>
-									<input class="label-wait" placeholder="모집중" disabled>&nbsp; 
+									<span class="label label-wait">모집중</span>
 								</c:otherwise>
 					</c:choose>
-						<input class="label-category" placeholder="${chalDtoRecruited.chalTopic}" disabled>
+					 	<span class="label label-category">${chalDtoRecruited.chalTopic}</span>
 			     </div>
 			  </div> 
 			  </a>
