@@ -113,6 +113,7 @@ margin-left: 10px;
 
 $(function () {
 	
+
     $("input[name=userPw]").on("blur", function(){
     	var userPw = $(this).val();
     	 var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;
@@ -166,8 +167,10 @@ $(function () {
 			     <span class="sp-3">새 비밀번호 확인 </span><input class="input short-text-box short-hover pw-box2"  type="password" placeholder="8~16자의 영문/숫자"  id="repeatPw"><br>
 			     <span class="fail-message sp-5">비밀번호가 일치하지 않습니다.</span>
 		</div>
+
 		<div class="row row-4 center">
 			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3" onclick="location.href='/mypage';">취소</button>
+
 			     <button class="save-btn" type="submit">변경</button>
 		</div>
 	</form>

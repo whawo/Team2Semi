@@ -88,13 +88,13 @@ margin은 간격을 벌리기 위해서 사용한다
 
 .btn {
     border: none;
-    font-size: 20px;
-    padding: 0.75em;/*글자 크기의 0.75배*/
+    font-size: 18px;
+    padding: 0.5em;/*글자 크기의 0.75배*/
     cursor: pointer;
-    /* a 태그의 버튼화를 위한 스타일*/
-    display:inline-block;
     text-align: center;
-    text-decoration: none;
+    display:inline-block;
+	text-decoration: none;
+	height: 42px;
 }
 .btn.btn-disabled {
     border: 1px solid #DDDDDD;
@@ -102,40 +102,159 @@ margin은 간격을 벌리기 위해서 사용한다
     color: #AAAAAA;
 }
 .btn.btn-positive {
-    border: 1px solid #0174e9;
-    background-color: #0174e9;
+  	border: 1px solid #6c7aef;
+    background-color: #6c7aef;
     color: white;
     border-radius: 2px;
 }
-.btn.btn-positive:hover {
+/* .btn.btn-positive:hover {
     background-color: #0068d1;
-}
+} */
 .btn.btn-positive[disabled],
 .btn.btn-positive[disabled]:hover {
-    border: none;
-    background-color: #74b9ff;
+    border: 1px solid #DDDDDD;
+    background-color:#DDDDDD;
+    color: #AAAAAA;
     cursor: not-allowed;
 }
 
 .btn.btn-neutral {
-    border: 1px solid gray;
+    border: 1px solid #6c7aef;
     background-color: white;
-    color: gray;
+    color: #6c7aef;
     border-radius: 2px;
 }
-.btn.btn-neutral:hover {
+/* .btn.btn-neutral:hover {
     border: 1px solid black;
     color: black;
-}
+} */
 .btn.btn-negative {
     border: 1px solid #d63031;
     background-color: #d63031;
     color: white;
     border-radius: 2px;
 }
-.btn.btn-negative:hover {
+/* .btn.btn-negative:hover {
     background-color: #c42627;
+} */
+
+.largebtn{
+    border: none;
+    font-size: 20px;
+    padding: 0.75em;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+
+    /* 높이와 너비는 상황에 따라 맞게 비율 설정 */
+    width: 100%;
+    height: 58px;
 }
+
+
+#largebutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#largebutton2{
+    background-color: e5e6f9;
+    color: #6c7aef;
+}
+#largebutton3{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+#largebutton4{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #6c7aef;
+}
+
+#largebutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#largebutton2-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#largebutton3-1{
+    border:solid;
+    border-color: #ebebed;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #ebebed;
+}
+#largebutton4-1{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #ebebed;
+}
+
+
+.smallbtn{
+    border: none;
+    font-size: 16px;
+    padding: 0.75em;/*글자 크기의 0.75배*/
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+    width: 225px;
+    height: 50px;
+}
+#smallbutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#smallbutton2{
+    background-color: e5e6f9;
+    color: #6c7aef;
+}
+#smallbutton3{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+#smallbutton4{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #6c7aef;
+}
+#smallbutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#smallbutton2-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#smallbutton3-1{
+    border:solid;
+    border-color: #ebebed;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #ebebed;
+}
+#smallbutton4-1{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #ebebed;
+}
+
+
 
 /* 
     입력창은 버튼과 같이 등장하므로 비율/크기 등이 같아야 함

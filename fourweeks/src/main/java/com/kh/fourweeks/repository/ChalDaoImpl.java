@@ -785,4 +785,10 @@ public class ChalDaoImpl implements ChalDao {
 		return jdbcTemplate.query(sql, allSuccessProgressMapper,param);
 	}
 	
+	@Override
+	public void deleteChalOnlyMe(String userId) {
+		String sql = "delete chal where user_id = ? and chal_person = 1";
+		Object[] param = {userId};
+		jdbcTemplate.update(sql, param);
+	}
 }

@@ -76,5 +76,7 @@ public interface ChalDao {
 	int noticeSeq();
 	void noticeAttachment(int noticeNo, int attachmentNo);
 	
-	
+    //탈퇴 시, 내가 개설하고 나만 참가 중인(참가자=1명) 챌린지 삭제
+    void deleteChalOnlyMe (String userId); 
+
 }
