@@ -23,6 +23,7 @@ import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.LeaveCountDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
@@ -192,10 +193,13 @@ public class ChalUserController {
 	}
 	
 	@GetMapping("/leave") // 탈퇴
-	public String leave(HttpSession session) {
+	public String leave(
+			HttpSession session,
+			@ModelAttribute LeaveCountDto leaveCountDto) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		if(chalUserDao.delete(userId)) {
 			session.removeAttribute(SessionConstant.ID);
+			chalUserDao.leaveCounting(leaveCountDto); // 탈퇴수 카운팅 메소드
 			return "chalUser/leave";
 		}else {
 			throw new TargetNotFoundException();

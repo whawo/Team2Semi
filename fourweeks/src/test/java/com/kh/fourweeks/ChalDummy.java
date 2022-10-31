@@ -19,12 +19,12 @@ public class ChalDummy {
 		for(int i=1; i < 7; i++) 
 			chalDao.insert(ChalDto.builder()
 					.chalNo(i+205)
-					.userId("crown1234")
+					.userId("user07")
 					.chalTitle(i+"번째 챌린지 테스트용이지롱")
 					.chalContent("챌린지"+i+"챌린지~~")
 					.howConfirm("챌린지"+i+"챌린지~~")
 					.chalTopic("취미")
-					.startDate(Date.valueOf("2022-10-01"))
+					.startDate(Date.valueOf("2022-11-01"))
 					.build());
 	}
 //	@AfterEach

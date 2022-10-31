@@ -20,6 +20,12 @@
             	return true;
             }
 		});
+		// 저장하지 않고 벗어날 경우 alert창 띄움
+		window.onbeforeunload = function(e) {
+		    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
+		    e.returnValue = dialogText;
+		    return dialogText;
+		};
 	});
 </script>
 <div class="container-794">

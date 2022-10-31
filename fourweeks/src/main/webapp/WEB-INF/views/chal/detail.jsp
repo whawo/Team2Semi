@@ -123,15 +123,25 @@
 		});
 	});
 
-	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	// 뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
 	$(window).bind("pageshow", function (event) {
         if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
           	location.href = location.href;
         }
     });
+	
+	// 참가하기 눌렀을때 confirm 받기
+	$(function() {
+		$(".confirm-form").submit(function (e) {
+	        var choice = window.confirm("참가하시겠습니까?");
+	        if (!choice) {
+	            return false;
+	        }
+	    });
+	});
 </script>
 
-<form action ="insert" method="post" >
+<form action ="insert" method="post" class="confirm-form">
 	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}">
 	
 <div class="container-794">

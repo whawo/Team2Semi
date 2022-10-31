@@ -443,7 +443,13 @@
 			}
 		});
 	});
-
+	
+	window.onbeforeunload = function(e) {
+	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
+	    e.returnValue = dialogText;
+	    return dialogText;
+	};
+	
 </script>
 <body>
 	<div class="container-1200">
@@ -467,7 +473,7 @@
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1">
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus helper-text1 alert-notice" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off">
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                <span class="fail-message">이메일을 입력해주세요.</span> 
 	                </div>
