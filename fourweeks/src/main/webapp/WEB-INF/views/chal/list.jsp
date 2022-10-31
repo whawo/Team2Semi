@@ -19,6 +19,7 @@
 
 <style>
 	div, table, td {
+		/*border: 1px solid gray;*/
 		border: 1px solid transparent;
 	}
 	/* tab*/
@@ -164,50 +165,46 @@
 	
 	.text-center {
 		display: flex;
-		justify-content: center;
+		text-align:center;
 		align-items: center;
+		margin : 0 auto;
 		height: 500px;
-		font-size: 24px;
+		font-size: 20px;
 	}
 	/* pagenavigation */
-	ul.page {
-		list-style: none; /*li 점 없애기*/
+	ul.pagenation {
+  		list-style:none;
+
 		margin: 0;
-		padding: 0;
-		font-size: 16px;
-		color: #6c7aef;
-		text-align: center;
-		/* margin-top: 1600px; */ /* 불필요 */
+        padding: 0;
+    }
+    ul.pagenation > li {
+    	display: inline-block;
+    	text-align:center;
+    }
+    ul.pagenation > li > a {
+		float:left;
+		margin:3px;
+		width:30px;
+	    height: 30px;
+		color:#6c7aef;
+		font-weight:bold;
+	    font-size: 12px;
+		border:1px solid transparent;
+	    border-radius: 30%;
+		text-decoration:none;
+	    line-height : 2.3em;
 	}
-	
-	ul.page>li {
-		display: inline-block; /*일렬로 정렬*/
-		border: 1px solid transparent; /*투명한 네모 상자 */
-		border-radius: 30%;
-		padding: 0em; /*사이 간격*/
-		line-height: -0.5em; /*글자 표시 높이*/
-		margin: 0.5em; /*글자 사이 간격 이거는 사이사이 간격*/
-		min-width: 1em; /*글자 사이 간격 더 크게 + border도 크게 */
-		text-align: center; /*상자안에 글자 중앙에 */
-		cursor: pointer;
-		width: 24px;
-		height: 24px;
+	.on {
+		color: white !important;
+		border:1px solid#6c7aef;
+		background-color:#6c7aef;
 	}
-	/* pagenavigation 번호에 커서대면 나타내는 표시  */
-	ul.page>li:hover, ul.page>li>a:hover {
-		border-color: #6c7aef; /*커서 대면 상자표시*/
-		background-color: #6c7aef;
+   	ul.pagenation > li > a:hover, 
+   	ul.pagenation > li > a:focus {
 		color: white;
-		font-weight: bold;
-		cursor: pointer;
-	}
-	
-	ul.page>li>a {
-		display: block;
-		width: 100%;
-		color: #6c7aef;
-		text-decoration: none;
-		font-weight: bold;
+		border:1px solid#6c7aef;
+		background-color:#6c7aef;
 	}
 	.ellipsis {
 	  width: 288px;
@@ -350,72 +347,62 @@
 			</div>
 	
 		<%-- 페이지 네비게이터 시작 --%>
-		<div class="row">
-		
-			<ul class="page">
+		<div class="row center mt-40 mb-40">
+			<ul class="pagenation">
 			
 			<c:if test="${vo.count > 0}">
-			<%-- 맨처음--%>
-				<li>
+			<%-- 맨처음--%>	
 					<c:choose>
 						<c:when test="${not vo.isFirst()}">
-							<a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a>
+							<li><a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&laquo;</a>
+							<li><a href="#">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
-				</li>
 				
 				<%-- 이전--%>
-				<li>
+				
 					<c:choose>
 						<c:when test="${vo.hasPrev()}">
-							<a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
+							<li><a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&lt;</a>
+							<li><a href="#">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
-				</li>
 				
 				<%-- 페이지 번호--%>
-				<li>
 					<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
 							<c:choose>
 								<c:when test="${vo.p == i}">
-									<a href="#">${i}</a>
+									<li><a href="#" class="on">${i}</a></li>
 								</c:when>
 								<c:otherwise>
-									<a href="list?p=${i}&${vo.parameter()}">${i}</a>
+									<li><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 					</c:forEach>
-				</li>
-				
+
 				<%-- 다음--%>
-				<li>
 					<c:choose>
 						<c:when test="${vo.hasNext()}">
-							<a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
+							<li><a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&gt;</a>
+							<li><a href="#">&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
-				</li>
-				
+
 				<%-- 맨뒤 --%>
-				<li>
 					<c:choose>
 						<c:when test="${not vo.isLast()}">
-							<a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a>
+							<li><a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&raquo;</a>
+							<li><a href="#">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
-				</li>
 			</c:if>
 			</ul>
 		</div>  
@@ -428,9 +415,9 @@
 
 		<div class="row chal-list-container">
 			<c:forEach var="chalDtoRecruited" items="${recruitedList}">
-			<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
-			<div class="row chal-list">	
-				<div class="row chal-item thumbnail">
+				<a href="detail?chalNo=${chalDtoRecruited.chalNo}">
+				<div class="row chal-list">	
+					<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
 						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
 					
@@ -469,7 +456,7 @@
 			        <%-- 라벨 --%>
 			        <c:choose>
 								<c:when test="${chalDtoRecruited.getDDay() < -28}">
-									<input class="label-status" placeholder="종료" disabled>
+									<input class="label-status" placeholder="종료" disabled>&nbsp; 
 								</c:when>
 								<c:when test="${chalDtoRecruited.getDDay() < 0}">
 									<input class="label-progress" placeholder="진행중" disabled>&nbsp; 
@@ -489,71 +476,61 @@
 			</div>
 			
 			<%-- 페이지 네비게이터 시작 --%>
-			<div class="row">
-				<ul class="page">
+			<div class="row center mt-40 mb-40">
+				<ul class="pagenation">
 				
 				<c:if test="${voRecruited.count > 0}">
 				<%-- 맨처음--%>
-					<li>
 					<c:choose>
 						<c:when test="${not voRecruited.isFirst()}">
-							<a href="list?p=${voRecruited.firstBlock()}&${voRecruited.parameter()}">&laquo;</a>
+							<li><a href="list?p=${voRecruited.firstBlock()}&${voRecruited.parameter()}">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&laquo;</a>
+							<li><a href="#">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
-					</li>
-					
+
 					<%-- 이전--%>
-				<li>
 					<c:choose>
 						<c:when test="${voRecruited.hasPrev()}">
-							<a href="list?p=${voRecruited.prevBlock()}&${voRecruited.parameter()}">&lt;</a>
+							<li><a href="list?p=${voRecruited.prevBlock()}&${voRecruited.parameter()}">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&lt;</a>
+							<li><a href="#">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
-				</li>
-					
+
 					<%-- 페이지 번호--%>
-				<li>
 					<c:forEach var="i" begin="${voRecruited.startBlock()}" end="${voRecruited.endBlock()}" step="1">
 						<c:choose>
 							<c:when test="${voRecruited.p == i}">
-								<a href="#">${i}</a>
+								<li><a href="#" class="on">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<a href="list?p=${i}&${voRecruited.parameter()}">${i}</a>
+								<li><a href="list?p=${i}&${voRecruited.parameter()}">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					</li>
-					
+
 					<%-- 다음--%>
-				<li>
 					<c:choose>
 						<c:when test="${voRecruited.hasNext()}">
-							<a href="list?p=${voRecruited.nextBlock()}&${voRecruited.parameter()}">&gt;</a>
+							<li><a href="list?p=${voRecruited.nextBlock()}&${voRecruited.parameter()}">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&gt;</a>
+							<li><a href="#">&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
-				</li>
-					
+
 				<%-- 맨뒤 --%>
-				<li>
 					<c:choose>
 						<c:when test="${not voRecruited.isLast()}">
-							<a href="list?p=${voRecruited.lastBlock()}&${voRecruited.parameter()}">&raquo;</a>
+							<li><a href="list?p=${voRecruited.lastBlock()}&${voRecruited.parameter()}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<a href="#">&raquo;</a>
+							<li><a href="#">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
-					</li>
 				</c:if>
 				</ul>
 			</div>

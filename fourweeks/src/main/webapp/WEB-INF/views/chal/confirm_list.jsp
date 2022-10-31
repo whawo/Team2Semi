@@ -46,7 +46,7 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
-        height : 200px;
+        height : 230px;
     }
    .user-img {
 		border-radius: 50%;
@@ -120,7 +120,7 @@
 
 </script>
 
-<div class="container-794">
+<div class="container-794" style="margin-top:100px">
 
 	<h2>참가자 인증글</h2>
 
@@ -146,7 +146,7 @@
        	    <!-- 인증 사진, 내용 -->   
             <div class="div-align">
 				${list.confirmContent}
-				<br><br><br><br><br><br>
+				<br><br><br><br><br>
 				<!-- 프로필, 닉네임 -->
 				<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
 				<span>${list.userNick}</span>	
@@ -166,7 +166,7 @@
 <!-- 인증글, 사진 목록 끝 -->			
 	
 	<!-- 페이지 내비게이터 -->
-	<div class="row center mt-40 mb-40 row">
+	<div class="row center mt-40 mb-40">
 		<!-- 이전 -->
 	<ul class=" pagenation">
 		<c:choose>

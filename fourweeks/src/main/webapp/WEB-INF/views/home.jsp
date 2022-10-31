@@ -230,7 +230,7 @@
 				</div>
 			
 				<div>
-					<a href="chal/list">전체보기 <i class="fa-regular fa-plus"></i></a>
+					<a href="chal/list" style="color:#6c7aef">전체보기 <i class="fa-solid fa-circle-chevron-right"></i></a>
 				</div>
 			</div>
 			

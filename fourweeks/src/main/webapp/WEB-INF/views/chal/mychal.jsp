@@ -509,6 +509,14 @@
                <progress max="100" value=" <fmt:formatNumber type="number" 
 		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
                </div>
+               
+                  <!-- 
+                테스트용 progress bar  숫자 바꾸면 진행률 확인가능
+                <div>
+                    <div class="bar-percent">35%</div>
+                    <progress max="100" value="35"></progress>
+                </div>                 
+                   -->
 		     
 	     <h2>인증 현황</h2> <!-- 추가 예정 -->
 	     
@@ -536,14 +544,14 @@
 		</div>
 		
 		<div class="row div-align float-right">
-			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
+			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
 		</div>
 		<br><br>
 		
 		<!-- 관리자글 -->
      	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
      <div class="notice-border">
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기>
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
      </div>     
 		
 <!-- confirm_mylist와 동일 -->		  
@@ -586,4 +594,4 @@
 </div>
 </div> 
 
-<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>--%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

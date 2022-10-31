@@ -580,6 +580,8 @@
 
 				<h2>챌린지 성공 (${allProgressDto.size()}명)</h2>
 					<c:forEach var="allProgressDto" items="${allProgressDto}">	
+					<!-- 프로필사진추가 필요 -->
+						<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
 						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
 					</c:forEach>
 					<br>
@@ -590,7 +592,7 @@
 		</div>
 		
 		<div class="row div-align float-right">
-			<a href="/confirm/all?chalNo=${chalDto.chalNo}">전체보기(${listCnt})</a>
+			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
 		</div>
 		<br><br>
 		
@@ -614,7 +616,7 @@
           	
           	 <!-- 인증 사진, 내용 -->   
                
-               <div class="div-align">
+               <div class="div-align" >
 					${list.confirmContent}
 					<br><br><br><br><br>
 					${list.confirmDate} 
