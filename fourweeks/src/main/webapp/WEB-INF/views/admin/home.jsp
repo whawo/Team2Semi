@@ -197,15 +197,15 @@
 <div id="dashboard">
 	<div class="container-1200 mb-50">
 		<div class="row float-container">
-			<div class="row float-left w-33 p-20">
+			<%-- <div class="row float-left w-33 p-20">
 				<div class="row center">
 					<h3>오늘 가입자/탈퇴자 수</h3>
 				</div>
 				<div class="row">
 					<canvas id="joinedAndLeave"></canvas>
 				</div>
-			</div>
-			<div class="row float-left w-33 p-20">
+			</div> --%>
+			<div class="row float-left w-33 p-50">
 				<div class="row center">
 					<h3>오늘 시작/종료 챌린지 수</h3>
 				</div>
@@ -213,7 +213,7 @@
 					<canvas id="startEndToday"></canvas>
 				</div>
 			</div>
-			<div class="row float-left w-33">
+			<div class="row float-left w-50">
 				<div class="row center">
 					<h3>오늘 인증률</h3>
 				</div>
