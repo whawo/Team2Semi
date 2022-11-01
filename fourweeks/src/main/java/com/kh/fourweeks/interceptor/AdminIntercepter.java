@@ -18,12 +18,10 @@ public class AdminIntercepter implements HandlerInterceptor{
 			HttpSession session = request.getSession();
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 			// 미리 부여된 adminID와 현재 로그인된 세션의 아이디가 같은지 판정
-			boolean admin = loginId.equals("admin123");
-			
+			boolean admin = loginId.equals("admin");
 			if(admin) {
 				return true;
 			} 
-			
 			response.sendError(403); // 관리자가 아닐시 403error 출력
 			return false;
 			

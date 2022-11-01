@@ -49,11 +49,11 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 	// 변경에 성공했을 경우 alert으로 알림
-	/* $(function() {
+	$(function() {
 		$(".confirm-form").submit(function (e) {
 			alert("비밀번호 변경에 성공했습니다.");
 	    });
-	}); */
+	}); 
 </script>
  <div class="container-794">
 	 <div class="row center">
