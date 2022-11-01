@@ -29,19 +29,22 @@
 				$(this).addClass("no-img");
 			});
 			
-			//form submi 시 select disabled 속성 제거
+			//form submit 시 select disabled 속성 제거
 			$(".confirm-form").submit(function(){
 				$(this).removeAttr('disabled');
             });
 			
-			// 저장하지 않고 벗어날 경우 alert창 띄움
-			window.onbeforeunload = function(e) {
-			    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
-			    e.returnValue = dialogText;
-			    return dialogText;
-			};
-
+			//취소버튼 클릭 시, 이전 페이지로 이동
+			$(".btn-edit-cancel").click(function(){
+				history.back();
+	        });
 	});
+	// 저장하지 않고 벗어날 경우 alert창 띄움
+	window.onbeforeunload = function(e) {
+	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
+	    e.returnValue = dialogText;
+	    return dialogText;
+	};
 </script>    
 
 	<form action="edit" method="post" enctype="multipart/form-data" class="confirm-form">
@@ -95,7 +98,7 @@
 		<!--  선택한 파일 취소하기(js) -->
 		<button type="button">삭제</button>
 		<br><br>
-		<a href = "detail?confirmNo=${confirmDto.confirmNo}">취소</a>
+		<button type="button" class="btn-edit-cancel">취소</button>
 		<button type="submit">인증글 저장하기</button>
 	</form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
