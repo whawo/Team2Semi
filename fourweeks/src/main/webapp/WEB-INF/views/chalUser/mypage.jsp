@@ -255,7 +255,7 @@ width: 120px;
 border-radius:0.5em;
 }
 .label-close{
-width: auto;
+width: 118px;
 border-radius:0.5em;
 }
 .lab-e{
