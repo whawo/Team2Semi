@@ -71,6 +71,8 @@ public class ChalConfirmController {
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
+		
+		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		confirmDto.setUserId(userId);
 		
@@ -79,6 +81,7 @@ public class ChalConfirmController {
 		
 		attr.addAttribute("confirmNo", confirmNo);
 		return "redirect:detail";
+		
 	}
 	
 	@GetMapping("/detail") //인증글 상세
