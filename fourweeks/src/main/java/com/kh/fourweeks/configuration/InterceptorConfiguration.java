@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.fourweeks.interceptor.AdminIntercepter;
 import com.kh.fourweeks.interceptor.ConfirmOwnerCheckInterceptor;
 import com.kh.fourweeks.interceptor.MyAccountCheckInterceptor;
+import com.kh.fourweeks.interceptor.OnePerDayInterceptor;
 import com.kh.fourweeks.interceptor.ParticipantCheckInterceptor;
 import com.kh.fourweeks.interceptor.ReplyOwnerCheckInterceptor;
 import com.kh.fourweeks.interceptor.UserInterceptor;
@@ -32,6 +33,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private ParticipantCheckInterceptor participantCheckInterceptor;
+	
+//	@Autowired
+//	private OnePerDayInterceptor onePerDayInterceptor; 
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -82,7 +86,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 										"/chal/mychal**",
 										"/chal/mychal/**"
 										);
-								
+		
+//		// 인증글을 한번이라도 작성했다면
+//		registry.addInterceptor(onePerDayInterceptor)
+//								.addPathPatterns(
+//										"/confirm/write"
+//										);
 		
 		
 	}

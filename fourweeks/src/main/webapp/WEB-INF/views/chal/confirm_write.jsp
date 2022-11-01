@@ -309,12 +309,12 @@
              }
          });
      });
- 	 // 저장하지 않고 벗어날 경우 alert창 띄움
+/*  	 // 저장하지 않고 벗어날 경우 alert창 띄움
 	window.onbeforeunload = function(e) {
 	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
 	    e.returnValue = dialogText;
 	    return dialogText;
-	};
+	}; */
      
  /* 
 		폼 이벤트 방지인데 ... 폼 이벤트를 방지하면 버튼이 안눌림.. ! 
@@ -369,6 +369,7 @@
 	<c:otherwise>
 <form action="write" method="post" enctype="multipart/form-data" class="con-form">
             <div class="row row-1 mt-92">
+            	<input type="hidden" name="userId" value="${loginId}">
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
                     <option id="select" selected="selected" value="" >선택</option>
