@@ -41,8 +41,11 @@ margin-top: 79px;
 div{
 border: 1px dotted transparent;
 }
-img{
+.img1{
 border-radius: 50%;
+margin-top: 50px;
+margin-left: 85px;
+margin-bottom: -30px;
 }
 .id-box{
 border: 1px solid transparent;
@@ -99,7 +102,7 @@ display:none;
         .input-file-upload{
             padding: 6px 17px; 
             background-color: #e5e6f9;
-            border-radius: 0.25em;
+            border-radius: 0.5em;
             color: #6c7aef;
             cursor: pointer;
         }
@@ -109,15 +112,18 @@ display:none;
         
         	.img-lab{
         		margin-left:30px;
+        		padding: 10px 30px;
+        		font-size: 14px;
         	}
-		.img-btn{ /* 삭제 버튼 */
+		.img-btn{ 
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
-			border-radius: 0.25em;
+			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 5px 16px; 
+			padding: 9px 30px; 
 			text-align: center;
 			color: #AAAAAA;
+			font-size: 14px;
 		}
 		.img-btns{
 			padding-top: 161px;
@@ -126,7 +132,7 @@ display:none;
 			border: 2px solid #AAAAAA;
 			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 16px; /* 삭제 버튼 크기 조절 */
+			padding: 4px 16px;
 			text-align: center;
 			color: #AAAAAA;
         }
@@ -242,7 +248,7 @@ display:none;
        }
 	 
 </script>
-<div class="row container-1200">
+<div class=" container-1200">
 <div class="row container-794 row-move">
 
 	<div class="row  row-3">
@@ -252,7 +258,7 @@ display:none;
 <form action="edit" method="post" enctype="multipart/form-data">
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
-			<span class="sp-0">프로필 사진</span> <img src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
+			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
 	</div>
 	
 	<div class="row  row-img">

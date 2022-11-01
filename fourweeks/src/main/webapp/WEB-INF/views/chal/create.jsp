@@ -8,6 +8,7 @@
 </jsp:include>
 
 <link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -95,7 +96,7 @@
 
         #short-text-box{
             border: 1px solid #AAAAAA;
-            border-radius: 0.25em;
+            border-radius: 0.5em;
             width: 200px;
             height: 40px;
         }
@@ -177,11 +178,11 @@
             float: left;
         }
         .input-file-upload{
-            padding: 5px 20px; 
+            padding: 4px 20px; 
             padding-bottom: 12px;
             background-color: #e5e6f9;
             border: 1px solid #e5e6f9;
-            border-radius: 0.25em;
+            border-radius: 0.5em;
             color: #6c7aef;
             cursor: pointer;
         }
@@ -189,23 +190,25 @@
             display: none;
         }
         .preview{
-            border-radius: 0.25em;
+            border-radius: 0.5em;
+            margin-top: 10px;
         }
         	.img-lab{
-        		margin-left:30px;
+        	padding: 10px 30px;
+        	margin-left:30px;
         	}
 		.img-btn{ 
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
 			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 30px; 
-			padding-bottom: 12px; 
-			text-align: center;
+			padding: 10px 30px; 
 			color: #AAAAAA;
+			font-size: 14px;
 		}
 		.img-btns{
 			padding-top: 161px; 
+			
 		}
         .row-7{ 
             padding-top: 80px;
@@ -311,37 +314,7 @@ $(function(){
         }
     });
 });
-<<<<<<< HEAD
 
-
-$(function(){
-    $(".create-form").submit(function(){
-        var title = $("input[name=chalTitle").val();
-        if(title.length == 0 ){
-        	 $("input[name=chalTitle").focus();
-            return false;
-        }else if(title.length < 40){
-        	return true;
-        }
-
-        var confirm = $("textarea[name=howConfirm]").val();
-        if(confirm.length == 0){
-            return false;
-        }else if(confirm.length < 300){
-        	return true;
-        }
-
-        var date = $("input[name=startDate]").val();
-        if(date.length == 0){
-            return false;
-        }
-
-        var check = $("input[type=checkbox]").val();
-        if(check == checked){
-            return false;
-        }
-    });
-});
 </script>
 <body>
 	<div class="container-1200">
@@ -349,7 +322,6 @@ $(function(){
         
 	           <div class="row">
 	                <p class="p1"> 1. 어떤 주제와 관련이 있나요?</p>
-	
 	                <div class="row checks small">
 	                <input class="lab"  id="ex_rd1" name="chalTopic" type="radio" value="운동" checked><label for="ex_rd1" class="lab-1">운동</label><br>
 	                <input class="lab"  id="ex_rd2" name="chalTopic" type="radio" value="생활"><label for="ex_rd2" class="lab-1">생활</label><br>
@@ -359,7 +331,6 @@ $(function(){
 	                <input class="lab"  id="ex_rd6" name="chalTopic" type="radio" value="환경"><label for="ex_rd6" class="lab-1">환경</label><br>
 	                <input class="lab"  id="ex_rd7" name="chalTopic" type="radio" value="그 외"><label for="ex_rd7" class="lab-1">그 외</label><br>
 	                </div>
-	             
 	            </div>
 	
 	            <div class="row">
@@ -367,7 +338,6 @@ $(function(){
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
 	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus helper-text1 alert-notice" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off" maxlength="40">
-
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                 <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
@@ -383,19 +353,15 @@ $(function(){
 	        <div class="row">
 	                <p class="p1">4. 챌린지 시작일을 선택해주세요.</p>
 	                <p class="p2">개설일로부터 5일 이내에 시작해야 해요.</p>
-	
 	                <div class="row">
 	                    <input type="text" class="single-date-picker short-hover date-box" id="short-text-box"  name="startDate" autocomplete="off" placeholder="챌린지 시작일을 정해주세요!">
 	                    <span class="fail-message">필수 항목 입니다. </span>
 	                </div>
-	
 	                <div class="row date-calendar">
 	                	<label class="date-box date-bx">챌린지 예상 종료일 <span id="result-1"></span></label> 
 	                </div>
+			</div>
 	
-	            </div>
-	
-	            <!--  라벨이라 체크를 어떻게 해야할지 ..   -->
 	            <div class="row">
 	                <p class="p1">5. 모집 방식을 확인해주세요.</p>
 	                <p class="p2-1">[모집 방식] 선착순 자동 마감</p>

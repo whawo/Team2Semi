@@ -18,12 +18,12 @@
 
 
     <style>
+    body{
+    font-size:12px;
+    }
         div{
-          /*   border: 1px dotted gray; */
             display: block;
         }
-        
-        /* row 모음 */
         .row-0{
         margin-left: 120px;
         }
@@ -88,7 +88,7 @@
         .short-text-underlinebox{
             width: 600px;
         }
-        .calendar{ /* 챌린지 예상 종료일 */
+        .calendar{
             width: 600px;
         }
 
@@ -98,22 +98,17 @@
             width: 200px;
             height: 40px;
         }
-        /* 챌린지 예상 종료일 수정 삭제 x  */
-       
-        /* btn */
         .cancel-btn{
             width: 150px;
             margin-right: 20px;
-            margin-top: 75px; /* 취소,개설하기 버튼과 위에 7번 사이 간격*/
+            margin-top: 75px; 
         }
         .create-btn{
             width: 320px;
         }
         .confirm-check{
-            /* 셀렉창  */
             width: 600px;
         }
-        /* 인증 방법  */
         .blind{
             position:absolute;
             clip: rect(0 0 0 0);
@@ -147,6 +142,9 @@
             text-align: center;
             text-decoration: none;
         }
+        .sp-2{
+        font-size: 12px;
+        }
         i{
             font-size:normal;
         }
@@ -159,56 +157,52 @@
             vertical-align: top;
             margin: 2px 5px 0 0;
         }
-    /*    이미지 업로드 및 미리보기 및 삭제 */ 
     .thumbnail{
             display: none;
         }
         img{
             float: left;
         }
-
-           /* 업로드 버튼 */
       .input-file-upload{
-            padding: 6px 17px; 
+            padding: 10px 30px; 
             background-color: #e5e6f9;
-            border-radius: 0.25em;
+            border-radius: 0.5em;
             color: #6c7aef;
             cursor: pointer;
+            	font-size: 14px;
         }
         .input-file-blind{
             display: none;
         }
         .preview{
             border-radius: 0.5em;
+            margin-top: 10px;
         }
-              /* 이미지 업로드 버튼들 */
         	.img-lab{
         		margin-left:30px;
         	}
-		.img-btn{ /* 삭제 버튼 */
+		.img-btn{ 
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
-			border-radius: 0.25em;
+			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 16px; /* 삭제 버튼 크기 조절 */
-			text-align: center;
+			padding: 10px 30px; 
 			color: #AAAAAA;
+			font-size: 14px;
 		}
 		.img-btns{
-			padding-top: 172px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
+			padding-top: 172px; 
 		}
-
 
     .confirm-check:focus
     .confirm-check:hover{
         color: #6c7aef;
         font-weight: bold;
     }
-       .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
+    .row-7{
             padding-top: 20px;
         }
         
-      /* 에러 모음 */
  		.fail-message {
 		display: none;
 	}

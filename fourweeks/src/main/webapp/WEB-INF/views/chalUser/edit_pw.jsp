@@ -54,9 +54,9 @@ padding-left: 223px;
  margin-left: 3px;
  }
  .pw-box1{
- padding-left: 20px; 
+ padding-left:20px;
  width: 500px;
-  margin-left: 50px;
+  margin-left: 47px;
  }
   .pw-box2{
  padding-left: 20px; 
