@@ -39,11 +39,6 @@
 			font-size: 16px;
 			resize: none;
         }
-
-        /* 
-            라디오 버튼 관련 1번 
-            라디오와 라벨 간격 띄우려면 basic.css 가시오 
-        */ 
         .lab-1{
         margin: 17px 0 10px;
         padding-left:30px;
@@ -56,7 +51,6 @@
            font-size: 30px;
             color: #3f3f3f;
             font-weight: bold;
-            /* margin-bottom: 10px; */
             margin-top:60px;
             padding-bottom: 10px;
        }
@@ -65,14 +59,14 @@
             color: #3f3f3f;
             font-weight: bold;
             margin-bottom: 16px;
-            padding-top:80px; /* 큰 제목간의 사이 간격 */
+            padding-top:80px; 
         }
          .p1-1{
             font-size: 20px;
             color: #3f3f3f;
             font-weight: bold;
             margin-bottom: 10px;
-            padding-top:48px; /* 큰 제목간의 사이 간격 */
+            padding-top:48px; 
         }
         .p2{
             font-size: 12px;
@@ -87,7 +81,7 @@
         .p3{
          	font-size: 12px;
             color: #3f3f3f;
-            margin-bottom: 30px;   /* [참가인원]과 확인했어요 사이 간격 */
+            margin-bottom: 30px;  
         }
         .rad{
             vertical-align: -11px;
@@ -95,7 +89,7 @@
         .short-text-underlinebox{
             width: 600px;
         }
-        .calendar{ /* 챌린지 예상 종료일 */
+        .calendar{ 
             width: 600px;
         }
 
@@ -106,7 +100,6 @@
             height: 40px;
         }
         
-        /* 챌린지 예상 종료일 수정 삭제 x 굳이 없어도 될듯   */
         .blind{
             position:absolute;
             clip: rect(0 0 0 0);
@@ -130,7 +123,6 @@
         #short-text-box{
           border: 2px solid #DDDDDD;
         }
-        /* 캘린더  */
        .date-box{
        background-color: transparent;
         border: 1px solid transparent;
@@ -138,17 +130,27 @@
          font-size: 16px;
           color: #6c7aef;
           font-weight: 700;
+          margin-bottom: 40px;
         }
-        date-bx{
-         width:600px;
-        height:58px;
-        padding: 5px 10px;
+        .date-bx{
+        border: 2px solid #6c7aef;
+        padding: 20px 160px 20px;
+        background-color: #6c7aef;
+        color: #FFF;
+        font-size: 20px;
+        font-weight: 500;
+        }
+        .single-date-picker{
+        text-align: center;
+        }
+       .single-date-picker:hover,
+        .single-date-picker:focus{
+        color: #6c7aef;
         }
         .date-calendar,
         #result-1{
         	display: inline;
         }
-        /* 체크박스 */
         .chk-1{
             margin-bottom: -3px;
         }
@@ -160,28 +162,23 @@
         .chk-line{
             margin: 0 0 0 -12px;
         }
-        /* btn */
         .cancel-btn{
             width: 150px;
             margin-right: 20px;
-            margin-top: 100px; /* 취소,개설하기 버튼과 위에 7번 사이 간격*/
+            margin-top: 100px; 
         }
         .create-btn{
             width: 320px;
         }
-
-        /* 이미지 보기  */
         .thumbnail{
              display: none; 
         }
         img{
             float: left;
         }
-
-           /* 업로드 버튼 */
         .input-file-upload{
             padding: 5px 20px; 
-            padding-bottom: 12px;/* 버튼 아래로 위치 조정 */
+            padding-bottom: 12px;
             background-color: #e5e6f9;
             border: 1px solid #e5e6f9;
             border-radius: 0.25em;
@@ -194,28 +191,25 @@
         .preview{
             border-radius: 0.25em;
         }
-        /* 이미지 업로드 버튼들 */
         	.img-lab{
         		margin-left:30px;
         	}
-		.img-btn{ /* 삭제 버튼 */
+		.img-btn{ 
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
 			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 30px; /* 삭제 버튼 크기 조절  위, 옆 */ 
-			padding-bottom: 12px; /* 버튼 아래로 위치 조정 */
+			padding: 4px 30px; 
+			padding-bottom: 12px; 
 			text-align: center;
 			color: #AAAAAA;
 		}
 		.img-btns{
-			padding-top: 161px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
+			padding-top: 161px; 
 		}
-        .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
+        .row-7{ 
             padding-top: 80px;
         }
-  
-  		/* 에러 */
   			.fail-message {
 		display: none;
 	}
@@ -224,13 +218,10 @@
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-	
 	.input ~ .find-error {
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-  
-    
     input[name="startDate"]::placeholder{
     color: #3f3f3f;
     }
@@ -278,11 +269,6 @@ $(function(){
                };
                reader.readAsDataURL(this.files[0]);//읽어라
            }
-           // 사진 변경하기 
-           var inputImage = document.getElementById("input-image")
-           inputImage.addEventListener(function(e){
-               $("[name=attachment]")(e.target)
-           });
        });
        $("button[name=thumbnail-delete]").click(function(){
            $(".preview").attr("src", "/images/bg_default.png");
@@ -325,11 +311,37 @@ $(function(){
         }
     });
 });
-	window.onbeforeunload = function(e) {
-	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
-	    e.returnValue = dialogText;
-	    return dialogText;
-	};
+<<<<<<< HEAD
+
+
+$(function(){
+    $(".create-form").submit(function(){
+        var title = $("input[name=chalTitle").val();
+        if(title.length == 0 ){
+        	 $("input[name=chalTitle").focus();
+            return false;
+        }else if(title.length < 40){
+        	return true;
+        }
+
+        var confirm = $("textarea[name=howConfirm]").val();
+        if(confirm.length == 0){
+            return false;
+        }else if(confirm.length < 300){
+        	return true;
+        }
+
+        var date = $("input[name=startDate]").val();
+        if(date.length == 0){
+            return false;
+        }
+
+        var check = $("input[type=checkbox]").val();
+        if(check == checked){
+            return false;
+        }
+    });
+});
 </script>
 <body>
 	<div class="container-1200">
@@ -406,7 +418,7 @@ $(function(){
 	                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
 	                    <div class="row img-btns">
 	                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-	                        <a class="delete-file-upload img-btn" name="thumbnail-delete">삭제</a>
+	                         <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
 	                    </div>
 	                </div>
 	            </div>
@@ -414,7 +426,7 @@ $(function(){
 	            <div class="row row-7 row-padding">
 	                <p class="p1-1" >7. 챌린지를 소개해주세요.(선택)</p>
 	                <p class="p2">다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.</p>
-	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea><br>
+	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
 	                <span  class="helper-text-500 helper-css">0</span> /500
 	            </div>
 	            

@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-
 <style>
 	.fail-message {
 		display: none;
@@ -21,51 +20,41 @@
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-	
 	.input ~ .find-error {
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-	
-	/* row 모음 */
 	.row-2{
 	margin-left: 158px;
 	}
 	.row-3{
 	margin-left: 102px;
 	}
-	
-	/* p 모음 */
 	.p1{
 	font-size: 24px;
 	font-weight: 700;
 	color: #3f3f3f;	
 	}
-		.p2{
+	.p2{
 	padding-top: 10px;
 	font-size: 14px;
 	color: #3f3f3f;	
 	}
-		.p3{
-		padding-top: 10px;
+	.p3{
+	padding-top: 10px;
 	font-size: 14px;
 	color: #3f3f3f;	
 	}
-	/* input 박스 */
 	.input{
 	width: 500px;
 	margin-top: 20px;
 	}
-	/* btn 모음 */
 	.btn1{
 	width: 500px;
 	}
-	/* a 태그 모음 */
 	.find{
 	color: #3f3f3f;
 	}
-	
-	/* span */
 	.sp2{
 	margin-right: 130px;
 	}

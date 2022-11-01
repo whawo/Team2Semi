@@ -14,11 +14,6 @@
 
 
 <style>
-/* 
-	디자인 수정해야할 것: 
-	- 취소 확인 버튼 일렬로 ..  --> 이거 다시 수정 폰트 사이즈 맞추면됨 
-	- 푸터는 왜 같이 움직이는가... ;;
- */
 
     div{
 		 border: 1px dotted transparent;
@@ -102,8 +97,12 @@
 	input[name="userId"]:disabled{
 		background-color:transparent;
 	}
+	.copyright {
+	margin-left: 810px;
+	}
    
 </style>
+<body>
 <div class="row container-1200">
  <div class="row container-794 row-down">
 	<div class="row center mt-92">
@@ -132,5 +131,5 @@
 		</form>
 		</div>
 	</div>
-
+</body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

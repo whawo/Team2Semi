@@ -15,20 +15,16 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
 <style>
-
-/* row 모음 */
 .row-0{
 padding-bottom: 40px;
 }
 .row-1{
-margin-left: 91px;
+margin-left: 93px;
 }
 .row-2{
 margin-top: 10px;
-padding-left: 323px;
+padding-left: 320px;
 }
-
-/* p 모음  */
 .p1{
 font-size: 24px;
 font-weight: 700;
@@ -39,37 +35,30 @@ padding-top: 40px;
 font-size: 14px;
 color: #3f3f3f;
 }
-
-/* input 박스 */
 .find-box{
 border: 2px solid #AAAAAA;
 border-radius: 0.5em;
 width: 600px;
 height: 58px;
 }
-/* btn  */
 .btn1{
 width: 600px;
 margin-top: 10px;
 }
-/* find */
 .find{
 color: #3f3f3f;
 font-size:12px;
 }
-/* error */
 .fail-message {
 	display: none;
 	padding-top: 0;
 	padding-bottom: 7px;
 }
-
 .input.fail ~ .fail-message {
 	display: block;
 	font-size:12px;
     color: #eb6f7f;
 }
-
 .input ~ .find-error {
 	font-size:12px;
     color: #eb6f7f;
@@ -77,8 +66,6 @@ font-size:12px;
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-
-
 
 	$(function() {
 		$("input[name=userEmail]").on("blur", function() {
@@ -89,6 +76,7 @@ font-size:12px;
 			}
 		});
 	});
+	
 </script>
 <div class="container-794">
 	<div class="row center mt-92">
