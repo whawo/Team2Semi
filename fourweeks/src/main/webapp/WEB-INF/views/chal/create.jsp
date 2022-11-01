@@ -138,12 +138,25 @@
          font-size: 16px;
           color: #6c7aef;
           font-weight: 700;
+          margin-bottom: 40px;
         }
-        date-bx{
-         width:600px;
-        height:58px;
-        padding: 5px 10px;
+        .date-bx{
+        border: 2px solid #6c7aef;
+        padding: 20px 160px 20px;
+        background-color: #6c7aef;
+        color: #FFF;
+        font-size: 20px;
+        font-weight: 500;
         }
+        .single-date-picker{
+        text-align: center;
+        }
+       .single-date-picker:hover,
+        .single-date-picker:focus{
+        color: #6c7aef;
+        
+        }
+        
         .date-calendar,
         #result-1{
         	display: inline;
@@ -281,11 +294,6 @@ $(function(){
                };
                reader.readAsDataURL(this.files[0]);//읽어라
            }
-           // 사진 변경하기 
-           var inputImage = document.getElementById("input-image")
-           inputImage.addEventListener(function(e){
-               $("[name=attachment]")(e.target)
-           });
        });
        $("button[name=thumbnail-delete]").click(function(){
            $(".preview").attr("src", "/images/bg_default.png");
@@ -326,6 +334,36 @@ $(function(){
         }
         else {
             $(this).next().css("color", "#3f3f3f");
+        }
+    });
+});
+
+
+$(function(){
+    $(".create-form").submit(function(){
+        var title = $("input[name=chalTitle").val();
+        if(title.length == 0 ){
+        	 $("input[name=chalTitle").focus();
+            return false;
+        }else if(title.length < 40){
+        	return true;
+        }
+
+        var confirm = $("textarea[name=howConfirm]").val();
+        if(confirm.length == 0){
+            return false;
+        }else if(confirm.length < 300){
+        	return true;
+        }
+
+        var date = $("input[name=startDate]").val();
+        if(date.length == 0){
+            return false;
+        }
+
+        var check = $("input[type=checkbox]").val();
+        if(check == checked){
+            return false;
         }
     });
 });
@@ -405,7 +443,7 @@ $(function(){
 	                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
 	                    <div class="row img-btns">
 	                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-	                        <a class="delete-file-upload img-btn" name="thumbnail-delete">삭제</a>
+	                         <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
 	                    </div>
 	                </div>
 	            </div>
@@ -413,7 +451,7 @@ $(function(){
 	            <div class="row row-7 row-padding">
 	                <p class="p1-1" >7. 챌린지를 소개해주세요.(선택)</p>
 	                <p class="p2">다른 사람들이 챌린지 참가를 결정할 때 참고할 수 있어요.</p>
-	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea><br>
+	                <textarea class="helper-text3 short-hover" name="chalContent" placeholder="예)어려워서 하기 싫은 알고리즘 문제풀이 매일매일 같이 인증해요~!" maxlength="500"></textarea>
 	                <span  class="helper-text-500 helper-css">0</span> /500
 	            </div>
 	            
