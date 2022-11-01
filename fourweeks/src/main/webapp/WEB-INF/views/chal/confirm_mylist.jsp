@@ -374,8 +374,8 @@
 					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 					&nbsp; 
 					<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</div>
-           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
+				</div>
+           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
  				<!-- 인증글, 사진 목록 끝 -->			
 	    </a>
 		</c:forEach>

@@ -61,7 +61,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(adminInterceptor)
 								.addPathPatterns(
 										"/admin/**",
-										"/confirm/reply/blind"
+										"/confirm/reply/blind")
+								.excludePathPatterns(
+										"/admin/login"
 										);
 		// 본인이 쓴 댓글만 삭제&수정 가능
 		registry.addInterceptor(replyOwnerCheckInterceptor)
