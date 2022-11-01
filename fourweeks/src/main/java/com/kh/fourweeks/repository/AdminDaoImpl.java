@@ -170,5 +170,12 @@ public class AdminDaoImpl implements AdminDao {
 
 	}
 	
+	@Override
+	public List<NoticeVO> selectNoticeTopN(int begin, int end) {
+		String sql = "select * from(select TMP.*, rownum rn from (select * from notice order by notice_no desc)TMP) where rn between ? and ?";
+		Object[] param = {begin, end};
+		
+		return jdbcTemplate.query(sql, NoticeMapper, param);
+	}
 	
 }

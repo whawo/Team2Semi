@@ -124,9 +124,15 @@
 	<h3>전체(${listCnt})</h3>
 	
 	<!-- 관리자글 -->
+     
      <div class="notice-border">
-     	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-            <span class="label label-notice" >공지</span> 공지글 추가하기
+	       <span class="label label-notice" >공지</span>
+	       <c:forEach var="noticeList" items="${noticeList}">
+		       	<span>공지</span><br>
+		       	<span>${noticeList.noticeTitle}</span><br>
+		       	<span>${noticeList.noticeTime}</span>
+	       </c:forEach>
+     </div>     
      </div>      
 
  <!--인증글 목록-->

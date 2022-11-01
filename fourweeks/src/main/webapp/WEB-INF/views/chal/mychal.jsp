@@ -522,10 +522,15 @@ $(window).bind("pageshow", function(event) {
 		<br><br>
 		
 		<!-- 관리자글 -->
-     	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
+     	<!-- 관리자글 -->
      <div class="notice-border">
-     		<span class="label label-notice" >공지</span> 공지글 추가하기
-     </div>     
+	       <span class="label label-notice" >공지</span>
+	       <c:forEach var="noticeList" items="${noticeList}">
+		       	<span>공지</span><br>
+		       	<span>${noticeList.noticeTitle}</span><br>
+		       	<span>${noticeList.noticeTime}</span>
+	       </c:forEach>
+     </div>       
 		
 <!-- confirm_mylist와 동일 -->		  
       <!--인증글 목록-->
