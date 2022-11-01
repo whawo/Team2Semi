@@ -24,10 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
+import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ReplyDto;
 import com.kh.fourweeks.entity.UserConfirmLikeDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
+import com.kh.fourweeks.repository.AdminDao;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
@@ -61,6 +63,9 @@ public class ChalConfirmController {
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private AdminDao adminDao;
 	
 	@GetMapping("/write") //인증글 등록
 	public String confirm(Model model,
@@ -138,6 +143,9 @@ public class ChalConfirmController {
 		//댓글 목록 조회
 		model.addAttribute("replyList", replyDao.selectList(confirmNo));
 		
+		//첨부파일 조회
+		model.addAttribute("attachDto", attachmentDao.confirmImgInfo(confirmNo));
+		
 		return "chal/confirm_detail";
 	}
 	
@@ -195,6 +203,10 @@ public class ChalConfirmController {
 		vo.setCount(count);
 		model.addAttribute("confirmList", confirmDao.myConfirmList(vo));
 		model.addAttribute("listCnt", count);
+		
+		//관리자 공지글 조회
+		model.addAttribute("noticeList", adminDao.selectNoticeTopN(1, 3));
+		
 		return "chal/confirm_mylist";
 	}
 	
@@ -228,6 +240,8 @@ public class ChalConfirmController {
 		vo.setCount(count);
 		model.addAttribute("listCnt", count);
 		model.addAttribute("confirmList", confirmDao.allConfirmList(vo));
+		//관리자 공지글 조회
+		model.addAttribute("noticeList", adminDao.selectNoticeTopN(1, 3));
 		return "chal/confirm_list";
 	}
 	

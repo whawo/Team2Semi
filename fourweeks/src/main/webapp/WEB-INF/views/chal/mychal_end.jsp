@@ -412,12 +412,14 @@
                    -->
 
 			<h2>인증 현황</h2>
-	         
-	     <ul class="my-confirm">
-			<c:forEach var="days" begin="1" end="28" step="1">
-				<li>${days}</li>
-			</c:forEach>
-		</ul>
+
+			<div class="container-400">
+				<ul class="my-confirm">
+					<c:forEach var="days" begin="1" end="28" step="1">
+						<li><i class="fa-solid fa-circle-check fa-2x not-yet"></i></li>
+					</c:forEach>
+				</ul>
+			</div>
 
 		</div>
 		<!-- tab1 끝 -->
@@ -471,57 +473,61 @@
 					</c:forEach>
 
 
-		<!-- 인증글 목록(최신 max 5개) -->
-		<div class="row div-align">
-			<h2>인증글</h2>
-		</div>
-		
-		<div class="row div-align float-right">
-			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
-		</div>
-		<br><br>
-		
-		
-		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-		  <div class="notice-border">
-            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
-     	  </div>     
-     	  
-    <!-- confirm_mylist와 동일 -->
-		<!-- 인증글 목록 -->
-			<c:forEach var="list" items="${confirmList}">
-			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-			
-			<div class="confirm-border" >
-          	<!-- 챌린지 제목 -->
-          	<div class="confirm-title-css" style="position:relative">
-           		${list.confirmTitle} 
-          	</div>
-          	<br><br>
-          	
-          	 <!-- 인증 사진, 내용 -->   
-               
-               
-               <div class="div-align" >
-					${list.confirmContent}
-					<br><br><br><br><br>
-					${list.confirmDate} 
-					&nbsp; 
-					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-					&nbsp;
-					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-					&nbsp; 
-					<i class="fa-regular fa-comment"></i> ${list.replyCount}
-
-						</div>
-						<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-						<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
-					</div>
-						
-					</c:forEach>
-				</a>
+			<!-- 인증글 목록(최신 max 5개) -->
+			<div class="row div-align">
+				<h2>인증글</h2>
 			</div>
+			
+			<div class="row div-align float-right">
+				<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
+			</div>
+			<br><br>
+			
+			
+			<!-- 관리자글 -->
+		     <div class="notice-border">
+			       <span class="label label-notice" >공지</span>
+			       <c:forEach var="noticeList" items="${noticeList}">
+				       	<span>공지</span><br>
+				       	<span>${noticeList.noticeTitle}</span><br>
+				       	<span>${noticeList.noticeTime}</span>
+			       </c:forEach>
+		     </div>    
+	     	  
+	    	<!-- confirm_mylist와 동일 -->
+			<!-- 인증글 목록 -->
+				<c:forEach var="list" items="${confirmList}">
+				<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+				
+					<div class="confirm-border" >
+		          	<!-- 챌린지 제목 -->
+			          	<div class="confirm-title-css" style="position:relative">
+			           		${list.confirmTitle} 
+			          	</div>
+			          	<br><br>
+			          	
+		          	 <!-- 인증 사진, 내용 -->   
+		               
+		               
+		               <div class="div-align" >
+							${list.confirmContent}
+							<br><br><br><br><br>
+							${list.confirmDate} 
+							&nbsp; 
+							<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+							&nbsp;
+							<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+							&nbsp; 
+							<i class="fa-regular fa-comment"></i> ${list.replyCount}
+		
+						</div>
+							<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
+							<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
+				</div>
+			</a>
+			</c:forEach>
 		</div>
-	</div>
+		</div>
 </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

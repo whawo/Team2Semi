@@ -203,11 +203,32 @@
 				 $(".preview").attr("src", "/images/bg_default.png");
 			});
 			
-			//form submi 시 select disabled 속성 제거
+			//form submit 시 select disabled 속성 제거
 			$(".confirm-form").submit(function(){
 				$(this).removeAttr('disabled');
             });
-	});
+
+			//취소버튼 클릭 시, 이전 페이지로 이동
+			$(".btn-edit-cancel").click(function(){
+				history.back();
+	        });
+			
+			//사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
+			$(".btn-delete-file").click(function(){
+				$(".preview").attr("src", "/images/bg_default.png");
+				$.ajax({
+			        //인증샷 삭제 메소드 호출
+			        url : "http://localhost:8888/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
+			        method : "get",
+			        dataType : "json",
+			        async : false,
+			        success : function(resp) {
+			            console.log(resp);
+			        }
+			    });
+			});
+	
+
 	 // 이미지 
     $(function(){
             $("[name=attachment]").change(function(e){
@@ -260,6 +281,7 @@
              }
          });
      });
+
 </script>    
 
 	<form action="edit" method="post" enctype="multipart/form-data" class="confirm-form">
@@ -306,7 +328,6 @@
 		<span class="fail-message">필수 항목 입니다.</span>
 	  </div>
 		
-	
 		<div class="row row-5">
 		  <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
           <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
@@ -316,16 +337,17 @@
 				</div>
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
-				<button  class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
+				<button  class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete">삭제</button>
 			</div>
 	</div>
 
 		<div class="row-7 center">
-			<a type="button"  class="smallbtn cancel-btn" id="smallbutton3"  href = "/confirm/detail?confirmNo=${confirmVO.confirmNo}">취소</a>
+			<a type="button"  class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3"  href = "/confirm/detail?confirmNo=${confirmVO.confirmNo}">취소</a>
 			<button  class="smallbtn create-btn" type="submit"  id="smallbutton1">인증글 저장하기</button>
 		</div>
 </div>	
 	</form>
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

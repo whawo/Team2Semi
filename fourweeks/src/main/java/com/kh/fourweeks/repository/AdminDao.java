@@ -29,5 +29,7 @@ public interface AdminDao {
 	int searchCount(NoticeListSearchVO vo);
 	int listCount(NoticeListSearchVO vo);
 	
+	//공지글 최신 3개 조회
+	List<NoticeVO> selectNoticeTopN(int begin, int end); // 공지글 topN 조회
 	
 }
