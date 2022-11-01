@@ -301,7 +301,6 @@
 		</select>
 		<input type="hidden" name="chalNo">
 		</div>
-		
 		 <div class="row row-2">
 			✅ 인증 방법
 			<br><br>
@@ -337,7 +336,7 @@
 				</div>
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
-				<button  class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete">삭제</button>
+				<button  class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" >삭제</button>
 			</div>
 	</div>
 
