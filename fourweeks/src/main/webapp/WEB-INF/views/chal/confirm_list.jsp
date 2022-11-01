@@ -19,9 +19,6 @@
 	a{
 		color : black;
 	}
-	.confirm-img.no-img {
-		display: none;
-	}
 	div {
 		/*border : 1px solid gray; */
 		border : 1px solid transparent;
@@ -105,7 +102,6 @@
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
-		
 		//인증샷이 없으면 img 태그 가리기
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
@@ -128,9 +124,15 @@
 	<h3>전체(${listCnt})</h3>
 	
 	<!-- 관리자글 -->
+     
      <div class="notice-border">
-     	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-            <span class="label label-notice" >공지</span> 공지글 추가하기
+	       <span class="label label-notice" >공지</span>
+	       <c:forEach var="noticeList" items="${noticeList}">
+		       	<span>공지</span><br>
+		       	<span>${noticeList.noticeTitle}</span><br>
+		       	<span>${noticeList.noticeTime}</span>
+	       </c:forEach>
+     </div>     
      </div>      
 
  <!--인증글 목록-->
@@ -149,7 +151,7 @@
 				${list.confirmContent}
 				<br><br><br><br><br>
 				<!-- 프로필, 닉네임 -->
-				<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+				<img src = "/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
 				<span>${list.userNick}</span>	
 				&nbsp; 
 				${list.confirmDate} 
@@ -159,9 +161,10 @@
 				<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 				&nbsp; 
 				<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</div>
-		       <img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
-			</div>	
+			
+	       <div>
+				<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">       		
+	       </div>
 		  </a>
 		</c:forEach>
 <!-- 인증글, 사진 목록 끝 -->			

@@ -5,8 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="마이페이지" name="title" />
 </jsp:include>
-<!DOCTYPE html>
-<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -356,28 +355,41 @@ header.header-fixed {
     left: 0;
     right: 0;
 }
+</style>
 
-
-
-    </style>
-
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
-
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+	    
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+	  
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function() {
+			$(this).attr("src", "/images/bg_default.png");
+		});
+	});
+    
+  	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
     });
-});
-    
-    
-    </script>
+</script>
+
 
 </head>
 <body>
@@ -385,7 +397,8 @@ header.header-fixed {
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0">
+	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img">
+
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
 	</div>
@@ -487,74 +500,75 @@ header.header-fixed {
 <div id="tab2" class="row row-9 tab_content">
 
 <c:choose>
-		<c:when test="${chalEndDto.size() == 0}">
+      <c:when test="${chalEndDto.size() == 0}">
 <div class="row row-9 ">
-			<button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
-   			 	<button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
-			<p class="p5">완료한 <br> 챌린지가 없습니다.</p>
-</div>		
+         <button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
+                <button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
+         <p class="p5">완료한 <br> 챌린지가 없습니다.</p>
+</div>      
 <div class="row row-10">
-	<button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
+   <button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
 </div>
-		</c:when>
-		
+      </c:when>
+      
 <c:otherwise>
  <div class="row row-3"> 
-	<a class="btn1" href ="/confirm/write">챌린지 인증</a>
-	<a class="btn2" href ="/chal/create"> 챌린지 개설</a>
+   <a class="btn1" href ="/confirm/write">챌린지 인증</a>
+   <a class="btn2" href ="/chal/create"> 챌린지 개설</a>
 </div>
-	<c:forEach var="chalEndDto" items="${chalEndDto}">
+   <c:forEach var="chalEndDto" items="${chalEndDto}">
 <div class="row row-4">
-		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-		<img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
-		</a>
+
+      <a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
+      <img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
+      </a>
 </div>
 <div class="row row-5"> 
 <c:choose>
-		<c:when test="${chalEndDto.getEndDDay() > 0 && chalEndDto.getEndDDay() < 28}">
-		        <input class="label-close lab-e"  placeholder="	${chalDto.getEndDDay()}일 뒤 종료" disabled>
-		</c:when>
-		<c:when test="${chalEndDto.getEndDDay() == 0}">
-			 <input class="label-close"  placeholder="오늘 종료" disabled>
-		</c:when>
-		<c:when test="${chalEndDto.getEndDDay() < 0}">
-		<input class="label-close" placeholder="종료" disabled>
-		</c:when>
-		<c:when test="${chalEndDto.getDDay() == 1}">
-			<input class="label-close"  placeholder="내일부터 시작" disabled>
-		</c:when>
-				<c:when test="${chalEndDto.getDDay() == 0}">
-			<input class="label-close" placeholder="오늘 시작" disabled>
-		</c:when>
-		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
-		<c:otherwise>
-		<input class="label-close" placeholder="${chalEndDto.getDDay()}일 뒤 시작" disabled>
-		</c:otherwise>
+      <c:when test="${chalEndDto.getEndDDay() > 0 && chalEndDto.getEndDDay() < 28}">
+              <input class="label-close lab-e"  placeholder="   ${chalDto.getEndDDay()}일 뒤 종료" disabled>
+      </c:when>
+      <c:when test="${chalEndDto.getEndDDay() == 0}">
+          <input class="label-close"  placeholder="오늘 종료" disabled>
+      </c:when>
+      <c:when test="${chalEndDto.getEndDDay() < 0}">
+      <input class="label-close" placeholder="종료" disabled>
+      </c:when>
+      <c:when test="${chalEndDto.getDDay() == 1}">
+         <input class="label-close"  placeholder="내일부터 시작" disabled>
+      </c:when>
+            <c:when test="${chalEndDto.getDDay() == 0}">
+         <input class="label-close" placeholder="오늘 시작" disabled>
+      </c:when>
+      <%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+      <c:otherwise>
+      <input class="label-close" placeholder="${chalEndDto.getDDay()}일 뒤 시작" disabled>
+      </c:otherwise>
 </c:choose>
-	
-	<div class="row row-6">
-		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
-	</div>
-	<div class="row row-7">${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div>
-		<input class="label-category" placeholder="${chalEndDto.getChalTopic()}" disabled>
-		<input class="label-success" placeholder="현재 달성률 : <fmt:formatNumber type="number" pattern="0" value="${chalEndDto.cnt*100/28}"/>%" disabled>
-		
-<div class="row row-8">		
-				 <c:choose>
-					<c:when test="${chalEndDto.getDDay()>0}">
-					 <button class="btn3"  disabled>내 인증글</button>
-				 </c:when>
-				 <c:otherwise>
-				  	<button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalEndDto.chalNo}';">내 인증글</button>
-				 </c:otherwise>
-				 </c:choose>
+   
+   <div class="row row-6">
+      <a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
+   </div>
+   <div class="row row-7">${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div>
+      <input class="label-category" placeholder="${chalEndDto.getChalTopic()}" disabled>
+      <input class="label-success" placeholder="현재 달성률 : <fmt:formatNumber type="number" pattern="0" value="${chalEndDto.cnt*100/28}"/>%" disabled>
+      
+<div class="row row-8">      
+             <c:choose>
+               <c:when test="${chalEndDto.getDDay()>0}">
+                <button class="btn3"  disabled>내 인증글</button>
+             </c:when>
+             <c:otherwise>
+                 <button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalEndDto.chalNo}';">내 인증글</button>
+             </c:otherwise>
+             </c:choose>
 </div>
-				 </div>
+             </div>
 
 </c:forEach>
 </c:otherwise>
 </c:choose>
-    </div> 
+</div> 
     
 
 

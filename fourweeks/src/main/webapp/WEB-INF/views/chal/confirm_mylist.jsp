@@ -249,6 +249,14 @@
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
 		});
+		
+		//달성률 소수점 자르기
+		var achieveString = $(".achieve").text();
+		var achieve = Number(achieveString);
+		
+		var achieveCut = achieve.toFixed(0);
+		
+		$(".achieve").text(achieveCut);
 	});
 	
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
@@ -273,6 +281,7 @@
 	<div>  <!-- 1단 -->
 		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img">
 	</div>
+
 
 <div>  <!-- 2단 시작 -->
 	<div>  <!-- label -->
@@ -314,7 +323,7 @@
 	 
 	 <div class="label-align"> <!-- 달성률 -->
 	 <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
-	 	 <span class="label label-achieve" >현재 달성률 ??%</span>
+	 	 <span class="label label-achieve">현재 달성률 &nbsp;<span class="achieve">${listCnt*100/28}</span>%</span>
      </div>            
 </a>
 </div> <!-- 2단 끝 -->
@@ -335,14 +344,18 @@
        
      <!-- 관리자글 -->
      <div class="notice-border">
-     	<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-            <span class="label label-notice" >공지</span> 공지글 추가하기
+	       <span class="label label-notice" >공지</span>
+	       <c:forEach var="noticeList" items="${noticeList}">
+		       	<span>공지</span><br>
+		       	<span>${noticeList.noticeTitle}</span><br>
+		       	<span>${noticeList.noticeTime}</span>
+	       </c:forEach>
      </div>     
      
      <!--인증글 목록-->
+    <div class="confirm-border" >
 	<c:forEach var="list" items="${confirmList}">
 	<a href="detail?confirmNo=${list.confirmNo}">
-      <div class="confirm-border" >
           <!-- 챌린지 제목 -->
           <div class="confirm-title-css" style="position:relative">
            	${list.confirmTitle} 
@@ -363,10 +376,11 @@
 					<i class="fa-regular fa-comment"></i> ${list.replyCount}
 			</div>
            			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
-              </div>					
  				<!-- 인증글, 사진 목록 끝 -->			
 	    </a>
 		</c:forEach>
+        </div>					
+
 
 	<div  class="confirm-empty">
 		 <c:if test="${listCnt == 0}">

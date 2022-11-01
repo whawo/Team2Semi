@@ -20,7 +20,7 @@ margin-top: 100px;
 }
 .row-2{
 margin-top: 40px;
-margin-left: 90px;
+margin-left: 300px;
 }
 .row-3{
 margin-top: 50px;
@@ -93,7 +93,7 @@ display:none;
      	.preview{
       	margin-left: 63px;
       	position: absolute;
-      	bottom: 380;
+      	top: 200px;
      	}
         .thumbnail{
             display: none;
@@ -215,6 +215,21 @@ display:none;
          $("button[name=thumbnail-delete]").click(function(){
              $(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
          });
+         
+         //사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
+		$(".btn-delete-file").click(function(){
+			$(".preview").attr("src", "/images/avatar.png");
+			$.ajax({
+		        //인증샷 삭제 메소드 호출
+		        url : "http://localhost:8888/rest/chal/user_img/delete?${param.confirmNo}",
+		        method : "get",
+		        dataType : "json",
+		        async : false,
+		        success : function(resp) {
+		            console.log(resp);
+		        }
+		    });
+		});
      });
 	 
 	 function checkNick(){
@@ -258,6 +273,7 @@ display:none;
 <form action="edit" method="post" enctype="multipart/form-data">
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
+
 			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
 	</div>
 	
@@ -268,7 +284,7 @@ display:none;
 	</div>
 	<div class="row row-2">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
+                        <button class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" type="button">삭제</button>
 	</div>
 	<div class="row  ">			
 	 <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
