@@ -4,6 +4,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 인증" name="title"/>
 </jsp:include>
+<html >
+<head>
 <link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +18,6 @@
 
 
     <style>
-        /*
-        	10.25 
-        	디자인 수정: 
-        	- focus 선택자가 브라우저 보다 후에 선택되어서 적용 안됨 해결 하세요. ㅇ 
-        	- 필수값을 입력 안했을 때 error메세지 추가하시길.... 
-        	- 나머지 hover랑 글꼴 글색상만 체크하세욧   
-        	 
-            디자인 수정해야 할 것 
-            - 글자들은 그냥 허옇게 하는지.. -> 뭔소리냐면 선택시에는 글자 색 다 지정되는데 커서를 다른곳을 클릭하면 글씨 색상이 다시 바뀜 
-            - 챌린지 인증샷 삭제버튼 글자 가운데 정렬 
-            - 사진 삭제가 안됨 ㅋㅋㅎㅎ 
-        */
         div{
           /*   border: 1px dotted gray; */
             display: block;
@@ -61,7 +51,12 @@
             font-size: 14px;
             color: #AAAAAA;
         }
-        
+       select{
+       outline:none;
+       }
+       select:hover{
+       border: 2px solid #6c7aef;
+       }
         textarea{
             width: 600px;
             height: 200px;
@@ -200,14 +195,10 @@
 			color: #AAAAAA;
 		}
 		.img-btns{
-			padding-top: 161px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
+			padding-top: 172px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
 		}
 
-    /* 옵션 선택시 글꼴 색상과 굵기 지정 
-        여기서 드는 의문점.. 
-        글자들은 그냥 허옇게 하는지.. -> 뭔소리냐면 
-        선택시에는 글자 색 다 지정되는데 커서를 다른곳을 클릭하면 글씨 색상이 다시 바뀜 
-    */
+
     .confirm-check:focus
     .confirm-check:hover{
         color: #6c7aef;
@@ -235,7 +226,7 @@
 	
     
     </style>
-     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script defer src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">
      
 
@@ -256,15 +247,15 @@
  			$("select[name=chalTitle]").val(chalNo).attr("selected", "selected").trigger("change");
  		}
  	});
-    // 이미지 
-    $(function(){
+
+  // 이미지 
+     $(function(){
             $("[name=attachment]").change(function(e){
                 //input[type=file] 태그에는 files라는 속성이 존재
                 console.log(this.files);
                 if(this.files.length > 0){
                     //읽는 도구
                     var reader = new FileReader();
-
                     //읽을 때 해야할 작업
                     reader.onload = function(e){
                         //읽은 내용 정보가 e에 들어 있음
@@ -273,16 +264,12 @@
                     };
                     reader.readAsDataURL(this.files[0]);//읽어라
                 }
-                // 사진 변경하기 
-                var inputImage = document.getElementById("input-image")
-                inputImage.addEventListener(function(e){
-                    $("[name=attachment]")(e.target)
-                });
             });
             $("button[name=thumbnail-delete]").click(function(){
                 $(".preview").attr("src", "/images/bg_default.png");
             });
         });
+  
     
     // help-text
      $(function(){
@@ -316,49 +303,7 @@
 	    return dialogText;
 	}; */
      
- /* 
-		폼 이벤트 방지인데 ... 폼 이벤트를 방지하면 버튼이 안눌림.. ! 
-		$(function () {
-    		// form이 전송될 때 내부의 입력창을 모두 trigger 처리
-    	    $(".con-form").submit(function(){
-    	    	//$("input[name=chalTitle]").blur();
-    	    	$("input[name=confirmTitle]").blur();
-    	    	$("input[name=confirmContent]").blur();
-    	    	if($(".input.fail".length == 0)) {
-    	            return true;
-    	        }else{
-    	        	return false;
-    	        }
-    	    });
-    	    
-    	    $("select[name=chalTitle]").on("blur", function(){
-    	    	var chalTitle = $(this).val();
-    	    	$(this).removeClass("fail");
-    	    	if(!judge) {
-    	    		$(this).addClass("fail").focus();
-    	    	}
-    	    }); 
-    	    
-    	    $("input[name=confirmTitle]").on("blur", function(){
-    	    	var confirmTitle= $("input[name=confirmTitle]").val();
-    	    	$(this).removeClass("fail");
-    	    	if(!confirmTitle) {
-    	    		$(this).addClass("fail");
-    	    	}
-    	    });
-    	    
-    	    $("textarea[name=confirmContent]").on("blur", function(){
-    	    	var confirmContent= $("input[name=confirmTitle]").val();
-    	    	$(this).removeClass("fail");
-    	    	if(!confirmContent) {
-    	    		$(this).addClass("fail");
-    	    	}
-    	    });
-    	    
->>>>>>> refs/remotes/origin/main
 
-    	}); 
- */
      </script>
      </head>
      <body>
@@ -383,22 +328,13 @@
             </div>
             
           <div class="row row-2">
-              <!--   <span class="sp-1 calendar how-confirm"  >
-                    <i class="c-end">
-                        <span class="blind">캘린더</span>
-                    </i> -->
                     <input class=" sp-1 calendar how-confirm" disabled>
-                    <!-- 자동으로 맞춰서 늘어나세요 ~  -->
-                  <!--   ✅ 인증 방법
-                    선택된 챌린지의 인증방법을 자동으로 불러오는 영역이고 인증 방법은 최대 300자까지 설정할수 있으므로 여역만큼 칸이 늘어남  -->
-                    <!-- textarea rows="5" readonly></textarea> -->
-               <!--  </span> -->
             </div>
 
             <div class="row row-3">
                 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40">
+                <input name="confirmTitle" class="short-text-underlinebox short-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40">
                 <span  class="helper-text-40 helper-css sp-2">0</span> /40
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>
@@ -419,7 +355,7 @@
                     <img class="preview" src="/images/bg_default.png" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <button class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
+                        <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
                     </div>
                 </div>
             </div>
@@ -433,3 +369,6 @@
 	</c:choose>
 </div>
 </body>
+
+</html>
+

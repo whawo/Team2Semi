@@ -13,9 +13,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
 <style>
-
-
-/* row 모음 */
+a{
+color: #3f3f3f;
+}
 .row-1{
 margin-bottom: 10px;
 }
@@ -23,20 +23,14 @@ margin-bottom: 10px;
 padding-bottom: 50px;
 }
  .row-3{
-            position: relative;
-            z-index: 100;
-            padding: 40px 60px 20px;
-            border: 1px solid #e5e5e5;
-            border-radius: 0.5em;
+ padding-right: 40px;
         }
 .row-4{
 padding-top: 30px;
 }
 .row-5{
-margin-left: 88px;
+margin-left: 96px;
 }
-        
- /* p모음 */
  .p1{
  font-size: 24px;
  font-weight: 700;
@@ -46,14 +40,6 @@ margin-left: 88px;
   font-size: 14px;
  color: #3f3f3f;
  }
- 
- /* lab 모음 */
- .lab-1{
- font-size: 16px;
- font-weight: 700;
-margin-top: 120px;
- }
- /* btn */
  .btn1{
  border: 1px solid #6c7aef;
  border-radius: 0.5em;
@@ -62,17 +48,51 @@ margin-top: 120px;
  font-size: 16px;
  width: 500px;
  height: 58px;
+ cursor:pointer;
+ margin-top: 30px;
+ }
+ .lab1{
+font-size: 20px;
+color: #3f3f3f;
+ cursor:pointer;
+ }
+ .custom-rad{
+border: 2px solid #e5e5e5;
+padding: 40px 177px ;
+border-radius: 0.5em;
+margin-left: 33px;
+ }
+ label.custom-rad input[type="radio"]{
+ opacity: 0;
+ }
+  label.custom-rad input[type="radio"]  ~ .help-el{
+ border: 2px solid #a8b0e9;
+ }
+ label.custom-rad input[type="radio"] ~ .help-el {
+ background-color: #FFF;
+ border: 2px solid #a8b0e9;
+ border-radius: 50%;
+ display: inline-block; 
+ margin-right: 4px;
+ padding: 9px;
+ position: relative;
+ top:5px;
+ }
+ label.custom-rad input[type="radio"]:checked  ~ .help-el{
+ border: 2px solid #6c7aef;
+ }
+ label.custom-rad input[type="radio"]:checked ~ .help-el:after{
+ background-color: #6c7aef;
+ border-radius: 50%;
+ content: " ";
+ font-size: 30px;
+ height: 14px;
+ left:2px;
+ position: absolute;
+ top:2px;
+ width:14px;
  }
  
- /* 라디오  */
-   .list-id strong{ /* 아이디와 가입일 사이의 간격( 가입일 기준으로 움직임) */
-            display: inline-block;
-            min-width: 230px;
-            padding-right: 40px;
-        }
-        .list-id li{ /* 찾은 아이디 input박스와 로그인 button 사이의 간격의 간격*/
-            padding-bottom: 40px;
-        }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -87,32 +107,19 @@ margin-top: 120px;
 		<div class="row-2 center">
 			<p class="p2">고객님의 정보와 일치하는 아이디 목록입니다.</p>
 		</div>	
-		<div class="row row-3">
-		 <div class="checks small">
-                    <ul class="list-id">
-                        <li>
-                            <strong>
+		<div class="row row-3 center">
                              <c:forEach var="userDto" items="${idList}">
-                                <input type="radio" id="ex_rd2" name="ex_rds" >
-                                    <label for="ex_rd2">
-                                    </label>
-                                    <label class="label-find-id lab-1">${userDto.userId}</label>
-                                    </c:forEach>
-                                </strong>
-                            <input type="hidden"   name="userId"   value="${userDto.userId}">
-                        </li>
-                    </ul>
-                </div>
+                             <label class="custom-rad">
+                             		<input class="rab1" id="radio-id" name="userId" type="radio" value="${userDto.userId}">
+                             		<label class="help-el"></label>
+                             		<label for="radio-id" class="lab1">${userDto.userId}</label>
+                  			         <input type="hidden"   name="userId"   value="${userDto.userId}">
+                  			 </label>
+                             </c:forEach>
             </div>
             <div class="row-4 center">
 				<button class="btn1" type="submit">로그인</button>
             </div>
-                
-	<%-- 	    <c:forEach var="userDto" items="${idList}">
-		    	<input id="radio-id" name="userId" type="radio" value="${userDto.userId}"><label for="radio-id">${userDto.userId}</label><br>
-		    </c:forEach>
-			<br><br>
-			<button type="submit">로그인</button> --%>
 	</form>
 	
 	<section class="row-5 center">
