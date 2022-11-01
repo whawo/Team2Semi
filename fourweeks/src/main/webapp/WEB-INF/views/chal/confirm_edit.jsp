@@ -188,7 +188,6 @@
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script> 코드 변경
 <script>
 	$(function() {
 			//선택된 챌린지 번호를 input type=hidden에 추가
@@ -204,18 +203,11 @@
 				 $(".preview").attr("src", "/images/bg_default.png");
 			});
 			
-			//form submit 시 select disabled 속성 제거
+			//form submi 시 select disabled 속성 제거
 			$(".confirm-form").submit(function(){
 				$(this).removeAttr('disabled');
             });
-
-			//취소버튼 클릭 시, 이전 페이지로 이동
-			$(".btn-edit-cancel").click(function(){
-				history.back();
-	        });
-
 	});
-
 	 // 이미지 
     $(function(){
             $("[name=attachment]").change(function(e){
@@ -268,15 +260,7 @@
              }
          });
      });
-	// 저장하지 않고 벗어날 경우 alert창 띄움
-	window.onbeforeunload = function(e) {
-	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
-	    e.returnValue = dialogText;
-	    return dialogText;
-	};
-
 </script>    
-
 
 	<form action="edit" method="post" enctype="multipart/form-data" class="confirm-form">
 	<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
@@ -321,7 +305,7 @@
 		<span>내용을 입력해주세요.</span>
 		<span class="fail-message">필수 항목 입니다.</span>
 	  </div>
-
+		
 	
 		<div class="row row-5">
 		  <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
@@ -341,7 +325,6 @@
 			<a type="button"  class="smallbtn cancel-btn" id="smallbutton3"  href = "/confirm/detail?confirmNo=${confirmVO.confirmNo}">취소</a>
 			<button  class="smallbtn create-btn" type="submit"  id="smallbutton1">인증글 저장하기</button>
 		</div>
-
 	</form>
 </div>	
 
