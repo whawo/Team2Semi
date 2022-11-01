@@ -198,6 +198,7 @@
 	     justify-content: center;
 	     align-items: center;
      }
+     .chal-status,
      .chal-timer-font {
      	font-size: 20px;
      }
@@ -245,10 +246,7 @@
 		display: none;
 	}
 
-    .days.is-confirm {
-    	color:red;
-    	font-weight: bold;
-    }
+    
      .user-img {
 	border-radius: 50%;
 	width: 30px;
@@ -284,82 +282,136 @@
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 <script type="text/javascript">
-//tab
-    $(function () {
-	    $(".tab_content").hide();
-	    $(".tab_content:first").show();
-	
-	    $("ul.tabs li").click(function () {
-		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-		    $(this).addClass("active").css("color", "#6c7aef");
-		    $(".tab_content").hide();
-		    var activeTab = $(this).attr("rel");
-		    $("#" + activeTab).show();
-	    });
-		
-		//챌린지 썸네일이 없으면 기본 이미지로 대체
-		$(".chal-img").on("error", function(){
-			$(this).attr("src", "/images/bg_default.png");
-		});
-	  
-		//프로필 이미지가 없으면 기본 아이콘으로 대체
-		$(".user-img").on("error", function(){
-			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
-		});
-		
-		//인증샷이 없으면 img 태그 가리기
-		$(".confirm-img").on("error", function(){
-			$(this).addClass("no-img");
-		});
-		
-		$.ajax({
-			//내 인증글 작성 일차를 리스트로 가져오기
-			url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
-			method : "get",
-			dataType : "json",
-			//async : false,
-			success : function(resp) {
-				//가져온 리스트를 배열로 만들기
-				var values = [];
-                for(var i = 0; i < resp.length; i++) {
-                	values.push(resp[i].confirmDays);
-                }
-                //console.log(values);
-                
-                //1~28일 배열 생성(인덱스 조회용)
-                var arrDays = [];
-        		for (var i = 1; i <= 28; i++) {
-        			arrDays.push(i);
-        		}
-        		
-        		//1~28일 배열에서 내 인증글 작성 일차와 일치하는 인덱스를 searchResult 배열에 저장
-				var searchResult = [];
-				for(var i = 0; i < arrDays.length; i++){
-					var index = arrDays.indexOf(values[i]);
-					if (index != -1) {
-					    searchResult.push(index);
-					};
-				}
-				
-				//searchResult를 인덱스로 갖는 li에 스타일 적용
-				$(".my-confirm li").removeClass("is-confirm");
-				for(var i = 0; i < searchResult.length; i++) {
-					$(".my-confirm li").eq(searchResult[i]).addClass("is-confirm");
-				}
+$(function () {
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    $("ul.tabs li").click(function () {
+        $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+        $(this).addClass("active").css("color", "#6c7aef");
+        $(".tab_content").hide();
+        var activeTab = $(this).attr("rel");
+        $("#" + activeTab).show();
+    });
+    
+    //챌린지 썸네일이 없으면 기본 이미지로 대체
+    $(".chal-img").on("error", function(){
+        $(this).attr("src", "/images/bg_default.png");
+    });
+  
+    //프로필 이미지가 없으면 기본 아이콘으로 대체
+    $(".user-img").on("error", function(){
+        $(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+    });
+    
+    //인증샷이 없으면 img 태그 가리기
+    $(".confirm-img").on("error", function(){
+        $(this).addClass("no-img");
+    });
+    
+    $.ajax({
+        //내 인증글 작성 일차를 리스트로 가져오기
+        url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
+        method : "get",
+        dataType : "json",
+        async : false,
+        success : function(resp) {
+            //가져온 리스트를 배열로 만들기
+            var values = [];
+            for(var i = 0; i < resp.length; i++) {
+                values.push(resp[i].confirmDays);
+            }
+            //console.log(values);
+            
+            //1~28일 배열 생성(인덱스 조회용)
+            var arrDays = [];
+            for (var i = 1; i <= 28; i++) {
+                arrDays.push(i);
+            }
+            
+            //1~28일 배열에서 내 인증글 작성 일차와 일치하는 인덱스를 searchResult 배열에 저장
+            var searchResult = [];
+            for(var i = 0; i < arrDays.length; i++){
+                var index = arrDays.indexOf(values[i]);
+                if (index != -1) {
+                    searchResult.push(index);
+                };
+            }
+            
+          	//searchResult를 인덱스로 갖는 li에 스타일 적용
+			$(".my-confirm li").removeClass("is-confirm");
+			for(var i = 0; i < searchResult.length; i++) {
+				$(".my-confirm li").eq(searchResult[i]).addClass("is-confirm");
 			}
-		});
-	});
+        }
+    });
 
+    $.ajax({
+        //챌린지 시작일 가져오기
+        url : "http://localhost:8888/rest/chal/chal_detail?chalNo=${param.chalNo}",
+        method : "get",
+        dataType : "json",
+        //async : false,
+        success : function(resp) {
+            var sString = resp.startDate;
+            console.log(sString);
+            
 
-	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
-	$(window).bind("pageshow", function(event) {
-		if (event.originalEvent.persisted
-			|| (window.performance && window.performance.navigation.type == 2)) {
-				location.href = location.href;
-		}
-	});
+            $.ajax({
+                //챌린지 종료일 가져오기
+                url:"http://localhost:8888/rest/chal/chal_end_date?chalNo=${param.chalNo}",
+                method:"get",
+                dataType:"json",
+                //async: false,
+                success:function(resp){
+                    var eString = resp.endDate;
+                    console.log(eString);
+                   
+                    function diffDay() {
+                        var sdate = new Date(sString);
+                        var edate = new Date(eString);
+                        var todayTime = new Date();
+                        var diff;
+                        
+                        if(sdate > moment()) {
+                            console.log("시작 전");
+                            $(".chal-status").text("시작까지");
+                            diff = sdate - todayTime;
+                        } else {
+                            $(".chal-status").text("종료까지");
+                            diff = edate - todayTime;
+                        }
+                        
+                        var diffDay = Math.floor(diff / (1000*60*60*24));
+                        var diffHour = Math.floor((diff / (1000*60*60)) % 24);
+                        var diffMin = Math.floor((diff / (1000*60)) % 60);
+                        var diffSec = Math.floor(diff / 1000 % 60);
+                        
+                        //var remainTime = document.querySelector("#remain-time");
+                        //remainTime.innerText = `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
+                        $("#remain-time").text(diffDay+"일 " + diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
+                    }
 
+                    diffDay();
+                    setInterval(diffDay, 1000);
+
+                }
+            });
+        }
+    });
+});
+
+//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+$(window).bind("pageshow", function(event) {
+    if (event.originalEvent.persisted
+        || (window.performance && window.performance.navigation.type == 2)) {
+            location.href = location.href;
+    }
+});
 </script>
 
 <div class="container-794">
@@ -368,7 +420,9 @@
 	  <div class="detail-top" style="margin-top:120px"> 
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
           <div class="chal-timer">
-              <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
+			<span class="chal-status"></span>
+				&nbsp;
+			<span class="chal-timer-font" id="remain-time"></span>
           </div>
       </div>
  
@@ -417,11 +471,13 @@
                    
 	         <h2>인증 현황</h2>
 	         
-	     <ul class="my-confirm">
-			<c:forEach var="days" begin="1" end="28" step="1">
-				<li>${days}</li>
-			</c:forEach>
-		</ul>
+	     		<div class="container-400">
+					<ul class="my-confirm">
+						<c:forEach var="days" begin="1" end="28" step="1">
+							<li> ${days} <br> <i class="fa-solid fa-circle-check fa-2x not-yet"></i></li>
+						</c:forEach>
+					</ul>
+				</div>
 
          </div> 
          <!-- tab1 끝 -->
