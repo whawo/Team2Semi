@@ -24,7 +24,7 @@
 
 	<form action="login" method="post">
 		<div class="row">
-			<input type="text" name="adminId" class="input w-100" placeholder="아이디" required>
+			<input type="text" name="adminId" class="input w-100" placeholder="아이디" required autocomplete="off">
 			<span class="fail-message">아이디를 입력해주세요.</span> <br> <br>
 		</div>	
 		
