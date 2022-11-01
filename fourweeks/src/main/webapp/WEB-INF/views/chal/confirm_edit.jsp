@@ -38,6 +38,21 @@
 			$(".btn-edit-cancel").click(function(){
 				history.back();
 	        });
+			
+			//사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
+			$(".btn-delete-file").click(function(){
+				$(".preview").attr("src", "/images/bg_default.png");
+				$.ajax({
+			        //인증샷 삭제 메소드 호출
+			        url : "http://localhost:8888/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
+			        method : "get",
+			        dataType : "json",
+			        async : false,
+			        success : function(resp) {
+			            console.log(resp);
+			        }
+			    });
+			});
 	});
 	// 저장하지 않고 벗어날 경우 alert창 띄움
 	window.onbeforeunload = function(e) {
@@ -93,10 +108,10 @@
 		<br>
 		jpg, png 파일만 업로드할 수 있어요.
 		<br>
-		<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" width="200" height="200" class="confirm-img">
+		<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" width="200" height="200" class="confirm-img preview">
 		<input type="file" name="attachment" accept="jpg, png"><br><br>
 		<!--  선택한 파일 취소하기(js) -->
-		<button type="button">삭제</button>
+		<button type="button" class="btn-delete-file">삭제</button>
 		<br><br>
 		<button type="button" class="btn-edit-cancel">취소</button>
 		<button type="submit">인증글 저장하기</button>
