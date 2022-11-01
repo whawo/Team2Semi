@@ -7,6 +7,7 @@ import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
 import com.kh.fourweeks.vo.ConfirmDaysVO;
 import com.kh.fourweeks.vo.NoticeVO;
+import com.kh.fourweeks.vo.OnePerDayVO;
 
 public interface ChalConfirmDao {
 	//인증글 쓰기(+수정) 관련 메소드
@@ -15,6 +16,9 @@ public interface ChalConfirmDao {
 	void write(ChalConfirmDto confirmDto);
 	boolean update(ChalConfirmDto confirmDto);
 	boolean delete(int confirmNo);
+	
+	// 인증글 단일 조회 메소드
+	OnePerDayVO selectOneList(int chalNo, String userId);
 	
 	//첨부파일 관련 메소드
 	

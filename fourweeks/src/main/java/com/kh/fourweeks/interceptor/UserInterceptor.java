@@ -18,8 +18,6 @@ public class UserInterceptor implements HandlerInterceptor{
 			Object handler
 			)
 			throws Exception {
-		// 인터셉터 확인용 프린트
-		System.out.println("user interceptor");
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		if (loginId == null) {
