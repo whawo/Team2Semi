@@ -39,11 +39,6 @@
 			font-size: 16px;
 			resize: none;
         }
-
-        /* 
-            라디오 버튼 관련 1번 
-            라디오와 라벨 간격 띄우려면 basic.css 가시오 
-        */ 
         .lab-1{
         margin: 17px 0 10px;
         padding-left:30px;
@@ -56,7 +51,6 @@
            font-size: 30px;
             color: #3f3f3f;
             font-weight: bold;
-            /* margin-bottom: 10px; */
             margin-top:60px;
             padding-bottom: 10px;
        }
@@ -65,14 +59,14 @@
             color: #3f3f3f;
             font-weight: bold;
             margin-bottom: 16px;
-            padding-top:80px; /* 큰 제목간의 사이 간격 */
+            padding-top:80px; 
         }
          .p1-1{
             font-size: 20px;
             color: #3f3f3f;
             font-weight: bold;
             margin-bottom: 10px;
-            padding-top:48px; /* 큰 제목간의 사이 간격 */
+            padding-top:48px; 
         }
         .p2{
             font-size: 12px;
@@ -87,7 +81,7 @@
         .p3{
          	font-size: 12px;
             color: #3f3f3f;
-            margin-bottom: 30px;   /* [참가인원]과 확인했어요 사이 간격 */
+            margin-bottom: 30px;  
         }
         .rad{
             vertical-align: -11px;
@@ -95,7 +89,7 @@
         .short-text-underlinebox{
             width: 600px;
         }
-        .calendar{ /* 챌린지 예상 종료일 */
+        .calendar{ 
             width: 600px;
         }
 
@@ -106,7 +100,6 @@
             height: 40px;
         }
         
-        /* 챌린지 예상 종료일 수정 삭제 x 굳이 없어도 될듯   */
         .blind{
             position:absolute;
             clip: rect(0 0 0 0);
@@ -130,7 +123,6 @@
         #short-text-box{
           border: 2px solid #DDDDDD;
         }
-        /* 캘린더  */
        .date-box{
        background-color: transparent;
         border: 1px solid transparent;
@@ -154,14 +146,11 @@
        .single-date-picker:hover,
         .single-date-picker:focus{
         color: #6c7aef;
-        
         }
-        
         .date-calendar,
         #result-1{
         	display: inline;
         }
-        /* 체크박스 */
         .chk-1{
             margin-bottom: -3px;
         }
@@ -173,28 +162,23 @@
         .chk-line{
             margin: 0 0 0 -12px;
         }
-        /* btn */
         .cancel-btn{
             width: 150px;
             margin-right: 20px;
-            margin-top: 100px; /* 취소,개설하기 버튼과 위에 7번 사이 간격*/
+            margin-top: 100px; 
         }
         .create-btn{
             width: 320px;
         }
-
-        /* 이미지 보기  */
         .thumbnail{
              display: none; 
         }
         img{
             float: left;
         }
-
-           /* 업로드 버튼 */
         .input-file-upload{
             padding: 5px 20px; 
-            padding-bottom: 12px;/* 버튼 아래로 위치 조정 */
+            padding-bottom: 12px;
             background-color: #e5e6f9;
             border: 1px solid #e5e6f9;
             border-radius: 0.25em;
@@ -207,28 +191,25 @@
         .preview{
             border-radius: 0.25em;
         }
-        /* 이미지 업로드 버튼들 */
         	.img-lab{
         		margin-left:30px;
         	}
-		.img-btn{ /* 삭제 버튼 */
+		.img-btn{ 
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
 			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 30px; /* 삭제 버튼 크기 조절  위, 옆 */ 
-			padding-bottom: 12px; /* 버튼 아래로 위치 조정 */
+			padding: 4px 30px; 
+			padding-bottom: 12px; 
 			text-align: center;
 			color: #AAAAAA;
 		}
 		.img-btns{
-			padding-top: 161px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
+			padding-top: 161px; 
 		}
-        .row-7{ /* 이미지 미리보기와 7번이 겹치기 때문에 조절 */
+        .row-7{ 
             padding-top: 80px;
         }
-  
-  		/* 에러 */
   			.fail-message {
 		display: none;
 	}
@@ -237,13 +218,10 @@
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-	
 	.input ~ .find-error {
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-  
-    
     input[name="startDate"]::placeholder{
     color: #3f3f3f;
     }
@@ -262,7 +240,6 @@ $(function(){
 		 format:"YYYY-MM-DD",
         firstDay:0, // 시작일 일요일부터 
         singleDate:true, // 날짜 한개만 선택
-
         // (+옵션) 표시되는 달의 개수를 지정 
         numberOfMonths:1, //2개의 달씩 보여줘라 
    
@@ -276,7 +253,6 @@ $(function(){
      // 오늘 날짜 기본값으로 자동 선택
     picker1.setDate(moment()); 
 });
-
 // 이미지 
 $(function(){
        $("[name=attachment]").change(function(e){
@@ -285,7 +261,6 @@ $(function(){
            if(this.files.length > 0){
                //읽는 도구
                var reader = new FileReader();
-
                //읽을 때 해야할 작업
                reader.onload = function(e){
                    //읽은 내용 정보가 e에 들어 있음
@@ -299,7 +274,6 @@ $(function(){
            $(".preview").attr("src", "/images/bg_default.png");
        });
    });
-
 //help-text
 $(function(){
        $(".helper-text1").on("input", function(){
@@ -337,6 +311,7 @@ $(function(){
         }
     });
 });
+<<<<<<< HEAD
 
 
 $(function(){
@@ -367,7 +342,6 @@ $(function(){
         }
     });
 });
-
 </script>
 <body>
 	<div class="container-1200">
@@ -392,7 +366,8 @@ $(function(){
 	                <p class="p1">2. 챌린지 제목을 입력해주세요.</p>
 	                <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 	                <div class="row">
-	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off" maxlength="40">
+	                <input name="chalTitle"  class="short-text-underlinebox uderline-hover underline-focus helper-text1 alert-notice" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1" autocomplete="off" maxlength="40">
+
 	                <span  class="helper-text-40 helper-css">0</span> /40
 	                 <span class="fail-message">필수 항목 입니다. </span>
 	                </div>

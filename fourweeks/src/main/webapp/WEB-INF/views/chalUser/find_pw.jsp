@@ -102,7 +102,7 @@
 		<div class="row row-2 "> 
 			<input type="text" name="userId" class="input short-text-box short-hover" placeholder="아이디">
 			<span class="fail-message">이메일을 입력해주세요.</span>
-			<input type="text" name="userEmail" class="input short-text-box short-hover" placeholder="예) id@4weeks.com"><br>
+			<input type="text" name="userEmail" class="input short-text-box short-hover" placeholder="예) id@4weeks.com" autocomplete="off"><br>
 			<c:if test="${param.error != null}">
 			     <span class="find-error sp-2">입력된 회원정보가 존재하지 않습니다. 비회원일 경우 회원가입 후 이용해주세요.</span>
 		     </c:if>			

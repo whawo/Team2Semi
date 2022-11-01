@@ -265,17 +265,35 @@ padding-right: 23px;
     </style>
 
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script type="text/javascript">
+   <script type="text/javascript">
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
-
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+	    
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+	  
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function() {
+			$(this).attr("src", "/images/bg_default.png");
+		});
+	});
+    
+  	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
     });
 });
     
@@ -288,7 +306,7 @@ padding-right: 23px;
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/profile/download?userId=${myDto.userId}"  class="img0">
+	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0">
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
 	</div>
@@ -332,8 +350,8 @@ padding-right: 23px;
 <c:forEach var="chalDto" items="${chalDto}">
 
 <div class="row row-4">
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
+		<img class="img-1" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 
@@ -361,7 +379,7 @@ padding-right: 23px;
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
+		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${chalDto.getStartDate()}~${chalDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${chalDto.getChalTopic()}" disabled>
@@ -408,8 +426,8 @@ padding-right: 23px;
 </div>
 	<c:forEach var="chalEndDto" items="${chalEndDto}">
 <div class="row row-4">
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
+		<img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 <div class="row row-5"> 
@@ -436,7 +454,7 @@ padding-right: 23px;
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
+		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${chalEndDto.getChalTopic()}" disabled>
@@ -483,8 +501,8 @@ padding-right: 23px;
         <c:forEach var="createDto" items="${createDto}">
         
 <div class="row row-4">
-		<a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
+		<img class="img-1" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 <div class="row row-5"> 
@@ -511,7 +529,7 @@ padding-right: 23px;
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
+		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${createDto.getStartDate()}~${createDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${createDto.getChalTopic()}" disabled>
@@ -538,20 +556,7 @@ padding-right: 23px;
     </div> 
 </div>
 
-
-<div class="row">
-        <ul class="page">
-            <li><a href="#">&lt;</a></li>
-            <li><a href="#">1</a></li>
-            <li class="on"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">&gt;</a></li>
-        </ul>
-    </div>
-</div> 
+</div>
 
 
 </body>

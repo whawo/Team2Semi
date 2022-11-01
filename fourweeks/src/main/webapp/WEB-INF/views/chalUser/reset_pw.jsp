@@ -139,38 +139,12 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-$(function() {
-	$(".confirm-form").submit(function() {
-		//정규식에 맞는지 아닌지 확인 
-		var newPw = $("input[name=newPw]").val();
-		var regex = /^[a-zA-Z0-9!@#$]{8,16}$/;
-		var judge = regex.test(newPw);
-		if(!judge){
-			return false;
-		}
-		if(judge.length == 0){
-			return false;
-		}
-		var rePw = $("input[name=newPwCheck]").val();
-		if(newPw !== rePw){
-			return false;
-		}
-		else{
-			alert("비밀번호 변경에 성공했습니다.");
-			return true;
-		}
-	});
-});
-
-
-
-
-/* 	// 변경에 성공했을 경우 alert으로 알림
+	// 변경에 성공했을 경우 alert으로 알림
 	$(function() {
 		$(".confirm-form").submit(function (e) {
 			alert("비밀번호 변경에 성공했습니다.");
 	    });
-	});  */
+	}); 
 </script>
  <div class="container-794">
  <div class="row center mt-92">
@@ -204,6 +178,9 @@ $(function() {
 		     <button class="largebtn" type="submit" id="largebutton1">변경</button>
 		</div>
 	</form>
+    <c:if test="${param.error != null}">
+    	<span class="fail-message">비밀번호를 다시 입력해주세요.</span>
+   	</c:if>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

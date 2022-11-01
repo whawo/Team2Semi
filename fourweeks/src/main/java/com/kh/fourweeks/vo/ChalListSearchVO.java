@@ -91,7 +91,7 @@ public class ChalListSearchVO {
 	@ToString.Include
 	public String parameter() {
 		if(isSearch() == 5 || isSearch() == 4 || isSearch() == 3) {
-			return "size="+size+"&type="+type+"&keyword="+keyword;
+			return "size="+size+"&type="+type+"&keyword="+keyword+"&alignType="+alignType;
 		}
 		else {
 			return "size="+size;

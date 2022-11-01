@@ -8,18 +8,19 @@
 </jsp:include>
    
 <style>
-    a {
+	a {
 		color : black;
 	}
-	div, table, td{
+	div{
 	/*border: 0.2px dotted gray;*/ 
-	   border: 0.2px dotted  transparent;
+	   border: 0.2px dotted transparent;
        margin: 40px 0px;
       }
       .chal-title {
           font-size: 29px;
           font-weight: bold;
       }
+
        span {
           font-size: 26px;
           vertical-align: middle;
@@ -34,6 +35,7 @@
           border-left: none;
           border-right: none;
       }
+
       .largebtn {
           border: none;
           font-size: 20px;
@@ -53,6 +55,7 @@
            background-color: white;
            color: #6c7aef;
        }
+
         /* tab menu */
      ul.tabs {
 	     color: #AAAAAA;
@@ -63,6 +66,7 @@
 	     margin:0px 0px 30px 8px;
 	     padding: 0;
      }
+
      ul.tabs li {
 	     float: left;
 	     border-bottom : 2px solid#AAAAAA;
@@ -78,19 +82,21 @@
 	     color: #6c7aef;
 	     font-weight:bold;
      }
+
      .tab_container {
 	     position:relative;
 	     float:left;
 	     width:100%;
 	     margin-top:0;
      }
+
      .tab_content {
          border: none;
      }
       /* progressbar */
       progress {
-	     -webkit-appearance: none;    /* 기존 bar style 숨김*/
-	     appearance: none;
+     -webkit-appearance: none;    /* 기존 bar style 숨김*/
+     appearance: none;
      }
      progress::-webkit-progress-bar {
        width: 790px;   /*bar 전체 길이 */
@@ -112,69 +118,16 @@
      }
      /* 다단배치 */
      .first {
-       display: flex;
-       flex-direction: row;
+		display: flex;
+		flex-direction: row;
      }
      .first > div {
-       flex-grow: 1;
+		flex-grow: 1;
      }
      .flexbox {
        margin: 0px;
      }
-     /* 아코디언메뉴 */
-     li {
-	     list-style: none;
-	     margin-left: -0.5em;
-     }
-     .acc-btn {
-	     border-radius: 4px;
-	     cursor: pointer;
-	     height: 42px;
-	     width:100%;
-	     border-top:none;
-     }
-     .side-menu-scroll-on{
-     	margin-left: 80px;
-     }
-     .acc-btn strong{
-	     color: #6c7aef;
-	     font-size: 1.1em;
-	     margin:12px 10px;
-	     display: inline-block;
-     }
-     .selected{
-     	color:#6c7aef !important;
-     }
-     .acc-btn .stats-title-img {
-	     border-right: 1px solid #e5e5e5;
-	     float: left;
-	     padding:4px;
-	     width: 41px;
-     }
-     .acc-btn .stats-tab-img-area{
-	     float:right;
-	     width:133px;
-	     height:100%;
-	     text-align: right;
-	     padding:12px 0;
-	     margin : 0px;
-     }
-     .acc-btn .stats-tab-img-area > img{
-	     width:15px;
-	     height:15px;
-     }
-     .acc-content-inner {
-     	padding:15px 0px;
-     }
-     li.acc-content {
-	     height:auto;
-	     width:100%;
-	     margin:0 auto;
-	     overflow:hidden;
-     }
-     .openContent{
-     	height:0px !important;
-     }
+
      /* pagenavigation */
      ul.page{
 	     list-style: none;  /*li 점 없애기*/
@@ -239,7 +192,6 @@
      }
    	 .div-align {
    		display : inline-block;
-   		margin:0;
    	}
 	.notice-border {
         border-bottom: 1px solid #E7E7E7;
@@ -267,8 +219,7 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
-        height : 200px;
-        margin:0;
+         height : 230px;
     }
    	.confirm-img.no-img {
 		display: none;
@@ -278,20 +229,25 @@
 		width: 90px;
         height: 90px;
 	}
-	   .user-img {
-		border-radius: 50%;
-		width: 30px;
-		height: 30px;
-	}
-    /* chart*/
-   .chart-size {
-       width: 100px;
-       height: 100px;
-   }
+
     .confirm-img.no-img {
 		display: none;
 	}
-    .my-confirm {
+
+    .days.is-confirm {
+    	color:red;
+    	font-weight: bold;
+    }
+     .user-img {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	}
+	.nick-size {
+		font-size :  15px;
+	}
+
+	.my-confirm {
 		width: 380px;
 		margin: 9px auto;
 		text-align:center;
@@ -314,10 +270,9 @@
 	.is-confirm > i {
 		color: #6C7AEF;
 	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-  <!--chartjs-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
 //tab
     $(function () {
@@ -331,8 +286,8 @@
 		    var activeTab = $(this).attr("rel");
 		    $("#" + activeTab).show();
 	    });
-	    
-	  	//챌린지 썸네일이 없으면 기본 이미지로 대체
+		
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function(){
 			$(this).attr("src", "/images/bg_default.png");
 		});
@@ -346,8 +301,8 @@
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
 		});
-	    
-	    $.ajax({
+		
+		$.ajax({
 			//내 인증글 작성 일차를 리스트로 가져오기
 			url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
 			method : "get",
@@ -383,95 +338,20 @@
 				}
 			}
 		});
-});
-  //아코디언 메뉴
-    $(document).on('touchstart click', '.acc-btn', function(){
-    $(this).next('.acc-content').toggleClass('openContent');
-    clickPolice = false;
-    if(!clickPolice){
-        clickPolice = true;
-    $(this).find('strong').toggleClass('selected');//메뉴의 타이틀 글자색
-       var $statsArrow = $(this).find('.stats-tab-img');//화살표방향바꾸게하기(열고닫기 버튼)
-        var src = ($statsArrow .attr('src') == '/images/arrow-down.png')
-           ? '/images/arrow-up.png'
-           : '/images/arrow-down.png';
-        $statsArrow .attr('src', src);
-      }
- });
-	$(function(){
-		//챌린지 썸네일이 없으면 기본 이미지로 대체
-		$(".chal-img").on("error", function(){
-			$(this).attr("src", "/images/bg_default.png");
-		});
-		
-		//인증샷이 없으면 img 태그 가리기
-		$(".confirm-img").on("error", function(){
-			$(this).addClass("no-img");
-		});
 	});
-	
+
+
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
-	$(window).bind("pageshow", function (event) {
-        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-          	location.href = location.href;
-        }
-    });
-	
-	//chart 비동기 통신으로 수정할 예정
-    $(function(){
-            const ctx = document.querySelector('#myChart');
-            const myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['100%', '85%이상', '85%미만'],
-            datasets: [{
-                label: '# of Votes',
-                data: [4, 5, 1], 
-                backgroundColor: [
-                    'rgb(108,122,239)',
-                    'rgb(167,176,233)',
-                    'rgb(229,230,249)'
-                ],
-                cutout: "70%", //도넛안의 원 크기
-                borderWidth: 0 
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins:{
-                legend: {
-                    display: false //범례 제거
-                }
-            },
-            responsive: false, 
-            scales: {xAxes: [{
-                stacked:true, //축 제거
-            }] 
-        },
-        hover: {mode: null} //hover모드제거
-        }   
-      });
-    });
+	$(window).bind("pageshow", function(event) {
+		if (event.originalEvent.persisted
+			|| (window.performance && window.performance.navigation.type == 2)) {
+				location.href = location.href;
+		}
+	});
+
 </script>
 
 <div class="container-794">
-<<<<<<< HEAD
-<%-- 이미지 --%>
-	  <div class="detail-top" style="margin-top:20px"> 
-          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
-          <div class="chal-timer">
-              <span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작  / 타이머로 변경하기 </span>
-          </div>
-      </div>
- 
-        <%-- 챌린지 제목 --%>
-	<div> 
-=======
-
 
 	<%-- 이미지 --%>
 	<div class="detail-top" style="margin-top: 20px">
@@ -483,9 +363,9 @@
 		</div>
 	</div>
 
+
 	<%-- 챌린지 제목 --%>
 	<div>
->>>>>>> refs/remotes/origin/HEAD
 		<span class="chal-title">${chalDto.getChalTitle()}</span>
 	</div>
 
@@ -532,9 +412,12 @@
                    -->
 
 			<h2>인증 현황</h2>
+	         
+	     <ul class="my-confirm">
 			<c:forEach var="days" begin="1" end="28" step="1">
-					 ${days} <br>
+				<li>${days}</li>
 			</c:forEach>
+		</ul>
 
 		</div>
 		<!-- tab1 끝 -->
@@ -544,22 +427,16 @@
 
 			<table class="table table-border">
 
-				<h2>총 참가자 정보</h2>
-
-				<!--progress bar-->
-				<div>
-					<div class="bar-percent">
-						평균 달성률 :
-						<fmt:formatNumber type="number" pattern="0"
-							value="${listCnt*100/28/chalDto.getChalPerson()}" />
-						%
-					</div>
-					<progress max="100"
-						value="<fmt:formatNumber type="number" 
-				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
-				</div>
-
-
+			<h2>총 참가자 정보</h2>
+		
+			<!--progress bar--> 
+	                 <div> 
+	                    <div class="bar-percent"> 평균 달성률 : <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
+	                    <progress max="100" value="<fmt:formatNumber type="number" pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
+	                </div>
+	                
+	                
 				<h2>총 ${chalDto.getChalPerson()}명 참가</h2>
 
 				<table width="150">
@@ -592,43 +469,50 @@
 						style="vertical-align: middle;">
 						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
 					</c:forEach>
-			<div>
-				<!-- 인증글 목록(최신 max 5개) -->
-				<div class="row div-align">
-					<h2>인증글</h2>
-				</div>
 
-				<div class="row div-align float-right">
-					<a href="/confirm/all?chalNo=${chalDto.chalNo}"
-						style="color: #6c7aef">전체보기(${listCnt}) <i
-						class="fa-solid fa-circle-chevron-right"></i></a>
-				</div>
+
+		<!-- 인증글 목록(최신 max 5개) -->
+		<div class="row div-align">
+			<h2>인증글</h2>
+		</div>
 		
+		<div class="row div-align float-right">
+			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
+		</div>
+		<br><br>
+		
+		
+		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
+		  <div class="notice-border">
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
+     	  </div>     
+     	  
+    <!-- confirm_mylist와 동일 -->
+		<!-- 인증글 목록 -->
+			<c:forEach var="list" items="${confirmList}">
+			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+			
+			<div class="confirm-border" >
+          	<!-- 챌린지 제목 -->
+          	<div class="confirm-title-css" style="position:relative">
+           		${list.confirmTitle} 
+          	</div>
+          	<br><br>
+          	
+          	 <!-- 인증 사진, 내용 -->   
+               
+               
+               <div class="div-align" >
+					${list.confirmContent}
+					<br><br><br><br><br>
+					${list.confirmDate} 
+					&nbsp; 
+					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+					&nbsp;
+					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+					&nbsp; 
+					<i class="fa-regular fa-comment"></i> ${list.replyCount}
 
-				<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-				<div class="notice-border">
-					<input class="label-notice" placeholder="공지" disabled>&nbsp;
-					공지글 추가하기 공지글 추가하기
-				</div>
-
-				<!-- confirm_mylist와 동일 -->
-				<!-- 인증글 목록 -->
-				<a href="/confirm/detail?confirmNo=${list.confirmNo}"> 
-				<c:forEach var="list" items="${confirmList}">
-
-					<div class="confirm-border">
-						<!-- 챌린지 제목 -->
-						<div class="confirm-title-css" style="position: relative">
-							${list.confirmTitle}
-						</div>
-							
-						<!-- 인증 사진, 내용 -->
-						<div class="div-align">
-							${list.confirmContent} <br>
-							<br>
-							<br>
-							<br>
-							<br> ${list.confirmDate} &nbsp; <i class="fa-regular fa-eye"></i> ${list.confirmRead} &nbsp; <i class="fa-regular fa-heart"></i> ${list.confirmLike} &nbsp; <i class="fa-regular fa-comment"></i> ${list.replyCount}
 						</div>
 						<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
 						<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">

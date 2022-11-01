@@ -283,7 +283,7 @@ display:none;
 </div>
 
 <div class="row  row-leave">
-			<a href="/leave" class="btn-leave " >탈퇴하기</a>
+			<a href="/user/leave" class="btn-leave " >탈퇴하기</a>
 </div>
 			
 <div class="row center  row-btns">

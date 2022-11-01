@@ -22,7 +22,7 @@
                    labels.push(resp[i].joinDate);
                    values.push(resp[i].userCount);
                }
-               const ctx = document.querySelector("#month-per-joined");
+               const ctx = document.querySelector("#monthly-joiner");
                const myChart = new Chart(ctx, {
                    type: "bar",
                    data: {
@@ -75,7 +75,60 @@
                    labels.push(resp[i].leaveDate);
                    values.push(resp[i].leaveCount);
                }
-               const ctx = document.querySelector("#month-per-leave");
+               const ctx = document.querySelector("#monthly-leaver");
+               const myChart = new Chart(ctx, {
+                   type: "bar",
+                   data: {
+                       labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+                       datasets: [{
+                               data: values,
+                               backgroundColor: [
+                                   "rgba(255, 99, 132, 0.2)",
+                                   "rgba(54, 162, 235, 0.2)",
+                                   "rgba(255, 206, 86, 0.2)",
+                                   "rgba(75, 192, 192, 0.2)",
+                                   "rgba(153, 102, 255, 0.2)",
+                                   "rgba(255, 159, 64, 0.2)",
+                               ],
+                               borderColor: [
+                                   "rgba(255, 99, 132, 1)",
+                                   "rgba(54, 162, 235, 1)",
+                                   "rgba(255, 206, 86, 1)",
+                                   "rgba(75, 192, 192, 1)",
+                                   "rgba(153, 102, 255, 1)",
+                                   "rgba(255, 159, 64, 1)",
+                               ],
+                               borderWidth: 1,
+                           },],
+                   },
+                   options: {
+                      scales: {
+                          y: {
+                        	  beginAtZero: true,
+                          },
+                      },
+                      plugins: {
+                    	 legend: {
+                    		 display: false
+                    	 },
+                      },
+                   },
+               });
+           },
+       });
+       // 2022년 월별 회원 로그인 통계
+       $.ajax({
+           url: "http://localhost:8888/admin/rest/report/chal/users_visit",
+           method: "get",
+           dataType: "json",
+           success: function (resp) {
+               var labels = [];
+               var values = [];
+               for (var i = 0; i < resp.length; i++) {
+                   labels.push(resp[i].loginDate);
+                   values.push(resp[i].visitCount);
+               }
+               const ctx = document.querySelector("#monthly-visitor");
                const myChart = new Chart(ctx, {
                    type: "bar",
                    data: {
@@ -127,7 +180,7 @@
 					<h3>2022년 월별 가입자수</h3>
 				</div>
 				<div class="row">
-					<canvas id="month-per-joined"></canvas>
+					<canvas id="monthly-joiner"></canvas>
 				</div>
 			</div>
 			
@@ -136,7 +189,7 @@
 					<h3>2022년 월별 탈퇴자수</h3>
 				</div>
 				<div class="row center">
-					<canvas id="month-per-leave"></canvas>
+					<canvas id="monthly-leaver"></canvas>
 				</div>
 			</div>
 		</div>
@@ -148,16 +201,16 @@
 					<h3>최근 한달 방문자수</h3>
 				</div>
 				<div class="row center">
-					<canvas id="month-per-visit"></canvas>
+					<canvas id="#"></canvas>
 				</div>
 			</div>
 			
 			<div class="row float-left w-50">
 				<div class="row center">
-					<h3>2022년 월별 방문자수</h3>
+					<h3>2022년 월별 방문자수(가입회원)</h3>
 				</div>
 				<div class="row center">
-					<canvas id="month-per-visit"></canvas>
+					<canvas id="monthly-visitor"></canvas>
 				</div>
 			</div>
 			
