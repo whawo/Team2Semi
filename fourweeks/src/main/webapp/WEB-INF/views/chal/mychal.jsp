@@ -451,8 +451,9 @@
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
 
                         ${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
-				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%
-							<br>
+				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%<br><br>
+				 			<br>
+
                </c:forEach>               
 				
 
@@ -491,7 +492,7 @@
 					<br><br><br><br><br><br>
 						
 						<!-- 프로필, 닉네임 -->
-						<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+						<img src = "/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
 						<span class="nick-size">${list.userNick}</span>	
 						&nbsp; 
 						${list.confirmDate} 

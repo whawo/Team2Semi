@@ -16,6 +16,7 @@ import com.kh.fourweeks.vo.PartByTopicVO;
 import com.kh.fourweeks.vo.StartEndTodayVO;
 import com.kh.fourweeks.vo.UserJoinedVO;
 import com.kh.fourweeks.vo.UserLeaveVO;
+import com.kh.fourweeks.vo.VisitVO;
 
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
@@ -66,5 +67,9 @@ public class AdminReportRestController {
 	@GetMapping("/chal/leave_user")
 	public List<UserLeaveVO> leaveCnt() {
 		return chalReportDao.leaveCnt();
+	}
+	@GetMapping("/chal/users_visit")
+	public List<VisitVO> visitCnt() {
+		return chalReportDao.visitCnt();
 	}
 }

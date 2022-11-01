@@ -1,9 +1,12 @@
 package com.kh.fourweeks.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,7 @@ import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalConfirmVO;
+import com.kh.fourweeks.vo.OnePerDayVO;
 
 @Controller
 @RequestMapping("/confirm")
@@ -67,18 +71,34 @@ public class ChalConfirmController {
 	}
 	
 	@PostMapping("/write")
-	public String confirm(@ModelAttribute ChalConfirmDto confirmDto,
+	public String confirm(
+			@ModelAttribute ChalConfirmDto confirmDto,
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
-			HttpSession session) throws IllegalStateException, IOException {
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		confirmDto.setUserId(userId);
+			HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
 		
-		//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
-		int confirmNo = chalService.confirm(confirmDto, attachment);
+		// 오늘 날짜에 등록된 인증글이 있는지 확인
+		OnePerDayVO judge = confirmDao.selectOneList(confirmDto.getChalNo(), confirmDto.getUserId());
 		
-		attr.addAttribute("confirmNo", confirmNo);
-		return "redirect:detail";
+		// 없다면 인증글 가능
+		if(judge == null) {
+			String userId = (String)session.getAttribute(SessionConstant.ID);
+			confirmDto.setUserId(userId);
+			
+			//chalService에서 번호 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
+			int confirmNo = chalService.confirm(confirmDto, attachment);
+			
+			attr.addAttribute("confirmNo", confirmNo);
+			return "redirect:detail";
+		// 있다면 페이지 처리
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('오늘은 인증글을 작성하셨습니다 :)');history.go(-2);</script>");
+			out.flush();
+			return "home";
+		} 
 	}
 	
 	@GetMapping("/detail") //인증글 상세

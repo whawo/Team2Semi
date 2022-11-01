@@ -125,16 +125,26 @@
 		});
 	});
 
-	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	// 뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
 	$(window).bind("pageshow", function (event) {
         if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
           	location.href = location.href;
         }
     });
+	
+	// 참가하기 눌렀을때 confirm 받기
+	$(function() {
+		$(".confirm-form").submit(function (e) {
+	        var choice = window.confirm("참가하시겠습니까?");
+	        if (!choice) {
+	            return false;
+	        }
+	    });
+	});
 </script>
 
-<form action ="insert" method="post" >
-	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}" disabled>
+<form action ="insert" method="post" class="confirm-form">
+	<input type="hidden" name="chalNo" value="${chalDto.getChalNo()}">
 	
 <div class="container-794">
 
@@ -184,8 +194,29 @@
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 		<span class="label label-status" >${chalVO.getDDay()}일뒤 시작</span>
 	</div>
-
 	<!-- 여기 조건 추가해야함 placeholder에 어떻게 조건을 넣지 -->
+	<!-- 이거!!! 넣으면 돼요 -->
+	 <c:choose>
+		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
+			${chalVO.getEndDday()}일 뒤 종료
+		</c:when>
+		<c:when test="${chalVO.getEndDday() == 0}">
+			오늘 종료
+		</c:when>
+		<c:when test="${chalVO.getEndDday() < 0}">
+			종료
+		</c:when>
+		<c:when test="${chalVO.getDDay() == 1}">
+			내일부터 시작
+		</c:when>
+				<c:when test="${chalVO.getDDay() == 0}">
+			오늘 시작
+		</c:when>
+		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+		<c:otherwise>
+			${chalVO.getDDay()}일 뒤 시작
+		</c:otherwise>
+	    </c:choose>
 
 	 <%-- 종료일 --%>
 	<div>
@@ -230,7 +261,7 @@
      </div>
      
 	<div>
-		<img src = "/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
+		<img src = "/user/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
 	</div>
 	
 	 <%-- 구분선 --%>

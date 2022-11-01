@@ -1,13 +1,12 @@
 package com.kh.fourweeks.service;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ChalDto;
-import com.kh.fourweeks.entity.NoticeDto;
+import com.kh.fourweeks.vo.NoticeVO;
 
 public interface ChalService {
 	int create(ChalDto chalDto, MultipartFile attachment) 
@@ -22,12 +21,12 @@ public interface ChalService {
 			throws IllegalStateException, IOException; //인증글 수정+인증샷;
 	
 	
-	int notice(NoticeDto noticeDto, MultipartFile attachment) 
+	int notice(NoticeVO noticeDto, MultipartFile attachment) 
 			throws IllegalStateException, IOException;
 
-	int noticeCreate(NoticeDto noticeDto, MultipartFile attachment) throws IllegalStateException, IOException;
+	int noticeCreate(NoticeVO noticeDto, MultipartFile attachment) throws IllegalStateException, IOException;
 
 	boolean removeNotice(int noticeNo);
 
-	int noticeEdit(NoticeDto noticeDto, MultipartFile attachment) throws IllegalStateException, IOException;
+	int noticeEdit(NoticeVO noticeDto, MultipartFile attachment) throws IllegalStateException, IOException;
 }

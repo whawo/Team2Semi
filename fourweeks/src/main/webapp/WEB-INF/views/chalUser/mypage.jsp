@@ -260,13 +260,17 @@ width: 100px;
 height:50px;
 }
 .btn4{
+color: #FFF;
+}
+.btn4{
 border: 1px solid #6c7aef;
-border-radius: 0.6em;
+border-radius: 0.5em;
 background-color: #6c7aef;
-font-color: #FFFFFF;
-font-size: 15px;
+font-color: #FFF;
+font-size: 16px;
 font-weight: 700;
-padding: 13px 22px;
+width: 100px;
+height:50px;
 }
 .btn4:visited{
 color:#FFFFFF;
@@ -290,32 +294,58 @@ height: 100px;
 .img-1{
 border-radius: 0.5em;
 }
-/* input 모음  */
+/* input 모음  */ 
 .label-wait,
-.label-success,
-.label-close,
 .label-progress,
 .label-category{
+width: 60px;
+border-radius:0.5em;
+}
+.label-success{
+width: 120px;
+border-radius:0.5em;
+}
+.label-close{
 width: auto;
 border-radius:0.5em;
+}
+.lab-e{
+padding-right: 23px;
 }
     </style>
 
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script type="text/javascript">
+   <script type="text/javascript">
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
-
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+	    
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+	  
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function() {
+			$(this).attr("src", "/images/bg_default.png");
+		});
+	});
+    
+  	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
     });
-});
-    </script>
+</script>
 
 </head>
 <body>
@@ -323,7 +353,7 @@ border-radius:0.5em;
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/profile/download?userId=${myDto.userId}"  class="img0">
+	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0">
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
 	</div>
@@ -350,12 +380,12 @@ border-radius:0.5em;
 <c:choose>
 			<c:when test="${chalDto.size() == 0}">
 			<div class="row row-9">
-				<button class="btn1" href ="/confirm/write" disabled>챌린지 인증</button>
-   			 	<button class="btn2"><a href ="/chal/create" >챌린지 개설</a></button>
+				<button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
+   			 	<button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
 				<p class="p5">참가한 <br> 챌린지가 없습니다.</p>
 				</div>
 				<div class="row row-10">
-				<a class="btn5" href ="/chal/list" disabled>챌린지 둘러보기</a>
+				<button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
 			</div>
 			</c:when>
 
@@ -367,15 +397,15 @@ border-radius:0.5em;
 <c:forEach var="chalDto" items="${chalDto}">
 
 <div class="row row-4">
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
+		<img class="img-1" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 
  <div class="row row-5"> 
 <c:choose>
 		<c:when test="${chalDto.getEndDDay() > 0 && chalDto.getEndDDay() < 28}">
-		        <input class="label-close " placeholder="	${chalDto.getEndDDay()}일 뒤 종료" disabled>
+		        <input class="label-close  lab-e" placeholder="	${chalDto.getEndDDay()}일 뒤 종료" disabled>
 		</c:when>
 		<c:when test="${chalDto.getEndDDay() == 0}">
 			 <input class="label-close"  placeholder="	오늘 종료" disabled>
@@ -396,7 +426,7 @@ border-radius:0.5em;
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}" maxlength="40"> ${chalDto.chalTitle}</a>
+		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${chalDto.getStartDate()}~${chalDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${chalDto.getChalTopic()}" disabled>
@@ -408,7 +438,7 @@ border-radius:0.5em;
 					 <button class="btn3"  disabled>내 인증글</button>
 				 </c:when>
 				 <c:otherwise>
-				 	<a class="btn4" href="/confirm/mylist?chalNo=${chalDto.chalNo}">내 인증글</a>
+				 	<button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalDto.chalNo}';">내 인증글</button>
 				 </c:otherwise>
 				 </c:choose>
 </div>
@@ -419,17 +449,6 @@ border-radius:0.5em;
 </c:otherwise>
 </c:choose>
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
           <!-- #tab2 --> 
 
@@ -438,12 +457,12 @@ border-radius:0.5em;
 <c:choose>
 		<c:when test="${chalEndDto.size() == 0}">
 <div class="row row-9 ">
-			<button class="btn1" href ="/confirm/write" disabled>챌린지 인증</button>
-			<button class="btn2"><a href ="/chal/create" >챌린지 개설</a></button>
+			<button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
+   			 	<button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
 			<p class="p5">완료한 <br> 챌린지가 없습니다.</p>
 </div>		
 <div class="row row-10">
-	<a class="btn5" href ="/chal/list" disabled>챌린지 둘러보기</a>
+	<button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
 </div>
 		</c:when>
 		
@@ -454,17 +473,17 @@ border-radius:0.5em;
 </div>
 	<c:forEach var="chalEndDto" items="${chalEndDto}">
 <div class="row row-4">
-		<a href="chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
+		<img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 <div class="row row-5"> 
 <c:choose>
 		<c:when test="${chalEndDto.getEndDDay() > 0 && chalEndDto.getEndDDay() < 28}">
-		        <input class="label-close " placeholder="	${chalDto.getEndDDay()}일 뒤 종료" disabled>
+		        <input class="label-close lab-e"  placeholder="	${chalDto.getEndDDay()}일 뒤 종료" disabled>
 		</c:when>
 		<c:when test="${chalEndDto.getEndDDay() == 0}">
-			 <input class="label-close"  placeholder="	오늘 종료" disabled>
+			 <input class="label-close"  placeholder="오늘 종료" disabled>
 		</c:when>
 		<c:when test="${chalEndDto.getEndDDay() < 0}">
 		<input class="label-close" placeholder="종료" disabled>
@@ -482,7 +501,7 @@ border-radius:0.5em;
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
+		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${chalEndDto.getChalTopic()}" disabled>
@@ -494,7 +513,7 @@ border-radius:0.5em;
 					 <button class="btn3"  disabled>내 인증글</button>
 				 </c:when>
 				 <c:otherwise>
-				 	<a class="btn4" href="/confirm/mylist?chalNo=${chalEndDto.chalNo}">내 인증글</a>
+				  	<button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalEndDto.chalNo}';">내 인증글</button>
 				 </c:otherwise>
 				 </c:choose>
 </div>
@@ -512,12 +531,12 @@ border-radius:0.5em;
 	<c:choose>
 		<c:when test="${createDto.size() == 0}">
 		<div class="row row-9">
-			<button class="btn1" href ="/confirm/write" disabled>챌린지 인증</button>
-   			<button class="btn2"><a href ="/chal/create" >챌린지 개설</a></button>
+			<button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
+   			 	<button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
 			<p class="p5">개설한 <br> 챌린지가 없습니다.</p>
 			</div>
 			<div class="row row-10">
-				<a class="btn5" href ="/chal/list" disabled>챌린지 둘러보기</a>
+				<button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
 			</div>
 		</c:when>
 
@@ -529,8 +548,8 @@ border-radius:0.5em;
         <c:forEach var="createDto" items="${createDto}">
         
 <div class="row row-4">
-		<a href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
+		<img class="img-1" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 <div class="row row-5"> 
@@ -557,7 +576,7 @@ border-radius:0.5em;
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
+		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${createDto.getStartDate()}~${createDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${createDto.getChalTopic()}" disabled>
@@ -569,7 +588,7 @@ border-radius:0.5em;
 					 <button class="btn3"  disabled>내 인증글</button>
 				 </c:when>
 				 <c:otherwise>
-				 	<a class="btn4" href="/confirm/mylist?chalNo=${createDto.chalNo}">내 인증글</a>
+				 	<button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${createDto.chalNo}';">내 인증글</button>
 				 </c:otherwise>
 				 </c:choose>
 				</div>
@@ -584,18 +603,6 @@ border-radius:0.5em;
     </div> 
 </div>
 
-    <div class="row">
-        <ul class="page">
-            <li><a href="#">&lt;</a></li>
-            <li><a href="#">1</a></li>
-            <li class="on"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">&gt;</a></li>
-        </ul>
-    </div>
 </div>
 
 

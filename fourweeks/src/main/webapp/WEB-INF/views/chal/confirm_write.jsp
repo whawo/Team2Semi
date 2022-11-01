@@ -32,6 +32,29 @@
           /*   border: 1px dotted gray; */
             display: block;
         }
+        
+        /* row 모음 */
+        .row-0{
+        margin-left: 120px;
+        }
+        .row-1{
+        margin-top: 60px;
+        }
+        .row-2{
+        margin-bottom: 50px;
+        }
+        .row-3{
+       	padding-top: 20px;
+        }
+        .row-4{
+        padding-top: 40px;
+        }
+        .row-5{
+        padding-top: 50px;
+        }
+        .row-7{
+        margin-top: 50px;
+        }
 
         input::placeholder,
         textarea::placeholder{
@@ -208,9 +231,14 @@
 		font-size:12px;
 	    color: #eb6f7f;
 	}
-</style>
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script type="text/javascript">
+
+	
+    
+    </style>
+     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+     <script type="text/javascript">
+     
+
      $(function() {
  		$("select[name=chalTitle]").on("change", function(){
  			//선택된 챌린지 번호를 input type=hidden에 추가
@@ -281,8 +309,16 @@
              }
          });
      });
+/*  	 // 저장하지 않고 벗어날 경우 alert창 띄움
+	window.onbeforeunload = function(e) {
+	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
+	    e.returnValue = dialogText;
+	    return dialogText;
+	}; */
      
-     $(function () {
+ /* 
+		폼 이벤트 방지인데 ... 폼 이벤트를 방지하면 버튼이 안눌림.. ! 
+		$(function () {
     		// form이 전송될 때 내부의 입력창을 모두 trigger 처리
     	    $(".con-form").submit(function(){
     	    	//$("input[name=chalTitle]").blur();
@@ -295,13 +331,13 @@
     	        }
     	    });
     	    
-    /* 	    $("select[name=chalTitle]").on("blur", function(){
+    	    $("select[name=chalTitle]").on("blur", function(){
     	    	var chalTitle = $(this).val();
     	    	$(this).removeClass("fail");
     	    	if(!judge) {
     	    		$(this).addClass("fail").focus();
     	    	}
-    	    }); */
+    	    }); 
     	    
     	    $("input[name=confirmTitle]").on("blur", function(){
     	    	var confirmTitle= $("input[name=confirmTitle]").val();
@@ -319,24 +355,23 @@
     	    	}
     	    });
     	    
-    	});
-</script>
-</head>
-<body>
-<div class="container-1200">
-	<c:choose>
-		<c:when test="${chalList.size() == 0}">
-			<h1>
-				참가 중인
-				<br>
-				챌린지가 없습니다.
-			</h1>
-			<br> 
-			<a href="/chal/list">챌린지 둘러보기</a>
-		</c:when>
-		<c:otherwise>
-		<form action="write" method="post" enctype="multipart/form-data" class="con-form">
-            <div class="row">
+>>>>>>> refs/remotes/origin/main
+
+    	}); 
+ */
+     </script>
+     </head>
+     <body>
+        <div class="row-0 container-1200">
+<c:choose>
+	<c:when test="${chalList.size() == 0}">
+		참가 중인 챌린지가 없습니다.
+		<a href="/chal/list">챌린지 둘러보기</a>
+	</c:when>
+	<c:otherwise>
+<form action="write" method="post" enctype="multipart/form-data" class="con-form">
+            <div class="row row-1 mt-92">
+            	<input type="hidden" name="userId" value="${loginId}">
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
                     <option id="select" selected="selected" value="" >선택</option>
@@ -347,7 +382,7 @@
                 <input type="hidden" name="chalNo">
             </div>
             
-            <div class="row">
+          <div class="row row-2">
               <!--   <span class="sp-1 calendar how-confirm"  >
                     <i class="c-end">
                         <span class="blind">캘린더</span>
@@ -360,23 +395,23 @@
                <!--  </span> -->
             </div>
 
-            <div class="row">
+            <div class="row row-3">
                 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off"><br>
-                <span  class="helper-text-40 helper-css">0</span> /40
+                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40">
+                <span  class="helper-text-40 helper-css sp-2">0</span> /40
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>
 
-            <div class="row">
+            <div class="row row-4">
                 <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
                 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
-                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off"></textarea><br>
-                <span  class="helper-text-40 helper-css">0</span> /300
+                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off" maxlength="300"></textarea>
+                <span  class="helper-text-40 helper-css sp-3">0</span> /300
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>
 
-            <div class="row">
+            <div class="row row-5">
                 <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
                 <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
                 <div class="row">

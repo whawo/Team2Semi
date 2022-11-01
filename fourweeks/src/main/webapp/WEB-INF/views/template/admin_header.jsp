@@ -65,7 +65,7 @@
 		<a href="https://dashboard.tawk.to/#/dashboard/6358850adaff0e1306d3fc24" target="_blank"><i class="fa-solid fa-comment me-10"></i>유저 문의</a>
 	</div>
 	<div class="row mb-50">
-		<a href="/admin/list"><i class="fa-solid fa-pen-to-square me-10"></i>공지</a>
+		<a href="list?p=${vo.nextBlock()}&${vo.parameter()}"><i class="fa-solid fa-pen-to-square me-10"></i>공지</a>
 	</div>
 	<hr>
 	<div class="row">

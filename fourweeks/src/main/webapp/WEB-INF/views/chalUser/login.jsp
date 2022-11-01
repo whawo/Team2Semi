@@ -121,7 +121,7 @@
                 
             </div>
             <div class="row">
-                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1" placeholder="비밀번호"  autocomplete="off">
+                <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1-1" placeholder="비밀번호"  autocomplete="off">
             </div>
             <div class="row">
                 <button type="submit" class="largebtn w-100" id="largebutton1">로그인</button>
@@ -137,11 +137,11 @@
 		 
             </form>
             <section class="row center row-2">
-                <a class="find" href="/find_pw">비밀번호 찾기</a>
+                <a class="find" href="/user/find_pw">비밀번호 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/find_id">아이디 찾기</a>
+                <a class="find" href="/user/find_id">아이디 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/join">회원가입</a>
+                <a class="find" href="/user/join">회원가입</a>
             </section>
         </div>
         </div>

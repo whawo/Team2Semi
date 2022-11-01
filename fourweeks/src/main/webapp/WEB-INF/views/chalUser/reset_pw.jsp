@@ -46,7 +46,15 @@
         }
         
 </style>
-
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	// 변경에 성공했을 경우 alert으로 알림
+	$(function() {
+		$(".confirm-form").submit(function (e) {
+			alert("비밀번호 변경에 성공했습니다.");
+	    });
+	}); 
+</script>
  <div class="container-794">
 	 <div class="row center">
 	     <p class="p-1">비밀번호 재설정</p>
@@ -57,23 +65,23 @@
 	 	<br> 새로운 비밀번호를 등록 후 사용해주세요.
 	 </div>
 	<!-- 회원가입처럼 새 비밀번호와 새 비밀번호 확인이 일치해야 form 전송되도록 설정 필요(jQuery) -->    
-	<form action="reset_pw" method="post">
+	<form action="reset_pw" method="post" class="confirm-form">
 		<div class="row center">
 			<input type="hidden" name="userId" value="${userDto.userId}">
  		     아이디 : ${userDto.userId}
 		     <br><br>
-		     새 비밀번호 : <input type="password" name="userPw" required placeholder="8~16자의 영문/숫자">
+		     새 비밀번호 : <input type="password" name="newPw" required placeholder="8~16자의 영문/숫자">
 		     <br>
 		     <span class="fail-message">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
 		     <br><br>
-		     새 비밀번호 확인 : <input type="password" required>
-		     <br><br>
-		     <span class="fail-message">비밀번호를 다시 입력해주세요.</span>
-		     
+		     새 비밀번호 확인 : <input type="password" name="newPwCheck" required>
 		     <br><br>
 		     <button type="submit">변경</button>
 		</div>
 	</form>
+    <c:if test="${param.error != null}">
+    	<span class="fail-message">비밀번호를 다시 입력해주세요.</span>
+   	</c:if>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

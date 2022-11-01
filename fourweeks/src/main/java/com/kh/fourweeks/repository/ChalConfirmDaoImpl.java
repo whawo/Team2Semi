@@ -1,5 +1,6 @@
 package com.kh.fourweeks.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.fourweeks.entity.ChalConfirmDto;
-import com.kh.fourweeks.entity.NoticeDto;
 import com.kh.fourweeks.vo.ChalConfirmVO;
 import com.kh.fourweeks.vo.ConfirmAbleChalListVO;
 import com.kh.fourweeks.vo.ConfirmDaysVO;
+import com.kh.fourweeks.vo.NoticeVO;
+import com.kh.fourweeks.vo.OnePerDayVO;
 
 @Repository
 public class ChalConfirmDaoImpl implements ChalConfirmDao {
@@ -62,7 +64,7 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 	}
 	
 	@Override
-	public boolean updateNotice(NoticeDto noticeDto) {
+	public boolean updateNotice(NoticeVO noticeDto) {
 		String sql = "update notice set "
 				+ "notice_title = ?, notice_content = ?, "
 				+ "notice_modified = sysdate "
@@ -265,5 +267,31 @@ public class ChalConfirmDaoImpl implements ChalConfirmDao {
 		String sql = "select trunc(f.confirm_date - c.start_date + 1) confirm_days from chal_confirm f left outer join chal c on f.chal_no = c.chal_no where f.chal_no = ? and f.user_id = ?";
 		Object[] param = {chalNo, userId};
 		return jdbcTemplate.query(sql, myConfirmDaysMapper, param);
+	}
+	
+	private ResultSetExtractor<OnePerDayVO> extractor = (rs) -> {
+		if(rs.next()) {
+			return OnePerDayVO.builder()
+					.chalNo(rs.getInt("chal_no"))
+					.user_id(rs.getString("user_id"))
+					.write_time(rs.getString("write_time"))
+					.build();
+		} else {
+			return null;
+		}
+	};
+	
+	@Override
+	public OnePerDayVO selectOneList(int chalNo, String userId) {
+		String sql = "select "
+						+ "chal_no, "
+						+ "user_id, "
+						+ "to_char(confirm_date, 'yyyy-mm-dd') write_time "
+					+ "from "
+						+ "chal_confirm "
+					+ "where "
+						+ "chal_no = ? and user_id = ? and  to_char(confirm_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')";
+		Object[] param = {chalNo, userId};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 }

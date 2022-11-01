@@ -10,7 +10,7 @@
 		width: 80px;
 		height:42px;
 	}
-	
+
 	.search-btn {
 		width: 80px;
 		height: 60px;
@@ -93,9 +93,65 @@
 		</table>
 		</div>
 		
+
+	</div>
+
+	
+	<div class="row center">
+		<ul class="pagination">
+			<!-- 이전 -->
+			<c:choose>
+				<c:when test="${not vo.isFirst()}">
+					<li><a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&laquo;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${vo.hasPrev()}">
+					<li><a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&lt;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 숫자 -->
+			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
+				<c:choose>
+					<c:when test="${vo.p == i}">
+						<li class="on"><a href="#">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+			<c:choose>
+				<c:when test="${vo.hasNext()}">
+					<li><a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&gt;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${not vo.isLast()}">
+					<li><a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&raquo;</a></li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
 	</div>
 </div>
+<!-- header에서 열린 태그 -->
 </body>
 </html>
-
 

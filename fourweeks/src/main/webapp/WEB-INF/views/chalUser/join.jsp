@@ -16,6 +16,10 @@
     <style>
 
 /*
+	10.31
+- 둘 중 하나 폼을 막으면 회원가입이 되지 않고 
+- 필수값 아무것도 입력 안했을때는 500번인가 404에러 뜸 
+
 	10.26
 	디자인 수정: 
 	- 회원가입 필수값 미입력시 넘어가지 않아야 함 ---> 500번이 나오면 안됨 
@@ -64,7 +68,7 @@
     
     div{
         /* border: 1px dotted transparent; */
-        border: 1px dotted gray;
+        border: 1px dotted transparent;
     }
     .a-join{
         font-size: 14px;
@@ -247,19 +251,9 @@
                 input.classList.add("fail");
             }
         }
-        
-        $(function(){
-            
-            $(".join-btn").click(function(){
-                $.ajax({
-                    url:"http://localhost:8888/rest/join",
-                    method:"post",
-                    success:function(result){
-                        $(".join-btn").text(result);
-                    }
-                })
-            });
-            
+       
+        //아이디 닉네임 중복 검사 ajax 
+       $(function(){
             var inputState = {
                 userIdValid:false,
                 userNickValid:false,
@@ -288,7 +282,6 @@
                                 inputState.userIdValid = false;
                             }
                         }
-    
                     });
                 }else {
                     $(this).addClass("fail");
@@ -323,6 +316,60 @@
                 }
             });
         });
+
+       $(function () {
+    		
+    	    $("input[name=userId]").on("blur", function(){
+    	    	var userId = $(this).val();
+    	    	$(this).removeClass("fail");
+    	    	if(!userId) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	    $("input[name=userNick]").on("blur", function(){
+    	    	var userNick = $(this).val();
+    	    	$(this).removeClass("fail");
+    	    	if(!userNick) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	    $("input[name=userPw]").on("blur", function(){
+    	    	var userPw = $(this).val();
+    	    	$(this).removeClass("fail");
+    	    	if(!userPw) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	    $("input[name=userEmail]").on("blur", function(){
+    	    	var userEmail = $(this).val();
+    	    	$(this).removeClass("fail");
+    	    	if(!userEmail) {
+    	    		$(this).addClass("fail");
+    	    	}
+    	    });
+    	    
+    	    
+    		 // form이 전송될 때 내부의 입력창을 모두 trigger 처리
+    	    $(".join-form").submit(function(){
+    	    	$("input[name=userId]").blur();
+    	    	$("input[name=userNick]").blur();
+    	    	$("input[name=userPw]").blur();
+    	    	$("input[name=userEmail]").blur();
+    	    	console.log("co" + $(".input.fail").length);
+    	    	if($(".input.fail".length == 0)) {
+    	            return true;
+    	        }else{
+    	        	return false;
+    	        }
+    	    });
+    	});
+        
+        
+        
+
     </script>
 <body>
     <div class="container-650">
@@ -331,7 +378,7 @@
             <p class="join-p2">함께 해요, 좋은 습관 챌린지!</p>
         </div>
 
-        <form action="" method="post" autocomplete="off">
+        <form action="join" method="post" autocomplete="off" class="join-form" >
 
             <div class="rows">
                 <label>아이디</label>

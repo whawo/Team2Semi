@@ -14,14 +14,27 @@
 
 <style>
 
+
 /* row 모음 */
- .row-1{
+.row-1{
+margin-bottom: 10px;
+}
+.row-2{
+padding-bottom: 50px;
+}
+ .row-3{
             position: relative;
             z-index: 100;
             padding: 40px 60px 20px;
             border: 1px solid #e5e5e5;
             border-radius: 0.5em;
         }
+.row-4{
+padding-top: 30px;
+}
+.row-5{
+margin-left: 88px;
+}
         
  /* p모음 */
  .p1{
@@ -38,6 +51,7 @@
  .lab-1{
  font-size: 16px;
  font-weight: 700;
+margin-top: 120px;
  }
  /* btn */
  .btn1{
@@ -65,15 +79,15 @@
     
 </script>
 <div class="container-794">
-    <div class="row center mt-92">
+    <div class="row-1 center mt-92">
 		<p class="p1">아이디 찾기</p>
 	</div>
     
 	<form action="/login" method="get">
-		<div class="row center">
+		<div class="row-2 center">
 			<p class="p2">고객님의 정보와 일치하는 아이디 목록입니다.</p>
 		</div>	
-		<div class="row row-1">
+		<div class="row row-3">
 		 <div class="checks small">
                     <ul class="list-id">
                         <li>
@@ -90,7 +104,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
+            <div class="row-4 center">
 				<button class="btn1" type="submit">로그인</button>
             </div>
                 
@@ -101,7 +115,7 @@
 			<button type="submit">로그인</button> --%>
 	</form>
 	
-	<section class="row center">
+	<section class="row-5 center">
 		<a class="find" href="/find_pw">비밀번호 찾기</a>
 		<em class="divi">|</em>
 		<a class="find" href="/join">회원가입</a>
