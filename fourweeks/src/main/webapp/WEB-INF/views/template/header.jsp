@@ -83,7 +83,7 @@
 		                <li><a href="/confirm/write">챌린지 인증</a></li>
 		                <li><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                <li class="right-menu">
-							<img src = "user/profile/download?userId=${loginId}" width="50" height="50" class="user-img"> ${loginNick}
+							<img src = "/user/profile/download?userId=${loginId}" width="50" height="50" class="user-img"> ${loginNick}
 							<ul>
 								<li><a href="/user/mypage">마이페이지</a></li>
 								<li><a href="/user/logout">로그아웃</a></li>

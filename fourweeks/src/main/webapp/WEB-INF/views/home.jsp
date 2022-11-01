@@ -23,14 +23,14 @@
 	}
 	/* 이미지 */
 	.banner {
-		padding-top: 50px;
+		padding-top: 120px;
 		position: relative;
 		height : 240px;
 	}
 	.banner-child{
 		position: absolute;
 		right: 0;
-		top:0;
+		top:30px;
 	}
 	#head-image {
 		height: 336px;
@@ -48,7 +48,7 @@
 		margin-bottom: 1.2em;
 	}
 	.search-bar {
-		margin-top : 100px;
+		margin-top : 150px;
 		margin-bottom: 30px;
 	}
 	/* 다단배치 */

@@ -108,7 +108,7 @@ display:none;
      	.preview{
       	margin-left: 63px;
       	position: absolute;
-      	bottom: 380;
+      	bottom: 380px;
      	}
         .thumbnail{
             display: none;
@@ -274,7 +274,7 @@ display:none;
 <form action="edit" method="post" enctype="multipart/form-data">
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
-			<span class="sp-0">프로필 사진</span> <img src="/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
+			<span class="sp-0">프로필 사진</span> <img src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
 	</div>
 	
 	<div class="row  row-img">

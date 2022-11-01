@@ -5,8 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
    <jsp:param value="마이페이지" name="title" />
 </jsp:include>
-<!DOCTYPE html>
-<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -312,23 +311,40 @@ border-radius:0.5em;
 .lab-e{
 padding-right: 23px;
 }
-    </style>
+</style>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
     $(function () {
-    $(".tab_content").hide();
-    $(".tab_content:first").show();
-
-    $("ul.tabs li").click(function () {
-    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
-    $(this).addClass("active").css("color", "#6c7aef");
-    $(".tab_content").hide();
-    var activeTab = $(this).attr("rel");
-    $("#" + activeTab).show();
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+	
+	    $("ul.tabs li").click(function () {
+		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
+		    $(this).addClass("active").css("color", "#6c7aef");
+		    $(".tab_content").hide();
+		    var activeTab = $(this).attr("rel");
+		    $("#" + activeTab).show();
+	    });
+	    
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+		});
+	  
+		//챌린지 썸네일이 없으면 기본 이미지로 대체
+		$(".chal-img").on("error", function() {
+			$(this).attr("src", "/images/bg_default.png");
+		});
+	});
+    
+  	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function (event) {
+        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+          	location.href = location.href;
+        }
     });
-});
-    </script>
+</script>
 
 </head>
 <body>
@@ -336,7 +352,7 @@ padding-right: 23px;
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/profile/download?userId=${myDto.userId}"  class="img0">
+	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img">
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
 	</div>
@@ -381,7 +397,7 @@ padding-right: 23px;
 
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<img class="img-1" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 
