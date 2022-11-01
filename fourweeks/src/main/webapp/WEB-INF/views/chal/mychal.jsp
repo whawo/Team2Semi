@@ -451,9 +451,9 @@
 
                         ${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
 				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%
-
+							<br>
                </c:forEach>               
-				<br>
+				
 
 	<br><br><br><br>
 		<!-- 인증글 목록(최신 max 5개) -->

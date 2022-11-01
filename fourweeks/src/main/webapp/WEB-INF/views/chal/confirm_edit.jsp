@@ -162,11 +162,6 @@
 		.img-btns{
 			padding-top: 161px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
 		}
-    /* 옵션 선택시 글꼴 색상과 굵기 지정 
-        여기서 드는 의문점.. 
-        글자들은 그냥 허옇게 하는지.. -> 뭔소리냐면 
-        선택시에는 글자 색 다 지정되는데 커서를 다른곳을 클릭하면 글씨 색상이 다시 바뀜 
-    */
     .confirm-check:focus
     .confirm-check:hover{
         color: #6c7aef;
@@ -203,9 +198,9 @@
 			var howConfirm = $("select[name=chalTitle]").find("option:selected").attr("data-howConfirm");
 			$(".how-confirm").val(howConfirm);
 			
-			//인증샷이 없으면 img 영역 미노출
-			$(".confirm-img").on("error", function(){
-				$(this).addClass("no-img");
+			//인증샷이 없으면 기본 이미지 노출
+			$(".preview").on("error", function(){
+				 $(".preview").attr("src", "/images/bg_default.png");
 			});
 			
 			//form submi 시 select disabled 속성 제거
@@ -236,7 +231,7 @@
                 });
             });
             $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "detail/download?confirmNo=${confirmVO.confirmNo}");
+                $(".preview").attr("src", "/images/bg_default.png");
             });
         });
     
@@ -317,7 +312,8 @@
           <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
 			<div class="row">
 				<input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail>
-				<img class="confirm-img preview" src = "detail/download?confirmNo=${confirmVO.confirmNo}"  width="250" height="200" >
+				<img class="preview" src="detail/download?confirmNo=${confirmVO.confirmNo}" width="250" height="200">
+				<%-- <img class="confirm-img preview" src = "detail/download?confirmNo=${confirmVO.confirmNo}"  width="250" height="200" > --%>
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
 				<button  class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>

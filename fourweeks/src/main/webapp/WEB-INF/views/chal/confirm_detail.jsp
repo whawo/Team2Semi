@@ -271,4 +271,4 @@
 	</div> <!-- row 끝 -->
 </div> <!-- 컨테이너 끝 -->
 
-<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>--%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
