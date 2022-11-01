@@ -192,11 +192,7 @@
 	<%-- 시작일 --%>
 	<div>  
 		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
-		<span class="label label-status" >${chalVO.getDDay()}일뒤 시작</span>
-	</div>
-	<!-- 여기 조건 추가해야함 placeholder에 어떻게 조건을 넣지 -->
-	<!-- 이거!!! 넣으면 돼요 -->
-	 <c:choose>
+		<span class="label label-status" > <c:choose>
 		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
 			${chalVO.getEndDday()}일 뒤 종료
 		</c:when>
@@ -216,7 +212,8 @@
 		<c:otherwise>
 			${chalVO.getDDay()}일 뒤 시작
 		</c:otherwise>
-	    </c:choose>
+	    </c:choose></span>
+	</div>
 
 	 <%-- 종료일 --%>
 	<div>
