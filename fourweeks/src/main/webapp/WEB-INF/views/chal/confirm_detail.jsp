@@ -20,6 +20,7 @@
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
+
 <style>
 	div, 
 	td {
@@ -265,4 +266,4 @@
 	</div> <!-- row 끝 -->
 </div> <!-- 컨테이너 끝 -->
 
-<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>--%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

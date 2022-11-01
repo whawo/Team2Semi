@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="비밀번호 변경" name="title"/>
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="/css/basic.css">
@@ -13,33 +13,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-
-/*
-
-전송 구현 완료 마지막에 취소버튼만 조금 수정화세요 
-
-디자인 구현은 끝 났으나 form 전송이 비밀번호가 다른데 자꾸 전송된다. 무슨 문제/ 그리고 DB에 넘어가지 않음  
-
-	디자인 해야할 것: 
-	- 마지막에 취소 변경 크기 맞추기 ㅇㅇ
-
-  */
-    div{
-		 border: 1px dotted transparent;
-    }
-        body{
-            font-family: sans-serif;
-        }
-        
-/*  row 모음 */
+div{
+border: 1px dotted transparent;
+}
+body{
+	font-family: sans-serif;
+ }
 .row-id{
  margin-left: 100px;
 }
 .row-4{
 margin-top: 50px;
 }
-        
-/* 스팬 모음 */
 .sp-1{
 padding-left: 30px;
 font-size:16px;
@@ -63,56 +48,45 @@ color:#3f3f3f;
 .sp-5{
 padding-left: 223px;
 }
- 
- /* 인풋 박스 모음  */
  .id-box{
  border: 1px solid transparent;
  width: auto;
  margin-left: 3px;
  }
  .pw-box1{
- padding-left: 20px; /* 플레이스 홀더  옆으로 띄우기*/
+ padding-left:20px;
  width: 500px;
-  margin-left: 50px;
+  margin-left: 47px;
  }
   .pw-box2{
- padding-left: 20px; /* 플레이스 홀더  옆으로 띄우기*/
+ padding-left: 20px; 
  width: 500px;
   margin-left: 30px;
  }
- 
- /* 에러 모음 */
- 		.fail-message {
-		display: none;
-	}
-	.input.fail ~ .fail-message {
-		display: block;
-		font-size:12px;
-	    color: #eb6f7f;
-	}
-	
-	.input ~ .find-error {
-		font-size:12px;
-	    color: #eb6f7f;
-	}
- 
- /*  disabled */
-input[name="userId"]:disabled{
-background-color:transparent;
+.fail-message {
+	display: none;
 }
-
+.input.fail ~ .fail-message {
+	display: block;
+	font-size:12px;
+	 color: #eb6f7f;
+}
+.input ~ .find-error { 
+	font-size:12px;
+		color: #eb6f7f;
+}
+input[name="userId"]:disabled{
+	background-color:transparent;
+}
 .save-btn{
 width:427px;
 margin-left: 10px;
 }
-
-
 </style>
      <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">    
 
 $(function () {
-	
 
     $("input[name=userPw]").on("blur", function(){
     	var userPw = $(this).val();
@@ -176,4 +150,3 @@ $(function () {
 	</form>
 </div>
 </body>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

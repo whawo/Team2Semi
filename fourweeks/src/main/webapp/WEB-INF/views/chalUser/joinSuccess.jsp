@@ -13,19 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* 
-        	10.31 
-        	- 로그인 버튼 클릭시 로그인 페이지로 이동 구현 
-        
-            10.21
-        	- 로그인 에러 구현 완료 
-            10.20 
-            디자인 수정해야할 것
-            - 아이디창과 비밀번호 창을 중심으로 위아래로 간격 더 넓히기 
-            - 로그인 밑에 비번찾기 아이디 찾기 간격 좀 더 띄우기 
-            - 헤더 수정 
-            
-        */
         body{
             font-family: sans-serif;
         }

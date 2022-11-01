@@ -205,6 +205,7 @@ public class ChalUserController {
 			throw new TargetNotFoundException();
 		}
 	}
+
 	
 	@GetMapping("/leave") // 탈퇴
 	public String leave(

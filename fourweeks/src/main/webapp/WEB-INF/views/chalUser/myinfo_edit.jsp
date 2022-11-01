@@ -12,18 +12,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-/*  
-	10.28
-	디자인 수정해야할 것: 
-	- 밑에 헤더가 맨 왼쪽으로 치우침 
-
-	10.27 
-	디자인 수정해야할 것 : 
-	- 프로필 사진 글자 가운데에 맞춰야함 
-	- 사진변경 삭제 구현하기 
-
-*/
-/* row 모음 */
 .row{
  margin-top: 20px;
 }
@@ -53,11 +41,12 @@ margin-top: 79px;
 div{
 border: 1px dotted transparent;
 }
- /* 프로필 사진 */
-img{
+.img1{
 border-radius: 50%;
+margin-top: 50px;
+margin-left: 85px;
+margin-bottom: -30px;
 }
-/* input-box들   */
 .id-box{
 border: 1px solid transparent;
 width: 420px;
@@ -72,8 +61,6 @@ border-radius: 0.5em;
 width:420px;
 margin-left: 55px;
 }
-
-/* span 모음  */
 .sp-1{
 margin-top: 45px;
 font-size: 16px;
@@ -96,7 +83,6 @@ font-weight: 700;
 color: #3f3f3f;
 }
 
-/* 이미지'' */
 .user-img{
 margin-left: 55px;
 }
@@ -104,7 +90,6 @@ margin-left: 55px;
 display:none;
 }
 
-     /* 이미지 보기  */
      	.preview{
       	margin-left: 63px;
       	position: absolute;
@@ -114,11 +99,10 @@ display:none;
             display: none;
         }
 
-           /* 업로드 버튼 */
         .input-file-upload{
             padding: 6px 17px; 
             background-color: #e5e6f9;
-            border-radius: 0.25em;
+            border-radius: 0.5em;
             color: #6c7aef;
             cursor: pointer;
         }
@@ -126,29 +110,29 @@ display:none;
             display: none;
         }
         
-        /* 이미지 업로드 버튼들 */
         	.img-lab{
         		margin-left:30px;
+        		padding: 10px 30px;
+        		font-size: 14px;
         	}
-		.img-btn{ /* 삭제 버튼 */
+		.img-btn{ 
 			margin-left:6px;
 			border: 2px solid #AAAAAA;
-			border-radius: 0.25em;
+			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 5px 16px; /* 삭제 버튼 크기 조절 */
+			padding: 9px 30px; 
 			text-align: center;
 			color: #AAAAAA;
+			font-size: 14px;
 		}
 		.img-btns{
-			padding-top: 161px; /* 미리보기와 사진변경/삭제 간의 높이 맞춤 */
+			padding-top: 161px;
 		}
-
-        /* 버튼 */
         .btn-leave{
 			border: 2px solid #AAAAAA;
 			border-radius: 0.5em;
 			background-color: transparent;
-			padding: 4px 16px; /* 삭제 버튼 크기 조절 */
+			padding: 4px 16px;
 			text-align: center;
 			color: #AAAAAA;
         }
@@ -157,7 +141,7 @@ display:none;
      	   border: 2px solid #e5e6f9;
 			border-radius: 0.5em;
 			background-color: #e5e6f9;
-			padding: 4px 16px; /* 삭제 버튼 크기 조절 */
+			padding: 4px 16px; 
 			text-align: center;
 			color: #6c7aef;
         }
@@ -169,7 +153,6 @@ display:none;
 	       margin-left:45px;
 	       }
         
-        /* 에러 메세지  */
       .fail-message,
     .NNNNN-message{
         display: none;
@@ -254,6 +237,7 @@ display:none;
          var userNick = input.value;
          var regex = /^[가-힣a-z0-9]{4,10}$/;
          var judge = regex.test(userNick);
+         console.log("rege" + judge);
          input.classList.remove("success", "error");
          if(judge){
              input.classList.add("success");
@@ -279,7 +263,7 @@ display:none;
        }
 	 
 </script>
-<div class="row container-1200">
+<div class=" container-1200">
 <div class="row container-794 row-move">
 
 	<div class="row  row-3">
@@ -289,7 +273,8 @@ display:none;
 <form action="edit" method="post" enctype="multipart/form-data">
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
-			<span class="sp-0">프로필 사진</span> <img src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
+
+			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
 	</div>
 	
 	<div class="row  row-img">
@@ -324,10 +309,9 @@ display:none;
 </div>
 			
 <div class="row center  row-btns">
-			<a href="/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
+			<a href="/user/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
 			<button  class="save-btn" type="submit">저장하기</button>
 </div>
 		</form>
 </div>
 </div>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

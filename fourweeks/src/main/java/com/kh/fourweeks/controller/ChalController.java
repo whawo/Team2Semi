@@ -152,8 +152,10 @@ public class ChalController {
 			@ModelAttribute (name="vo") ChalConfirmVO vo,
 			HttpSession session,
 			Model model) {
+		
+		
 		//모든 유저 조회
-		model.addAttribute("dto", chalDao.selectAllDetail(chalMyDetailDto.getChalNo()));
+		model.addAttribute("dto", chalDao.selectParticipant(chalMyDetailDto.getChalNo()));
 		//챌린지 상세 조회
 		model.addAttribute("chalDto" , chalDao.selectMy((String)session.getAttribute(SessionConstant.ID),
 				chalMyDetailDto.getChalNo()));

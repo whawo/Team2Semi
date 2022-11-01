@@ -21,52 +21,9 @@
     
 
     <style>
-    
-    /* 
-    	10.28
-		버튼 확인해보기     	
-     */
     div,ul, li{
     border: 1px dotted transparent;
     }
-	/*  ul.tabs {
-    color: #AAAAAA;
-    position:relative;
-    float:left;
-    list-style: none;
-    width: 100%;
-    margin:0px 0px 30px 0px;
-    padding: 0;
-    }
-
-    ul.tabs li {
-    float: left;
-    border-bottom : 2px solid#AAAAAA;
-    text-align:center;
-    cursor: pointer;
-    width:33.3%;
-    padding: 0;
-    line-height: 50px;
-    height:50px;
-    }
-    ul.tabs li.active {
-    border-bottom-color : #6c7aef;
-    color: #6c7aef;
-    font-weight:bold;
-    }
-
-    .tab_container {
-    position:relative;
-    float:left;
-    width:100%;
-    padding:30px;
-    }
-
-    .tab_content {
-        border: none;
-    }  */
-
-    /* row 모음  */
     .row-move{
     margin: 10px  0 10px 321px;
     }
@@ -89,7 +46,6 @@
     .row-11{
     margin-top: 40px;
     }
-    /* 글씨 모음  */
    .p1{
    font-size: 20px;
    font-weight: 700;
@@ -122,8 +78,6 @@
  	 padding-top: 150px;
  	 line-height: 2;
    }
-   
-   /* a 모음  */
    a:visited{
    }
    .a1{
@@ -139,8 +93,6 @@
    font-weight: 700;
    color: #3f3f3f;
    }
-   
-   /* 챌린지 현황  모음  */
 .ul-1{
 	list-style: none;
 	padding-bottom: 20px;
@@ -151,6 +103,7 @@ float: left;
 width: 33.3%;
 border: none;
 border-bottom: 1px solid #707070;
+cursor:pointer;
 }
 .c1{
 display: block;
@@ -166,11 +119,6 @@ text-align: center;
 display: block;
 padding: 20px;
 text-align: center;
-}
-
-/* 챌린지 목록 모음 */
-.row-4{
-/* position: relative; */
 }
  .row-5{
 position: relative; 
@@ -191,7 +139,6 @@ position: absolute;
 bottom: 60px;
 left: 350px;
 }
-/* hover, active 모음 */
 	.c1-hover:active,
 	.c1-hover:hover{
 	font-weight: 700;
@@ -208,7 +155,6 @@ left: 350px;
 	color:  #6c7aef;
 	}
 
-/* btn 모음  */
 .btn1{
 font-size:16px;
 font-weight: 700;
@@ -218,6 +164,7 @@ background-color: #FFF;
 color:  #6c7aef;
 padding: 14px 145px;
 margin-left: 10px;
+cursor:pointer;
 }
 .btn1:disabled{
 font-size:16px;
@@ -237,6 +184,7 @@ background-color: #FFF;
 color:  #6c7aef;
 padding: 14px 145px;
 margin-left: 22px;
+cursor:pointer;
 }
 .btn2:disabled{
 font-size:16px;
@@ -257,6 +205,7 @@ font-size: 16px;
 font-weight: 700;
 width: 100px;
 height:50px;
+cursor:pointer;
 }
 .btn4{
 color: #FFF;
@@ -270,6 +219,7 @@ font-size: 16px;
 font-weight: 700;
 width: 100px;
 height:50px;
+cursor:pointer;
 }
 .btn4:visited{
 color:#FFFFFF;
@@ -283,8 +233,9 @@ border-radius: 0.5em;
 color:  #FFF;
 padding: 14px 100px;
 margin-left: 238px;
+cursor:pointer;
+
 }
-/* img 모음  */
 .img0{
 border-radius: 50%;
 width: 100px;
@@ -293,7 +244,6 @@ height: 100px;
 .img-1{
 border-radius: 0.5em;
 }
-/* input 모음  */ 
 .label-wait,
 .label-progress,
 .label-category{
@@ -310,6 +260,100 @@ border-radius:0.5em;
 }
 .lab-e{
 padding-right: 23px;
+}
+
+/* header */
+header {
+	width: 100%;
+    height: 92px;
+    background-color: white;
+    display: flex;
+   	justify-content: center;
+    align-items: center;
+}
+header > a {
+	width: 15%;
+}
+header > nav {
+	width:100%;
+	height:100%;
+}
+.dropdown-nav {
+	display:flex;
+	width:100%;
+	height: 100%;
+}
+.dropdown-nav,
+.dropdown-nav ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #6C7AEF;
+    font-size:16px;
+    text-align: center;
+}
+.dropdown-nav li {
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+    align-items: center;	
+}
+.dropdown-nav > li {
+	position: relative;
+	width: 120px;
+	height: 100%;
+}
+.dropdown-nav > li.right-menu {
+	justify-content: flex-end;
+	padding: 0.5em 0;
+	width: auto;
+	height: 100%;
+	min-width: 120px;
+}
+.dropdown-nav ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+.dropdown-nav ul {
+    display: none;
+}
+.dropdown-nav li:hover > ul {
+    display: block;
+}
+.dropdown-nav a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;;
+    text-align: center;
+}
+.dropdown-nav ul {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #A8B0E9;
+    padding: 0.5em;
+}
+.dropdown-nav li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+/* 9) */
+.dropdown-nav {
+    position: relative;
+}
+.dropdown-nav > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+header.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 </style>
 
@@ -346,6 +390,7 @@ padding-right: 23px;
     });
 </script>
 
+
 </head>
 <body>
 
@@ -353,6 +398,7 @@ padding-right: 23px;
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
 	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img">
+
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
 	</div>
@@ -472,6 +518,7 @@ padding-right: 23px;
 </div>
    <c:forEach var="chalEndDto" items="${chalEndDto}">
 <div class="row row-4">
+
       <a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
       <img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
       </a>
@@ -548,7 +595,7 @@ padding-right: 23px;
         
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1" src="chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<img class="img-1" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
 		</a>
 </div>
 <div class="row row-5"> 
@@ -601,22 +648,7 @@ padding-right: 23px;
 </c:choose>
     </div> 
 </div>
-
-    <div class="row">
-        <ul class="page">
-            <li><a href="#">&lt;</a></li>
-            <li><a href="#">1</a></li>
-            <li class="on"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">&gt;</a></li>
-        </ul>
-    </div>
-</div>
-
-
+</div> 
 </body>
 </html>
 

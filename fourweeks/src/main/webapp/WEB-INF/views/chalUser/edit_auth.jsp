@@ -14,11 +14,6 @@
 
 
 <style>
-/* 
-	디자인 수정해야할 것: 
-	- 취소 확인 버튼 일렬로 ..  --> 이거 다시 수정 폰트 사이즈 맞추면됨 
-	- 푸터는 왜 같이 움직이는가... ;;
- */
 
     div{
 		 border: 1px dotted transparent;
@@ -102,8 +97,107 @@
 	input[name="userId"]:disabled{
 		background-color:transparent;
 	}
+	.copyright {
+	margin-left: 810px;
+	}
+	
+	/* header */
+header {
+	width: 100%;
+    height: 92px;
+    background-color: white;
+    display: flex;
+   	justify-content: center;
+    align-items: center;
+}
+header > a {
+	width: 15%;
+}
+header > nav {
+	width:100%;
+	height:100%;
+}
+.dropdown-nav {
+	display:flex;
+	width:100%;
+	height: 100%;
+}
+.dropdown-nav,
+.dropdown-nav ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #6C7AEF;
+    font-size:16px;
+    text-align: center;
+}
+.dropdown-nav li {
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+    align-items: center;	
+}
+.dropdown-nav > li {
+	position: relative;
+	width: 120px;
+	height: 100%;
+}
+.dropdown-nav > li.right-menu {
+	justify-content: flex-end;
+	padding: 0.5em 0;
+	width: auto;
+	height: 100%;
+	min-width: 120px;
+}
+.dropdown-nav ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+.dropdown-nav ul {
+    display: none;
+}
+.dropdown-nav li:hover > ul {
+    display: block;
+}
+.dropdown-nav a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;;
+    text-align: center;
+}
+.dropdown-nav ul {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #A8B0E9;
+    padding: 0.5em;
+}
+.dropdown-nav li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+/* 9) */
+.dropdown-nav {
+    position: relative;
+}
+.dropdown-nav > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+header.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+	
    
 </style>
+<body>
 <div class="row container-1200">
  <div class="row container-794 row-down">
 	<div class="row center mt-92">
@@ -132,5 +226,5 @@
 		</form>
 		</div>
 	</div>
-
+</body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
