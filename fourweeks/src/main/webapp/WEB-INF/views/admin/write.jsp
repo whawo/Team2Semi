@@ -18,6 +18,11 @@
 	.create-btn {
 		width: 200px;
 	}
+	textarea {
+			    width: 100%;
+			    border: none;
+			    resize: none;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
@@ -26,6 +31,7 @@
 			height:350,
 			minHeight:350,
 		});
+		
 	});
 </script>
 <div id="dashboard">

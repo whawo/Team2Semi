@@ -554,6 +554,7 @@ header.header-fixed {
           <div class="row-11">
            <p class="p6">${list.confirmTitle}</p> 
           </div>
+
                <div class="row-12">
 					<p class="p7">${list.confirmContent}</p>
 				</div>
@@ -566,6 +567,7 @@ header.header-fixed {
 				<div class="row-14">
            			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align"  >
 				</div>
+
 	    </a>
 		</c:forEach>
         </div>					

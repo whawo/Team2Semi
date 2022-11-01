@@ -227,7 +227,7 @@
 			        }
 			    });
 			});
-	
+	});
 
 	 // 이미지 
     $(function(){
@@ -341,7 +341,7 @@
 	</div>
 
 		<div class="row-7 center">
-			<a type="button"  class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3"  href = "/confirm/detail?confirmNo=${confirmVO.confirmNo}">취소</a>
+			<a type="button"  class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3">취소</a>
 			<button  class="smallbtn create-btn" type="submit"  id="smallbutton1">인증글 저장하기</button>
 		</div>
 </div>	
