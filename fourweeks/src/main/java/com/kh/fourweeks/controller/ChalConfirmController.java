@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
+import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ReplyDto;
 import com.kh.fourweeks.entity.UserConfirmLikeDto;
@@ -121,6 +122,9 @@ public class ChalConfirmController {
 		//댓글 목록 조회
 		model.addAttribute("replyList", replyDao.selectList(confirmNo));
 		
+		//첨부파일 조회
+		model.addAttribute("attachDto", attachmentDao.confirmImgInfo(confirmNo));
+		
 		return "chal/confirm_detail";
 	}
 	
@@ -178,6 +182,7 @@ public class ChalConfirmController {
 		vo.setCount(count);
 		model.addAttribute("confirmList", confirmDao.myConfirmList(vo));
 		model.addAttribute("listCnt", count);
+		
 		return "chal/confirm_mylist";
 	}
 	
