@@ -23,6 +23,9 @@
         a{
         line-height:32px;
         } 
+        .row-2{
+        
+        }
         .p-1{
             font-size: 24px;
             font-weight: bold;
@@ -45,7 +48,9 @@
         .color{
             color: #425F57;
         }
-        
+        .join-btn{
+        margin-top: 10px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
      <script type="text/javascript">
@@ -60,12 +65,12 @@
             </div>
             
             <div class="row center">
-               <img src="/images/join_success.png" width="300" height="300">
+               <img src="/images/join_success.png" width="200" height="200">
             </div>
 
-            <div class="row center">
-                <a class="largebtn btn1"  id="largebutton1" href="/login">로그인</a>
-                <a class="largebtn btn1" id="largebutton3" href="/join">회원가입</a>
+            <div class="row row-2 center">
+                <button class="largebtn btn1 login-btn"  id="largebutton1" onclick="location.href='/login';">로그인</button>
+                <button class="largebtn btn1 join-btn" id="largebutton3"  onclick="location.href='/join';">회원가입</button>
             </div>
         </div>
 </div>
