@@ -340,8 +340,8 @@
      
      <!--인증글 목록-->
 		<div class="confirm-border" >
-			<a href="detail?confirmNo=${list.confirmNo}">
 			<c:forEach var="list" items="${confirmList}">
+			<a href="detail?confirmNo=${list.confirmNo}">
 	          <!-- 챌린지 제목 -->
 	          <div class="confirm-title-css" style="position:relative">
 	           	${list.confirmTitle} 
@@ -363,8 +363,8 @@
 					</div>
 	           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
 	 				<!-- 인증글, 사진 목록 끝 -->			
-			</c:forEach>
 			</a>
+			</c:forEach>
 		</div>					
 
 	<div  class="confirm-empty">

@@ -149,7 +149,7 @@
 				${list.confirmContent}
 				<br><br><br><br><br>
 				<!-- 프로필, 닉네임 -->
-				<img src = "/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+				<img src = "/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
 				<span>${list.userNick}</span>	
 				&nbsp; 
 				${list.confirmDate} 

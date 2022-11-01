@@ -238,7 +238,7 @@
      </div>
      
 	<div>
-		<img src = "/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
+		<img src = "/user/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
 	</div>
 	
 	 <%-- 구분선 --%>
