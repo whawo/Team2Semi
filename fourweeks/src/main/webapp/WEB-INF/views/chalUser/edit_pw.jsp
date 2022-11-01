@@ -127,7 +127,6 @@ $(function () {
 	 <div class="row center mt-92">
 	 	<h2>비밀번호 변경 </h2>
 	 </div>
-	<!-- 회원가입처럼 새 비밀번호와 새 비밀번호 확인이 일치해야 form 전송되도록 설정 필요(jQuery) -->    
 	<form action="pw" method="post" class="edit-form">
 		<div class="row  center row-id">
 			<span class="sp-1">아이디</span><input class="input short-text-box id-box" name="userId"  value="${userDto.userId}" disabled>

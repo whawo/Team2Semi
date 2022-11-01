@@ -334,20 +334,20 @@
 			<div class="row">
 				<input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
 				<img class="preview" src="detail/download?confirmNo=${confirmVO.confirmNo}" width="250" height="200">
-			</div>
+				</div>
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
 				<button  class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete">삭제</button>
 			</div>
-		</div>
-	
+	</div>
 
 		<div class="row-7 center">
 			<a type="button"  class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3"  href = "/confirm/detail?confirmNo=${confirmVO.confirmNo}">취소</a>
 			<button  class="smallbtn create-btn" type="submit"  id="smallbutton1">인증글 저장하기</button>
 		</div>
-	</div>	
-</form>
+</div>	
+	</form>
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
