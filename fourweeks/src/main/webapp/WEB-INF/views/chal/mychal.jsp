@@ -372,6 +372,7 @@
           </div>
       </div>
  
+ 
         <%-- 챌린지 제목 --%>
 	<div> 
 		<span class="chal-title">${chalDto.getChalTitle()}</span>

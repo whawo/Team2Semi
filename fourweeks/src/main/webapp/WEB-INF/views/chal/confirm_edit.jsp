@@ -262,6 +262,7 @@
      });
 </script>    
 
+
 	<form action="edit" method="post" enctype="multipart/form-data" class="confirm-form">
 	<input type="hidden" name="confirmNo" value="${confirmVO.confirmNo}">
 	<input type="hidden" name="userId" value="${confirmVO.userId}">
