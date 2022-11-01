@@ -238,7 +238,7 @@ public class ChalUserController {
 		ChalUserDto userDto = chalUserDao.findPw(userId, userEmail);
 		if(userDto != null) {			
 			model.addAttribute("userDto", userDto);
-			return "chalUser/reset_pw";
+			return "reset_pw";
 		} else {			
 			return "redirect:find_pw?error";
 		}
