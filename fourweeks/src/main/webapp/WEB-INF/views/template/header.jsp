@@ -85,8 +85,8 @@
 		                <li class="right-menu">
 							<img src = "/profile/download?userId=${loginId}" width="50" height="50" class="user-img"> ${loginNick}
 							<ul>
-								<li><a href="/mypage">마이페이지</a></li>
-								<li><a href="/logout">로그아웃</a></li>
+								<li><a href="/user/mypage">마이페이지</a></li>
+								<li><a href="/user/logout">로그아웃</a></li>
 							</ul>
 						</li>
 					</c:when>
@@ -98,8 +98,8 @@
 		                <li class="right-menu">
 							로그인
 							<ul>
-								<li><a href="/login">로그인</a></li>
-								<li><a href="/join">회원가입</a></li>
+								<li><a href="/user/login">로그인</a></li>
+								<li><a href="/user/join">회원가입</a></li>
 							</ul>
 						</li>
 		           	 	

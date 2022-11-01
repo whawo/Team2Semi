@@ -33,6 +33,7 @@ import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalUserService;
 
 @Controller
+@RequestMapping("/user")
 public class ChalUserController {
 	@Autowired
 	private ChalUserDao chalUserDao;	
@@ -62,7 +63,7 @@ public class ChalUserController {
 		chalUserDao.join(chalUserDto);
 		return "redirect:join_success";
 	}
-	@RequestMapping("join_success")
+	@RequestMapping("/join_success")
 	public String joinSuccess() {
 		return "chalUser/joinSuccess";
 	}
@@ -177,7 +178,7 @@ public class ChalUserController {
 		if(!passwordMatch) {
 			return "redirect:auth?error";
 		}else {
-			return "redirect:/mypage/edit";
+			return "redirect:/user/mypage/edit";
 		}
 	}
 	
@@ -193,7 +194,7 @@ public class ChalUserController {
 	public String editPw(@ModelAttribute ChalUserDto inputDto,
 			RedirectAttributes attr) {
 		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
-		return "redirect:/mypage";
+		return "redirect:/user/mypage";
 	}
 	
 	@GetMapping("/leave") // 탈퇴

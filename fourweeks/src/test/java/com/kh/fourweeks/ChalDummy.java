@@ -16,15 +16,15 @@ public class ChalDummy {
 	
 	@Test
 	public void before() {
-		for(int i=1; i < 30; i++) 
+		for(int i=301; i < 306; i++) 
 			chalDao.insert(ChalDto.builder()
-					.chalNo(i+3333)
-					.userId("user07")
+					.chalNo(i)
+					.userId("test02")
 					.chalTitle(i+"번째 챌린지 테스트용이지롱")
 					.chalContent("챌린지"+i+"챌린지~~")
 					.howConfirm("챌린지"+i+"챌린지~~")
-					.chalTopic("취미")
-					.startDate(Date.valueOf("2022-11-02"))
+					.chalTopic("운동")
+					.startDate(Date.valueOf("2022-11-01"))
 					.build());
 	}
 //	@AfterEach

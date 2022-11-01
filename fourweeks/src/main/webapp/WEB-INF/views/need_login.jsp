@@ -64,8 +64,8 @@
             </div>
 
             <div class="row center">
-                <a class="largebtn btn1"  id="largebutton1" href="/login">로그인</a>
-                <a class="largebtn btn1" id="largebutton3" href="/join">회원가입</a>
+                <a class="largebtn btn1"  id="largebutton1" href="/user/login">로그인</a>
+                <a class="largebtn btn1" id="largebutton3" href="/user/join">회원가입</a>
             </div>
         </div>
 </div>
