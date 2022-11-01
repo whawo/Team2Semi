@@ -714,6 +714,7 @@ public class ChalDaoImpl implements ChalDao {
 			return  ChalProgressVO.builder()
 					.userNick(rs.getString("user_nick"))
 					.cnt(rs.getInt("cnt"))
+					.userId(rs.getString("user_id"))
 					.build();
 		}
 	};
@@ -732,12 +733,12 @@ public class ChalDaoImpl implements ChalDao {
 	public List<ChalProgressVO> selectAllProgress(int chalNo) {
 		
 		String sql = "select count(C.confirm_no) cnt,"
-				+ " U.user_nick from participant P"
+				+ " U.user_nick, U.user_id from participant P"
 				+ " left outer join (select * from chal_confirm where chal_no = ?) C "
 				+ "on P.user_id = C.user_id left outer join"
 				+ " chal_user U on P.user_id = U.user_id"
 				+ " where P.chal_no = ?"
-				+ " group by U.user_nick";
+				+ " group by U.user_nick, U.user_id";
 		Object[] param = {chalNo, chalNo};
 		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}

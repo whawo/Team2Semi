@@ -451,7 +451,8 @@
 	     
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
 
-                        ${allProgressDto.userNick} &nbsp; 달성률 : <fmt:formatNumber type="number" 
+                        <img src = "/user/profile/download?userId=${allProgressDto.userId}" class="user-img">
+                        ${allProgressDto.userNick}: &nbsp; 달성률 : <fmt:formatNumber type="number" 
 				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%<br><br>
 				 			<br>
 				 			
