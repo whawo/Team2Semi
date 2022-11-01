@@ -229,13 +229,7 @@
 		$("#autoSelect-alignType").val(
 				decodeURIComponent("${param.alignType}" || "d_day asc"));
 	});
-	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
-	$(window).bind("pageshow", function(event) {
-		if (event.originalEvent.persisted
-			|| (window.performance && window.performance.navigation.type == 2)) {
-				location.href = location.href;
-		}
-	});
+	
 	//tab
 	$(function() {
 		$(".tab_content").hide();
@@ -247,6 +241,14 @@
 			var activeTab = $(this).attr("rel");
 			$("#" + activeTab).show();
 		});
+	});
+	
+	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
+	$(window).bind("pageshow", function(event) {
+		if (event.originalEvent.persisted
+			|| (window.performance && window.performance.navigation.type == 2)) {
+				location.href = location.href;
+		}
 	});
 </script>
 <div class="container-1200">
