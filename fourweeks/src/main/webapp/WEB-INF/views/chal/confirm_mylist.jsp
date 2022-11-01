@@ -409,6 +409,7 @@
 				</c:choose>
 			</c:forEach>
 			
+			
 			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 			<c:choose>
 				<c:when test="${vo.hasNext()}">
@@ -427,9 +428,10 @@
 					<li><a href="#">&raquo;</a></li>
 				</c:otherwise>
 			</c:choose>
+
 		</ul>
+
 	</div>
-	</c:if>
 </div>	
 </div>
 

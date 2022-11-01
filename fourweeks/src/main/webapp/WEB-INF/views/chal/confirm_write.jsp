@@ -324,8 +324,10 @@
     	    	//$("input[name=chalTitle]").blur();
     	    	$("input[name=confirmTitle]").blur();
     	    	$("input[name=confirmContent]").blur();
-    	    	if($(".input.fail".length > 0)) {
-    	            return false;
+    	    	if($(".input.fail".length == 0)) {
+    	            return true;
+    	        }else{
+    	        	return false;
     	        }
     	    });
     	    

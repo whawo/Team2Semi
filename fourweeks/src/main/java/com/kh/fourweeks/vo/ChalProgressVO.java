@@ -10,4 +10,5 @@ public class ChalProgressVO {
 
 	private int cnt;
 	private String userNick;
+	private String userId;
 }

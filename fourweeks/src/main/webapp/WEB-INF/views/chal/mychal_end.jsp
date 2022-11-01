@@ -352,6 +352,7 @@
 </script>
 
 <div class="container-794">
+
 	<%-- 이미지 --%>
 	<div class="detail-top" style="margin-top: 20px">
 		<img src="detail/download?chalNo=${chalDto.getChalNo()}"
@@ -361,6 +362,7 @@
 				변경하기 </span>
 		</div>
 	</div>
+
 
 	<%-- 챌린지 제목 --%>
 	<div>
@@ -425,22 +427,16 @@
 
 			<table class="table table-border">
 
-				<h2>총 참가자 정보</h2>
-
-				<!--progress bar-->
-				<div>
-					<div class="bar-percent">
-						평균 달성률 :
-						<fmt:formatNumber type="number" pattern="0"
-							value="${listCnt*100/28/chalDto.getChalPerson()}" />
-						%
-					</div>
-					<progress max="100"
-						value="<fmt:formatNumber type="number" 
-				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
-				</div>
-
-
+			<h2>총 참가자 정보</h2>
+		
+			<!--progress bar--> 
+	                 <div> 
+	                    <div class="bar-percent"> 평균 달성률 : <fmt:formatNumber type="number" 
+				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
+	                    <progress max="100" value="<fmt:formatNumber type="number" pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
+	                </div>
+	                
+	                
 				<h2>총 ${chalDto.getChalPerson()}명 참가</h2>
 
 				<table width="150">
@@ -469,47 +465,54 @@
 				<h2>챌린지 성공 (${allProgressDto.size()}명)</h2>
 				<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<!-- 프로필사진추가 필요 -->
-					<img src="/profile/download?userId=${list.userId}" class="user-img"
+					<img src="/user/profile/download?userId=${list.userId}" class="user-img"
 						style="vertical-align: middle;">
 						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
 					</c:forEach>
-			<div>
-				<!-- 인증글 목록(최신 max 5개) -->
-				<div class="row div-align">
-					<h2>인증글</h2>
-				</div>
 
-				<div class="row div-align float-right">
-					<a href="/confirm/all?chalNo=${chalDto.chalNo}"
-						style="color: #6c7aef">전체보기(${listCnt}) <i
-						class="fa-solid fa-circle-chevron-right"></i></a>
-				</div>
+
+		<!-- 인증글 목록(최신 max 5개) -->
+		<div class="row div-align">
+			<h2>인증글</h2>
+		</div>
 		
+		<div class="row div-align float-right">
+			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
+		</div>
+		<br><br>
+		
+		
+		<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
+		  <div class="notice-border">
+            <input class="label-notice" placeholder="공지" disabled>&nbsp; 공지글 추가하기 공지글 추가하기
+     	  </div>     
+     	  
+    <!-- confirm_mylist와 동일 -->
+		<!-- 인증글 목록 -->
+			<c:forEach var="list" items="${confirmList}">
+			<a href="/confirm/detail?confirmNo=${list.confirmNo}">
+			
+			<div class="confirm-border" >
+          	<!-- 챌린지 제목 -->
+          	<div class="confirm-title-css" style="position:relative">
+           		${list.confirmTitle} 
+          	</div>
+          	<br><br>
+          	
+          	 <!-- 인증 사진, 내용 -->   
+               
+               
+               <div class="div-align" >
+					${list.confirmContent}
+					<br><br><br><br><br>
+					${list.confirmDate} 
+					&nbsp; 
+					<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
+					&nbsp;
+					<i class="fa-regular fa-heart"></i> ${list.confirmLike}
+					&nbsp; 
+					<i class="fa-regular fa-comment"></i> ${list.replyCount}
 
-				<!-- 관리자글 최신 세 개 조회하는 기능 추가 후 수정 필요 -->
-				<div class="notice-border">
-					<input class="label-notice" placeholder="공지" disabled>&nbsp;
-					공지글 추가하기 공지글 추가하기
-				</div>
-
-				<!-- confirm_mylist와 동일 -->
-				<!-- 인증글 목록 -->
-				<a href="/confirm/detail?confirmNo=${list.confirmNo}"> 
-				<c:forEach var="list" items="${confirmList}">
-
-					<div class="confirm-border">
-						<!-- 챌린지 제목 -->
-						<div class="confirm-title-css" style="position: relative">
-							${list.confirmTitle}
-						</div>
-							
-						<!-- 인증 사진, 내용 -->
-						<div class="div-align">
-							${list.confirmContent} <br>
-							<br>
-							<br>
-							<br>
-							<br> ${list.confirmDate} &nbsp; <i class="fa-regular fa-eye"></i> ${list.confirmRead} &nbsp; <i class="fa-regular fa-heart"></i> ${list.confirmLike} &nbsp; <i class="fa-regular fa-comment"></i> ${list.replyCount}
 						</div>
 						<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
 						<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
