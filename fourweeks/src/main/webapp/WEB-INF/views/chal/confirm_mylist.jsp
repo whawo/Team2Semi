@@ -249,6 +249,14 @@
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
 		});
+		
+		//달성률 소수점 자르기
+		var achieveString = $(".achieve").text();
+		var achieve = Number(achieveString);
+		
+		var achieveCut = achieve.toFixed(0);
+		
+		$(".achieve").text(achieveCut);
 	});
 	
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
@@ -314,7 +322,7 @@
 			 
 				 <div class="label-align"> <!-- 달성률 -->
 				 <!-- 달성률 계산 메소드 구현 완료 후 추가 필요 -->
-				 	 <span class="label label-achieve" >현재 달성률 ??%</span>
+				 	 <span class="label label-achieve">현재 달성률 &nbsp;<span class="achieve">${listCnt*100/28}</span>%</span>
 			     </div>            
 			</div> <!-- 2단 끝 -->
 		</a>
