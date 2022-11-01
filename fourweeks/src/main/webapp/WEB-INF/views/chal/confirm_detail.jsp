@@ -148,7 +148,7 @@
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	<div>
          <div class="div-align" >
-            <img src = "/profile/download?userId=${confirmVO.userId}" class="user-img">
+            <img src = "/user/profile/download?userId=${confirmVO.userId}" class="user-img">
          </div>
          <div class="div-align">
 	         <ul style="list-style:none; font-size:15px;">
@@ -220,7 +220,7 @@
 				<tr class="view">
 					<td>
 						<!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-						<img src = "#" width="50" height="50" class="user-img reply-user-img">
+						<img src = "/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
 						${replyDto.userNick}
 						<c:if test="${replyDto.userId == confirmVO.userId}">
 							&nbsp; [작성자]
