@@ -125,7 +125,7 @@
             </div>
             
             <div class="row row-3 center">
-            	<button type="button" onclick="location.href='/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
+            	<button type="button" onclick="location.href='/user/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
 				<button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
 			 </div>
 			 

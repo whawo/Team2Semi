@@ -325,11 +325,6 @@ $(function(){
         }
     });
 });
-	window.onbeforeunload = function(e) {
-	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
-	    e.returnValue = dialogText;
-	    return dialogText;
-	};
 </script>
 <body>
 	<div class="container-1200">
@@ -390,7 +385,7 @@ $(function(){
 	                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
 	                <div class="row chk-line">
 	                <label class="line lab-2" >
-	                    <input type="checkbox" >
+	                    <input type="checkbox">
 	                    <span class="chk-1"></span>
 	                    <span class="chk-2">확인했어요!</span>
 	                    <span class="fail-message">필수 항목 입니다. </span>

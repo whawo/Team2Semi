@@ -156,20 +156,20 @@ $(function () {
 	<!-- 회원가입처럼 새 비밀번호와 새 비밀번호 확인이 일치해야 form 전송되도록 설정 필요(jQuery) -->    
 	<form action="pw" method="post" class="edit-form">
 		<div class="row  center row-id">
-			<span class="sp-1">아이디</span><input class="input short-text-box id-box" name="userId"  value="${userDto.userId}" disabled>
-			<input class="input short-text-box id-box" name="userId"  value="${userDto.userId}" type="hidden">
+			<span class="sp-1">아이디</span><input class="input short-text-box id-box" value="${loginId}" disabled>
+			<input class="input short-text-box id-box" name="userId" value="${loginId}" type="hidden">
 		</div>	
 		<div class="row center">
 			<span class="sp-2">새 비밀번호 </span><input name="userPw" class="input short-text-box short-hover pw-box1"  type="password"   placeholder="8~16자의 영문/숫자"><br>
 		     <span class="fail-message sp-4">8~16자 이내 영문 소문자/대문자,숫자,특수문자(!@#$)로 입력해주세요.</span>
 		</div>
 		<div class="row ">
-			     <span class="sp-3">새 비밀번호 확인 </span><input class="input short-text-box short-hover pw-box2"  type="password" placeholder="8~16자의 영문/숫자"  id="repeatPw"><br>
+			     <span class="sp-3">새 비밀번호 확인 </span><input name="userPwCheck" class="input short-text-box short-hover pw-box2"  type="password" placeholder="8~16자의 영문/숫자"  id="repeatPw"><br>
 			     <span class="fail-message sp-5">비밀번호가 일치하지 않습니다.</span>
 		</div>
 
 		<div class="row row-4 center">
-			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3" onclick="location.href='/mypage';">취소</button>
+			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3" onclick="location.href='/user/mypage';">취소</button>
 
 			     <button class="save-btn" type="submit">변경</button>
 		</div>

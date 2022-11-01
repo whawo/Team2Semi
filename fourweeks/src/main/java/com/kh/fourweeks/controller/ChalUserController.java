@@ -144,7 +144,7 @@ public class ChalUserController {
 		String userId = userService.myInfoEdit(userDto, attachment);
 		
 		attr.addAttribute("userId", userId);
-		return "redirect:/mypage";
+		return "redirect:/user/mypage";
 	}
 	
 	@GetMapping("/profile/download") // 프로필 사진 다운로드
@@ -183,20 +183,21 @@ public class ChalUserController {
 	}
 	
 	@GetMapping("/mypage/edit/pw") // 비밀번호 변경
-	public String editPw(Model model,
-			HttpSession session) {
-		String userId = (String)session.getAttribute(SessionConstant.ID);
+	public String editPw(
+			Model model,
+			@RequestParam(required = false) String userId) {
 		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
 		return "chalUser/edit_pw";
 	}
 	
 	@PostMapping("/mypage/edit/pw") 
-	public String editPw(@ModelAttribute ChalUserDto inputDto,
-			HttpSession session,
-			RedirectAttributes attr) {
-		String loginId = (String)session.getAttribute(SessionConstant.ID);
-		if(loginId.equals(inputDto.getUserId())) {
-			if(chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId())) {
+	public String editPw(
+			@RequestParam(required = false) String userId,
+			@RequestParam String userPw,
+			@RequestParam String userPwCheck) {
+		
+		if(userPw.equals(userPwCheck)) {
+			if(chalUserDao.updatePw(userPw, userId)) {
 				return "redirect:/user/mypage";
 			}else {
 				throw new TargetNotFoundException();
@@ -262,7 +263,8 @@ public class ChalUserController {
 	}
 	
 	@GetMapping("/reset_pw") // 비밀번호 재설정
-	public String resetPw(Model model,
+	public String resetPw(
+			Model model,
 			@RequestParam(required = false) String userId) {
 		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
 		return "chalUser/reset_pw";
