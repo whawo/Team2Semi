@@ -192,10 +192,20 @@ public class ChalUserController {
 	
 	@PostMapping("/mypage/edit/pw") 
 	public String editPw(@ModelAttribute ChalUserDto inputDto,
+			HttpSession session,
 			RedirectAttributes attr) {
-		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
-		return "redirect:/user/mypage";
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		if(loginId.equals(inputDto.getUserId())) {
+			if(chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId())) {
+				return "redirect:/user/mypage";
+			}else {
+				throw new TargetNotFoundException();
+			}
+		}else {
+			throw new TargetNotFoundException();
+		}
 	}
+
 	
 	@GetMapping("/leave") // 탈퇴
 	public String leave(
