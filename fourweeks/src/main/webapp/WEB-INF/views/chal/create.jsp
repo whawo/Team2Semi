@@ -337,12 +337,12 @@ $(function(){
         field:document.querySelector(".single-date-picker"),
         
         minDate:moment(), // 오늘자 선택 가능
-        minDate:moment().add(4,'day'), // 오늘 + 5일
+        maxDate:moment().add(4,'day'), // 오늘 + 5일
 		 format:"YYYY-MM-DD",
         firstDay:0, // 시작일 일요일부터 
         singleDate:true, // 날짜 한개만 선택
         // (+옵션) 표시되는 달의 개수를 지정 
-        numberOfMonths:1, //2개의 달씩 보여줘라 
+        numberOfMonths:1, //1개의 달씩 보여줘라 
    
         // 날짜 출력하기 
         onSelect: function(date){
