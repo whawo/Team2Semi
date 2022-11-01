@@ -233,13 +233,6 @@
 	}
 
 	
-	/* sp 모음 */
-	.sp-2{
-	padding-left: 570px;
-	}
-	.sp-3{
-	padding-left: 560px;
-	}
     
     </style>
      <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -316,6 +309,12 @@
              }
          });
      });
+ 	 // 저장하지 않고 벗어날 경우 alert창 띄움
+	window.onbeforeunload = function(e) {
+	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
+	    e.returnValue = dialogText;
+	    return dialogText;
+	};
      
  /* 
 		폼 이벤트 방지인데 ... 폼 이벤트를 방지하면 버튼이 안눌림.. ! 
@@ -354,6 +353,7 @@
     	    	}
     	    });
     	    
+>>>>>>> refs/remotes/origin/main
 
     	}); 
  */
@@ -395,7 +395,7 @@
             <div class="row row-3">
                 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
-                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40"><br>
+                <input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40">
                 <span  class="helper-text-40 helper-css sp-2">0</span> /40
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>
@@ -403,7 +403,7 @@
             <div class="row row-4">
                 <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
                 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
-                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off" maxlength="300"></textarea><br>
+                <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off" maxlength="300"></textarea>
                 <span  class="helper-text-40 helper-css sp-3">0</span> /300
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>

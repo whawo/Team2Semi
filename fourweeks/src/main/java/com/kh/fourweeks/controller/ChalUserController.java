@@ -23,6 +23,7 @@ import com.kh.fourweeks.constant.SessionConstant;
 import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.LeaveCountDto;
 import com.kh.fourweeks.error.TargetNotFoundException;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
@@ -32,6 +33,7 @@ import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalUserService;
 
 @Controller
+@RequestMapping("/user")
 public class ChalUserController {
 	@Autowired
 	private ChalUserDao chalUserDao;	
@@ -61,7 +63,7 @@ public class ChalUserController {
 		chalUserDao.join(chalUserDto);
 		return "redirect:join_success";
 	}
-	@RequestMapping("join_success")
+	@RequestMapping("/join_success")
 	public String joinSuccess() {
 		return "chalUser/joinSuccess";
 	}
@@ -176,7 +178,7 @@ public class ChalUserController {
 		if(!passwordMatch) {
 			return "redirect:auth?error";
 		}else {
-			return "redirect:/mypage/edit";
+			return "redirect:/user/mypage/edit";
 		}
 	}
 	
@@ -192,17 +194,20 @@ public class ChalUserController {
 	public String editPw(@ModelAttribute ChalUserDto inputDto,
 			RedirectAttributes attr) {
 		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
-		return "redirect:/mypage";
+		return "redirect:/user/mypage";
 	}
 	
 	@GetMapping("/leave") // 탈퇴
-	public String leave(HttpSession session) {
+	public String leave(
+			HttpSession session,
+			@ModelAttribute LeaveCountDto leaveCountDto) {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		if(chalUserDao.delete(userId)) {
 			//내가 개설하고 나만 참가 중인(참가자=1명) 챌린지 삭제
 			chalDao.deleteChalOnlyMe(userId);
 			
 			session.removeAttribute(SessionConstant.ID);
+			chalUserDao.leaveCounting(leaveCountDto); // 탈퇴수 카운팅 메소드
 			return "chalUser/leave";
 		}else {
 			throw new TargetNotFoundException();
@@ -230,15 +235,17 @@ public class ChalUserController {
 		return "chalUser/find_pw";
 	}
 	
-	@PostMapping("/find_pw")
+	@PostMapping("/find_pw") // 비밀번호 찾기
 	public String findPw(
 			Model model, 
 			@RequestParam String userId,
-			@RequestParam String userEmail) {
+			@RequestParam String userEmail,
+			RedirectAttributes attr) {
 		ChalUserDto userDto = chalUserDao.findPw(userId, userEmail);
 		if(userDto != null) {			
 			model.addAttribute("userDto", userDto);
-			return "reset_pw";
+			attr.addAttribute("userId", userId);
+			return "redirect:reset_pw";
 		} else {			
 			return "redirect:find_pw?error";
 		}
@@ -246,15 +253,23 @@ public class ChalUserController {
 	
 	@GetMapping("/reset_pw") // 비밀번호 재설정
 	public String resetPw(Model model,
-			@RequestParam String userId) {
+			@RequestParam(required = false) String userId) {
 		model.addAttribute("userDto", chalUserDao.selectOne(userId));			
 		return "chalUser/reset_pw";
 	}
 	
 	@PostMapping("/reset_pw") 
-	public String resetPw(@ModelAttribute ChalUserDto inputDto,
-			RedirectAttributes attr) {
-		chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId());
-		return "redirect:/login";
+	public String resetPw(
+			@RequestParam(required = false) String userId,
+			@RequestParam String newPw,
+			@RequestParam String newPwCheck
+			) {
+		boolean check = newPw.equals(newPwCheck);
+		if(check) {
+			chalUserDao.updatePw(newPw, userId);
+			return "redirect:login";
+		} else {
+			return "redirect:reset_pw?error";
+		}
 	}
 }

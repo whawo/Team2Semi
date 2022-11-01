@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.fourweeks.entity.ChalCreateMyDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
+import com.kh.fourweeks.entity.LeaveCountDto;
 
 @Repository
 public class ChalUserDaoImpl implements ChalUserDao{
@@ -222,4 +223,9 @@ public class ChalUserDaoImpl implements ChalUserDao{
       Object[] param = {userId};
       return jdbcTemplate.update(sql, param) > 0;
    }
+   @Override
+	public void leaveCounting(LeaveCountDto leaveCountDto) {
+		String sql = "insert into leave_count values(leave_seq.nextval, sysdate, 1)";
+		jdbcTemplate.update(sql);
+	}
 }

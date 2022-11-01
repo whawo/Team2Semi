@@ -250,6 +250,7 @@
 				location.href = location.href;
 		}
 	});
+
 </script>
 <div class="container-1200">
 	
@@ -389,7 +390,7 @@
 				<%-- 다음--%>
 					<c:choose>
 						<c:when test="${vo.hasNext()}">
-							<li><a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
+							<li><a href="list?p=${vo.nextBlock()}&${vo.parameter()}&${param.alignType}">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="#">&gt;</a></li>
