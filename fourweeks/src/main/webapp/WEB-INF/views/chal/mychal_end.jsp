@@ -1,4 +1,4 @@
-   <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -544,9 +544,10 @@
 	                 <div> 
 	                    <div class="bar-percent"> 평균 달성률 : <fmt:formatNumber type="number" 
 				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
-	                    <progress max="100" value="<fmt:formatNumber type="number" 
-				 pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
+	                    <progress max="100" value="<fmt:formatNumber type="number" pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
 	                </div>
+	                
+	                
 
             
             <h2>총 ${chalDto.getChalPerson()}명 참가</h2>

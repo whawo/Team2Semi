@@ -431,13 +431,11 @@
 	    <div id="tab2" class="tab_content">
   
 	     <h2>달성률</h2>
-	     	<!--progress bar-->    	   
-	      	   <div>
-               <div class="bar-percent"> 평균달성률 :  <fmt:formatNumber type="number" 
-		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
-               <progress max="100" value=" <fmt:formatNumber type="number" 
-		pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
-               </div>
+	     	<!--progress bar-->    	                  
+                <div>
+                    <div class="bar-percent">평균달성률 : <fmt:formatNumber type="number" pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>%</div>
+                    <progress max="100" value="<fmt:formatNumber type="number" pattern="0" value="${listCnt*100/28/chalDto.getChalPerson()}"/>"></progress>
+                </div>     
                
                   <!-- 
                 테스트용 progress bar  숫자 바꾸면 진행률 확인가능

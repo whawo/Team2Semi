@@ -11,9 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
     
 <style>
  div{
@@ -238,7 +236,7 @@
                 });
             });
             $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
+                $(".preview").attr("src", "detail/download?confirmNo=${confirmVO.confirmNo}");
             });
         });
     
@@ -274,8 +272,8 @@
 	<input type="hidden" name="userId" value="${confirmVO.userId}">
 	
 	<div class="container-1200">
-	  <div class="row row-1 mt-92">
-                <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
+	  <div class="row row-1">
+                <p class="p1"> 1.수정할 챌린지를 선택해주세요.</p>
 		<br>
 		<!-- 기존 챌린지 자동 선택, 수정 불가 (form submit 시 disabled 속성 제거) -->
 		<select  class="dropdown dropdown-check confirm-check"  name="chalTitle" disabled>
@@ -294,13 +292,11 @@
   		</div>
   		
   		<div class="row row-3">
-			 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
+			<p class="p1">2. 인증글 제목을 입력해주세요.</p>
 			<p class="p2">타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
 			<br>
 			<input name="confirmTitle" class="short-text-underlinebox uderline-hover  helper-text1" type="text" value = "${confirmVO.confirmTitle}" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40">
-			<br><br>
 			<span  class="helper-text-40 helper-css sp-2">0</span> /40
-			<span>40자까지만 입력할 수 있어요.</span>
 			<span class="fail-message">필수 항목 입니다.</span>
 			<br><br>
 		</div>
@@ -310,7 +306,6 @@
 		 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
 		<br>
 		<textarea name="confirmContent" placeholder="예) 매일 깃 커밋하기 - 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" rows="10" required required autocomplete="off"  class="helper-text2  short-hover">${confirmVO.confirmContent}</textarea>
-		<br><br>
 		<span  class="helper-text-40 helper-css sp-3">0</span> /300
 		<span>내용을 입력해주세요.</span>
 		<span class="fail-message">필수 항목 입니다.</span>
@@ -322,7 +317,7 @@
           <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
 			<div class="row">
 				<input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail>
-				<img src = "detail/download?confirmNo=${confirmVO.confirmNo}"  width="250" height="200" class="confirm-img preview">
+				<img class="confirm-img preview" src = "detail/download?confirmNo=${confirmVO.confirmNo}"  width="250" height="200" >
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
 				<button  class="delete-file-upload img-btn" name="thumbnail-delete">삭제</button>
