@@ -26,9 +26,6 @@
 		/*border : 1px dotted transparent; */
 		border : 1px dotted  transparent;
 	}
-	.confirm-img.no-img {
-		display: none;
-	}
 	.container-margin {
 		margin-top : 80px;		
 	}
@@ -116,11 +113,6 @@
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
-		
-		//인증샷이 없으면 img 영역 미노출
-		$(".confirm-img").on("error", function(){
-			$(this).addClass("no-img");
-		});
 	});
 	
 	$(function(){
@@ -158,9 +150,11 @@
 		</div>
      </div>
      
-	<!-- 인증샷-->
+	<!-- 인증샷 : 있을 때만 노출-->
        <div>
-           <img src = "detail/download?confirmNo=${confirmVO.confirmNo}" class="confirm-img">
+       	<c:if test="${attachDto != null}">
+			<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" class="confirm-img">       		
+		</c:if>
        </div>
        
        <div class="confirm-content">

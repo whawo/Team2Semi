@@ -19,9 +19,6 @@
 	a{
 		color : black;
 	}
-	.confirm-img.no-img {
-		display: none;
-	}
 	div {
 		/*border : 1px solid gray; */
 		border : 1px solid transparent;
@@ -105,7 +102,6 @@
 		$(".user-img").on("error", function(){
 			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
 		});
-		
 		//인증샷이 없으면 img 태그 가리기
 		$(".confirm-img").on("error", function(){
 			$(this).addClass("no-img");
@@ -159,9 +155,10 @@
 				<i class="fa-regular fa-heart"></i> ${list.confirmLike}
 				&nbsp; 
 				<i class="fa-regular fa-comment"></i> ${list.replyCount}
-			</div>
-		       <img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align"  >
-			</div>	
+			
+	       <div>
+				<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">       		
+	       </div>
 		  </a>
 		</c:forEach>
 <!-- 인증글, 사진 목록 끝 -->			

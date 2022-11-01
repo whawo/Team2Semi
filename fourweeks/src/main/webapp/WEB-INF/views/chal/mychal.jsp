@@ -233,9 +233,6 @@
         padding : 5px;
          height : 230px;
     }
-   	.confirm-img.no-img {
-		display: none;
-	}
 	.confirm-img {
         border-radius: 10px;
 		width: 90px;
@@ -307,11 +304,11 @@ $(function () {
     $(".user-img").on("error", function(){
         $(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
     });
-    
-    //인증샷이 없으면 img 태그 가리기
-    $(".confirm-img").on("error", function(){
-        $(this).addClass("no-img");
-    });
+  //인증샷이 없으면 img 태그 가리기
+	$(".confirm-img").on("error", function(){
+		$(this).addClass("no-img");
+	});
+
     
     $.ajax({
         //내 인증글 작성 일차를 리스트로 가져오기
@@ -559,10 +556,12 @@ $(window).bind("pageshow", function(event) {
 						&nbsp; 
 						<i class="fa-regular fa-comment"></i> ${list.replyCount}
 
-
-				</div>
-           			<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
-              	</div><!-- 인증글, 사진 목록 끝 -->			
+				<!-- 인증샷 : 있을 때만 노출-->
+		       <div>
+		       	<c:if test="${attachDto != null}">
+					<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">    		
+				</c:if>
+		       </div>	
      		</a>
 		</c:forEach>
 
