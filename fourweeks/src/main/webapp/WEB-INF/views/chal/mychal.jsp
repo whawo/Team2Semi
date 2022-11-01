@@ -371,11 +371,14 @@ $(function () {
                     function diffDay() {
                         var sdate = new Date(sString);
                         var edate = new Date(eString);
+                        sdate.setHours(sdate.getHours()-9);
+                        edate.setHours(edate.getHours()+14);
+                        edate.setMinutes(edate.getMinutes()+59);
+                        edate.setSeconds(edate.getSeconds()+59);
                         var todayTime = new Date();
                         var diff;
                         
                         if(sdate > moment()) {
-                            console.log("시작 전");
                             $(".chal-status").text("시작까지");
                             diff = sdate - todayTime;
                         } else {
