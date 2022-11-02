@@ -443,7 +443,7 @@ header.header-fixed {
 
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170">
 		</a>
 </div>
 
@@ -520,7 +520,7 @@ header.header-fixed {
 <div class="row row-4">
 
       <a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-      <img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
+      <img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170">
       </a>
 </div>
 <div class="row row-5"> 
@@ -595,7 +595,7 @@ header.header-fixed {
         
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170">
 		</a>
 </div>
 <div class="row row-5"> 

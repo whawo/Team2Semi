@@ -228,4 +228,11 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		String sql = "insert into leave_count values(leave_seq.nextval, sysdate, 1)";
 		jdbcTemplate.update(sql);
 	}
+   
+   @Override
+	public boolean updateModifiedTime(String userId) {
+	    String sql = "update chal_user set modified_date = sysdate where user_id = ?";
+	    Object[] param = {userId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }

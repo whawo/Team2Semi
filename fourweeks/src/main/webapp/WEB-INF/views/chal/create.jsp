@@ -443,7 +443,7 @@ $(function(){
 	
 	            <div class="row">
 	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" maxlength="300" ></textarea>
+	                <textarea class="helper-text2 short-hover" name="howConfirm" required placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" maxlength="300" ></textarea>
 	                <span  class="helper-text-300 helper-css">0</span> /300
 	                <span class="fail-message">필수 항목 입니다. </span>
 	            </div>
@@ -466,7 +466,7 @@ $(function(){
 	                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
 	                <div class="row chk-line">
 	                <label class="line lab-2" >
-	                    <input type="checkbox" >
+	                    <input type="checkbox" required>
 	                    <span class="chk-1"></span>
 	                    <span class="chk-2">확인했어요!</span>
 	                    <span class="fail-message">필수 항목 입니다. </span>

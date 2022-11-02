@@ -567,9 +567,9 @@ $(window).bind("pageshow", function(event) {
 
 				<!-- 인증샷 : 있을 때만 노출-->
 		       <div>
-		       	<c:if test="${attachDto != null}">
+		       	
 					<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">    		
-				</c:if>
+				
 		       </div>	
      		</a>
 		</c:forEach>

@@ -483,7 +483,7 @@ header.header-fixed {
 	</div>
 
 	<div class="row row-parenet">
-		<a href="/chal/detail?chalNo=${chalDto.chalNo}">
+		<a href="/chal/mychal?chalNo=${chalDto.chalNo}">
 	<div class="row-2">
 		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img">
 	</div>
@@ -579,7 +579,8 @@ header.header-fixed {
 	      </c:if>
 	 </div>
     </div>
-
+	<c:if test="${listCnt != 0}">
+		<!-- 페이지 내비게이터 -->
 	<div class="row row-last center  mb-40">
 		<!-- 이전 -->
 		<ul class=" pagenation">
@@ -631,6 +632,7 @@ header.header-fixed {
 			</c:choose>
 			</ul>
 	</div>
+	</c:if>
 </body>
 
 

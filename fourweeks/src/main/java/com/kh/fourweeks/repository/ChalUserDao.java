@@ -22,6 +22,7 @@ public interface ChalUserDao {
 	boolean myInfoUpdate(ChalUserDto userDto); // 프로필 정보 변경
 	void userAttachment(int attachmentNo, String userId); // user_img 테이블에 첨부파일 정보 연결
 	boolean updatePw(String newPw, String userId); //비밀번호 변경
+	boolean updateModifiedTime(String userId); // 수정일시 자동갱신 메소드
 
 	//참가중인 모든챌린지 조회 메소드
 	List<ChalMyDetailDto> selectAllMyDetail(String userId);

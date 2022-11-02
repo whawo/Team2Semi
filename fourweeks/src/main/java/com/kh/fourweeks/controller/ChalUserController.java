@@ -143,6 +143,10 @@ public class ChalUserController {
 		//userService에서 수정, 첨부파일 업로드(추가, 변경)/삭제까지 처리
 		String userId = userService.myInfoEdit(userDto, attachment);
 		
+		//수정 성공 시, DB 수정일시 컬럼 자동 업데이트 
+		if(chalUserDao.myInfoUpdate(userDto)) {			
+			chalUserDao.updateModifiedTime(userId);
+		};
 		attr.addAttribute("userId", userId);
 		return "redirect:/user/mypage";
 	}
@@ -197,6 +201,8 @@ public class ChalUserController {
 		String loginId = (String)session.getAttribute(SessionConstant.ID);
 		if(loginId.equals(inputDto.getUserId())) {
 			if(chalUserDao.updatePw(inputDto.getUserPw(), inputDto.getUserId())) {
+				//수정 성공 시, DB 수정일시 컬럼 자동 업데이트 
+				chalUserDao.updateModifiedTime(loginId);
 				return "redirect:/user/mypage";
 			}else {
 				throw new TargetNotFoundException();
@@ -276,7 +282,10 @@ public class ChalUserController {
 			) {
 		boolean check = newPw.equals(newPwCheck);
 		if(check) {
-			chalUserDao.updatePw(newPw, userId);
+			if(chalUserDao.updatePw(newPw, userId)) {
+				//수정 성공 시, DB 수정일시 컬럼 자동 업데이트 
+				chalUserDao.updateModifiedTime(userId);
+			};
 			return "redirect:login";
 		} else {
 			return "redirect:reset_pw?error";
