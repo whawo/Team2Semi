@@ -249,12 +249,16 @@
 	left: 365px;
 	}
 	.row-9{
+
 	margin-top:10px;
 	margin-bottom: -90px;
+
 	}
 	.row-11{
+
 	position: relative;
 	top: 10px;
+
 	}
 	.row-12{
 	position: relative;
@@ -304,6 +308,7 @@
 	color: #3f3f3f;
 	}
 	.p6{
+
 	margin-top:70px;
 	padding-top:10px;
 	font-size:16px;
