@@ -69,8 +69,8 @@
             </div>
 
             <div class="row row-2 center">
-                <button class="largebtn btn1 login-btn"  id="largebutton1" onclick="location.href='/login';">로그인</button>
-                <button class="largebtn btn1 join-btn" id="largebutton3"  onclick="location.href='/join';">회원가입</button>
+                <button class="largebtn btn1 login-btn"  id="largebutton1" onclick="location.href='/user/login';">로그인</button>
+                <button class="largebtn btn1 join-btn" id="largebutton3"  onclick="location.href='/user/join';">회원가입</button>
             </div>
         </div>
 </div>
