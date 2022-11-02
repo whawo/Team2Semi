@@ -231,7 +231,7 @@
     .confirm-border {
         border-bottom: 1px solid #E7E7E7;
         padding : 5px;
-         height : 230px;
+        height : 300px;
     }
 	.confirm-img {
         border-radius: 10px;
@@ -521,17 +521,15 @@ $(window).bind("pageshow", function(event) {
 			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
 		</div>
 		<br><br>
-		
-		<!-- 관리자글 -->
+
      	<!-- 관리자글 -->
-     <div class="notice-border">
-	       <span class="label label-notice" >공지</span>
 	       <c:forEach var="noticeList" items="${noticeList}">
-		       	<span>공지</span><br>
-		       	<span>${noticeList.noticeTitle}</span><br>
-		       	<span>${noticeList.noticeTime}</span>
-	       </c:forEach>
+     <div class="notice-border">
+	       <span class="label label-notice">공지</span>
+		       	<span style="font-size:16px;">&nbsp; ${noticeList.noticeTitle}</span>&nbsp; &nbsp; 
+		       	<span style="font-size:16px;">&nbsp; ${noticeList.noticeTime}</span>
      </div>       
+	       </c:forEach>
 		
 <!-- confirm_mylist와 동일 -->		  
       <!--인증글 목록-->

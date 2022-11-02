@@ -90,6 +90,7 @@
          justify-content: center;
          align-items: center;
        }
+       .chal-status,
        .chal-timer-font {
            font-size: 20px;
        }
@@ -107,6 +108,9 @@
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 <script>
 	$(function() {
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
@@ -123,6 +127,63 @@
 		$(".confirm-img").on("error", function() {
 			$(this).addClass("no-img");
 		});
+		
+		$.ajax({
+	        //챌린지 시작일 가져오기
+	        url : "http://localhost:8888/rest/chal/chal_detail?chalNo=${param.chalNo}",
+	        method : "get",
+	        dataType : "json",
+	        //async : false,
+	        success : function(resp) {
+	            var sString = resp.startDate;
+	            console.log(sString);
+	            
+
+	            $.ajax({
+	                //챌린지 종료일 가져오기
+	                url:"http://localhost:8888/rest/chal/chal_end_date?chalNo=${param.chalNo}",
+	                method:"get",
+	                dataType:"json",
+	                //async: false,
+	                success:function(resp){
+	                    var eString = resp.endDate;
+	                    console.log(eString);
+	                   
+	                    function diffDay() {
+	                        var sdate = new Date(sString);
+	                        var edate = new Date(eString);
+	                        sdate.setHours(sdate.getHours()-9);
+	                        edate.setHours(edate.getHours()+14);
+	                        edate.setMinutes(edate.getMinutes()+59);
+	                        edate.setSeconds(edate.getSeconds()+59);
+	                        var todayTime = new Date();
+	                        var diff;
+	                        
+	                        if(sdate > moment()) {
+	                            $(".chal-status").text("시작까지");
+	                            diff = sdate - todayTime;
+	                        } else {
+	                            $(".chal-status").text("종료까지");
+	                            diff = edate - todayTime;
+	                        }
+	                        
+	                        var diffDay = Math.floor(diff / (1000*60*60*24));
+	                        var diffHour = Math.floor((diff / (1000*60*60)) % 24);
+	                        var diffMin = Math.floor((diff / (1000*60)) % 60);
+	                        var diffSec = Math.floor(diff / 1000 % 60);
+	                        
+	                        //var remainTime = document.querySelector("#remain-time");
+	                        //remainTime.innerText = `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
+	                        $("#remain-time").text(diffDay+"일 " + diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
+	                    }
+
+	                    diffDay();
+	                    setInterval(diffDay, 1000);
+
+	                }
+	            });
+	        }
+	    });
 	});
 
 	// 뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
@@ -154,30 +215,31 @@
           <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
 
           <div class="chal-timer">
-              <span class="chal-timer-font"> 
         <c:choose>
-		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
+		<%-- <c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
 			${chalVO.getEndDday()}일 뒤 종료
 		</c:when>
 		<c:when test="${chalVO.getEndDday() == 0}">
 			오늘 종료
-		</c:when>
+		</c:when> --%>
 		<c:when test="${chalVO.getEndDday() < 0}">
 			종료
 		</c:when>
-		<c:when test="${chalVO.getDDay() == 1}">
+		<%-- <c:when test="${chalVO.getDDay() == 1}">
 			내일부터 시작
 		</c:when>
 				<c:when test="${chalVO.getDDay() == 0}">
 			오늘 시작
-		</c:when>
-		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
+		</c:when> --%>
 		<c:otherwise>
-			${chalVO.getDDay()}일 뒤 시작
+			<span class="chal-status"></span>
+				&nbsp;
+			<span class="chal-timer-font" id="remain-time"></span>
 		</c:otherwise>
-	    </c:choose>  / 타이머로 변경하기 </span>
+	    </c:choose>
           </div>
-      </div>
+          </div>
+      
       
 	<%-- 챌린지 제목 --%>
 	<div> 
@@ -271,7 +333,7 @@
      </div>
      
 	<div> 
-		${chalDto.getChalContent()}
+		<pre>${chalDto.getChalContent()}</pre>
 	</div>
 	
 	 <div>
@@ -279,15 +341,11 @@
      </div>
 	
 	<div> 
-		${chalDto.getHowConfirm()}
+		<pre>${chalDto.getHowConfirm()}</pre>
 	</div>
 		
 </div>
 </form>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-
-
-
