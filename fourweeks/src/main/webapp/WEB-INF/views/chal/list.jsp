@@ -140,8 +140,7 @@
 	.main-img {
 		width: 288px;
 		height: 208px;
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
+		border-radius:0.5em;
 	}
 	
 	.home-chal-title {
@@ -423,7 +422,6 @@
 					<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
 						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
-					
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>
