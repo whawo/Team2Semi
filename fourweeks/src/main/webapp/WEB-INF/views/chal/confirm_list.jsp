@@ -128,9 +128,11 @@
      <div class="notice-border">
 	       <span class="label label-notice" >공지</span>
 	       <c:forEach var="noticeList" items="${noticeList}">
+	       <a href="/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
 		       	<span>공지</span><br>
 		       	<span>${noticeList.noticeTitle}</span><br>
 		       	<span>${noticeList.noticeTime}</span>
+		   </a>
 	       </c:forEach>
      </div>     
      </div>      

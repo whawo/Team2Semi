@@ -105,6 +105,9 @@
                       scales: {
                           y: {
                         	  beginAtZero: true,
+                        	  ticks : {
+									stepSize : 1
+								}
                           },
                       },
                       plugins: {
@@ -196,14 +199,14 @@
 		
 		<div class="row float-container">
 			
-			<div class="row float-left w-50">
+			<!-- <div class="row float-left w-50">
 				<div class="row center">
 					<h3>최근 한달 방문자수</h3>
 				</div>
 				<div class="row center">
 					<canvas id="#"></canvas>
 				</div>
-			</div>
+			</div> -->
 			
 			<div class="row float-left w-50">
 				<div class="row center">

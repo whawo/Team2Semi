@@ -356,10 +356,9 @@
 	<%-- 이미지 --%>
 	<div class="detail-top" style="margin-top: 20px">
 		<img src="detail/download?chalNo=${chalDto.getChalNo()}"
-			class="chal-img detail-top-img">
+			class="chal-img detail-top-img" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		<div class="chal-timer">
-			<span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작 / 타이머로
-				변경하기 </span>
+			<span class="chal-timer-font">종료</span>
 		</div>
 	</div>
 
@@ -468,7 +467,7 @@
 				<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<!-- 프로필사진추가 필요 -->
 					<img src="/user/profile/download?userId=${list.userId}" class="user-img"
-						style="vertical-align: middle;">
+						style="vertical-align: middle;" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
 						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
 					</c:forEach>
 
@@ -488,9 +487,11 @@
 		     <div class="notice-border">
 			       <span class="label label-notice" >공지</span>
 			       <c:forEach var="noticeList" items="${noticeList}">
+			       <a href="/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
 				       	<span>공지</span><br>
 				       	<span>${noticeList.noticeTitle}</span><br>
 				       	<span>${noticeList.noticeTime}</span>
+				    </a>
 			       </c:forEach>
 		     </div>    
 	     	  
@@ -522,7 +523,7 @@
 		
 						</div>
 							<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-							<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
+							<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align" onerror="this.style.display='none'">
 				</div>
 			</a>
 			</c:forEach>

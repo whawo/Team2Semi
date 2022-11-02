@@ -38,6 +38,7 @@ import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalService;
 import com.kh.fourweeks.vo.ChalConfirmVO;
+import com.kh.fourweeks.vo.NoticeVO;
 import com.kh.fourweeks.vo.OnePerDayVO;
 
 @Controller
@@ -207,6 +208,15 @@ public class ChalConfirmController {
 		//관리자 공지글 조회
 		model.addAttribute("noticeList", adminDao.selectNoticeTopN(1, 3));
 		
+		//챌린지 썸네일 파일 조회
+		//기존 첨부파일이 있는지 검사, 있으면 첨
+		AttachmentDto attachDto = attachmentDao.selectDetail(vo.getChalNo());
+		if(attachDto!=null) {
+			System.out.println("썸넬 있음@@@@");
+		}else {
+			System.out.println("썸넬없음@@@");
+		}
+		
 		return "chal/confirm_mylist";
 	}
 	
@@ -287,4 +297,23 @@ public class ChalConfirmController {
 		attr.addAttribute("confirmNo", confirmNo);
 		return "redirect:/confirm/detail";
 	}
+	
+	@GetMapping("/notice/detail")//공지글 상세 조회
+	public String noticeDetail(@ModelAttribute NoticeVO noticeDto, Model model) {
+		model.addAttribute("detailDto", adminDao.selectNoticeOne(noticeDto.getNoticeNo()));
+		return "/chal/notice_detail";
+	};
+	
+	@GetMapping("/notice/download")//공지글 상세 이미지 조회
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> noticeImgDownload(
+			@ModelAttribute NoticeVO noticeDto
+		) throws IOException {
+		//공지글 번호로 첨부파일 번호 찾기
+		int attachmentNo = attachmentDao.selectNoticeImg(noticeDto.getNoticeNo());
+		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
+		return attachService.load(attachmentNo);
+	}
+	
+	
 }
