@@ -55,14 +55,18 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 										"/user/find_id", // 아이디 찾기 가능
 										"/user/find_pw", // 비밀번호 찾기 가능
 										"/user/reset_pw", // 비밀번호 변경 가능
-										"/user/leave" // 탈퇴 가능
+										"/user/leave", // 탈퇴 가능
+										"/admin/login"
 										);
 		// 관리자 구분
 		registry.addInterceptor(adminInterceptor)
 								.addPathPatterns(
 										"/admin/**",
-										"/confirm/reply/blind"
+										"/confirm/reply/blind")
+								.excludePathPatterns(
+										"/admin/login"
 										);
+		
 		// 본인이 쓴 댓글만 삭제&수정 가능
 		registry.addInterceptor(replyOwnerCheckInterceptor)
 								.addPathPatterns(

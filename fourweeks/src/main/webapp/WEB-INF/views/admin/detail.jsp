@@ -15,6 +15,11 @@
 	.cancel-btn {
 		margin-top: 30px; 
 	}
+	textarea {
+			    width: 100%;
+			    border: none;
+			    resize: none;
+	}
 </style>
 <script>
 	$(function(){
@@ -46,7 +51,7 @@
 				<tbody>
 					<tr height="350" valign="top">
 						<td>${detailDto.noticeContent}
-						<img src="detail/download?noticeNo=${detailDto.noticeNo}" class="notice-img  mt-20"></td>
+						<img src="detail/download?noticeNo=${detailDto.noticeNo}" class="notice-img  mt-20" width="400"></td>
 					</tr>
 				</tbody>
 			</table>		

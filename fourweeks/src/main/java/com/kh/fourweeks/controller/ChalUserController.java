@@ -144,7 +144,7 @@ public class ChalUserController {
 		String userId = userService.myInfoEdit(userDto, attachment);
 		
 		attr.addAttribute("userId", userId);
-		return "redirect:/mypage";
+		return "redirect:/user/mypage";
 	}
 	
 	@GetMapping("/profile/download") // 프로필 사진 다운로드

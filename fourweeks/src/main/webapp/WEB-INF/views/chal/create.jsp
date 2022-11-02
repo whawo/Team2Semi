@@ -228,6 +228,104 @@
     input[name="startDate"]::placeholder{
     color: #3f3f3f;
     }
+    
+    	/* header */
+header {
+	width: 100%;
+    height: 92px;
+    background-color: white;
+    display: flex;
+   	justify-content: center;
+    align-items: center;
+}
+header > a {
+	width: 15%;
+}
+header > nav {
+	width:100%;
+	height:100%;
+}
+.dropdown-nav {
+	display:flex;
+	width:100%;
+	height: 100%;
+}
+.dropdown-nav,
+.dropdown-nav ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #6C7AEF;
+    font-size:16px;
+    text-align: center;
+}
+.dropdown-nav li {
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+    align-items: center;	
+}
+.dropdown-nav > li {
+	position: relative;
+	width: 120px;
+	height: 100%;
+}
+.dropdown-nav > li.right-menu {
+	justify-content: flex-end;
+	padding: 0.5em 0;
+	width: auto;
+	height: 100%;
+	min-width: 120px;
+}
+.dropdown-nav ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+.dropdown-nav ul {
+    display: none;
+}
+.dropdown-nav li:hover > ul {
+    display: block;
+}
+.dropdown-nav a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;;
+    text-align: center;
+}
+.dropdown-nav ul {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #A8B0E9;
+    padding: 0.5em;
+}
+.dropdown-nav li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+/* 9) */
+.dropdown-nav {
+    position: relative;
+}
+.dropdown-nav > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+header.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.copyright{
+margin-left: 830px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
@@ -317,7 +415,7 @@ $(function(){
 
 </script>
 <body>
-	<div class="container-1200">
+	<div class="container-1200  mt-92">
         <form action="create" method="post" enctype="multipart/form-data" class="create-form"  autocomplete="off">
         
 	           <div class="row">
@@ -403,4 +501,3 @@ $(function(){
 		</form>    
 	</div>    
 </body>     
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

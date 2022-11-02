@@ -48,7 +48,7 @@
 		margin-bottom: 1.2em;
 	}
 	.search-bar {
-		margin-top : 100px;
+		margin-top : 150px;
 		margin-bottom: 30px;
 	}
 	/* 다단배치 */

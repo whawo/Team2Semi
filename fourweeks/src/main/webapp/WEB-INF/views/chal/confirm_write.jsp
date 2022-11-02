@@ -290,6 +290,12 @@
              }
          });
      });
+     
+     $(function(){
+    		$(".btn-edit-cancel").click(function(){
+				history.back();
+	        });
+     });
 /*  	 // 저장하지 않고 벗어날 경우 alert창 띄움
 	window.onbeforeunload = function(e) {
 	    var dialogText = "사이트에서 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.";
@@ -322,6 +328,7 @@
             </div>
             
           <div class="row row-2">
+          ✅ 인증 방법
                     <input class=" sp-1 calendar how-confirm" disabled>
             </div>
 
@@ -355,7 +362,7 @@
             </div>
 
             <div class="row-7 center">
-                <button class="smallbtn cancel-btn" type="button" id="smallbutton3">취소</button>
+            <a type="button"  class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3" >취소</a>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
             </div>
  		</form>

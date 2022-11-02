@@ -25,6 +25,7 @@ import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ParticipantDto;
+import com.kh.fourweeks.repository.AdminDao;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
@@ -52,6 +53,9 @@ public class ChalController {
 	
 	@Autowired
 	private ChalConfirmDao confirmDao;
+	
+	@Autowired
+	private AdminDao adminDao;
 	
 	private final File dir = new File(System.getProperty("user.home") + "/upload");
 
@@ -166,6 +170,8 @@ public class ChalController {
 		//참가자 인증글 목록(최신 5개)
 		model.addAttribute("confirmList", confirmDao.allConfirmTopN(vo));
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		//관리자 공지글 조회
+		model.addAttribute("noticeList", adminDao.selectNoticeTopN(1, 3));
 		
 		return "chal/mychal";
 	}
@@ -198,6 +204,8 @@ public class ChalController {
 		model.addAttribute("listCnt", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
 		//전체 참가자 평균 달성률
 		model.addAttribute("avgDto", confirmDao.confirmCnt(chalMyDetailDto.getChalNo()));
+		//관리자 공지글 조회
+		model.addAttribute("noticeList", adminDao.selectNoticeTopN(1, 3));
 		return "chal/mychal_end";
 	}
 	
