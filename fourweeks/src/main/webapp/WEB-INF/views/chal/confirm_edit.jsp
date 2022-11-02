@@ -311,7 +311,7 @@
 		  <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
           <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
 			<div class="row">
-				<input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail>
+				<input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
 				<img class="preview" src="detail/download?confirmNo=${confirmVO.confirmNo}" width="250" height="200">
 				<%-- <img class="confirm-img preview" src = "detail/download?confirmNo=${confirmVO.confirmNo}"  width="250" height="200" > --%>
 			<div class="row img-btns">
