@@ -34,11 +34,12 @@
 	  	display: inline-block;
 	}
 	.confirm-img {
-	  position: relative;
-      width : 785px;
-      height : 740px;
+	 position: relative;
+      width : 400px;
+      /* height : 740px; */
       border-radius: 10px;
 	}
+	
      .confirm-content {
          font-size: 22px;
          line-height: 1.5em;
@@ -152,7 +153,7 @@
      </div>
      
 	<!-- 인증샷 : 있을 때만 노출-->
-       <div>
+       <div class="confirm-img-box">
        	<c:if test="${attachDto != null}">
 			<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" class="confirm-img">       		
 		</c:if>
@@ -191,7 +192,7 @@
 	<!-- 댓글 CRUD 비동기 처리 예정 -->
 	<!-- 댓글 입력 -->
 		<div class="div-align" >
-			 <img src = "#" width="50" height="50" class="user-img  reply-user-img">
+			 <img src = "/images/avatar.png" width="50" height="50" class="user-img  reply-user-img">
 	    </div>
 	    
 	    <div class="div-align">
