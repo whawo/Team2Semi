@@ -362,7 +362,7 @@ header.header-fixed {
     $(function () {
 	    $(".tab_content").hide();
 	    $(".tab_content:first").show();
-	
+	    
 	    $("ul.tabs li").click(function () {
 		    $("ul.tabs li").removeClass("active").css("color", "#AAAAAA");
 		    $(this).addClass("active").css("color", "#6c7aef");
@@ -397,7 +397,7 @@ header.header-fixed {
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img">
+	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
 
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
@@ -443,7 +443,7 @@ header.header-fixed {
 
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170">
+		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		</a>
 </div>
 
@@ -520,7 +520,7 @@ header.header-fixed {
 <div class="row row-4">
 
       <a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-      <img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170">
+      <img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
       </a>
 </div>
 <div class="row row-5"> 
@@ -595,7 +595,7 @@ header.header-fixed {
         
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170">
+		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		</a>
 </div>
 <div class="row row-5"> 

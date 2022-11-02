@@ -212,7 +212,7 @@
 	<%-- 이미지 --%>
 
 	  <div class="detail-top" style="margin-top:100px;"> 
-          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 
           <div class="chal-timer">
         <c:choose>
@@ -239,7 +239,7 @@
 	    </c:choose>
           </div>
           </div>
-      </div>
+     
       
 	<%-- 챌린지 제목 --%>
 	<div> 
@@ -345,8 +345,8 @@
 	</div>
 		
 </div>
+ 
 </form>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 
