@@ -358,6 +358,8 @@
 	font-size: 24px;
 	font-weight: 700;
 	color: #3f3f3f;
+	margin-top: 300px;
+	margin-bottom:200px;
 	}
 	  .label-notice{
     border-radius: 90%;
@@ -616,7 +618,8 @@ header.header-fixed {
 	      </c:if>
 	 </div>
     </div>
-
+	
+	<c:if test="${listCnt != 0}">
 	<div class="row row-last center mt-40 mb-40">
 		<!-- 이전 -->
 		<ul class=" pagenation">
@@ -668,6 +671,7 @@ header.header-fixed {
 			</c:choose>
 			</ul>
 	</div>
+	</c:if>
 </body>
 
 
