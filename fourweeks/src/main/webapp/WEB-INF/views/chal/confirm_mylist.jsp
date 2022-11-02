@@ -45,11 +45,6 @@
         border-radius: 10px;
     }
     .notice-border {
-        border-bottom: 2px solid #f0ecf2;
-        display: flex;
-        align-items: center;
-        position : relative;
-        padding-bottom: 10px;
         cursor:pointer;
     }
     .confirm-title-css {
@@ -165,6 +160,7 @@
     .label-align {
         display: inline-block;
     }
+   
 	.confirm-empty {
 		height : 100px;
 		display: flex;
@@ -216,7 +212,7 @@
 		background-color:#6c7aef;
 	}
 	
-	.row-1{
+.row-1{
 	margin-top: 50px;
 	}
 	.row-2{
@@ -247,11 +243,11 @@
 	.row-7{
 	position: relative;
 	bottom: 70px;
-	left: 375px;
+	left: 365px;
+	}
+	.row-9{
 	}
 	.row-11{
-	padding-top: 10px;
-	padding-bottom: 10px;
 	}
 	.row-12{
 	padding-top: 10px;
@@ -263,7 +259,7 @@
 	}
 	.row-14{
 	position:relative;
-	bottom:147px;
+	bottom:150px;
 	left:660px;
 	margin-bottom: -80px;
 	}
@@ -299,7 +295,7 @@
 	color: #3f3f3f;
 	}
 	.p6{
-	padding-top:30px;
+	padding-top:10px;
 	font-size:16px;
 	font-weight: 700;
 	color:#3f3f3f;
@@ -308,6 +304,14 @@
 	font-size:14px;
 	color:#3f3f3f;
 	padding:20px 0 20px 0 ;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width:400px;
+    height: 100px;
+    line-height: 135%;
 	}
 	.p8{
 	font-size: 12px;
@@ -324,13 +328,25 @@
 	font-weight: 700;
 	color:#3f3f3f;
 	}
+	.sp4{
+	position:relative;
+	}
 	.sp5{
-	margin-left: 510px;
+	 float: right;
 	}
 	.sp6{
 	font-size: 24px;
 	font-weight: 700;
 	color: #3f3f3f;
+	}
+	  .label-notice{
+    border-radius: 90%;
+    padding:7px 10px;
+    }
+	hr{
+	border:none;
+	border-bottom: 2px solid #f0ecf2;
+	padding-bottom: 8px;
 	}
 	.chal-img{
 	width: 300px;
@@ -427,7 +443,6 @@ header > nav {
     color: #6C7AEF;
     font-weight: bold;
 }
-
 /* 9) */
 .dropdown-nav {
     position: relative;
@@ -437,7 +452,6 @@ header > nav {
     right: 0;
     top: 0;
 }
-
 header.header-fixed {
     position: fixed;
     top: 0;
@@ -541,10 +555,11 @@ header.header-fixed {
  	</div>
        
      <div class="row-9 notice-border">
-	       <span class="label label-notice" >공지</span>
-	       <c:forEach var="noticeList" items="${noticeList}">
-		       	<span class="sp4">${noticeList.noticeTitle}</span>
-		       	<span class="sp5">${noticeList.noticeTime}</span>
+	       <c:forEach var="noticeList" items="${noticeList}"><br>
+	     		<span class="label label-notice" >공지</span>
+		       	<span class="sp4" >${noticeList.noticeTitle}</span><br>
+		       	<span class="sp5">${noticeList.noticeTime}</span><br>
+	     		<hr>
 	       </c:forEach>
      </div>     
      

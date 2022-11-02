@@ -153,7 +153,7 @@ public class ChalUserDaoImpl implements ChalUserDao{
             + " nvl(C.cnt, 0) cnt from my_chal_detail M left outer join (select count(*) cnt,"
             + " chal_no from chal_confirm where user_id = ? group by chal_no) C"
             + " on M.chal_no = C.chal_no where user_id = ?)"
-            + " where end_d_day > 0";
+            + " where end_d_day > 0 order by start_date desc";
       Object[] param = {userId, userId};
       return jdbcTemplate.query(sql, allDetailMapper, param);
    }
@@ -168,7 +168,7 @@ public class ChalUserDaoImpl implements ChalUserDao{
             + " nvl(C.cnt, 0) cnt from my_chal_detail M left outer join (select count(*) cnt,"
             + " chal_no from chal_confirm where user_id = ? group by chal_no) C"
             + " on M.chal_no = C.chal_no where user_id = ?)"
-            + " where end_d_day < 0";
+            + " where end_d_day < 0 order by start_date desc";
       Object[] param = {userId, userId};
       return jdbcTemplate.query(sql, allDetailMapper, param);
    }
@@ -211,7 +211,7 @@ public class ChalUserDaoImpl implements ChalUserDao{
             + " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
             + " nvl(T.cnt, 0) cnt from chal C left outer join"
             + " (select count(*) cnt, chal_no from chal_confirm where user_id = ? group by chal_no)"
-            + " T on C.chal_no = T.chal_no where C.user_id = ?)where end_d_day >0";
+            + " T on C.chal_no = T.chal_no where C.user_id = ?)where end_d_day >0 order by start_date desc";
       
       Object[] param = {userId, userId};
       
