@@ -140,7 +140,7 @@ public class ChalDaoImpl implements ChalDao {
 	public ChalDetailVO selectEndDday(int chalNo) {
 		String sql ="select "
 				+ "chal_no, "
-				+ "ceil(start_date-sysdate) d_day, "
+				+ "trunc(start_date-sysdate) d_day, "
 				+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date, "
 				+ "trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day "
 				+ "from chal where chal_no = ?";
@@ -177,12 +177,12 @@ public class ChalDaoImpl implements ChalDao {
 						+ "chal_topic,"
 						+ "chal_person, "
 						+ "start_date, "
-						+ "ceil(start_date-sysdate) d_day, "
+						+ "trunc(start_date-sysdate) d_day, "
 						+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 					+ "from "
 						+ "chal "
 					+ "where "
-						+ "ceil(start_date-sysdate) > -1"
+						+ "trunc(start_date-sysdate) > -1 and to_char(start_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd') "
 					+ "and "
 						+ "chal_person < 11 "
 					+ "order by "
@@ -234,14 +234,14 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic,"
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
-								+ "ceil(start_date-sysdate) > -1 "
+								+ "trunc(start_date-sysdate) > -1 "
 							+ "and "
-								+ "chal_person < 11 "
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "d_day asc, "
 								+ "chal_no desc"
@@ -260,14 +260,14 @@ public class ChalDaoImpl implements ChalDao {
 						+ "chal_topic,"
 						+ "chal_person, "
 						+ "start_date, "
-						+ "ceil(start_date-sysdate) d_day, "
+						+ "trunc(start_date-sysdate) d_day, "
 						+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 					+ "from "
 						+ "chal "
 					+ "where "
-						+ "ceil(start_date-sysdate) > -1 "
+						+ "trunc(start_date-sysdate) > -1 "
 					+ "and "
-						+ "chal_person < 11 "
+						+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 					+ "order by "
 						+ "#1, "
 						+ "chal_no desc"
@@ -288,7 +288,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic, "
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
@@ -297,7 +297,7 @@ public class ChalDaoImpl implements ChalDao {
 							+ "and "
 								+ "instr(chal_topic, ?) > 0 "
 							+ "and "
-								+ "ceil(start_date-sysdate) > -1 "
+								+ "trunc(start_date-sysdate) > -1 and trunc(start_date-sysdate) < 6 "
 							+ "and "
 								+ "chal_person < 11 "
 							+ "order by "
@@ -320,16 +320,16 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic,"
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
 								+ "instr(chal_title, ?) > 0 "
 							+ "and "
-								+ "ceil(start_date-sysdate) > -1 "
+								+ "trunc(start_date-sysdate) > -1 "
 							+ "and "
-								+ "chal_person < 11"
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "#1, "
 								+ "chal_no desc"
@@ -349,16 +349,16 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic, "
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
 								+ "instr(chal_topic, ?) > 0 "
 							+ "and "
-								+ "ceil(start_date-sysdate) > -1 "
+								+ "trunc(start_date-sysdate) > -1 "
 							+ "and "
-								+ "chal_person < 11 "
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "#1, "
 								+ "chal_no desc"
@@ -379,12 +379,12 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic,"
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
-								+ "chal_person < 11 "
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "chal_no desc "
 							+ ")TMP"
@@ -402,12 +402,12 @@ public class ChalDaoImpl implements ChalDao {
 						+ "chal_topic,"
 						+ "chal_person, "
 						+ "start_date, "
-						+ "ceil(start_date-sysdate) d_day, "
+						+ "trunc(start_date-sysdate) d_day, "
 						+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 					+ "from "
 						+ "chal "
 					+ "where "
-						+ "chal_person < 11 "
+						+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 					+ "order by "
 						+ "chal_no desc, "
 						+ "#1"
@@ -428,7 +428,7 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic, "
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
@@ -437,7 +437,7 @@ public class ChalDaoImpl implements ChalDao {
 							+ "and "
 								+ "instr(chal_topic, ?) > 0 "
 							+ "and "
-								+ "chal_person < 11 "
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "chal_no desc,"
 								+ "#1"
@@ -458,14 +458,14 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic,"
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
 								+ "instr(chal_title, ?) > 0 "
 							+ "and "
-								+ "chal_person < 11"
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "chal_no desc, "
 								+ "#1"
@@ -485,14 +485,14 @@ public class ChalDaoImpl implements ChalDao {
 								+ "chal_topic, "
 								+ "chal_person, "
 								+ "start_date, "
-								+ "ceil(start_date-sysdate) d_day, "
+								+ "trunc(start_date-sysdate) d_day, "
 								+ "to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd day') end_date "
 							+ "from "
 								+ "chal "
 							+ "where "
 								+ "instr(chal_topic, ?) > 0 "
 							+ "and "
-								+ "chal_person < 11 "
+								+ "chal_person < 11 and trunc(start_date-sysdate) < 6 "
 							+ "order by "
 								+ "chal_no desc, "
 								+ "#1"
@@ -538,25 +538,25 @@ public class ChalDaoImpl implements ChalDao {
 	// 모집중 페이지수 조회
 	@Override
 	public int listCount(ChalListSearchVO vo) {
-		String sql = "select count(*) from chal where ceil(start_date-sysdate) > -1 and chal_person < 11";
+		String sql = "select count(*) from chal where trunc(start_date-sysdate) > -1 and chal_person < 11 and trunc(start_date-sysdate) < 6";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	@Override
 	public int searchCount(ChalListSearchVO vo) {
-		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and instr(chal_title, ?) > 0 and ceil(start_date-sysdate) > -1 and chal_person < 11";
+		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and instr(chal_title, ?) > 0 and trunc(start_date-sysdate) > -1 and chal_person < 11";
 		Object[] param = {vo.getType(), vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
 	@Override
 	public int searchForAllTypeCount(ChalListSearchVO vo) {
-		String sql = "select count(*) from chal where instr(chal_title, ?) > 0 and ceil(start_date-sysdate) > -1 and chal_person < 11";
+		String sql = "select count(*) from chal where instr(chal_title, ?) > 0 and trunc(start_date-sysdate) > -1 and chal_person < 11 and trunc(start_date-sysdate) < 6 ";
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	@Override
 	public int searchForOnlyTypeCount(ChalListSearchVO vo) {
-		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and ceil(start_date-sysdate) > -1 and chal_person < 11";
+		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and trunc(start_date-sysdate) > -1 and chal_person < 11 and trunc(start_date-sysdate) < 6 ";
 		Object[] param = {vo.getType()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	} 
@@ -564,25 +564,25 @@ public class ChalDaoImpl implements ChalDao {
 	// 전체 챌린지 페이지수 조회 
 	@Override
 	public int listCountRecruited(ChalListSearchRecruitedVO vo) {
-		String sql = "select count(*) from chal where chal_person < 11";
+		String sql = "select count(*) from chal where chal_person < 11 and trunc(start_date-sysdate) < 6 ";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	@Override
 	public int searchCountRecruited(ChalListSearchRecruitedVO vo) {
-		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and instr(chal_title, ?) > 0 and chal_person < 11";
+		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and instr(chal_title, ?) > 0 and chal_person < 11 and trunc(start_date-sysdate) < 6 ";
 		Object[] param = {vo.getType(), vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
 	@Override
 	public int searchForAllTypeCountRecruited(ChalListSearchRecruitedVO vo) {
-		String sql = "select count(*) from chal where instr(chal_title, ?) > 0 and chal_person < 11";
+		String sql = "select count(*) from chal where instr(chal_title, ?) > 0 and chal_person < 11 and trunc(start_date-sysdate) < 6 ";
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	@Override
 	public int searchForOnlyTypeCountRecruited(ChalListSearchRecruitedVO vo) {
-		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and chal_person < 11";
+		String sql = "select count(*) from chal where instr(chal_topic, ?) > 0 and chal_person < 11 and trunc(start_date-sysdate) < 6 ";
 		Object[] param = {vo.getType()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}

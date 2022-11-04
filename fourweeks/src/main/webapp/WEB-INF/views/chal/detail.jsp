@@ -291,17 +291,13 @@
 			<c:when test="${chalDtoRecruited.getDDay() < -28}">
 				<span class="label label-status" >종료</span>
 			</c:when>
-			<c:when test="${chalDtoRecruited.getDDay() < 0}">
-				<span class="label label-ing" >진행중</span>
-			</c:when>
-					<c:when test="${chalDtoRecruited.getDDay() == 0}">
+			<c:when test="${chalDtoRecruited.getDDay() == 0}">
 				<span class="label label-ing" >진행중</span>
 			</c:when>
 			<c:otherwise>
 				<span class="label label-wait" >모집중</span>
 			</c:otherwise>
 		</c:choose>
-		<span class="label label-category" >진행중</span>
 	</div>
 	
 	 <%-- 버튼 --%>
