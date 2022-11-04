@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="탈퇴 완료" name="title"/>
 </jsp:include>
-	<link rel="stylesheet" type="text/css" href="/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -53,7 +53,7 @@
             </div>
             
             <div class="row center">
-               <img src="/images/join_success.png" width="300" height="300">
+               <img src="${pageContext.request.contextPath}/images/join_success.png" width="300" height="300">
             </div>
 
         </div>

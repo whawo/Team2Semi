@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 인증" name="title"/>
 </jsp:include>
 <html >
 <head>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -260,7 +260,7 @@
                 }
             });
             $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
+                $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
             });
         });
   
@@ -311,7 +311,7 @@
 <c:choose>
 	<c:when test="${chalList.size() == 0}">
 		참가 중인 챌린지가 없습니다.
-		<a href="/chal/list">챌린지 둘러보기</a>
+		<a href="${pageContext.request.contextPath}/chal/list">챌린지 둘러보기</a>
 	</c:when>
 	<c:otherwise>
 <form action="write" method="post" enctype="multipart/form-data" class="con-form">
@@ -353,7 +353,7 @@
                 <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
                 <div class="row">
                     <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
-                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
+                    <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.png" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
                         <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>

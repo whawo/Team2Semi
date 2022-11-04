@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="회원 전용 페이지" name="title"/>
 </jsp:include>
-	<link rel="stylesheet" type="text/css" href="/css/basic.css">
-	<link rel="stylesheet" type="text/css" href="/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -65,7 +65,7 @@
             </div>
             
             <div class="row center">
-               <img src="/images/join_success.png" width="200" height="200">
+               <img src="${pageContext.request.contextPath}/images/join_success.png" width="200" height="200">
             </div>
 
             <div class="row row-2 center">

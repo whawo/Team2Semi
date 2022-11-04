@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/admin_header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/admin_header.jsp">
 	<jsp:param value="유저 통계" name="title" />
 </jsp:include>
     
@@ -12,7 +12,7 @@
    $(function () {
 	   // 2022년 월별 가입자 통계
        $.ajax({
-           url: "http://localhost:8888/admin/rest/report/chal/user",
+           url: "${pageContext.request.contextPath}/admin/rest/report/chal/user",
            method: "get",
            dataType: "json",
            success: function (resp) {
@@ -65,7 +65,7 @@
        });
     // 2022년 월별 탈퇴자 통계
        $.ajax({
-           url: "http://localhost:8888/admin/rest/report/chal/leave_user",
+           url: "${pageContext.request.contextPath}/admin/rest/report/chal/leave_user",
            method: "get",
            dataType: "json",
            success: function (resp) {
@@ -121,7 +121,7 @@
        });
        // 2022년 월별 회원 로그인 통계
        $.ajax({
-           url: "http://localhost:8888/admin/rest/report/chal/users_visit",
+           url: "${pageContext.request.contextPath}/admin/rest/report/chal/users_visit",
            method: "get",
            dataType: "json",
            success: function (resp) {
