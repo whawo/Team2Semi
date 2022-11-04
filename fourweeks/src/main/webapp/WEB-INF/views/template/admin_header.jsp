@@ -19,9 +19,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css_admin/reset.css">
-<link rel="stylesheet" type="text/css" href="/css_admin/layout.css">
-<link rel="stylesheet" type="text/css" href="/css_admin/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css_admin/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css_admin/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css_admin/commons.css">
   	
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
@@ -46,7 +46,7 @@
 <body>
 <aside>
 	<div class="row mb-30">
-		<a href="/admin/home"><img src="/images/top_logo.png" width="100"></a>
+		<a href="${pageContext.request.contextPath}/admin/home"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
 	</div>
 	<div class="row center">
 		<i class="fa-solid fa-user-lock fa-2x"></i>
@@ -56,20 +56,20 @@
 		<span class="today"></span>
 	</div>
 	<div class="row">
-		<a href="/admin/report/user"><i class="fa-solid fa-user me-10"></i>유저 통계</a>
+		<a href="${pageContext.request.contextPath}/admin/report/user"><i class="fa-solid fa-user me-10"></i>유저 통계</a>
 	</div>
 	<div class="row">
-		<a href="/admin/report/chal"><i class="fa-solid fa-calendar me-10"></i>챌린지 통계</a>
+		<a href="${pageContext.request.contextPath}/admin/report/chal"><i class="fa-solid fa-calendar me-10"></i>챌린지 통계</a>
 	</div>
 	<div class="row">
 		<a href="https://dashboard.tawk.to/#/dashboard/6358850adaff0e1306d3fc24" target="_blank"><i class="fa-solid fa-comment me-10"></i>유저 문의</a>
 	</div>
 	<div class="row mb-50">
-		<a href="/admin/list?p=1"><i class="fa-solid fa-pen-to-square me-10"></i>공지</a>
+		<a href="${pageContext.request.contextPath}/admin/list?p=1"><i class="fa-solid fa-pen-to-square me-10"></i>공지</a>
 	</div>
 	<hr>
 	<div class="row">
-		<a href="/admin/logout"><i class="fa-solid fa-power-off me-10"></i>로그아웃</a>
+		<a href="${pageContext.request.contextPath}/admin/logout"><i class="fa-solid fa-power-off me-10"></i>로그아웃</a>
 	</div>
 </aside>
 	

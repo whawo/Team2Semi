@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 상세" name="title" />
 </jsp:include>
 
@@ -14,8 +14,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
@@ -115,7 +115,7 @@
 	$(function() {
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function() {
-			$(this).attr("src", "/images/bg_default.png");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 		});
 
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
@@ -248,12 +248,12 @@
 	
 	 <%-- 참가 인원 --%>
 	<div> 
-		<span><img src="/images/attend_user.png" class="img-margin">${chalDto.getChalPerson()}명/10명</span>
+		<span><img src="${pageContext.request.contextPath}/images/attend_user.png" class="img-margin">${chalDto.getChalPerson()}명/10명</span>
 	</div>
 	
 	<%-- 시작일 --%>
 	<div>  
-		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
+		<span><img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 
 		<span class="label label-status" > <c:choose>
 		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
@@ -281,7 +281,7 @@
 
 	 <%-- 종료일 --%>
 	<div>
-		<img src="/images/chal_end_date.png" class="img-margin">
+		<img src="${pageContext.request.contextPath}/images/chal_end_date.png" class="img-margin">
 		<span>~${chalVO.endDate}</span>
 	</div>
 	
@@ -322,7 +322,7 @@
      </div>
      
 	<div>
-		<img src = "/user/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
+		<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
 	</div>
 	
 	 <%-- 구분선 --%>
@@ -347,7 +347,7 @@
 </div>
  
 </form>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 
 

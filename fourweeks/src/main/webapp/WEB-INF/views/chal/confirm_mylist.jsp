@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="내 인증글" name="title"/>
 </jsp:include> 
 
@@ -12,8 +12,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
@@ -169,6 +169,7 @@
 		display: flex;
 		align-items:center; 
 		justify-content: center;
+		
 	}
 	h3 {
 		margin : 40px 0;
@@ -251,7 +252,7 @@
 	.row-9{
 
 	margin-top:10px;
-	margin-bottom: -90px;
+/* 	margin-bottom: -90px; */
 
 	}
 	.row-11{
@@ -280,7 +281,7 @@
 	margin-top: 100px;
 	}
 	.row-last2{
-	margin-top: -70px
+	margin-bottm: 70px
 	}
 	
 	.p1{
@@ -358,8 +359,6 @@
 	font-size: 24px;
 	font-weight: 700;
 	color: #3f3f3f;
-	margin-top: 300px;
-	margin-bottom:200px;
 	}
 	  .label-notice{
     border-radius: 90%;
@@ -486,7 +485,7 @@ header.header-fixed {
 	$(function(){
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function(){
-			$(this).attr("src", "/images/bg_default.png");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 		});
 		
 		//인증샷이 없으면 img 태그 가리기
@@ -519,9 +518,9 @@ header.header-fixed {
 	</div>
 
 	<div class="row row-parenet">
-		<a href="/chal/mychal?chalNo=${chalDto.chalNo}">
+		<a href="${pageContext.request.contextPath}/chal/mychal?chalNo=${chalDto.chalNo}">
 	<div class="row-2">
-		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+		<img src="${pageContext.request.contextPath}/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 	</div>
 
  		<!-- 2단 시작 -->
@@ -578,7 +577,7 @@ header.header-fixed {
        
      <div class="row-9 notice-border">
 	       <c:forEach var="noticeList" items="${noticeList}"><br>
-     			<a href="/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
+     			<a href="${pageContext.request.contextPath}/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
 		     		<span class="label label-notice" >공지</span>
 			       	<span class="sp4" >${noticeList.noticeTitle}</span><br>
 			       	<span class="sp5">${noticeList.noticeTime}</span><br>
@@ -612,11 +611,11 @@ header.header-fixed {
         </div>					
 
 
-	<div  class="row-last2 confirm-empty">
 		 <c:if test="${listCnt == 0}">
+	<div  class="row-last2 confirm-empty">
 	      		<span class="sp6">작성한 인증글이 없습니다</span>
-	      </c:if>
 	 </div>
+	      </c:if>
     </div>
 	
 	<c:if test="${listCnt != 0}">
@@ -675,4 +674,4 @@ header.header-fixed {
 </body>
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>

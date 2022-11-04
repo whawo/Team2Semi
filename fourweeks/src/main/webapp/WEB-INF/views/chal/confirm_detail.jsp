@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 인증글" name="title"/>
 </jsp:include> 
 
@@ -14,8 +14,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -142,7 +142,7 @@
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	<div>
          <div class="div-align" >
-            <img src = "/user/profile/download?userId=${confirmVO.userId}" class="user-img">
+            <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${confirmVO.userId}" class="user-img">
          </div>
          <div class="div-align">
 	         <ul style="list-style:none; font-size:15px;">
@@ -192,7 +192,7 @@
 	<!-- 댓글 CRUD 비동기 처리 예정 -->
 	<!-- 댓글 입력 -->
 		<div class="div-align" >
-			 <img src = "/images/avatar.png" width="50" height="50" class="user-img  reply-user-img">
+			 <img src = "${pageContext.request.contextPath}/images/avatar.png" width="50" height="50" class="user-img  reply-user-img">
 	    </div>
 	    
 	    <div class="div-align">
@@ -216,7 +216,7 @@
 				<tr class="view">
 					<td>
 						<!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-						<img src = "/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
+						<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
 						${replyDto.userNick}
 						<c:if test="${replyDto.userId == confirmVO.userId}">
 							&nbsp; [작성자]
@@ -267,4 +267,4 @@
 	</div> <!-- row 끝 -->
 </div> <!-- 컨테이너 끝 -->
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>
