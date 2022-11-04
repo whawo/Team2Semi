@@ -304,7 +304,7 @@
 		
 		$.ajax({
 			//내 인증글 작성 일차를 리스트로 가져오기
-			url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
+			url : "${pageContext.request.contextPath}/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
 			method : "get",
 			dataType : "json",
 			//async : false,

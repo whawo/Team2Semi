@@ -218,12 +218,12 @@
 				$(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 				$.ajax({
 			        //인증샷 삭제 메소드 호출
-			        url : "http://localhost:8888/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
+			        url : "${pageContext.request.contextPath}/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
 			        method : "get",
 			        dataType : "json",
 			        async : false,
 			        success : function(resp) {
-			            console.log(resp);
+			        	$(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 			        }
 			    });
 			});
@@ -251,9 +251,9 @@
                     $("[name=attachment]")(e.target)
                 });
             });
-            $("button[name=thumbnail-delete]").click(function(){
+            /* $("button[name=thumbnail-delete]").click(function(){
                 $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
-            });
+            }); */
         });
     
     // help-text
