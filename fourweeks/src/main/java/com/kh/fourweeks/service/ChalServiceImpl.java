@@ -97,8 +97,8 @@ public class ChalServiceImpl implements ChalService {
 			attachment.transferTo(target); //예외 전가
 					
 			//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
-			//chal_img에 insert
-			confirmDao.confirmAttachment(confirmNo, attachmentNo);	
+			//confirm_img에 insert
+			confirmDao.confirmAttachment(confirmNo, attachmentNo, confirmDto.getUserId());	
 		}
 		return confirmNo;
 	}
@@ -143,7 +143,7 @@ public class ChalServiceImpl implements ChalService {
 				attachment.transferTo(target); //예외 전가
 				//+ 연결 테이블에 연결 정보 저장(인증글 번호, 첨부파일 번호, 유저아이디)
 				//chal_img에 insert
-				confirmDao.confirmAttachment(confirmDto.getConfirmNo(), attachmentNo);	
+				confirmDao.confirmAttachment(confirmDto.getConfirmNo(), attachmentNo, confirmDto.getUserId());	
 			}
 			//수정 후 첨부파일이 없는 경우
 			//  1) 원래 없고, 새로 추가도 안한 경우

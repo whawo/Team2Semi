@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 종료" name="title" />
 </jsp:include>
    
@@ -531,4 +531,4 @@
 		</div>
 </div>
 
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
