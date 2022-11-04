@@ -336,7 +336,7 @@
 				</div>
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
-				<button  class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" >삭제</button>
+				<button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" >삭제</button>
 			</div>
 	</div>
 
