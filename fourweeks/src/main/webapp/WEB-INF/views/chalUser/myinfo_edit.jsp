@@ -284,7 +284,7 @@ display:none;
 	</div>
 	<div class="row row-2">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <button class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" type="button">삭제</button>
+                        <button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" type="button">삭제</button>
 	</div>
 	<div class="row  ">			
 	 <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
