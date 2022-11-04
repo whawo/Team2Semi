@@ -87,7 +87,6 @@ public class ChalUserController {
 			session.setAttribute(SessionConstant.NICK, findDto.getUserNick());
 			// 로그인 시각 업데이트
 			chalUserDao.updateLoginTime(inputDto.getUserId());
-			System.out.println();
 			return "redirect:/";
 		} else {
 			return "redirect:login?error";

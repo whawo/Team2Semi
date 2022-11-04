@@ -211,11 +211,7 @@ public class ChalConfirmController {
 		//챌린지 썸네일 파일 조회
 		//기존 첨부파일이 있는지 검사, 있으면 첨
 		AttachmentDto attachDto = attachmentDao.selectDetail(vo.getChalNo());
-		if(attachDto!=null) {
-			System.out.println("썸넬 있음@@@@");
-		}else {
-			System.out.println("썸넬없음@@@");
-		}
+		
 		
 		return "chal/confirm_mylist";
 	}

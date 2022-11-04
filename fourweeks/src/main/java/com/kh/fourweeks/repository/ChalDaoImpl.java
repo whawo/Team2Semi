@@ -182,7 +182,7 @@ public class ChalDaoImpl implements ChalDao {
 					+ "from "
 						+ "chal "
 					+ "where "
-						+ "ceil(start_date-sysdate) > -1 "
+						+ "ceil(start_date-sysdate) > -1"
 					+ "and "
 						+ "chal_person < 11 "
 					+ "order by "

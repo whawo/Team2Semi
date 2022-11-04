@@ -474,7 +474,7 @@
 			  </div> 
 			  </a>
 		      </c:forEach>
-		      <c:if test="${vo.count == 0}">
+		      <c:if test="${voRecruited.count == 0}">
 				<span class="text-center">검색 결과가 없습니다.</span>
 				</c:if>
 			</div>
