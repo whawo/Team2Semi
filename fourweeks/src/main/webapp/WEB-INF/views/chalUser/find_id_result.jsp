@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/headerNo.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="아이디 찾기" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -103,7 +103,7 @@ margin-left: 33px;
 		<p class="p1">아이디 찾기</p>
 	</div>
     
-	<form action="/login" method="get">
+	<form action="${pageContext.request.contextPath}/login" method="get">
 		<div class="row-2 center">
 			<p class="p2">고객님의 정보와 일치하는 아이디 목록입니다.</p>
 		</div>	
@@ -123,8 +123,8 @@ margin-left: 33px;
 	</form>
 	
 	<section class="row-5 center">
-		<a class="find" href="/find_pw">비밀번호 찾기</a>
+		<a class="find" href="${pageContext.request.contextPath}/find_pw">비밀번호 찾기</a>
 		<em class="divi">|</em>
-		<a class="find" href="/join">회원가입</a>
+		<a class="find" href="${pageContext.request.contextPath}/join">회원가입</a>
 	</section>
  </div>

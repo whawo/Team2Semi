@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="계정 관리" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    
@@ -218,7 +218,7 @@ display:none;
          
          //사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
 		$(".btn-delete-file").click(function(){
-			$(".preview").attr("src", "/images/avatar.png");
+			$(".preview").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 			$.ajax({
 		        //인증샷 삭제 메소드 호출
 		        url : "http://localhost:8888/rest/chal/user_img/delete?${param.confirmNo}",
@@ -274,7 +274,7 @@ display:none;
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
 
-			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
+			<span class="sp-0">프로필 사진</span> <img class="img1" src="${pageContext.request.contextPath}/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
 	</div>
 	
 	<div class="row  row-img">
@@ -305,11 +305,11 @@ display:none;
 </div>
 
 <div class="row  row-leave">
-			<a href="/user/leave" class="btn-leave " >탈퇴하기</a>
+			<a href="${pageContext.request.contextPath}/user/leave" class="btn-leave " >탈퇴하기</a>
 </div>
 			
 <div class="row center  row-btns">
-			<a href="/user/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
+			<a href="${pageContext.request.contextPath}/user/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
 			<button  class="save-btn" type="submit">저장하기</button>
 </div>
 		</form>

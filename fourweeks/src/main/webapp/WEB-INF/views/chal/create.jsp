@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
- <jsp:include page="/WEB-INF/views/template/header.jsp">
+ <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -372,7 +372,7 @@ $(function(){
            }
        });
        $("button[name=thumbnail-delete]").click(function(){
-           $(".preview").attr("src", "/images/bg_default.png");
+           $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
        });
    });
 //help-text
@@ -479,7 +479,7 @@ $(function(){
 	                <p class="p2">노출 위치에 따라 섬네일이 축소/확대되어 적용합니다. 등록하지 않는 경우, 랜점으로 기본 이미지가 적용됩니다.</p>
 	                <div class="row">
 	                    <input id="input-file" type="file" name="attachment" class="thumbnail">
-	                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
+	                    <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.png" width="250" height="200">
 	                    <div class="row img-btns">
 	                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
 	                         <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
@@ -495,7 +495,7 @@ $(function(){
 	            </div>
 	            
 	            <div class="row center"> 
-	                <a href="/" class="smallbtn cancel-btn" id="smallbutton3">취소</a>
+	                <a href="${pageContext.request.contextPath}" class="smallbtn cancel-btn" id="smallbutton3">취소</a>
 	                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
 	            </div>
 		</form>    

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="인증글 수정" name="title"/>
 </jsp:include> 
 
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -200,7 +200,7 @@
 			
 			//인증샷이 없으면 기본 이미지 노출
 			$(".preview").on("error", function(){
-				 $(".preview").attr("src", "/images/bg_default.png");
+				 $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 			});
 			
 			//form submit 시 select disabled 속성 제거
@@ -215,7 +215,7 @@
 			
 			//사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
 			$(".btn-delete-file").click(function(){
-				$(".preview").attr("src", "/images/bg_default.png");
+				$(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 				$.ajax({
 			        //인증샷 삭제 메소드 호출
 			        url : "http://localhost:8888/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
@@ -252,7 +252,7 @@
                 });
             });
             $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
+                $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
             });
         });
     
@@ -349,4 +349,4 @@
 
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>

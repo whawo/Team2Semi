@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 상세" name="title" />
 </jsp:include>
 
@@ -13,8 +13,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
    
@@ -366,7 +366,7 @@ $(function () {
     
     //챌린지 썸네일이 없으면 기본 이미지로 대체
     $(".chal-img").on("error", function(){
-        $(this).attr("src", "/images/bg_default.png");
+        $(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
     });
   
     //프로필 이미지가 없으면 기본 아이콘으로 대체
@@ -503,11 +503,11 @@ $(window).bind("pageshow", function(event) {
 	
 	<%-- 시작일 --%>
 	<div>  
-		<span><img src="/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
+		<span><img src="${pageContext.request.contextPath}/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
 	</div>
 	
 	<div>
-	 	<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button class="largebtn" type="submit" id="largebutton3">챌린지 바로가기</button></a>
+	 	<a href = "${pageContext.request.contextPath}/chal/detail?chalNo=${chalDto.getChalNo()}"><button class="largebtn" type="submit" id="largebutton3">챌린지 바로가기</button></a>
 	</div>
 		
 <!-- tab title -->
@@ -575,7 +575,7 @@ $(window).bind("pageshow", function(event) {
 	     
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
 
-                        <img src = "/user/profile/download?userId=${allProgressDto.userId}" class="user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
+                        <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${allProgressDto.userId}" class="user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
                         ${allProgressDto.userNick}: &nbsp; 달성률 : <fmt:formatNumber type="number" 
 				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%<br><br>
 				 			<br>
@@ -590,14 +590,14 @@ $(window).bind("pageshow", function(event) {
 		</div>
 		
 		<div class="row div-align float-right">
-			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
+			<a href="${pageContext.request.contextPath}/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
 		</div>
 		<br><br>
 		
 		<!-- 관리자글 -->
      	<div class="row-9 notice-border">
 	       <c:forEach var="noticeList" items="${noticeList}"><br>
-	       	<a href="/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
+	       	<a href="${pageContext.request.contextPath}/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
 	     		<span class="label label-notice" >공지</span>
 		       	<span class="sp4" >${noticeList.noticeTitle}</span><br>
 		       	<span class="sp5">${noticeList.noticeTime}</span><br>
@@ -620,7 +620,7 @@ $(window).bind("pageshow", function(event) {
 				</div>
 				<div class="row-13">	
 						<!-- 프로필, 닉네임 -->
-						<img src = "/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
+						<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
 						<span class="nick-size">${list.userNick}</span>	
 						&nbsp; 
 					<span class="p8">${list.confirmDate}</span> 
@@ -647,4 +647,4 @@ $(window).bind("pageshow", function(event) {
 </div>
 </div> 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>

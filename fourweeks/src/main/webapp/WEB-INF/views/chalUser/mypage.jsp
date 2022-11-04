@@ -2,7 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
    <jsp:param value="마이페이지" name="title" />
 </jsp:include>
 
@@ -16,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
  
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
     
 
     <style>
@@ -378,7 +378,7 @@ header.header-fixed {
 	  
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function() {
-			$(this).attr("src", "/images/bg_default.png");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 		});
 	});
     
@@ -397,7 +397,7 @@ header.header-fixed {
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
+	<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
 
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
@@ -436,14 +436,14 @@ header.header-fixed {
 
 <c:otherwise>
  <div class="row row-3"> 
-	<a class="btn1" href ="/confirm/write">챌린지 인증</a>
-	<a class="btn2" href ="/chal/create"> 챌린지 개설</a>
+	<a class="btn1" href ="${pageContext.request.contextPath}/confirm/write">챌린지 인증</a>
+	<a class="btn2" href ="${pageContext.request.contextPath}/chal/create"> 챌린지 개설</a>
 </div>
 <c:forEach var="chalDto" items="${chalDto}">
 
 <div class="row row-4">
-		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+		<a href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
+		<img class="img-1 chal-img" src="${pageContext.request.contextPath}/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		</a>
 </div>
 
@@ -471,7 +471,7 @@ header.header-fixed {
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
+		<a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${chalDto.getStartDate()}~${chalDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${chalDto.getChalTopic()}" disabled>
@@ -513,14 +513,14 @@ header.header-fixed {
       
 <c:otherwise>
  <div class="row row-3"> 
-   <a class="btn1" href ="/confirm/write">챌린지 인증</a>
-   <a class="btn2" href ="/chal/create"> 챌린지 개설</a>
+   <a class="btn1" href ="${pageContext.request.contextPath}/confirm/write">챌린지 인증</a>
+   <a class="btn2" href ="${pageContext.request.contextPath}/chal/create"> 챌린지 개설</a>
 </div>
    <c:forEach var="chalEndDto" items="${chalEndDto}">
 <div class="row row-4">
 
-      <a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-      <img class="img-1 chal-img" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+      <a href="${pageContext.request.contextPath}/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
+      <img class="img-1 chal-img" src="${pageContext.request.contextPath}/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
       </a>
 </div>
 <div class="row row-5"> 
@@ -547,7 +547,7 @@ header.header-fixed {
 </c:choose>
    
    <div class="row row-6">
-      <a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
+      <a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${chalEndDto.chalNo}" maxlength="40"> ${chalEndDto.chalTitle}</a>
    </div>
    <div class="row row-7">${chalEndDto.getStartDate()}~${chalEndDto.getEndDate()}</div>
       <input class="label-category" placeholder="${chalEndDto.getChalTopic()}" disabled>
@@ -588,14 +588,14 @@ header.header-fixed {
 
 <c:otherwise>
  <div class="row row-3"> 
-	<a class="btn1" href ="/confirm/write">챌린지 인증</a>
-	<a class="btn2" href ="/chal/create"> 챌린지 개설</a>
+	<a class="btn1" href ="${pageContext.request.contextPath}/confirm/write">챌린지 인증</a>
+	<a class="btn2" href ="${pageContext.request.contextPath}/chal/create"> 챌린지 개설</a>
 </div>
         <c:forEach var="createDto" items="${createDto}">
         
 <div class="row row-4">
-		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1 chal-img" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+		<a href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
+		<img class="img-1 chal-img" src="${pageContext.request.contextPath}/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		</a>
 </div>
 <div class="row row-5"> 
@@ -622,7 +622,7 @@ header.header-fixed {
 </c:choose>
 	
 	<div class="row row-6">
-		<a class="a2" href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
+		<a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
 	</div>
 	<div class="row row-7">${createDto.getStartDate()}~${createDto.getEndDate()}</div>
 		<input class="label-category" placeholder="${createDto.getChalTopic()}" disabled>
@@ -652,4 +652,4 @@ header.header-fixed {
 </body>
 </html>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>
