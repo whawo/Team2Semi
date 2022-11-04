@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/admin_header.jsp">
+<jsp:include page="/WEB-INF/views/template/admin_header.jsp">
 	<jsp:param value="공지 게시판" name="title"/>
 </jsp:include>
 

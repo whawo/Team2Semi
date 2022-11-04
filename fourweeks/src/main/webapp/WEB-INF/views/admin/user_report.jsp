@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/admin_header.jsp">
+<jsp:include page="/WEB-INF/views/template/admin_header.jsp">
 	<jsp:param value="유저 통계" name="title" />
 </jsp:include>
     

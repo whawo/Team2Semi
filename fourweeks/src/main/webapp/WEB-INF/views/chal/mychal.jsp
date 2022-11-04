@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 상세" name="title" />
 </jsp:include>
 
@@ -610,7 +610,7 @@ $(window).bind("pageshow", function(event) {
       <!--인증글 목록-->
     <div class="row-10 " >
 	<c:forEach var="list" items="${confirmList}">
-	<a href="detail?confirmNo=${list.confirmNo}">
+	<a href="${pageContext.request.contextPath}/confirm/detail?confirmNo=${list.confirmNo}">
           <div class="row-11">
            <p class="p6">${list.confirmTitle}</p> 
           </div>
@@ -647,4 +647,4 @@ $(window).bind("pageshow", function(event) {
 </div>
 </div> 
 
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

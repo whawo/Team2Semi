@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
- <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/template/header.jsp">
+ <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
 
