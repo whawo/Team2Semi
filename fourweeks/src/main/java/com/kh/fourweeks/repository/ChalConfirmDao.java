@@ -35,7 +35,7 @@ public interface ChalConfirmDao {
 	List<ChalConfirmVO> allConfirmTopN(ChalConfirmVO vo); //챌린지별 참가자 전체 인증글 topN개 조회
 	int confirmCnt(int chalNo); //참가자 인증글 개수 조회
 	boolean updateNotice(NoticeVO noticeDto);
-	void confirmAttachment(int confirmNo, int attachmentNo);
+	void confirmAttachment(int confirmNo, int attachmentNo, String userId);
 	void noticeAttachment(int noticeNo, int attachmentNo);
 	
 	List<ConfirmDaysVO> myConfirmDays(int chalNo, String userId); //챌린지 번호와 유저 아이디로 작성된 인증글 n일차로 조회 
