@@ -202,7 +202,7 @@ select {
 					if (checkId()) {
 						var that = this;
 						$.ajax({
-							url : "http://localhost:8888/rest/join/id?userId="
+							url : "${pageContext.request.contextPath}/rest/join/id?userId="
 									+ userId,
 							method : "get",
 							success : function(result) {
@@ -236,7 +236,7 @@ select {
 								var that = this;
 								$
 										.ajax({
-											url : "http://localhost:8888/rest/join/nick?userNick="
+											url : "${pageContext.request.contextPath}/rest/join/nick?userNick="
 													+ userNick,
 											success : function(result) {
 

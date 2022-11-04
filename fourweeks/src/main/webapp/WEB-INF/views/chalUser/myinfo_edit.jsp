@@ -212,21 +212,21 @@ display:none;
                  $("[name=attachment]")(e.target)
              });
          });
-         $("button[name=thumbnail-delete]").click(function(){
+         /* $("button[name=thumbnail-delete]").click(function(){
              $(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
-         });
+         }); */
          
          //사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
 		$(".btn-delete-file").click(function(){
 			$(".preview").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 			$.ajax({
 		        //인증샷 삭제 메소드 호출
-		        url : "http://localhost:8888/rest/chal/user_img/delete?${param.confirmNo}",
+		        url : "${pageContext.request.contextPath}/rest/chal/user_img/delete?${loginId}",
 		        method : "get",
 		        dataType : "json",
 		        async : false,
 		        success : function(resp) {
-		            console.log(resp);
+		        	$(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
 		        }
 		    });
 		});

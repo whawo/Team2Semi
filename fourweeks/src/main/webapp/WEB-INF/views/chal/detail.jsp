@@ -130,7 +130,7 @@
 		
 		$.ajax({
 	        //챌린지 시작일 가져오기
-	        url : "http://localhost:8888/rest/chal/chal_detail?chalNo=${param.chalNo}",
+	        url : "${pageContext.request.contextPath}/rest/chal/chal_detail?chalNo=${param.chalNo}",
 	        method : "get",
 	        dataType : "json",
 	        //async : false,
@@ -141,7 +141,7 @@
 
 	            $.ajax({
 	                //챌린지 종료일 가져오기
-	                url:"http://localhost:8888/rest/chal/chal_end_date?chalNo=${param.chalNo}",
+	                url:"${pageContext.request.contextPath}/rest/chal/chal_end_date?chalNo=${param.chalNo}",
 	                method:"get",
 	                dataType:"json",
 	                //async: false,
