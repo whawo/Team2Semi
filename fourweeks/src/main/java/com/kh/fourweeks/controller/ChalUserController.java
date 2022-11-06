@@ -72,6 +72,7 @@ public class ChalUserController {
 	public String login() {
 		return "chalUser/login";
 	}
+	
 	@PostMapping("/login")
 	public String login(@ModelAttribute ChalUserDto inputDto,
 											HttpSession session) {

@@ -442,11 +442,10 @@
 								<div>오늘 시작</div>
 
 							</c:when>
-							<c:when test="${chalDtoRecruited.getDDay() < 0}">
-								<span class="label label-ing">진행중</span>
+							<c:when test="${chalDtoRecruited.getDDay() > 0 && chalDtoRecruited.getDDay() < 6}">
+								<span>${chalDtoRecruited.getDDay()}일 뒤 시작</span>
 							</c:when>
 							<c:otherwise>
-								<span class="label label-wait">모집중</span>
 								<div>${chalDtoRecruited.startDate}</div>
 							</c:otherwise>
 						</c:choose>
@@ -474,7 +473,7 @@
 			  </div> 
 			  </a>
 		      </c:forEach>
-		      <c:if test="${vo.count == 0}">
+		      <c:if test="${voRecruited.count == 0}">
 				<span class="text-center">검색 결과가 없습니다.</span>
 				</c:if>
 			</div>
