@@ -371,9 +371,9 @@ header.header-fixed {
 		    $("#" + activeTab).show();
 	    });
 	    
-		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		//프로필 이미지가 없으면 기본 이미지로 대체
 		$(".user-img").on("error", function(){
-			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		});
 	  
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
