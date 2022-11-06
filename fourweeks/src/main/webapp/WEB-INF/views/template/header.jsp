@@ -53,7 +53,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-	//프로필 이미지가 없으면 기본 이미로 대체
+	//프로필 이미지가 없으면 기본 이미지로 대체
 	$(function(){
 		$(".user-img").on("error", function(){
 			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
