@@ -193,7 +193,7 @@ display:none;
 	 $(function(){
          $("[name=attachment]").change(function(e){
              //input[type=file] 태그에는 files라는 속성이 존재
-             console.log(this.files);
+             
              if(this.files.length > 0){
                  //읽는 도구
                  var reader = new FileReader();
@@ -206,11 +206,6 @@ display:none;
                  };
                  reader.readAsDataURL(this.files[0]);//읽어라
              }
-        /*      // 사진 변경하기 
-             var inputImage = document.getElementById("input-image")
-             inputImage.addEventListener(function(e){
-                 $("[name=attachment]")(e.target) */
-             });
          });
          /* $("button[name=thumbnail-delete]").click(function(){
              $(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
@@ -226,7 +221,7 @@ display:none;
 		        dataType : "json",
 		        async : false,
 		        success : function(resp) {
-		        	$(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
+		        	$(".preview").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		        }
 		    });
 		});
@@ -274,7 +269,7 @@ display:none;
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
 
-			<span class="sp-0">프로필 사진</span> <img class="img1" src="${pageContext.request.contextPath}/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
+			<span class="sp-0">프로필 사진</span> <img class="img1 preview" src="${pageContext.request.contextPath}/user/profile/download?userId=${userDto.userId}" width="100" height="100">
 	</div>
 	
 	<div class="row  row-img">
@@ -284,7 +279,7 @@ display:none;
 	</div>
 	<div class=" row-2">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" type="button">삭제</button>
+                        <button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete">삭제</button>
 	</div>
 	<div class="row  ">			
 	 <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>

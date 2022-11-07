@@ -233,7 +233,7 @@
     $(function(){
             $("[name=attachment]").change(function(e){
                 //input[type=file] 태그에는 files라는 속성이 존재
-                console.log(this.files);
+               
                 if(this.files.length > 0){
                     //읽는 도구
                     var reader = new FileReader();
@@ -246,10 +246,10 @@
                     reader.readAsDataURL(this.files[0]);//읽어라
                 }
                 // 사진 변경하기 
-                var inputImage = document.getElementById("input-image")
+                /* var inputImage = document.getElementById("input-image")
                 inputImage.addEventListener(function(e){
                     $("[name=attachment]")(e.target)
-                });
+                }); */
             });
             /* $("button[name=thumbnail-delete]").click(function(){
                 $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");

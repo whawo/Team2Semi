@@ -53,10 +53,10 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-	//프로필 이미지가 없으면 기본 아이콘으로 대체
+	//프로필 이미지가 없으면 기본 이미지로 대체
 	$(function(){
 		$(".user-img").on("error", function(){
-			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		});
 	});
 	
@@ -71,7 +71,7 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
+		<a href="/${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>

@@ -235,7 +235,7 @@
      $(function(){
             $("[name=attachment]").change(function(e){
                 //input[type=file] 태그에는 files라는 속성이 존재
-                console.log(this.files);
+                
                 if(this.files.length > 0){
                     //읽는 도구
                     var reader = new FileReader();
