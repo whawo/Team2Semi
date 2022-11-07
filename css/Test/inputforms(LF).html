@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forms</title>
+    <style>
+        .container-800 { width:800px; margin:0 auto; }
+
+        /* 
+            들어가기 앞서 백그라운드 컬뤄 투명? 화이트? 
+        */
+        .short-text-box{
+            border: solid;
+            /* border-width: thin thin thin thin; */
+            border-width: 2px 2px 2px 2px;
+            border-radius: 0.5em;
+            width: 100%;
+            height: 58px;
+            font-size: 16px;
+        }
+        #text-box1{
+            border-color: #cfc9d5;
+            color: #3d3d3d;
+        }
+        .short-hover:hover{
+            border-color: #6c7aef;
+            color: #cfc9d5;
+        }
+   
+
+        .short-text-underlinebox{
+            border: none;
+            border-width: 2px 2px 2px 2px;
+            width: 100%;
+            height: 58px;
+            font-size: 16px;
+        }
+        #text-underlinebox1{
+            border-bottom: 2px solid #6c7aef;
+            outline: none;
+            color: #3d3d3d;
+        }
+        .short-text-underlinebox.underlinebox-hover:hover{
+            color: #cfc9d5;
+        }
+  
+
+        .long-text-box{
+            border: 2px solid;
+            border-width: 2px 2px 2px 2px;
+            border-radius: 0.5em;
+            width: 400px;
+            height: 123px;
+            text-align: left;
+            font-size: 16px;
+            /* 상자안ㅇ ㅔ글 위쪽 부터 쓰는 방법 좀..  */
+        }
+        #long-box1{
+            border-color: #ebebed;
+            color: #3d3d3d;
+        }
+        .long-hover:hover{
+            border-color: #cfc9d5;
+            color: #cfc9d5;
+        }
+
+        #long-box2{
+            border-color: #6c7aef;
+        }
+    
+        #long-box4{
+            border-color: #ebebed;
+            color: #3d3d3d;
+        }
+        .dropdown{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 150px;
+            height: 60px;
+            font-size: 16px;
+        }
+        /*  t선택시 색상과 굵기 선택이 되어야하는데 무엇으로 해야하나    */
+        .dropdown.dropdown-check:checked{
+            font-weight: bold;
+            color: #6c7aef;
+        }
+        .search-bar{
+            display: flex;
+            flex-direction: row;
+        }
+        .search-bar > select > input{
+            flex-grow: 1;
+        }
+        .search-box{
+            border:2px solid #6c7aef;
+            border-radius: 0.5em;
+            width: 300px;
+            height: 60px;
+            font-size: 16px;
+        }
+        
+        /*  둘이 높이가 안맞음 ... ㅠㅠ  */
+        .search-box > select > input{
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        .mt-40 { margin-top: 40px;}
+        .container-600 { width:600px; margin:0 auto; }
+
+    </style>
+</head>
+<body>
+    <div class="container-800">
+        <div class="row">
+        <h1>short-text-box</h1>
+        </div>
+    <input class="short-text-box short-hover" type="text" placeholder="now..." id="text-box1">
+
+    <h1>underline-box</h1>
+    <input class="short-text-underlinebox uderline-hover" type="text" placeholder="now..." id="text-underlinebox1">
+
+    <!-- 이거 입력창이 맨위 왼쪽에서부터 쓰여야함  -->
+    <h1>Long-text-box</h1>
+    <input class="long-text-box long-hover" type="text" placeholder="입력해주세요" id="long-box1">
+    
+
+
+
+
+    <!--  보류 자바스크립트 배우고 만들 것 임  씨 바..  -->
+    <!-- 다 완성 되엇으나.. 옆으로 옮겨지지 않음 ..  -->
+  
+        <div class="row">
+            <h1>Search Bar</h1>
+        </div>
+        <div class="row search-bar">
+            <select class="dropdown dropdown-check">
+                <option selected="selected" value="1">전체</option>
+                <option>모집중</option>
+                <option>모집중</option>
+                <option>모집중</option>
+            </select>
+            <input class="search-box" type="text" placeholder="현재 참가중인 어쩌고">
+        </div>
+    
+
+
+        <h1>Dropdown</h1>
+    
+        <select class="dropdown dropdown-check">
+            <option selected="selected" value="1">전체</option>
+            <option>모집중</option>
+            <option>모집중</option>
+            <option>모집중</option>
+        </select>
+    
+        <h1>Search</h1>
+        <input class="search-box" type="text" placeholder="현재 참가중인 어쩌고">
+    </div>
+
+    <!-- 모집중을 어떻게 합치냐 ~~   float 로 만들기 혹은 ...  flex 박스로 하셈 -->
+</body>
+</html>

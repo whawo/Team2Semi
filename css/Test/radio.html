@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /* 해야할것  */
+body {margin: 10px; font-size: 13px}
+.where {
+  display: block;
+  margin: 25px 15px;
+  font-size: 11px;
+  color: black;
+  text-decoration: none;
+  font-family: verdana;
+  font-style: italic;
+} 
+
+.checks {position: relative;}
+.checks input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+.checks input[type="radio"] + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+/* 버튼 누르기전  */
+.checks input[type="radio"] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -4px;
+  width: 21px;
+  height: 21px;
+  text-align: center;
+  background: transparent;
+  border: 1px solid #a8b0e9;
+  border-radius: 100%;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="radio"] + label:active:before,
+.checks input[type="radio"]:checked + label:active:before  {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.checks input[type="radio"]:checked + label:before {
+  background: transparent;
+  border-color: #6c7aef;
+}
+/* 안에 내부 원 */
+.checks input[type="radio"]:checked + label:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 13px;
+  height: 13px;
+  background: #6c7aef;
+  border-radius: 100%;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+}
+
+/* radio size */
+.checks.small input[type="radio"] + label {
+  font-size: 12px;
+  padding-left: 25px;
+}
+.checks.small input[type="radio"] + label:before {
+	top: -2px;
+  width: 17px;
+  height: 17px;
+}
+.checks.small input[type="radio"]:checked + label:after {
+	top: 3px;
+  width: 9px;
+  height: 9px;
+}
+</style>
+</head>
+<body>
+    <div class="checks">
+        <input type="radio" id="ex_rd" name="ex_rds"> 
+        <label for="ex_rd">라디오버튼</label> 
+      </div>
+
+<br>
+
+<div class="checks small">
+        <input type="radio" id="ex_rd2" name="ex_rds"> 
+        <label for="ex_rd2">라디오버튼</label> 
+      </div>
+</body>
+</html>

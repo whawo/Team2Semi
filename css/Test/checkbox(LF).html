@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+/* 들어가기 앞서.. 이거 배경 채우는 색상과 체크후 회색 표시 만들ㅇ야 ㅎ마 ~  */
+
+        /*  체크박스 숨김 */
+        .line input{
+            display: none;
+        }
+
+        /* 체크박스 테두리  */
+        .chk-1{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ebebed;
+            background-color: white;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* 체크박스 가상요소  안에 체크 표시 */
+        .chk-1::before, .chk-1::after{
+            content: '';
+            display: inline-block;
+            width: 2px;
+            height: 0px;
+            background-color:  #6c7aef;
+            /* background-color: black; */
+            position: absolute;
+            transform-origin: left top;
+            
+        }
+
+        /* 가상요소 비뽀 */
+        .chk-1::before{
+            top: 9px;
+            left: 2px;
+            transform: rotate(-44deg);
+        }
+
+        /* 가상요소 에뽀또  */
+        .chk-1::after{
+            top: 16px;
+            left: 9px;
+            transform:  rotate(-135deg);
+        }
+
+        /* 체크되었을때 테두리  */
+        .line input:checked + .chk-1{
+            border-color:  #6c7aef;
+            /* background-color: #6c7aef; */
+        }
+
+        /* 체크되었을 때 가상요소 비포 */
+        .line input:checked + .chk-1::before{
+            height: 9px;
+            transition: all 0.15s ease 0.15s;
+        }
+
+        /* 체크되었을 때 가상요소 에포 */
+        .line input:checked + .chk-1::after{
+            height: 17px;
+            transition: all 0.15s ease 0.15s;
+        }
+    </style>
+</head>
+<body>
+    <label class="line">
+        <input type="checkbox">
+        <span class="chk-1"></span>
+        <span class="chk-2"></span>
+    </label>    
+</body>
+</html>

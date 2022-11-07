@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* 
+    홈페이지 레이아웃을 설정하는 스타일 시트
+*/
+
+main {
+    width: 1000px;
+    margin: 0 auto;
+}
+header {
+    padding: 20px 0;
+}
+body {
+	/* padding-top: 92px; */
+}
+nav {
+
+}
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+}
+aside {
+    padding: 10px;
+    border-right: 2px solid #d9d9d9;
+}
+aside a {
+    display:block;
+    width:100%;
+    padding:0.5em;
+    text-decoration: none;
+    color: #6C7AEF;
+}
+aside a:hover {
+    font-weight: bold;
+}
+section {
+    padding: 20px;
+    float: left;
+    width: 75%;
+    min-height: 400px;
+}
+footer {
+    padding: 20px;
+}

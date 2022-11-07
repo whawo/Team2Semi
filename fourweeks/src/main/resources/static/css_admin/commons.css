@@ -1,0 +1,767 @@
+@charset "UTF-8";
+
+
+
+/* 
+    container는 작은 화면의 외부 영역을 관리하는 도구
+    - 폭 조절과 가운데 배치를 할 수 있어야 함
+    - css에서는 계산식이 모든 브라우저에서 작동하지 않음
+    - 미리 예상 가능한 크기를 준비해두면 편하게 쓸 수 있지 않을까?
+*/
+.container-200{width:200px; margin: 0 auto;}
+.container-300{width:300px; margin: 0 auto;}
+.container-400{width:400px; margin:0 auto;}
+.container-600{width:600px; margin:0 auto;}
+.container-500{width:500px; margin:0 auto;}
+.container-700{width:700px; margin:0 auto;}
+.container-800{width:800px; margin:0 auto;}
+.container-900{width:900px; margin:0 auto;}
+.container-1000{width:1000px; margin:0 auto;}
+.container-1100{width:1100px; margin:0 auto;}
+.container-1200{width:1200px; margin:0 auto;}
+
+
+/* 
+    row는 container 내부에 배치될 도구들이 위치할 자리에 해당
+    - 상하 margin만 부여해 간격을 띄워주기
+*/
+.row{margin: 10px 0px;}
+
+/* 
+    row 내부에 위치하는 도구들의 폭을 설정
+    - 폭을 row에 맞게 100%로 설정 or 자신의 폭을 그대로 사용
+    - 아무 표시도 하지 않으면 폭을 있는 그대로 두고 클래스를 부여하면 100%로 변경
+*/
+.w-20 {width: 20%;}
+.w-25 {width: 25%;}
+.w-33 {width: 33.3333%;}
+.w-50 {width: 50%;}
+.w-90 {width: 90%;}
+.w-100{width: 100%;}
+
+/* 
+    어차피 정렬은 left, center, right 밖에 없음
+    - text-align 속성으로 설정
+*/
+.left{text-align: left;}
+
+.right{text-align: right;}
+
+.center{text-align: center;}
+
+ /*
+margin은 간격을 벌리기 위해서 사용한다
+어떨때는 12px, 어떨때는 17px과 같이 부여하면 일관성이 떨어진다
+표준화된 margin 부여가 가능하도록 스타일을 설정
+- mt(margin-top), mb(margin-bottom), ms(margin-start), me(margin-end)
+*/
+.mt-10 { margin-top: 10px;}
+.mt-20 { margin-top: 20px;}
+.mt-30 { margin-top: 30px;}
+.mt-40 { margin-top: 40px;}
+.mt-50 { margin-top: 50px;}
+
+.mb-10 { margin-bottom: 10px;}
+.mb-20 { margin-bottom: 20px;}
+.mb-30 { margin-bottom: 30px;}
+.mb-40 { margin-bottom: 40px;}
+.mb-50 { margin-bottom: 50px;}
+
+.ms-10 { margin-left: 10px;}
+.ms-20 { margin-left: 20px;}
+.ms-30 { margin-left: 30px;}
+.ms-40 { margin-left: 40px;}
+.ms-50 { margin-left: 50px;}
+
+.me-10 { margin-right: 10px;}
+.me-20 { margin-right: 20px;}
+.me-30 { margin-right: 30px;}
+.me-40 { margin-right: 40px;}
+.me-50 { margin-right: 50px;}
+
+/* 
+    버튼은 3가지 역할로 구분해 디자인
+    - 긍정버튼: 현재 작업을 완성시키는 버튼
+    - 부정버튼: 현재의 작업이 위험함을 알리거나 부정적인 효과를 처리하는 버튼
+    - 중립버튼: 현재의 작업과 상관없이 다른 작업과 연결된 버튼
+*/
+
+.btn {
+    border: none;
+    font-size: 18px;
+    padding: 0.5em;/*글자 크기의 0.75배*/
+    cursor: pointer;
+    text-align: center;
+    display:inline-block;
+	text-decoration: none;
+	height: 42px;
+}
+.btn.btn-disabled {
+    border: 1px solid #DDDDDD;
+    background-color: #DDDDDD;
+    color: #AAAAAA;
+}
+.btn.btn-positive {
+  	border: 1px solid #6c7aef;
+    background-color: #6c7aef;
+    color: white;
+    border-radius: 2px;
+}
+/* .btn.btn-positive:hover {
+    background-color: #0068d1;
+} */
+.btn.btn-positive[disabled],
+.btn.btn-positive[disabled]:hover {
+    border: 1px solid #DDDDDD;
+    background-color:#DDDDDD;
+    color: #AAAAAA;
+    cursor: not-allowed;
+}
+
+.btn.btn-neutral {
+    border: 1px solid #6c7aef;
+    background-color: white;
+    color: #6c7aef;
+    border-radius: 2px;
+}
+/* .btn.btn-neutral:hover {
+    border: 1px solid black;
+    color: black;
+} */
+.btn.btn-negative {
+    border: 1px solid #d63031;
+    background-color: #d63031;
+    color: white;
+    border-radius: 2px;
+}
+/* .btn.btn-negative:hover {
+    background-color: #c42627;
+} */
+
+.largebtn{
+    border: none;
+    font-size: 20px;
+    padding: 0.75em;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+
+    /* 높이와 너비는 상황에 따라 맞게 비율 설정 */
+    width: 100%;
+    height: 58px;
+}
+
+
+#largebutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#largebutton2{
+    background-color: e5e6f9;
+    color: #6c7aef;
+}
+#largebutton3{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+#largebutton4{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #6c7aef;
+}
+
+#largebutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#largebutton2-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#largebutton3-1{
+    border:solid;
+    border-color: #ebebed;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #ebebed;
+}
+#largebutton4-1{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #ebebed;
+}
+
+
+.smallbtn{
+    border: none;
+    font-size: 16px;
+    padding: 0.75em;/*글자 크기의 0.75배*/
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5em;
+    width: 225px;
+    height: 50px;
+}
+#smallbutton1{
+    background-color: #6c7aef;
+    color: white;
+}
+#smallbutton2{
+    background-color: e5e6f9;
+    color: #6c7aef;
+}
+#smallbutton3{
+    border:solid;
+    border-color: #6c7aef;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #6c7aef;
+}
+#smallbutton4{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #6c7aef;
+}
+#smallbutton1-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#smallbutton2-1{
+    background-color: #ebebed;
+    color: #cfc9d5;
+}
+#smallbutton3-1{
+    border:solid;
+    border-color: #ebebed;
+    border-width: 2px 2px 2px 2px;
+    background-color: white;
+    color: #ebebed;
+}
+#smallbutton4-1{
+    border: none;
+    border-color: transparent;
+    background-color: white;
+    color: #ebebed;
+}
+
+
+
+/* 
+    입력창은 버튼과 같이 등장하므로 비율/크기 등이 같아야 함
+*/
+.input {
+    font-size: 20px;
+    padding: 0.75em;
+    outline: none;
+    border: 1px solid gray;
+}
+.input:focus{
+    border-color: black;
+}
+.input.input-underline{
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.input.input-underline:focus{
+    border-color: black;
+}
+
+/* 배경 이미지가 들어가는 입력창 */
+.input.input-icon{
+    padding-left: 2.5em;
+    /* background-image: url("./images/search icon.png"); */
+    background-size: 1em;
+    background-repeat: no-repeat;
+    background-position-x: 0.75em;
+    background-position-y: center;
+}
+
+/* 
+    textarea는 기본적으로 폭 조절이 가능해 디자인 상 어려움이 많음
+    - 높이만 조절되거나 아예 조절을 못하도록 설정
+    - resize 속성 사용
+*/
+textarea.input{
+    resize: vertical;
+}
+textarea.input.fix-size{
+    resize: none;
+}
+
+/* 테이블 디자인 */
+
+.table {
+    border-collapse: collapse; /* 테두리 병합 */
+    width: 100%;
+    font-size: 16px;
+}
+
+/* 방법1: .table 안에 있는 모든 th와 모든 td 선택(후손 선택자)
+- 내부에 있는 모든 요소를 선택하므로 테이블이 중첩하는 경우 문제가 발생 */
+
+/* .table th, td {
+    border: 1px solid black
+}  */
+
+/* 방법2: .table 부터 시작하는 모든 경로를 제시해 th와 td를 선택(자식 선택자) */
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+    padding: 0.5em;
+}
+
+/* 확장 스타일: 테두리가 있는 테이블 */
+.table.table-border {
+    border: 1px solid #AAAAAA;
+}
+
+.table.table-border > thead > tr > th,
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border > tfoot > tr > th,
+.table.table-border > tfoot > tr > td {
+    border: 1px solid #AAAAAA;
+}
+
+/* 확장 스타일: 제목 행 강조 */
+/* .table > thead > tr > th {
+    background-color: #E5E6F9; 
+} */
+
+/* 확장 스타일: hover 시 해당 행 강조 */
+.table.table-stripe > thead > tr,
+.table.table-stripe > tbody > tr:nth-child(2n) {
+    background-color: #dfe6e9;
+}
+
+/* 확장 스타일: hover 시 해당 행 강조 */
+.table.table-hover > thead > tr:hover,
+.table.table-hover > tbody > tr:hover,
+.table.table-hover > tfoot > tr:hover {
+    background-color: #dfe6e9;
+}
+
+/* 확장 스타일: 가로선만 있는 테이블 */
+.table.table-slit {
+    border: 2px solid #A8B0E9;
+    border-left: none;
+    border-right: none; 
+}
+
+.table.table-slit > thead {
+    border-bottom: 1px solid #A8B0E9;
+}
+
+.table.table.table-slit > tfoot{
+    border-top: 1px solid #A8B0E9;
+}
+
+/* 이미지 스타일 */
+.image {
+    border: 1px solid transparent;
+}
+
+.image.image-hover:hover,
+.image.image-frame {
+    border-color: blue;
+}
+
+.image.image-blur {
+    opacity: 0.4;
+}
+
+.image.image-blur:hover {
+    opacity: 1;
+}
+
+.image.image-shadow {
+    /* 
+        box-shadow 속성
+        - box-shadow: 우측위치 하단위치 번짐정도 확장정도
+    */
+    box-shadow: 1px 2px 5px 0px rgb(209, 209, 209);
+}
+
+.image.image-round {
+    border-radius: 50px;
+}
+.image.image-circle {
+    border-radius: 50%
+}
+
+.image.image-leaf {
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+/* 페이지네이션 스타일 */
+ul.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+ul.pagination > li {
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: 0.5em;
+    line-height: 1em; /* 글자 표시 높이 설정 */
+    min-width: 2em;
+    text-align: center;
+    cursor: pointer;
+}
+ul.pagination > li.on,
+ul.pagination > li:hover {
+    border-color: #d63031;
+    color: #d63031;
+}
+
+/* 확장 스타일: 글자 크기별 옵션 제공 */
+ul.pagination.pagination-big {
+    font-size: 20px; /* 1.25 em*/
+}
+ul.pagination.pagination-small {
+    font-size: 0.75em;
+}
+
+ul.pagination > li > a {
+    display: block;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* full screen - fixed */
+.fullscreen > .modal{
+    width: 400px;
+    height: 400px;
+    background-color: white;
+}
+
+.screen-center{
+    position: absolute;
+    /* 중앙배치 */
+    top: 50%;
+    left: 50%;
+   /* 
+        방법1: margin을 이용해 좌측 상단으로 이동(크기를 알아야 함)
+        margin-left: -200px;
+        margin-top: -200px; 
+    */
+
+    /* 
+        방법2: transform 속성을 이용해 영역을 비율로 이동(크기 몰라도 됨)            
+    */
+    transform: translate(-50%, -50%);
+}
+
+/* 
+    drop down 메뉴 만들기
+    - HTML 구조는 ul로 구현
+    1) 1차 메뉴와 2차 메뉴, 모든 메뉴에 대한 선택자가 다름
+    - 1차 메뉴: .dropdown-menu > li
+    - 2차 메뉴: .dropdown-menu > li > ul > li
+    - 모든 메뉴: .dropdown-menu  li
+    - 2차 이상 메뉴: .dropdown-menu ul > li
+    2) 모든 메뉴 태그의 여백과 표시 방식을 변경
+    3) 1차 메뉴 표시 방식(display)을 inline-block으로 변경
+    4)
+        - 1차 메뉴가 기준점이 될 수 있도록 position을 설정
+        - 2차 이상 메뉴의 위치 결정 방식(position)을 absolute로 변경
+    5) 1차 메뉴를 제외한 나머지 메뉴를 숨김
+    6) li 태그에 hover 시, 바로 아래 ul 표시
+    7) 메뉴 항목(li)에 여백 설정 및 폭 맞춤
+    8) 메뉴에 hover 시 강조 효과 부여
+    --추가--
+    9) 우측에 붙는 메뉴를 구현
+    10) 3차메뉴부터는 하단이 아닌 옆으로 나오도록 처리
+    11) 확장 스타일 부여하면 메뉴를 상단에 고정하도록 변경
+*/
+
+/* 2) */
+.dropdown-menu,
+.dropdown-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* 3) */
+.dropdown-menu > li {
+    display: inline-block;
+    width: 100px;
+    color: #6C7AEF;
+    text-align: center;
+}
+
+/* 4) */
+.dropdown-menu > li {
+    position: relative;
+}
+
+.dropdown-menu ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+
+/* 5) */
+.dropdown-menu ul {
+    display: none;
+}
+
+/* 6) */
+.dropdown-menu li:hover > ul {
+    display: block;
+}
+
+/* 7) */
+.dropdown-menu {
+    font-size: 14px;
+}
+.dropdown-menu li {
+    padding: 0.5em;
+}
+
+.dropdown-menu a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;
+    text-align: center;
+}
+
+.dropdown-menu ul {
+    width: 100%;
+    background-color: white;
+}
+
+/* 8) */
+/* .dropdown-menu li:hover {
+    font-weight: bold;
+} */
+
+.dropdown-menu li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+/* .dropdown-menu {
+    background-color: #acd5ec;
+} */
+
+/* 9) */
+.dropdown-menu {
+    position: relative;
+}
+.dropdown-menu > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* 10) */
+.dropdown-menu li {
+    position: relative;
+}
+.dropdown-menu li > ul ul {
+    position: absolute;
+    top:0;
+    left:100%;
+}
+
+.dropdown-menu > li.right-menu > ul ul {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 100%;
+}
+
+/* 11) */
+.dropdown-menu.dropdown-menu-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+/* springhome-header */
+.logo {
+    border: none;
+    font-size: 20px;
+    padding: 0.5em 0.5em 0.5em 0;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.logo:link, .logo:visited {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+header {
+	width: 100%;
+    height: 92px;
+    background-color: white;
+    display: flex;
+   	justify-content: center;
+    align-items: center;
+}
+header > a {
+	width: 15%;
+}
+header > nav {
+	width:100%;
+	height:100%;
+}
+.dropdown-nav {
+	display:flex;
+	width:100%;
+	height: 100%;
+}
+.dropdown-nav,
+.dropdown-nav ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #6C7AEF;
+    font-size:16px;
+    text-align: center;
+}
+.dropdown-nav li {
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	
+}
+.dropdown-nav > li {
+	position: relative;
+	width: 120px;
+	height: 100%;
+}
+.dropdown-nav ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+.dropdown-nav ul {
+    display: none;
+}
+.dropdown-nav li:hover > ul {
+    display: block;
+}
+.dropdown-nav a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;;
+    text-align: center;
+}
+.dropdown-nav ul {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #A8B0E9;
+    padding: 0.5em;
+}
+.dropdown-nav li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+/* 9) */
+.dropdown-nav {
+    position: relative;
+}
+.dropdown-nav > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+header.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+/* 
+    float 설정
+    - float를 설정하면 현재 영역에서 left 혹은 right 방향에 붙음(cf > 자석)
+    - [문제점] float와 float가 아닌 요소들을 섞어서 배치할 때 문제 발생
+        - float가 float가 아닌 영역에 포함되지 않음
+    - [해결책] float를 제거하는 속성인 clear를 float가 끝나는 시점에 사용
+        - clear등장 이후부터는 float의 영향을 받지 않음
+    - [최종 형태]
+        - float는 필요하고, 다른 요소와 어울리기는 힘드니 별도의 영역을 준비
+        - 해당 영역(.float-container) 종료 시 자동으로 clear 되도록 처리
+        - 가상 선택자(virtual selector)가 필요함
+*/
+.float-container {}
+.float-container::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.float-left{
+    float: left;
+}
+.float-right{
+    float:right;
+}
+
+.flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+	align-items: center;
+}
+
+.flex > div {
+    flex-grow: 1;
+}
+.flex > div > a {
+	display: block;
+    width: 100%;
+	text-decoration: none;
+	color: black;
+	text-align: right;
+}
+
+flex > div > a:link, flex > div > a:visited {
+    color: black;
+}
+
+.p-20 {
+	padding: 0 20px 0 0;
+}
+
+/* 사이드바(aside) 적용 시 내용 위치 */
+#dashboard{
+    position: absolute;
+    top: 0;
+    left: 200px;
+    right: 0;
+}

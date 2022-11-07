@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>button</title>
+    <style>
+        p{
+            font-size: 20px;
+            color: #6c7aef;
+        }
+        .p-hover:hover{
+            font-weight: bold;
+        }
+        .text-underline{
+            text-decoration-line: underline;
+            text-underline-position: under;
+        }
+       ul{
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+       }
+       a{
+        text-decoration: none;
+        color: #AAAAAA;
+       }
+       li{
+        list-style: none;
+       }
+       #nav{
+        width: 100%; /* 컨테이너 정하고 다시 ..!*/
+        height: 50px;
+        /* outline: 1px dotted red; */
+        border: 3px solid #AAAAAA;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+       }
+       #nav ul li{
+        float: left;
+        width: 50%; /*li항목에 따라 등분으로 나눈 것 2개라 50으로 나눔*/
+        height: 100%;
+        line-height: 50px;
+        text-align: center;
+        background:transparent;
+       }
+       #nav ul li a{
+        display: block;
+       }
+       #nav ul li a:hover{
+        background: transparent;
+        color: #6c7aef;
+        font-weight: bold;
+        border-bottom: 3px solid #6c7aef;
+       }
+    </style>
+    </head>
+    <body>
+        <p class="p-hover">ACTIVE</p>
+        <p>INACTIVE</p>
+        <p>INACTIVE</p>
+        <p>INACTIVE</p>
+
+        <div class="row">
+            <h1>tab_bi</h1>
+        </div>
+       
+        <div id="nav">
+            <ul>
+                <li><a href="#">ACTIVE</a></li>
+                <li><a href="#">INACTIVE</a></li>
+            </ul>
+        </div>
+    </body>
+    </html>
