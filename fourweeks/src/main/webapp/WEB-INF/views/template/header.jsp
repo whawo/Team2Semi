@@ -71,7 +71,7 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="/${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
+		<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>
