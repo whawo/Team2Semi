@@ -62,6 +62,9 @@
 	.error-span{
 	white-space: pre;
 	}
+	.high1{
+	margin-top: 20px;
+	}
     </style>
     
      <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -69,9 +72,8 @@
      
      </script>
       <body>
-<div class="row container-1200">
-        <div class="container-400 margin-move">
-            <div class="row center row-1" >
+        <div class="container-400 high1">
+            <div class=" center row-1" >
                 <h1>로그인</h1>
                 <p class="login-p1">가입하신 아이디와 비밀번호를 입력해주세요</p>
                    <p class="login-p2"> 비밀번호는 대소문자를 구분합니다.</p>
@@ -85,7 +87,7 @@
             <div class="row">
                 <input type="password" name="userPw" class="input short-text-box short-hover" id="text-box1-1" placeholder="비밀번호"  autocomplete="off">
             </div>
-            <div class="row">
+            <div class="">
                 <button type="submit" class="largebtn w-100" id="largebutton1">로그인</button>
             </div>
 
@@ -105,6 +107,5 @@
                 <em class="divi">|</em>
                 <a class="find" href="/user/join">회원가입</a>
             </section>
-        </div>
         </div>
      </body>

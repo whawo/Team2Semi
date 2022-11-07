@@ -20,7 +20,7 @@ margin-top: 100px;
 }
 .row-2{
 margin-top: 40px;
-margin-left: 300px;
+margin-left: 90px;
 }
 .row-3{
 margin-top: 50px;
@@ -206,10 +206,10 @@ display:none;
                  };
                  reader.readAsDataURL(this.files[0]);//읽어라
              }
-             // 사진 변경하기 
+        /*      // 사진 변경하기 
              var inputImage = document.getElementById("input-image")
              inputImage.addEventListener(function(e){
-                 $("[name=attachment]")(e.target)
+                 $("[name=attachment]")(e.target) */
              });
          });
          $("button[name=thumbnail-delete]").click(function(){
@@ -274,7 +274,7 @@ display:none;
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
 
-			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="100" height="100" class="preview">
+			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="80" height="80" class="preview">
 	</div>
 	
 	<div class="row  row-img">
@@ -282,7 +282,7 @@ display:none;
 			<!--  선택한 파일 취소하기(js) -->
 		<input id="input-file" type="file" name="attachment" class="img-input">
 	</div>
-	<div class="row row-2">
+	<div class=" row-2">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
                         <button class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" type="button">삭제</button>
 	</div>

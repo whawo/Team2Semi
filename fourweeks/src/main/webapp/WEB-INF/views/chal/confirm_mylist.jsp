@@ -17,8 +17,11 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
-	.confirm-img.no-img {
-		display: none;
+	.confirm-img .no-img {
+	/* 	display: none; */
+	}
+	.img-last{
+	/* display:none; */
 	}
 	
 	.confirm-img {
@@ -174,7 +177,7 @@
 		border-radius: 50%;
 	}
 	.div-align {
-		display : inline-block;
+		display : inline-block; 
 	}
 	/* pagenavigation */
 	ul.pagenation {
@@ -230,7 +233,7 @@
 	bottom: 210px;
 	left: 310px;
 	}
-	.row-5{
+.row-5{
 	position:absolute;
 	bottom: 140px;
 	left: 310px;
@@ -246,28 +249,33 @@
 	left: 365px;
 	}
 	.row-9{
+	margin-top:10px;
+	margin-bottom: -90px;
 	}
 	.row-11{
+	position: relative;
+	top: 10px;
 	}
 	.row-12{
-	padding-top: 10px;
-	padding-bottom:10px;
+	position: relative;
+	top:32px;
 	}
 	.row-13{
+	margin-top: 18px;
 	border-bottom: 2px solid #f0ecf2;
-	padding-bottom: 8px;
+	padding-bottom: 10px;
 	}
 	.row-14{
 	position:relative;
-	bottom:150px;
+	bottom:120px;
 	left:660px;
 	margin-bottom: -80px;
 	}
 	.row-last{
-	margin-bottom: 100px;
+	position: relative;
+	margin-top: 40px;
 	}
 	.row-last2{
-	margin-top: -70px
 	}
 	
 	.p1{
@@ -295,23 +303,29 @@
 	color: #3f3f3f;
 	}
 	.p6{
+	margin-top:70px;
 	padding-top:10px;
 	font-size:16px;
 	font-weight: 700;
 	color:#3f3f3f;
 	}
 	.p7{
+	margin-bottom: 15px;
 	font-size:14px;
 	color:#3f3f3f;
-	padding:20px 0 20px 0 ;
 	overflow: hidden;
-    text-overflow: ellipsis;
+  /*   text-overflow: ellipsis; */
+  text-overflow: clip;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    width:400px;
-    height: 100px;
-    line-height: 135%;
+/*     width:400px;
+    height: 100px; */
+     line-height: 1.2em;
+     width:400px;
+    height: 3.6em;
+/*     line-height: 135%; */
+    white-space:normal;
 	}
 	.p8{
 	font-size: 12px;
@@ -338,6 +352,7 @@
 	font-size: 24px;
 	font-weight: 700;
 	color: #3f3f3f;
+	margin-top: 200px;
 	}
 	  .label-notice{
     border-radius: 90%;
@@ -499,7 +514,7 @@ header.header-fixed {
 	<div class="row row-parenet">
 		<a href="/chal/detail?chalNo=${chalDto.chalNo}">
 	<div class="row-2">
-		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img">
+		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img"  onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 	</div>
 
  		<!-- 2단 시작 -->
@@ -580,7 +595,7 @@ header.header-fixed {
 					<span class="sp3"><i class="fa-regular fa-comment"></i> ${list.replyCount}</span>
 				</div>
 				<div class="row-14">
-           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align"  >
+           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align img-last" onerror="this.style.display='none'" / >
 				</div>
 
 	    </a>
@@ -595,7 +610,7 @@ header.header-fixed {
 	 </div>
     </div>
 
-	<div class="row row-last center  mb-40">
+	<div class="row row-last center mt-40 mb-40">
 		<!-- 이전 -->
 		<ul class=" pagenation">
 			<c:choose>

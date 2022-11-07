@@ -5,13 +5,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="비밀번호 확인" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 
 <style>
 
@@ -22,7 +15,6 @@
         body{
             font-family: sans-serif;
         }
-        /* row 모음  */
 	   .row-down{
         margin: 50px 0 50px 300px;
         }
@@ -31,13 +23,11 @@
         }
         .row-3{
         margin-top: 40px;
+        margin-bottom: 40px;
         }
-        /* p and span 모음  */
           p{
             color:#3f3f3f;
             font-size: 12px;
-            /* 컨테이너에 따라 달라질 수 있으니 알아서 수동 조절하쇼 */
-            /* margin: 상 하 좌 우  */
             margin: 20px 0px 20px 0px;
             line-height: 2%;
         }
@@ -74,9 +64,19 @@
         padding-left: 50px;
         }
         .pw-box{
+        border:2px solid #cfc9d5;
+        border-radius: 0.5em;
         width: 390px;
          padding-left: 20px;
         }
+          .pw-box:active,
+          .pw-box:visited,
+          .pw-box:hover,
+          .pw-hover:focus{
+       	  outline: none;
+  		  border-color: #6c7aef;
+  		  color: #3f3f3f;
+          }
         
         	/* 버튼 모음 */
         .cancel-btn{
@@ -98,7 +98,7 @@
 		background-color:transparent;
 	}
 	.copyright {
-	margin-left: 810px;
+	margin-left: 660px;
 	}
 	
 	/* header */
@@ -198,9 +198,8 @@ header.header-fixed {
    
 </style>
 <body>
-<div class="row container-1200">
- <div class="row container-794 row-down">
-	<div class="row center mt-92">
+ <div class=" container-794 ">
+	<div class=" center mt-92">
         <h2>비밀번호 인증 </h2>
          <p class="p1"> 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.<p>
     </div>
@@ -211,20 +210,19 @@ header.header-fixed {
              <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
             </div>
             
-		<div class="row row-side">
-            <span class="sp-2">비밀번호</span><input type="password" name="userPw" class="input short-text-box short-hover pw-box"  placeholder="8~16자의 영문/숫자" autocomplete="off"><br>
+		<div class=" row-side">
+            <span class="sp-2">비밀번호</span><input type="password" name="userPw" class="input  pw-box"  placeholder="8~16자의 영문/숫자" autocomplete="off"><br>
            <c:if test="${param.error != null}">
 			     <span class="error">비밀번호를 다시 확인해주세요.</span>
 		     </c:if>
             </div>
             
-            <div class="row row-3 center">
-            	<button type="button" onclick="location.href='/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
+            <div class=" row-3 center">
+            	<button type="button" onclick="location.href='/user/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
 				<button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
 			 </div>
 			 
 		</form>
 		</div>
-	</div>
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

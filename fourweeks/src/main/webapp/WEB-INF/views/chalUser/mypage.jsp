@@ -6,26 +6,9 @@
    <jsp:param value="마이페이지" name="title" />
 </jsp:include>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tab_final</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
- 
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/basic.css">
-    
-
     <style>
     div,ul, li{
     border: 1px dotted transparent;
-    }
-    .row-move{
-    margin: 10px  0 10px 321px;
     }
     .row-1{
     margin-bottom: 30px;
@@ -162,7 +145,7 @@ border: 2px solid  #6c7aef;
 border-radius: 0.5em;
 background-color: #FFF;
 color:  #6c7aef;
-padding: 14px 145px;
+padding: 14px 138px;
 margin-left: 10px;
 cursor:pointer;
 }
@@ -173,7 +156,7 @@ border: 2px solid  #DDDDDD;
 border-radius: 0.5em;
 background-color: #DDDDDD;
 color:  #AAAAAA;
-padding: 14px 146px;
+padding: 14px 138px;
 }
 .btn2{
 font-size:16px;
@@ -182,7 +165,7 @@ border: 2px solid  #6c7aef;
 border-radius: 0.5em;
 background-color: #FFF;
 color:  #6c7aef;
-padding: 14px 145px;
+padding: 14px 138px;
 margin-left: 22px;
 cursor:pointer;
 }
@@ -193,8 +176,8 @@ border: 2px solid  #DDDDDD;
 border-radius: 0.5em;
 background-color: #DDDDDD;
 color:  #AAAAAA;
-padding: 14px 145px;
-margin-left: 10px;
+padding: 14px 138px;
+margin-left: 14px;
 }
 .btn3{
 border: 1px solid #DDDDDD;
@@ -270,13 +253,6 @@ header {
     display: flex;
    	justify-content: center;
     align-items: center;
-}
-header > a {
-	width: 15%;
-}
-header > nav {
-	width:100%;
-	height:100%;
 }
 .dropdown-nav {
 	display:flex;
@@ -371,10 +347,10 @@ header.header-fixed {
 		    $("#" + activeTab).show();
 	    });
 	    
-		//프로필 이미지가 없으면 기본 아이콘으로 대체
+	/* 	//프로필 이미지가 없으면 기본 아이콘으로 대체
 		$(".user-img").on("error", function(){
-			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
-		});
+			$(this).replaceWith("");
+		}); */
 	  
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function() {
@@ -393,11 +369,10 @@ header.header-fixed {
 
 </head>
 <body>
-
-<div class="row container-794 row-move ">	
+<div class="container-794">
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img">
+	<img src="/user/profile/download?userId=${myDto.userId}"  class="img0 user-img"  onerror=" this.onerror=null; this.src='/images/avatar.png';" >
 
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
@@ -443,7 +418,7 @@ header.header-fixed {
 
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">
-		<img class="img-1" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<img class="img-1" src="/chal/detail/download?chalNo=${chalDto.getChalNo()}" width="250" height="170" class="chal-img"  onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		</a>
 </div>
 
@@ -520,7 +495,7 @@ header.header-fixed {
 <div class="row row-4">
 
       <a href="/chal/mychal_end?userId=${loginId}&chalNo=${chalEndDto.chalNo}">
-      <img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img">
+      <img class="img-1" src="/chal/detail/download?chalNo=${chalEndDto.getChalNo()}" width="250" height="170" class="chal-img"  onerror=" this.onerror=null; this.src='/images/bg_default.png';" />
       </a>
 </div>
 <div class="row row-5"> 
@@ -595,7 +570,7 @@ header.header-fixed {
         
 <div class="row row-4">
 		<a href="/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}">
-		<img class="img-1" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img">
+		<img class="img-1" src="/chal/detail/download?chalNo=${createDto.getChalNo()}" width="250" height="170" class="chal-img"   onerror=" this.onerror=null; this.src='/images/bg_default.png';" />
 		</a>
 </div>
 <div class="row row-5"> 
@@ -648,7 +623,7 @@ header.header-fixed {
 </c:choose>
     </div> 
 </div>
-</div> 
+</div>
 </body>
 </html>
 

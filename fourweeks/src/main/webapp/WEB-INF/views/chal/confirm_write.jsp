@@ -4,18 +4,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="챌린지 인증" name="title"/>
 </jsp:include>
-<html >
-<head>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
-
 
     <style>
     body{
@@ -23,6 +11,7 @@
     }
         div{
             display: block;
+             border: 1px dotted gray;
         }
         .row-0{
         margin-left: 120px;
@@ -305,9 +294,8 @@
      
 
      </script>
-     </head>
      <body>
-        <div class="row-0 container-1200">
+        <div class=" container-1200">
 <c:choose>
 	<c:when test="${chalList.size() == 0}">
 		참가 중인 챌린지가 없습니다.
@@ -315,7 +303,7 @@
 	</c:when>
 	<c:otherwise>
 <form action="write" method="post" enctype="multipart/form-data" class="con-form">
-            <div class="row row-1 mt-92">
+            <div class=" row-1 mt-92">
             	<input type="hidden" name="userId" value="${loginId}">
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
@@ -327,12 +315,12 @@
                 <input type="hidden" name="chalNo">
             </div>
             
-          <div class="row row-2">
+          <div class=" row-2">
           ✅ 인증 방법
                     <input class=" sp-1 calendar how-confirm" disabled>
             </div>
 
-            <div class="row row-3">
+            <div class=" row-3">
                 <p class="p1">2. 인증글 제목을 입력해주세요.</p>
                 <p class="p2"> 타인에게 불쾌감을 주는 단어를 사용할 경우 계정이 영구정지 될 수 있습니다.</p>
                 <input name="confirmTitle" class="short-text-underlinebox short-hover  helper-text1" type="text" placeholder="예) 아침 6시에 일어나기 " id="text-underlinebox1"  autocomplete="off" maxlength="40">
@@ -340,7 +328,7 @@
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>
 
-            <div class="row row-4">
+            <div class=" row-4">
                 <p class="p1">3. 실천한 내용을 입력해 주세요.</p>
                 <p class="p2"> 실천 여부를 알 수 있도록 구체적으로 적어주세요.</p>
                 <textarea  name="confirmContent" class="helper-text2  short-hover" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기"  autocomplete="off" maxlength="300"></textarea>
@@ -348,7 +336,7 @@
                   <span class="fail-message">필수 항목 입니다.</span>
             </div>
 
-            <div class="row row-5">
+            <div class=" row-5">
                 <p class="p1">4. 챌린지 인증샷을 등록하세요.(선택)</p>
                 <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
                 <div class="row">

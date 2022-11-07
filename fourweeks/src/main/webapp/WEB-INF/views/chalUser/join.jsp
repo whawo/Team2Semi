@@ -350,7 +350,7 @@ select {
 				<button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
 			</div>
 			<p class="join-p5">
-				이미 4weeks 계정이 있으신가요? <a href="/login" class="a-join a-hover">로그인</a>
+				이미 4weeks 계정이 있으신가요? <a href="/user/login" class="a-join a-hover">로그인</a>
 			</p>
 		</form>
 	</div>

@@ -16,35 +16,10 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
-	a{
-		color : black;
-	}
 	div {
-		/*border : 1px solid gray; */
+		/* border : 1px dotted gray;  */
 		border : 1px solid transparent;
 	}
-	 .notice-border {
-        border-bottom: 1px solid #E7E7E7;
-        height: 60px;
-        /* 글자 세로 가운데 */
-        display: flex;
-        align-items: center;
-        position : relative;
-    }
-    .confirm-title-css {
-        font-weight: bold;
-        margin: 10px 0;
-    }
-    .confirm-content-css {
-        line-height: 1.7em;
-        margin: 15px 0;
-        vertical-align: middle;
-    }
-    .confirm-border {
-        border-bottom: 1px solid #E7E7E7;
-        padding : 5px;
-        height : 230px;
-    }
    .user-img {
 		border-radius: 50%;
 		width: 30px;
@@ -92,8 +67,56 @@
 		border:1px solid#6c7aef;
 		background-color:#6c7aef;
 	}
-
-
+	.p1{
+	font-size: 24px;
+	font-weight: 700;
+	color: #3f3f3f;
+	}
+	.p2{
+	font-size: 16px;
+	color: #3f3f3f;
+	padding-top: 10px;
+	}
+	.row-9{
+	margin-top:10px;
+	}
+		.sp4, .sp5{
+	font-size: 16px;
+	font-weight: 700;
+	color:#3f3f3f;
+	}
+	.sp4{
+	position:relative;
+	}
+	.sp5{
+	 float: right;
+	}
+	.p-1{
+	font-size: 20px;
+	font-weight: 700;
+	color: #3f3f3f;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position:relative;
+	}
+	.p-2{
+	font-size: 16px;
+	color: #3f3f3f;
+	padding-bottom: 20px;
+	}
+	.p-3{
+	font-size: 12px;
+	color: #3f3f3f;
+	padding-bottom: 20px;
+	top: 100px;
+	}
+	.p-4{
+	font-size: 12px;
+	color: #3f3f3f;
+	padding-bottom: 20px;
+	}
+	.confirm-border{
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -118,40 +141,35 @@
 </script>
 
 <div class="container-794" style="margin-top:100px">
-
-	<h2>참가자 인증글</h2>
-
-	<h3>전체(${listCnt})</h3>
-	
+	<div class="row">
+		<div class="row row-1">
+			<p class="p1">참가자 인증글</p>
+			<p class="p2">전체(${listCnt})</p>
+	</div>
 	<!-- 관리자글 -->
      
-     <div class="notice-border">
-	       <span class="label label-notice" >공지</span>
-	       <c:forEach var="noticeList" items="${noticeList}">
-		       	<span>공지</span><br>
-		       	<span>${noticeList.noticeTitle}</span><br>
-		       	<span>${noticeList.noticeTime}</span>
+     <div class="row-9 notice-border">
+	       <c:forEach var="noticeList" items="${noticeList}"><br>
+	     		<span class="label label-notice" >공지</span>
+		       	<span class="sp4" >${noticeList.noticeTitle}</span>
+		       	<span class="sp5">${noticeList.noticeTime}</span>
+	     		<hr>
 	       </c:forEach>
-     </div>     
-     </div>      
+     </div>         
 
- <!--인증글 목록-->
-	<c:forEach var="list" items="${confirmList}">
+<c:forEach var="list" items="${confirmList}">
 	<a href="detail?confirmNo=${list.confirmNo}">
 	
 	  <div class="confirm-border" >
           <!-- 챌린지 제목 -->
           <div class="confirm-title-css" style="position:relative">
-           	${list.confirmTitle} 
+           	<p class="p-1">${list.confirmTitle}</p> 
           </div>
-          	<br><br>
-          	
        	    <!-- 인증 사진, 내용 -->   
             <div class="div-align">
-				${list.confirmContent}
-				<br><br><br><br><br>
+				<p class="p-2">${list.confirmContent}</p>
 				<!-- 프로필, 닉네임 -->
-				<img src = "/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+				<img src = "/user/profile/download?userId=${list.userId}" class="user-img" >
 				<span>${list.userNick}</span>	
 				&nbsp; 
 				${list.confirmDate} 

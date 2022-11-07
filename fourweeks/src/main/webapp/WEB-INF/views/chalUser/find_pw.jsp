@@ -112,8 +112,8 @@
 	</form>
 
 	<section class="row center row-3">
-		<a class="find" href="/find_id">아이디 찾기</a>
+		<a class="find" href="/user/find_id">아이디 찾기</a>
 		<em class="divi">|</em>
-		<a class="find" href="/join">회원가입</a>
+		<a class="find" href="/user/join">회원가입</a>
 	</section>
  </div>
