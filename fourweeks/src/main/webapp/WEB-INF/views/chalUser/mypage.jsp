@@ -400,8 +400,8 @@ header.header-fixed {
 <c:choose>
 			<c:when test="${chalDto.size() == 0}">
 			<div class="row row-9">
-				<button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
-   			 	<button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
+				<button class="btn1" onclick="location.href='${pageContext.request.contextPath}/confirm/write';" disabled>챌린지 인증</button>
+   			 	<button class="btn2" onclick="location.href='${pageContext.request.contextPath}/chal/create';">챌린지 개설</button>
 				<p class="p5">참가한 <br> 챌린지가 없습니다.</p>
 				</div>
 				<div class="row row-10">
@@ -458,7 +458,7 @@ header.header-fixed {
 					 <button class="btn3"  disabled>내 인증글</button>
 				 </c:when>
 				 <c:otherwise>
-				 	<button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalDto.chalNo}';">내 인증글</button>
+				 	<button class="btn4" onclick="location.href='${pageContext.request.contextPath}/confirm/mylist?chalNo=${chalDto.chalNo}';">내 인증글</button>
 				 </c:otherwise>
 				 </c:choose>
 </div>
