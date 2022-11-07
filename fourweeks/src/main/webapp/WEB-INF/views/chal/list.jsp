@@ -304,7 +304,7 @@
 			<div class="row chal-list">	
 			 	<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
-						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}">
+						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 		         </div>
 		         <div class="row chal-item">
 					<%-- 제목 --%>

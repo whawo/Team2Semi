@@ -258,9 +258,9 @@ html{
     color: #6c7aef;
 }
 #smallbutton3{
-    border:solid;
+    border:1px solid  #6c7aef;
     border-color: #6c7aef;
-    border-width: 2px 2px 2px 2px;
+    /* border-width: 1px 1px 1px 1px; */
     background-color: white;
     color: #6c7aef;
 }
@@ -279,7 +279,7 @@ html{
     color: #cfc9d5;
 }
 #smallbutton3-1{
-    border:solid;
+    border:1px solid #ebebed;
     border-color: #ebebed;
     border-width: 2px 2px 2px 2px;
     background-color: white;

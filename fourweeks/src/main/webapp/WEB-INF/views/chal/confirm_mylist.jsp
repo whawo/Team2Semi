@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
 	.confirm-img .no-img {
-		display: none;
+	/* 	display: none; */
 	}
 	.img-last{
 	display:none;
@@ -250,16 +250,12 @@
 	left: 365px;
 	}
 	.row-9{
-
 	margin-top:10px;
-/* 	margin-bottom: -90px; */
-
+	margin-bottom: -90px;
 	}
 	.row-11{
-
 	position: relative;
 	top: 10px;
-
 	}
 	.row-12{
 	position: relative;
@@ -278,10 +274,9 @@
 	}
 	.row-last{
 	position: relative;
-	margin-top: 100px;
+	margin-top: 40px;
 	}
 	.row-last2{
-	margin-bottm: 70px
 	}
 	
 	.p1{
@@ -309,7 +304,6 @@
 	color: #3f3f3f;
 	}
 	.p6{
-
 	margin-top:70px;
 	padding-top:10px;
 	font-size:16px;
@@ -359,6 +353,7 @@
 	font-size: 24px;
 	font-weight: 700;
 	color: #3f3f3f;
+	margin-top: 200px;
 	}
 	  .label-notice{
     border-radius: 90%;
