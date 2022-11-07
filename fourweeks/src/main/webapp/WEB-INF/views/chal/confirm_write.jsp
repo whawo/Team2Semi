@@ -9,10 +9,7 @@
     body{
     font-size:12px;
     }
-        div{
-            display: block;
-             border: 1px dotted gray;
-        }
+        
         .row-0{
         margin-left: 120px;
         }

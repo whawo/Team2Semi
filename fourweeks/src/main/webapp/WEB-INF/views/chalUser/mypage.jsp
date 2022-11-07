@@ -370,7 +370,7 @@ header.header-fixed {
 </head>
 <body>
 <div class="container-794">
-	<p class="p1 mt-92">마이페이지</p>
+	<p class="p1">마이페이지</p>
 	<div class="row  row-1 center">
 	<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='${pageContext.request.contextPath}/images/avatar.png';" >
 
