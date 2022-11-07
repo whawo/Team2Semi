@@ -21,7 +21,8 @@ public class ChalUserServiceImpl implements ChalUserService {
 	@Autowired
 	private AttachmentDao attachmentDao;
 
-	private final File dir = new File(System.getProperty("user.home") + "/upload");
+	//private final File dir = new File(System.getProperty("user.home") + "/upload");
+	private final File dir = new File("D:/upload/fourweeks");
 	
 	@Override
 	public String myInfoEdit(ChalUserDto userDto, MultipartFile attachment) throws IllegalStateException, IOException {

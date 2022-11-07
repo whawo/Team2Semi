@@ -57,7 +57,8 @@ public class ChalController {
 	@Autowired
 	private AdminDao adminDao;
 	
-	private final File dir = new File(System.getProperty("user.home") + "/upload");
+	//private final File dir = new File(System.getProperty("user.home") + "/upload");
+	private final File dir = new File("D:/upload/fourweeks");
 
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
