@@ -371,9 +371,9 @@ header.header-fixed {
 		    $("#" + activeTab).show();
 	    });
 	    
-		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		//프로필 이미지가 없으면 기본 이미지로 대체
 		$(".user-img").on("error", function(){
-			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		});
 	  
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
@@ -397,7 +397,7 @@ header.header-fixed {
 <div class="row container-794 row-move ">	
 	<p class="p1 mt-92">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
+	<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='${pageContext.request.contextPath}/images/avatar.png';" >
 
 	<p class="p2">${myDto.getUserNick()}</p>
 	<p class="p3">${myDto.userEmail}</p>
