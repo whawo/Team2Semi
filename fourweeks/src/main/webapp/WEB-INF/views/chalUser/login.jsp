@@ -7,7 +7,7 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
  
-	<link rel="stylesheet" type="text/css" href="/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -101,11 +101,11 @@
 		 
             </form>
             <section class="row center row-2">
-                <a class="find" href="/user/find_pw">비밀번호 찾기</a>
+                <a class="find" href="${pageContext.request.contextPath}/user/find_pw">비밀번호 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/user/find_id">아이디 찾기</a>
+                <a class="find" href="${pageContext.request.contextPath}/user/find_id">아이디 찾기</a>
                 <em class="divi">|</em>
-                <a class="find" href="/user/join">회원가입</a>
+                <a class="find" href="${pageContext.request.contextPath}/user/join">회원가입</a>
             </section>
         </div>
      </body>

@@ -14,7 +14,7 @@
 	$(function() {
 		$.ajax({
 			//오늘 시작/종료 챌린지 수 차트
-			url : "http://localhost:8888/admin/rest/report/chal/today",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/today",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -70,7 +70,7 @@
 		
 		$.ajax({
 			//최근 6개월 시작 챌린지 수 차트
-			url : "http://localhost:8888/admin/rest/report/chal/half",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/half",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -124,7 +124,7 @@
 
 		$.ajax({
 			//지난 달 주제별 시작 챌린지 수
-			url : "http://localhost:8888/admin/rest/report/chal/topic_last",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/topic_last",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -137,7 +137,7 @@
 				}
 				$.ajax({
 					//이번 달 주제별 시작 챌린지 수
-					url : "http://localhost:8888/admin/rest/report/chal/topic_this",
+					url : "${pageContext.request.contextPath}/admin/rest/report/chal/topic_this",
 					method : "get",
 					dataType : "json",
 					async : false,
@@ -204,7 +204,7 @@
 
 		$.ajax({
 			//이번 달 주제별 시작 챌린지 수
-			url : "http://localhost:8888/admin/rest/report/chal/topic_this",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/topic_this",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -217,7 +217,7 @@
 				}
 				$.ajax({
 					//이번 달 주제별 참가자 수 평균
-					url : "http://localhost:8888/admin/rest/report/chal/part_topic",
+					url : "${pageContext.request.contextPath}/admin/rest/report/chal/part_topic",
 					method : "get",
 					dataType : "json",
 					async : false,

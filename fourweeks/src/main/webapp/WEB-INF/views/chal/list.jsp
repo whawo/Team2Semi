@@ -12,8 +12,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
@@ -112,7 +112,7 @@
 	}
 	
 	select {
-		background: url("/images/arrow-down.png") no-repeat 97% 50%/15px auto;
+		background: url("${pageContext.request.contextPath}/images/arrow-down.png") no-repeat 97% 50%/15px auto;
 	}
 	
 	.btn {
@@ -220,7 +220,7 @@
 	$(function() {
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".main-img").on("error", function() {
-			$(this).attr("src", "/images/bg_default.png");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 
 		});
 		// 사용자가 선택한 주제를 selected 시켜라, type이 null이면 "chal_tilte"을 찍어라
@@ -312,26 +312,26 @@
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
-					 <img src="/images/attend_user.png" class="img-margin">
+					 <img src="${pageContext.request.contextPath}/images/attend_user.png" class="img-margin">
 		                ${chalDto.chalPerson}명 / 10명
 		         </div>   
 			     <%-- 시작일 조건 --%>
 		         <c:if test="${chalDto.getDDay() == 0}">
 		         <div class="row chal-item">
-			        <img src="/images/chal_start_date.png" class="img-margin">
+			        <img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">
 			                 오늘 시작
 			     </div>
 		         </c:if>
 		         <%-- 시작일 조건 --%>
 		         <c:if test="${chalDto.getDDay() > 0}">
 		         <div class="row chal-item">
-			        <img src="/images/chal_start_date.png" class="img-margin">
+			        <img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">
 			                 ${chalDto.getDDay()}일 뒤 시작
 			     </div>
 			     </c:if>
 		         <div class="row chal-item">
 			         <%-- 종료일 --%>
-			        <img src="/images/chal_end_date.png" class="img-margin">
+			        <img src="${pageContext.request.contextPath}/images/chal_end_date.png" class="img-margin">
 		                ~${chalDto.endDate}
 			     </div>
 			     <div class="row chal-item">
@@ -431,29 +431,28 @@
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
-					 <img src="/images/attend_user.png" class="img-margin">
+					 <img src="${pageContext.request.contextPath}/images/attend_user.png" class="img-margin">
 					${chalDtoRecruited.chalPerson}명 / 10명
 		         </div>   
 			     <%-- 시작일 조건 --%>
 		         <div class="row chal-item">
-			        <img src="/images/chal_start_date.png" class="img-margin">
+			        <img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">
 					<c:choose>
 							<c:when test="${chalDtoRecruited.getDDay() == 0}">
 								<div>오늘 시작</div>
 
 							</c:when>
-							<c:when test="${chalDtoRecruited.getDDay() < 0}">
-								<span class="label label-ing">진행중</span>
+							<c:when test="${chalDtoRecruited.getDDay() > 0 && chalDtoRecruited.getDDay() < 6}">
+								<span>${chalDtoRecruited.getDDay()}일 뒤 시작</span>
 							</c:when>
 							<c:otherwise>
-								<span class="label label-wait">모집중</span>
 								<div>${chalDtoRecruited.startDate}</div>
 							</c:otherwise>
 						</c:choose>
 			     </div>
 		         <div class="row chal-item">
 			         <%-- 종료일 --%>
-			        <img src="/images/chal_end_date.png" class="img-margin">
+			        <img src="${pageContext.request.contextPath}/images/chal_end_date.png" class="img-margin">
 					~${chalDtoRecruited.endDate}
 			     </div>
 			     <div class="row chal-item">
@@ -474,7 +473,7 @@
 			  </div> 
 			  </a>
 		      </c:forEach>
-		      <c:if test="${vo.count == 0}">
+		      <c:if test="${voRecruited.count == 0}">
 				<span class="text-center">검색 결과가 없습니다.</span>
 				</c:if>
 			</div>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" type="text/css" href="/css_admin/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css_admin/commons.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 
 	<form action="login" method="post">
 		<div class="row">
-			<input type="text" name="adminId" class="input w-100" placeholder="아이디" required>
+			<input type="text" name="adminId" class="input w-100" placeholder="아이디" required autocomplete="off">
 			<span class="fail-message">아이디를 입력해주세요.</span> <br> <br>
 		</div>	
 		

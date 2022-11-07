@@ -13,8 +13,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
    
@@ -205,14 +205,7 @@
    	 .div-align {
    		display : inline-block;
    	}
-	.notice-border {
-        border-bottom: 1px solid #E7E7E7;
-        height: 60px;
-        /* 글자 세로 가운데 */
-        display: flex;
-        align-items: center;
-        margin : 0;
- 	}
+	
  	.confirm-empty {
 		height : 100px;
 		display: flex;
@@ -276,6 +269,82 @@
 	.is-confirm > i {
 		color: #6C7AEF;
 	}
+	.label-notice{
+	    border-radius: 90%;
+	    padding:7px 10px;
+    }
+    .p6{
+	margin-top:70px;
+	padding-top:10px;
+	font-size:16px;
+	font-weight: 700;
+	color:#3f3f3f;
+	}
+	.p7{
+	margin-bottom: 15px;
+	font-size:14px;
+	color:#3f3f3f;
+	overflow: hidden;
+  /*   text-overflow: ellipsis; */
+  text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+/*     width:400px;
+    height: 100px; */
+     line-height: 1.2em;
+     width:400px;
+    height: 3.6em;
+/*     line-height: 135%; */
+    white-space:normal;
+	}
+    .p8{
+	font-size: 12px;
+	color:#707070;
+	padding:20px 10px 20px 0;
+	}
+	.sp1, .sp2, .sp3{
+	font-size:12px;
+	padding-left: 18px;
+	color:#707070;
+	}
+    .sp4, .sp5{
+		font-size: 16px;
+		font-weight: 700;
+		color:#3f3f3f;
+	}
+	.sp4{
+		position:relative;
+	}
+	.sp5{
+		 float: right;
+	}
+	.row-9{
+	margin-top:10px;
+	margin-bottom: -90px;
+	}
+	.notice-border {
+        cursor:pointer;
+    }
+    .row-11{
+	position: relative;
+	top: 10px;
+	}
+	.row-12{
+	position: relative;
+	top:32px;
+	}
+	.row-13{
+	margin-top: 18px;
+	border-bottom: 2px solid #f0ecf2;
+	padding-bottom: 10px;
+	}
+	.row-14{
+	position:relative;
+	bottom:120px;
+	left:660px;
+	margin-bottom: -80px;
+	}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -297,7 +366,7 @@ $(function () {
     
     //챌린지 썸네일이 없으면 기본 이미지로 대체
     $(".chal-img").on("error", function(){
-        $(this).attr("src", "/images/bg_default.png");
+        $(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
     });
   
     //프로필 이미지가 없으면 기본 아이콘으로 대체
@@ -312,7 +381,7 @@ $(function () {
     
     $.ajax({
         //내 인증글 작성 일차를 리스트로 가져오기
-        url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
+        url : "${pageContext.request.contextPath}/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
         method : "get",
         dataType : "json",
         async : false,
@@ -349,7 +418,7 @@ $(function () {
 
     $.ajax({
         //챌린지 시작일 가져오기
-        url : "http://localhost:8888/rest/chal/chal_detail?chalNo=${param.chalNo}",
+        url : "${pageContext.request.contextPath}/rest/chal/chal_detail?chalNo=${param.chalNo}",
         method : "get",
         dataType : "json",
         //async : false,
@@ -360,7 +429,7 @@ $(function () {
 
             $.ajax({
                 //챌린지 종료일 가져오기
-                url:"http://localhost:8888/rest/chal/chal_end_date?chalNo=${param.chalNo}",
+                url:"${pageContext.request.contextPath}/rest/chal/chal_end_date?chalNo=${param.chalNo}",
                 method:"get",
                 dataType:"json",
                 //async: false,
@@ -371,11 +440,14 @@ $(function () {
                     function diffDay() {
                         var sdate = new Date(sString);
                         var edate = new Date(eString);
+                        sdate.setHours(sdate.getHours()-9);
+                        edate.setHours(edate.getHours()+14);
+                        edate.setMinutes(edate.getMinutes()+59);
+                        edate.setSeconds(edate.getSeconds()+59);
                         var todayTime = new Date();
                         var diff;
                         
                         if(sdate > moment()) {
-                            console.log("시작 전");
                             $(".chal-status").text("시작까지");
                             diff = sdate - todayTime;
                         } else {
@@ -415,7 +487,7 @@ $(window).bind("pageshow", function(event) {
 
 	<%-- 이미지 --%>
 	  <div class="detail-top" style="margin-top:120px"> 
-          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img">
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
           <div class="chal-timer">
 			<span class="chal-status"></span>
 				&nbsp;
@@ -431,16 +503,16 @@ $(window).bind("pageshow", function(event) {
 	
 	<%-- 시작일 --%>
 	<div>  
-		<span><img src="/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
+		<span><img src="${pageContext.request.contextPath}/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
 	</div>
 	
 	<div>
-	 	<a href = "/chal/detail?chalNo=${chalDto.getChalNo()}"><button class="largebtn" type="submit" id="largebutton3">챌린지 바로가기</button></a>
+	 	<a href = "${pageContext.request.contextPath}/chal/detail?chalNo=${chalDto.getChalNo()}"><button class="largebtn" type="submit" id="largebutton3">챌린지 바로가기</button></a>
 	</div>
 		
 <!-- tab title -->
     <ul class="tabs">
-        <li class="active" rel="tab1">내 인증현황</li>
+        <li class="active" rel="tab1">내 인증 현황</li>
         <li rel="tab2">참가자 인증 현황</li>
     </ul>
     
@@ -503,7 +575,7 @@ $(window).bind("pageshow", function(event) {
 	     
 			<c:forEach var="allProgressDto" items="${allProgressDto}">
 
-                        <img src = "/user/profile/download?userId=${allProgressDto.userId}" class="user-img">
+                        <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${allProgressDto.userId}" class="user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
                         ${allProgressDto.userNick}: &nbsp; 달성률 : <fmt:formatNumber type="number" 
 				 			pattern="0" value="${allProgressDto.cnt*100/28}"/>%<br><br>
 				 			<br>
@@ -518,65 +590,59 @@ $(window).bind("pageshow", function(event) {
 		</div>
 		
 		<div class="row div-align float-right">
-			<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
+			<a href="${pageContext.request.contextPath}/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
 		</div>
 		<br><br>
 		
 		<!-- 관리자글 -->
-     	<!-- 관리자글 -->
-     <div class="notice-border">
-	       <span class="label label-notice" >공지</span>
-	       <c:forEach var="noticeList" items="${noticeList}">
-		       	<span>공지</span><br>
-		       	<span>${noticeList.noticeTitle}</span><br>
-		       	<span>${noticeList.noticeTime}</span>
+     	<div class="row-9 notice-border">
+	       <c:forEach var="noticeList" items="${noticeList}"><br>
+	       	<a href="${pageContext.request.contextPath}/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
+	     		<span class="label label-notice" >공지</span>
+		       	<span class="sp4" >${noticeList.noticeTitle}</span><br>
+		       	<span class="sp5">${noticeList.noticeTime}</span><br>
+			</a>	     	
+	     		<hr>
 	       </c:forEach>
-     </div>       
+     </div>      
 		
 <!-- confirm_mylist와 동일 -->		  
       <!--인증글 목록-->
+    <div class="row-10 " >
 	<c:forEach var="list" items="${confirmList}">
-	<a href="/confirm/detail?confirmNo=${list.confirmNo}">
-	
-      <div class="confirm-border">
-       <!-- 챌린지 제목 -->
-           <div class="confirm-title-css" style="position:relative">
-           	${list.confirmTitle} 
-           </div>
-            <br><br>
-            
-            <div class="div-align"> <!-- 인증 사진, 내용 -->   
-      
-					${list.confirmContent}
-					<br><br><br><br><br><br>
-						
+	<a href="${pageContext.request.contextPath}/confirm/detail?confirmNo=${list.confirmNo}">
+          <div class="row-11">
+           <p class="p6">${list.confirmTitle}</p> 
+          </div>
+
+               <div class="row-12">
+					<p class="p7">${list.confirmContent}</p>
+				</div>
+				<div class="row-13">	
 						<!-- 프로필, 닉네임 -->
-						<img src = "/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;">
+						<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${list.userId}" class="user-img" style="vertical-align:middle;" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
 						<span class="nick-size">${list.userNick}</span>	
 						&nbsp; 
-						${list.confirmDate} 
-						&nbsp; 
-						<i class="fa-regular fa-eye"></i> ${list.confirmRead} 
-						&nbsp;
-						<i class="fa-regular fa-heart"></i> ${list.confirmLike}
-						&nbsp; 
-						<i class="fa-regular fa-comment"></i> ${list.replyCount}
+					<span class="p8">${list.confirmDate}</span> 
+					<span class="sp1"><i class="fa-regular fa-eye"></i> ${list.confirmRead}</span> 
+					<span class="sp2"><i class="fa-regular fa-heart"></i> ${list.confirmLike}</span>
+					<span class="sp3"><i class="fa-regular fa-comment"></i> ${list.replyCount}</span>
+				</div>
+				<div class="row-14">
+           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align img-last" onerror="this.style.display='none'" >
+				</div>
 
-				<!-- 인증샷 : 있을 때만 노출-->
-		       <div>
-		       	<c:if test="${attachDto != null}">
-					<img src = "/confirm/detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">    		
-				</c:if>
-		       </div>	
-     		</a>
+	    </a>
 		</c:forEach>
+        </div>					
 
-		<div  class="confirm-empty">
-			 <c:if test="${listCnt == 0}">
-		      		<span style="font-size : 14px;">작성한 인증글이 없습니다</span>
-		      </c:if>
-		 </div>
-	    </div> <!-- 인증글 목록 끝 -->     
+
+	<div  class="row-last2 confirm-empty">
+		 <c:if test="${listCnt == 0}">
+	      		<span class="sp6">작성한 인증글이 없습니다</span>
+	      </c:if>
+	 </div>
+    </div>   
 	</div>
 </div>
 </div> 

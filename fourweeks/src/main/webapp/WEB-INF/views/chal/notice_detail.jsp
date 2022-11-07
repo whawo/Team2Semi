@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/WEB-INF/views/template/admin_header.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="공지글 상세" name="title" />
 </jsp:include>
 <style>
@@ -27,6 +27,10 @@
 		$(".notice-img").on("error", function(){
 			$(this).addClass("no-img");
 		});
+		//돌아가기 버튼 클릭 시, 이전 페이지로 이동
+		$(".btn-go-back").click(function(){
+			history.back();
+        });
 	});
 	
 	//뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
@@ -36,7 +40,6 @@
         }
     });
 </script>
-<div id="dashboard">
 	<div class="container-500 mt-50">
 		<div class="row left">
 			<h3>[no.${detailDto.noticeNo}]</h3> 
@@ -58,11 +61,9 @@
 		</div>
 		
 		<div class="row center">
-			<a href="list" class="smallbtn cancel-btn" id="smallbutton3">목록 보기</a>
-			<a href="edit?noticeNo=${detailDto.noticeNo}" class="smallbtn create-btn" id="smallbutton3">수정하기</a>
+			<a type="button" class="smallbtn btn-go-back" id="smallbutton3">돌아가기</a>
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
  

@@ -6,8 +6,8 @@
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="아이디 찾기" name="title" />
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -99,8 +99,8 @@ font-size:12px;
 	</form>
 
 	<section class="row row-2">
-		<a class="find" href="/find_pw">비밀번호 찾기</a>
+		<a class="find" href="${pageContext.request.contextPath}/find_pw">비밀번호 찾기</a>
 		<em class="divi">|</em>
-		<a class="find" href="/join">회원가입</a>
+		<a class="find" href="${pageContext.request.contextPath}/join">회원가입</a>
 	</section>
 </div>

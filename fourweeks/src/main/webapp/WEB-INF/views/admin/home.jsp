@@ -19,7 +19,7 @@
 	$(function() {
 		$.ajax({
 			//오늘 시작/종료 챌린지 수 차트
-			url : "http://localhost:8888/admin/rest/report/chal/today",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/today",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -74,7 +74,7 @@
 		
 		$.ajax({
 			//오늘 인증률 차트
-			url : "http://localhost:8888/admin/rest/report/chal/today_confirm_rate",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/today_confirm_rate",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -140,7 +140,7 @@
 		
 		$.ajax({
 			//오늘 가입/탈퇴자수 차트
-			url : "http://localhost:8888/admin/rest/report/chal/today_user",
+			url : "${pageContext.request.contextPath}/admin/rest/report/chal/today_user",
 			method : "get",
 			dataType : "json",
 			async : false,
@@ -205,7 +205,7 @@
 					<canvas id="joinedAndLeave"></canvas>
 				</div>
 			</div>
-			<div class="row float-left w-33 p-20">
+			<div class="row float-left w-33 p-50">
 				<div class="row center">
 					<h3>오늘 시작/종료 챌린지 수</h3>
 				</div>

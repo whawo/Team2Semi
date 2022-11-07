@@ -14,7 +14,6 @@ import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.ChalUserService;
 
-@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RequestMapping("/rest/join")
 @RestController
 public class ChalUserRestController {

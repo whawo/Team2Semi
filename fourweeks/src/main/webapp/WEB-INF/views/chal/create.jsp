@@ -7,8 +7,8 @@
 	<jsp:param value="챌린지 개설" name="title"/>
 </jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -337,12 +337,12 @@ $(function(){
         field:document.querySelector(".single-date-picker"),
         
         minDate:moment(), // 오늘자 선택 가능
-        minDate:moment().add(4,'day'), // 오늘 + 5일
+        maxDate:moment().add(4,'day'), // 오늘 + 5일
 		 format:"YYYY-MM-DD",
         firstDay:0, // 시작일 일요일부터 
         singleDate:true, // 날짜 한개만 선택
         // (+옵션) 표시되는 달의 개수를 지정 
-        numberOfMonths:1, //2개의 달씩 보여줘라 
+        numberOfMonths:1, //1개의 달씩 보여줘라 
    
         // 날짜 출력하기 
         onSelect: function(date){
@@ -372,7 +372,7 @@ $(function(){
            }
        });
        $("button[name=thumbnail-delete]").click(function(){
-           $(".preview").attr("src", "/images/bg_default.png");
+           $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
        });
    });
 //help-text
@@ -443,7 +443,7 @@ $(function(){
 	
 	            <div class="row">
 	                <p class="p1">3. 인증 방법을 입력해 주세요.</p>
-	                <textarea class="helper-text2 short-hover" name="howConfirm" placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" maxlength="300" ></textarea>
+	                <textarea class="helper-text2 short-hover" name="howConfirm" required placeholder="예) 매일 깃 커밋하기0 오늘 날짜와 커밋 내역이 보이도록 깃 허브 히스토리를 캡쳐해서 인증샷으로 첨부하기" maxlength="300" ></textarea>
 	                <span  class="helper-text-300 helper-css">0</span> /300
 	                <span class="fail-message">필수 항목 입니다. </span>
 	            </div>
@@ -466,7 +466,7 @@ $(function(){
 	                <p class="p3">[참가 인원] 최대 10명까지 참가할 수 있어요. 챌린지 시작 전에 10명이 다 모이면 자동으로 모집이 마갑됩니다. </p>
 	                <div class="row chk-line">
 	                <label class="line lab-2" >
-	                    <input type="checkbox" >
+	                    <input type="checkbox" required>
 	                    <span class="chk-1"></span>
 	                    <span class="chk-2">확인했어요!</span>
 	                    <span class="fail-message">필수 항목 입니다. </span>
@@ -479,7 +479,7 @@ $(function(){
 	                <p class="p2">노출 위치에 따라 섬네일이 축소/확대되어 적용합니다. 등록하지 않는 경우, 랜점으로 기본 이미지가 적용됩니다.</p>
 	                <div class="row">
 	                    <input id="input-file" type="file" name="attachment" class="thumbnail">
-	                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
+	                    <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.png" width="250" height="200">
 	                    <div class="row img-btns">
 	                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
 	                         <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
@@ -495,7 +495,7 @@ $(function(){
 	            </div>
 	            
 	            <div class="row center"> 
-	                <a href="/" class="smallbtn cancel-btn" id="smallbutton3">취소</a>
+	                <a href="${pageContext.request.contextPath}" class="smallbtn cancel-btn" id="smallbutton3">취소</a>
 	                <button class="smallbtn create-btn" type="submit" id="smallbutton1" >개설하고 참가하기</button>
 	            </div>
 		</form>    

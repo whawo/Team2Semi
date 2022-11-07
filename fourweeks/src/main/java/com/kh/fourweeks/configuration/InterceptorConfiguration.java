@@ -59,13 +59,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 										"/admin/login"
 										);
 		// 관리자 구분
-		registry.addInterceptor(adminInterceptor)
-								.addPathPatterns(
-										"/admin/**",
-										"/confirm/reply/blind")
-								.excludePathPatterns(
-										"/admin/login"
-										);
+	     registry.addInterceptor(adminInterceptor)
+	                        	.addPathPatterns(
+		                              "/admin/**",
+		                              "/confirm/reply/blind") 
+		                        .excludePathPatterns(
+		                              "/admin/login" // 어드민 로그인 페이지 이동 가능
+		                              );
 		
 		// 본인이 쓴 댓글만 삭제&수정 가능
 		registry.addInterceptor(replyOwnerCheckInterceptor)

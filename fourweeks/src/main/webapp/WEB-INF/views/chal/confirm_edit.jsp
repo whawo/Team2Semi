@@ -5,7 +5,7 @@
 	<jsp:param value="인증글 수정" name="title"/>
 </jsp:include> 
 
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -200,7 +200,7 @@
 			
 			//인증샷이 없으면 기본 이미지 노출
 			$(".preview").on("error", function(){
-				 $(".preview").attr("src", "/images/bg_default.png");
+				 $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 			});
 			
 			//form submit 시 select disabled 속성 제거
@@ -215,15 +215,15 @@
 			
 			//사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
 			$(".btn-delete-file").click(function(){
-				$(".preview").attr("src", "/images/bg_default.png");
+				$(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 				$.ajax({
 			        //인증샷 삭제 메소드 호출
-			        url : "http://localhost:8888/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
+			        url : "${pageContext.request.contextPath}/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
 			        method : "get",
 			        dataType : "json",
 			        async : false,
 			        success : function(resp) {
-			            console.log(resp);
+			        	$(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 			        }
 			    });
 			});
@@ -251,9 +251,9 @@
                     $("[name=attachment]")(e.target)
                 });
             });
-            $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
-            });
+            /* $("button[name=thumbnail-delete]").click(function(){
+                $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
+            }); */
         });
     
     // help-text
@@ -336,7 +336,7 @@
 				</div>
 			<div class="row img-btns">
 				<label class="input-file-upload img-lab" for="input-file">사진변경</label>     
-				<button  class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" >삭제</button>
+				<button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" >삭제</button>
 			</div>
 	</div>
 

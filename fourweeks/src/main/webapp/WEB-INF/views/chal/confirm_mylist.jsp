@@ -12,8 +12,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
@@ -21,7 +21,7 @@
 	/* 	display: none; */
 	}
 	.img-last{
-	/* display:none; */
+	display:none;
 	}
 	
 	.confirm-img {
@@ -169,6 +169,7 @@
 		display: flex;
 		align-items:center; 
 		justify-content: center;
+		
 	}
 	h3 {
 		margin : 40px 0;
@@ -479,7 +480,7 @@ header.header-fixed {
 	$(function(){
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function(){
-			$(this).attr("src", "/images/bg_default.png");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
 		});
 		
 		//인증샷이 없으면 img 태그 가리기
@@ -512,9 +513,9 @@ header.header-fixed {
 	</div>
 
 	<div class="row row-parenet">
-		<a href="/chal/detail?chalNo=${chalDto.chalNo}">
+		<a href="${pageContext.request.contextPath}/chal/mychal?chalNo=${chalDto.chalNo}">
 	<div class="row-2">
-		<img src="/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img"  onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+		<img src="${pageContext.request.contextPath}/chal/detail/download?chalNo=${chalDto.chalNo}" class="chal-img chal-info-img" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 	</div>
 
  		<!-- 2단 시작 -->
@@ -571,9 +572,11 @@ header.header-fixed {
        
      <div class="row-9 notice-border">
 	       <c:forEach var="noticeList" items="${noticeList}"><br>
-	     		<span class="label label-notice" >공지</span>
-		       	<span class="sp4" >${noticeList.noticeTitle}</span><br>
-		       	<span class="sp5">${noticeList.noticeTime}</span><br>
+     			<a href="${pageContext.request.contextPath}/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
+		     		<span class="label label-notice" >공지</span>
+			       	<span class="sp4" >${noticeList.noticeTitle}</span><br>
+			       	<span class="sp5">${noticeList.noticeTime}</span><br>
+		       	</a>
 	     		<hr>
 	       </c:forEach>
      </div>     
@@ -595,7 +598,7 @@ header.header-fixed {
 					<span class="sp3"><i class="fa-regular fa-comment"></i> ${list.replyCount}</span>
 				</div>
 				<div class="row-14">
-           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align img-last" onerror="this.style.display='none'" / >
+           			<img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align img-last" onerror="this.style.display='none'" >
 				</div>
 
 	    </a>
@@ -603,13 +606,14 @@ header.header-fixed {
         </div>					
 
 
-	<div  class="row-last2 confirm-empty">
 		 <c:if test="${listCnt == 0}">
+	<div  class="row-last2 confirm-empty">
 	      		<span class="sp6">작성한 인증글이 없습니다</span>
-	      </c:if>
 	 </div>
+	      </c:if>
     </div>
-
+	
+	<c:if test="${listCnt != 0}">
 	<div class="row row-last center mt-40 mb-40">
 		<!-- 이전 -->
 		<ul class=" pagenation">
@@ -661,6 +665,7 @@ header.header-fixed {
 			</c:choose>
 			</ul>
 	</div>
+	</c:if>
 </body>
 
 

@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="회원가입" name="title" />
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -202,7 +202,7 @@ select {
 					if (checkId()) {
 						var that = this;
 						$.ajax({
-							url : "http://localhost:8888/rest/join/id?userId="
+							url : "${pageContext.request.contextPath}/rest/join/id?userId="
 									+ userId,
 							method : "get",
 							success : function(result) {
@@ -236,7 +236,7 @@ select {
 								var that = this;
 								$
 										.ajax({
-											url : "http://localhost:8888/rest/join/nick?userNick="
+											url : "${pageContext.request.contextPath}/rest/join/nick?userNick="
 													+ userNick,
 											success : function(result) {
 
@@ -350,7 +350,7 @@ select {
 				<button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
 			</div>
 			<p class="join-p5">
-				이미 4weeks 계정이 있으신가요? <a href="/user/login" class="a-join a-hover">로그인</a>
+				이미 4weeks 계정이 있으신가요? <a href="${pageContext.request.contextPath}/login" class="a-join a-hover">로그인</a>
 			</p>
 		</form>
 	</div>

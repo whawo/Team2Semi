@@ -147,13 +147,13 @@ public class ChalUserDaoImpl implements ChalUserDao{
    
    @Override
    public List<ChalMyDetailDto> selectAllMyDetail(String userId) {
-      String sql ="select * from (select M.*, ceil(start_date-sysdate) d_day,"
+      String sql ="select * from (select M.*, trunc(start_date-sysdate) d_day,"
             + " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
             + " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
             + " nvl(C.cnt, 0) cnt from my_chal_detail M left outer join (select count(*) cnt,"
             + " chal_no from chal_confirm where user_id = ? group by chal_no) C"
             + " on M.chal_no = C.chal_no where user_id = ?)"
-            + " where end_d_day > 0";
+            + " where end_d_day > 0 order by start_date desc";
       Object[] param = {userId, userId};
       return jdbcTemplate.query(sql, allDetailMapper, param);
    }
@@ -162,13 +162,13 @@ public class ChalUserDaoImpl implements ChalUserDao{
    
    @Override
    public List<ChalMyDetailDto> selectEndAllMyDetail(String userId) {
-      String sql ="select * from (select M.*, ceil(start_date-sysdate) d_day,"
+      String sql ="select * from (select M.*, trunc(start_date-sysdate) d_day,"
             + " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
             + " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
             + " nvl(C.cnt, 0) cnt from my_chal_detail M left outer join (select count(*) cnt,"
             + " chal_no from chal_confirm where user_id = ? group by chal_no) C"
             + " on M.chal_no = C.chal_no where user_id = ?)"
-            + " where end_d_day < 0";
+            + " where end_d_day < 0 order by start_date desc";
       Object[] param = {userId, userId};
       return jdbcTemplate.query(sql, allDetailMapper, param);
    }
@@ -206,12 +206,12 @@ public class ChalUserDaoImpl implements ChalUserDao{
    
    @Override
    public List<ChalCreateMyDto> selectCreateAllMyDetail(String userId) {
-      String sql ="select * from (select C.*,ceil(start_date-sysdate) d_day,"
+      String sql ="select * from (select C.*,trunc(start_date-sysdate) d_day,"
             + " to_char(start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60), 'yyyy-mm-dd') end_date,"
             + " trunc((start_date +27+ 23/24 + 59/(24*60) + 59/(24*60*60))-sysdate) end_d_day,"
             + " nvl(T.cnt, 0) cnt from chal C left outer join"
             + " (select count(*) cnt, chal_no from chal_confirm where user_id = ? group by chal_no)"
-            + " T on C.chal_no = T.chal_no where C.user_id = ?)where end_d_day >0";
+            + " T on C.chal_no = T.chal_no where C.user_id = ?)where end_d_day >0 order by start_date desc";
       
       Object[] param = {userId, userId};
       
@@ -227,5 +227,12 @@ public class ChalUserDaoImpl implements ChalUserDao{
 	public void leaveCounting(LeaveCountDto leaveCountDto) {
 		String sql = "insert into leave_count values(leave_seq.nextval, sysdate, 1)";
 		jdbcTemplate.update(sql);
+	}
+   
+   @Override
+	public boolean updateModifiedTime(String userId) {
+	    String sql = "update chal_user set modified_date = sysdate where user_id = ?";
+	    Object[] param = {userId};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 }
