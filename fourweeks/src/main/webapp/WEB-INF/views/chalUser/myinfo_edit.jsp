@@ -91,9 +91,9 @@ display:none;
 }
 
      	.preview{
-      	margin-left: 63px;
+      	margin-left: 100px;
       	position: absolute;
-      	top: 200px;
+      	top: 130px;
      	}
         .thumbnail{
             display: none;
@@ -207,9 +207,6 @@ display:none;
                  reader.readAsDataURL(this.files[0]);//읽어라
              }
          });
-         /* $("button[name=thumbnail-delete]").click(function(){
-             $(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
-         }); */
          
          //사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
 		$(".btn-delete-file").click(function(){
