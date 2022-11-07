@@ -235,7 +235,7 @@
      $(function(){
             $("[name=attachment]").change(function(e){
                 //input[type=file] 태그에는 files라는 속성이 존재
-                console.log(this.files);
+                
                 if(this.files.length > 0){
                     //읽는 도구
                     var reader = new FileReader();
@@ -249,7 +249,7 @@
                 }
             });
             $("button[name=thumbnail-delete]").click(function(){
-                $(".preview").attr("src", "/images/bg_default.png");
+                $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
             });
         });
   
@@ -299,7 +299,7 @@
 <c:choose>
 	<c:when test="${chalList.size() == 0}">
 		참가 중인 챌린지가 없습니다.
-		<a href="/chal/list">챌린지 둘러보기</a>
+		<a href="${pageContext.request.contextPath}/chal/list">챌린지 둘러보기</a>
 	</c:when>
 	<c:otherwise>
 <form action="write" method="post" enctype="multipart/form-data" class="con-form">
@@ -341,7 +341,7 @@
                 <p class="p2">jpg, png 파일만 업로드할 수 있어요.</p>
                 <div class="row">
                     <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
-                    <img class="preview" src="/images/bg_default.png" width="250" height="200">
+                    <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.png" width="250" height="200">
                     <div class="row img-btns">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
                         <button class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</button>
@@ -360,4 +360,3 @@
 </body>
 
 </html>
-

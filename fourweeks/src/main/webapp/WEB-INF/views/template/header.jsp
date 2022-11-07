@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="login" value="${loginId != null}"></c:set>
-<c:set var="admin" value="${loginGrade == '관리자'}"></c:set>
 <html>
 <head>
 <title>
@@ -19,14 +18,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
   	
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-  	
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+
 <style>
 	.header-fixed{
 		z-index:100;
@@ -46,7 +44,7 @@
 	(function(){
 	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 	s1.async=true;
-	s1.src='https://embed.tawk.to/6358bb84daff0e1306d4011a/1gg99p084';
+	s1.src='wss://embed.tawk.to/6358bb84daff0e1306d4011a/1gg99p084';
 	s1.charset='UTF-8';
 	s1.setAttribute('crossorigin','*');
 	s0.parentNode.insertBefore(s1,s0);
@@ -73,33 +71,37 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="/"><img src="/images/top_logo.png" width="100"></a>
+		<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>
 					<c:when test="${login}">
-						<li><a href="/chal/list">전체 챌린지</a></li>
-	   					<li><a href="/chal/create">챌린지 개설</a></li>
-		                <li><a href="/confirm/write">챌린지 인증</a></li>
+						<li><a href="${pageContext.request.contextPath}/chal/list">전체 챌린지</a></li>
+	   					<li><a href="${pageContext.request.contextPath}/chal/create">챌린지 개설</a></li>
+		                <li><a href="${pageContext.request.contextPath}/confirm/write">챌린지 인증</a></li>
 		                <li><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                <li class="right-menu">
+<<<<<<< HEAD
 							<img src = "/user/profile/download?userId=${loginId}" width="50" height="50" class="user-img"  onerror=" this.onerror=null; this.src='/images/avatar.png';" > ${loginNick}
+=======
+							<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${loginId}" width="50" height="50" class="user-img"> ${loginNick}
+>>>>>>> refs/remotes/origin/HEAD
 							<ul>
-								<li><a href="/user/mypage">마이페이지</a></li>
-								<li><a href="/user/logout">로그아웃</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/mypage">마이페이지</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 							</ul>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/chal/list">전체 챌린지</a></li>
-		  				<li><a href="/need_login">챌린지 개설</a></li>
-		                <li><a href="/need_login">챌린지 인증</a></li>
+						<li><a href="${pageContext.request.contextPath}/chal/list">전체 챌린지</a></li>
+		  				<li><a href="${pageContext.request.contextPath}/need_login">챌린지 개설</a></li>
+		                <li><a href="${pageContext.request.contextPath}/need_login">챌린지 인증</a></li>
 		                <li><a href="javascript:void(Tawk_API.toggle())">문의하기</a></li>
 		                <li class="right-menu">
 							로그인
 							<ul>
-								<li><a href="/user/login">로그인</a></li>
-								<li><a href="/user/join">회원가입</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/join">회원가입</a></li>
 							</ul>
 						</li>
 		           	 	

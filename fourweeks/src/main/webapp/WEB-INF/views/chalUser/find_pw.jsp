@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="비밀번호 찾기" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -112,8 +112,16 @@
 	</form>
 
 	<section class="row center row-3">
+<<<<<<< HEAD
 		<a class="find" href="/user/find_id">아이디 찾기</a>
+=======
+		<a class="find" href="${pageContext.request.contextPath}/find_id">아이디 찾기</a>
+>>>>>>> refs/remotes/origin/HEAD
 		<em class="divi">|</em>
+<<<<<<< HEAD
 		<a class="find" href="/user/join">회원가입</a>
+=======
+		<a class="find" href="${pageContext.request.contextPath}/join">회원가입</a>
+>>>>>>> refs/remotes/origin/HEAD
 	</section>
  </div>

@@ -4,8 +4,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="계정 관리" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    
@@ -193,7 +193,7 @@ display:none;
 	 $(function(){
          $("[name=attachment]").change(function(e){
              //input[type=file] 태그에는 files라는 속성이 존재
-             console.log(this.files);
+             
              if(this.files.length > 0){
                  //읽는 도구
                  var reader = new FileReader();
@@ -206,27 +206,22 @@ display:none;
                  };
                  reader.readAsDataURL(this.files[0]);//읽어라
              }
-        /*      // 사진 변경하기 
-             var inputImage = document.getElementById("input-image")
-             inputImage.addEventListener(function(e){
-                 $("[name=attachment]")(e.target) */
-             });
          });
-         $("button[name=thumbnail-delete]").click(function(){
+         /* $("button[name=thumbnail-delete]").click(function(){
              $(".preview").attr("src", "<i class='fa-solid fa-circle-user fa-10x'></i>");
-         });
+         }); */
          
          //사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
 		$(".btn-delete-file").click(function(){
-			$(".preview").attr("src", "/images/avatar.png");
+			$(".preview").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 			$.ajax({
 		        //인증샷 삭제 메소드 호출
-		        url : "http://localhost:8888/rest/chal/user_img/delete?${param.confirmNo}",
+		        url : "${pageContext.request.contextPath}/rest/chal/user_img/delete?${loginId}",
 		        method : "get",
 		        dataType : "json",
 		        async : false,
 		        success : function(resp) {
-		            console.log(resp);
+		        	$(".preview").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		        }
 		    });
 		});
@@ -274,7 +269,7 @@ display:none;
 	<div class="row  row-1">
 			<input type="hidden" name="userId" value="${userDto.userId}">
 
-			<span class="sp-0">프로필 사진</span> <img class="img1" src="/user/profile/download?userId=${userDto.userId}" width="80" height="80" class="preview">
+			<span class="sp-0">프로필 사진</span> <img class="img1 preview" src="${pageContext.request.contextPath}/user/profile/download?userId=${userDto.userId}" width="100" height="100">
 	</div>
 	
 	<div class="row  row-img">
@@ -284,7 +279,7 @@ display:none;
 	</div>
 	<div class=" row-2">
                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                        <button class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" type="button">삭제</button>
+                        <button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete">삭제</button>
 	</div>
 	<div class="row  ">			
 	 <span class="sp-1">아이디</span><input class="input short-text-box  id-box" name="userId"  value="${userDto.userId}" disabled>
@@ -305,11 +300,11 @@ display:none;
 </div>
 
 <div class="row  row-leave">
-			<a href="/user/leave" class="btn-leave " >탈퇴하기</a>
+			<a href="${pageContext.request.contextPath}/user/leave" class="btn-leave " >탈퇴하기</a>
 </div>
 			
 <div class="row center  row-btns">
-			<a href="/user/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
+			<a href="${pageContext.request.contextPath}/user/mypage" class="smallbtn cancel-btn"   id="smallbutton3">취소</a>
 			<button  class="save-btn" type="submit">저장하기</button>
 </div>
 		</form>

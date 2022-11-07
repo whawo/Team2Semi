@@ -6,8 +6,8 @@
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="회원 전용 페이지" name="title"/>
 </jsp:include>
-	<link rel="stylesheet" type="text/css" href="/css/basic.css">
-	<link rel="stylesheet" type="text/css" href="/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -65,12 +65,12 @@
             </div>
             
             <div class="row center">
-               <img src="/images/join_success.png" width="200" height="200">
+               <img src="${pageContext.request.contextPath}/images/join_success.png" width="200" height="200">
             </div>
 
             <div class="row row-2 center">
-                <button class="largebtn btn1 login-btn"  id="largebutton1" onclick="location.href='/chaluser/login';" type="button">로그인</button>
-                <button class="largebtn btn1 join-btn" id="largebutton3"  onclick="location.href='/chaluser/join';" type="button">회원가입</button>
+                <button class="largebtn btn1 login-btn"  id="largebutton1" onclick="location.href='/user/login';">로그인</button>
+                <button class="largebtn btn1 join-btn" id="largebutton3"  onclick="location.href='/user/join';">회원가입</button>
             </div>
         </div>
 </div>
