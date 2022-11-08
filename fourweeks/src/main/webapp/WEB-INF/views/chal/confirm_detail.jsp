@@ -113,7 +113,7 @@
 	$(function(){
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
 		$(".user-img").on("error", function(){
-			$(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
+			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		});
 	});
 	

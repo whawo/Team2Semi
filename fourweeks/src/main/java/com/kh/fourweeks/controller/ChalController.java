@@ -97,7 +97,7 @@ public class ChalController {
 	public ResponseEntity<ByteArrayResource> detailDownload(
 			@ModelAttribute ChalDto chalDto
 		) throws IOException {
-		//인증글 번호로 첨부파일 번호 찾기
+		//챌린지 번호로 첨부파일 번호 찾기
 		int attachmentNo = attachmentDao.selectChalImg(chalDto.getChalNo());
 		//attachService에서 첨부파일 번호로 파일정보 조회해서 전송  
 		return attachService.load(attachmentNo);

@@ -142,7 +142,7 @@ $(function () {
 		</div>
 
 		<div class="row row-4 center">
-			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3" onclick="location.href='/mypage';">취소</button>
+			     <button  class="smallbtn cancel-btn"  type="button"  id="smallbutton3" onclick="location.href='${pageContext.request.contextPath}/mypage';">취소</button>
 
 			     <button class="save-btn" type="submit">변경</button>
 		</div>

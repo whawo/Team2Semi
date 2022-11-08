@@ -561,7 +561,7 @@ header.header-fixed {
 </a>
 </div> 
 
-	 	<button class="navbtn" type="submit" id="navbutton1" onclick="location.href='http://localhost:8888/confirm/write?chalNo=${chalDto.chalNo}';">
+	 	<button class="navbtn" type="submit" id="navbutton1" onclick="location.href='${pageContext.request.contextPath}/confirm/write?chalNo=${chalDto.chalNo}';">
 	 	인증하기
 	 	</button>
 	 </div>
