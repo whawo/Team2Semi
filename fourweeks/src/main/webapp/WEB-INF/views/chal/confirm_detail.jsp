@@ -14,8 +14,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -34,12 +34,11 @@
 	  	display: inline-block;
 	}
 	.confirm-img {
-	 position: relative;
-      width : 400px;
-      /* height : 740px; */
+	  position: relative;
+      width : 785px;
+      height : 740px;
       border-radius: 10px;
 	}
-	
      .confirm-content {
          font-size: 22px;
          line-height: 1.5em;
@@ -142,7 +141,7 @@
 	<!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
 	<div>
          <div class="div-align" >
-            <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${confirmVO.userId}" class="user-img">
+            <img src = "/user/profile/download?userId=${confirmVO.userId}" class="user-img">
          </div>
          <div class="div-align">
 	         <ul style="list-style:none; font-size:15px;">
@@ -153,7 +152,7 @@
      </div>
      
 	<!-- 인증샷 : 있을 때만 노출-->
-       <div class="confirm-img-box">
+       <div>
        	<c:if test="${attachDto != null}">
 			<img src = "detail/download?confirmNo=${confirmVO.confirmNo}" class="confirm-img">       		
 		</c:if>
@@ -192,7 +191,7 @@
 	<!-- 댓글 CRUD 비동기 처리 예정 -->
 	<!-- 댓글 입력 -->
 		<div class="div-align" >
-			 <img src = "${pageContext.request.contextPath}/images/avatar.png" width="50" height="50" class="user-img  reply-user-img">
+			 <img src = "#" width="50" height="50" class="user-img  reply-user-img">
 	    </div>
 	    
 	    <div class="div-align">
@@ -216,7 +215,7 @@
 				<tr class="view">
 					<td>
 						<!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-						<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
+						<img src = "/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
 						${replyDto.userNick}
 						<c:if test="${replyDto.userId == confirmVO.userId}">
 							&nbsp; [작성자]

@@ -69,7 +69,7 @@
 		
 		<div class="row left">
 			<label>첨부파일(최대 1MB)</label>
-			<img src="detail/download?noticeNo=${dto.getNoticeNo()}" class="notice-img" width="400">
+			<img src="detail/download?noticeNo=${dto.getNoticeNo()}" class="notice-img">
 			<input class="input w-100" type="file" name="attachment">
 		</div>
 		

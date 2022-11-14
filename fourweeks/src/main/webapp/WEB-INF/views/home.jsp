@@ -11,8 +11,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
@@ -169,7 +169,7 @@
   $(function(){
     //챌린지 썸네일이 없으면 기본 이미지로 대체
     $(".main-img").on("error", function(){
-      $(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
+      $(this).attr("src", "/images/bg_default.png");
     });
 
     //뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
@@ -191,7 +191,7 @@
 		#목표관리 #습관형성 #갓생살기
 		</span>
 		<div class="row banner-child">
-			<img src="${pageContext.request.contextPath}/images/home_banner_illust.png" id="head-image">  
+			<img src="/images/home_banner_illust.png" id="head-image">  
 		</div>
 	</div>
 		
@@ -221,16 +221,16 @@
 		<%-- 주제별 리스트 시작 --%>
 
 		<div class="row first mt-50">
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=생활&keyword="><img src="${pageContext.request.contextPath}/images/regular_lifestyle.png"></a></div>
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=운동&keyword="><img src="${pageContext.request.contextPath}/images/exercise.png"></a></div>
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=식습관&keyword="><img src="${pageContext.request.contextPath}/images/eating_habits.png"></a></div>
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=정서&keyword="><img src="${pageContext.request.contextPath}/images/mind_control.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=생활&keyword="><img src="/images/regular_lifestyle.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=운동&keyword="><img src="/images/exercise.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=식습관&keyword="><img src="/images/eating_habits.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=정서&keyword="><img src="/images/mind_control.png"></a></div>
 		</div>
 		<div class="row first">
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=취미&keyword="><img src="${pageContext.request.contextPath}/images/hobby.png"></a></div>
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=학습&keyword="><img src="${pageContext.request.contextPath}/images/study.png"></a></div>
-			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=환경&keyword="><img src="${pageContext.request.contextPath}/images/echo_and_pat.png"></a></div>
-			<div class="flexbox"><a href=""><img src="${pageContext.request.contextPath}/images/start_today.png"></a></div>	
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=취미&keyword="><img src="/images/hobby.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=학습&keyword="><img src="/images/study.png"></a></div>
+			<div class="flexbox"><a href="chal/list?alignType=d_day+asc&type=환경&keyword="><img src="/images/echo_and_pat.png"></a></div>
+			<div class="flexbox"><a href=""><img src="/images/start_today.png"></a></div>	
 
 		</div>
 		<%-- 주제별 리스트 끝 --%>
@@ -262,26 +262,26 @@
 		         </div>     
 		         <div class="row chal-item">
 					<%-- 인원수 --%>
-					 <img src="${pageContext.request.contextPath}/images/attend_user.png" class="img-margin">
+					 <img src="/images/attend_user.png" class="img-margin">
 		                ${chalDto.chalPerson}명 / 10명
 		         </div>   
 			     <%-- 시작일 조건 --%>
 		         <c:if test="${chalDto.getDDay() == 0}">
 		         <div class="row chal-item">
-			        <img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">
+			        <img src="/images/chal_start_date.png" class="img-margin">
 			                 오늘 시작
 			     </div>
 		         </c:if>
 		         <%-- 시작일 조건 --%>
 		         <c:if test="${chalDto.getDDay() > 0}">
 		         <div class="row chal-item">
-			        <img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">
+			        <img src="/images/chal_start_date.png" class="img-margin">
 			                 ${chalDto.getDDay()}일 뒤 시작
 			     </div>
 			     </c:if>
 		         <div class="row chal-item">
 			         <%-- 종료일 --%>
-			        <img src="${pageContext.request.contextPath}/images/chal_end_date.png" class="img-margin">
+			        <img src="/images/chal_end_date.png" class="img-margin">
 		                ~${chalDto.endDate}
 			     </div>
 			     <div class="row chal-item">
