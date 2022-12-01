@@ -5,8 +5,8 @@
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
 	<jsp:param value="비밀번호 변경" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    

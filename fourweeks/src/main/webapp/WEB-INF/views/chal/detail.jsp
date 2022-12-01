@@ -14,8 +14,8 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons1.css">
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
@@ -90,7 +90,6 @@
          justify-content: center;
          align-items: center;
        }
-       .chal-status,
        .chal-timer-font {
            font-size: 20px;
        }
@@ -108,14 +107,11 @@
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<!-- moment 라이브러리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 <script>
 	$(function() {
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function() {
-			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
+			$(this).attr("src", "/images/bg_default.png");
 		});
 
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
@@ -127,63 +123,6 @@
 		$(".confirm-img").on("error", function() {
 			$(this).addClass("no-img");
 		});
-		
-		$.ajax({
-	        //챌린지 시작일 가져오기
-	        url : "${pageContext.request.contextPath}/rest/chal/chal_detail?chalNo=${param.chalNo}",
-	        method : "get",
-	        dataType : "json",
-	        //async : false,
-	        success : function(resp) {
-	            var sString = resp.startDate;
-	            console.log(sString);
-	            
-
-	            $.ajax({
-	                //챌린지 종료일 가져오기
-	                url:"${pageContext.request.contextPath}/rest/chal/chal_end_date?chalNo=${param.chalNo}",
-	                method:"get",
-	                dataType:"json",
-	                //async: false,
-	                success:function(resp){
-	                    var eString = resp.endDate;
-	                    console.log(eString);
-	                   
-	                    function diffDay() {
-	                        var sdate = new Date(sString);
-	                        var edate = new Date(eString);
-	                        sdate.setHours(sdate.getHours()-9);
-	                        edate.setHours(edate.getHours()+14);
-	                        edate.setMinutes(edate.getMinutes()+59);
-	                        edate.setSeconds(edate.getSeconds()+59);
-	                        var todayTime = new Date();
-	                        var diff;
-	                        
-	                        if(sdate > moment()) {
-	                            $(".chal-status").text("시작까지");
-	                            diff = sdate - todayTime;
-	                        } else {
-	                            $(".chal-status").text("종료까지");
-	                            diff = edate - todayTime;
-	                        }
-	                        
-	                        var diffDay = Math.floor(diff / (1000*60*60*24));
-	                        var diffHour = Math.floor((diff / (1000*60*60)) % 24);
-	                        var diffMin = Math.floor((diff / (1000*60)) % 60);
-	                        var diffSec = Math.floor(diff / 1000 % 60);
-	                        
-	                        //var remainTime = document.querySelector("#remain-time");
-	                        //remainTime.innerText = `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
-	                        $("#remain-time").text(diffDay+"일 " + diffHour + "시간 " + diffMin + "분 " + diffSec + "초");
-	                    }
-
-	                    diffDay();
-	                    setInterval(diffDay, 1000);
-
-	                }
-	            });
-	        }
-	    });
 	});
 
 	// 뒤로가기로 돌아왔을 때, 이미지 onerror 이벤트 실행을 위해 새로고침
@@ -212,34 +151,33 @@
 	<%-- 이미지 --%>
 
 	  <div class="detail-top" style="margin-top:100px;"> 
-          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+          <img src="detail/download?chalNo=${chalDto.getChalNo()}" class="chal-img detail-top-img  mt-92">
 
           <div class="chal-timer">
+              <span class="chal-timer-font"> 
         <c:choose>
-		<%-- <c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
+		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
 			${chalVO.getEndDday()}일 뒤 종료
 		</c:when>
 		<c:when test="${chalVO.getEndDday() == 0}">
 			오늘 종료
-		</c:when> --%>
+		</c:when>
 		<c:when test="${chalVO.getEndDday() < 0}">
 			종료
 		</c:when>
-		<%-- <c:when test="${chalVO.getDDay() == 1}">
+		<c:when test="${chalVO.getDDay() == 1}">
 			내일부터 시작
 		</c:when>
 				<c:when test="${chalVO.getDDay() == 0}">
 			오늘 시작
-		</c:when> --%>
+		</c:when>
+		<%--시작 전에 인증글 리스트 조회 불가 -> 해당 기능 구현 후 아래 구문 삭제, 위 구문을 otherwise로 변경 --%>
 		<c:otherwise>
-			<span class="chal-status"></span>
-				&nbsp;
-			<span class="chal-timer-font" id="remain-time"></span>
+			${chalVO.getDDay()}일 뒤 시작
 		</c:otherwise>
-	    </c:choose>
+	    </c:choose>  / 타이머로 변경하기 </span>
           </div>
-          </div>
-     
+      </div>
       
 	<%-- 챌린지 제목 --%>
 	<div> 
@@ -248,12 +186,12 @@
 	
 	 <%-- 참가 인원 --%>
 	<div> 
-		<span><img src="${pageContext.request.contextPath}/images/attend_user.png" class="img-margin">${chalDto.getChalPerson()}명/10명</span>
+		<span><img src="/images/attend_user.png" class="img-margin">${chalDto.getChalPerson()}명/10명</span>
 	</div>
 	
 	<%-- 시작일 --%>
 	<div>  
-		<span><img src="${pageContext.request.contextPath}/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
+		<span><img src="/images/chal_start_date.png" class="img-margin">${chalDto.getStartDate()}</span>
 
 		<span class="label label-status" > <c:choose>
 		<c:when test="${chalVO.getEndDday() > 0 && chalVO.getEndDday() < 28}">
@@ -281,7 +219,7 @@
 
 	 <%-- 종료일 --%>
 	<div>
-		<img src="${pageContext.request.contextPath}/images/chal_end_date.png" class="img-margin">
+		<img src="/images/chal_end_date.png" class="img-margin">
 		<span>~${chalVO.endDate}</span>
 	</div>
 	
@@ -291,13 +229,17 @@
 			<c:when test="${chalDtoRecruited.getDDay() < -28}">
 				<span class="label label-status" >종료</span>
 			</c:when>
-			<c:when test="${chalDtoRecruited.getDDay() == 0}">
+			<c:when test="${chalDtoRecruited.getDDay() < 0}">
+				<span class="label label-ing" >진행중</span>
+			</c:when>
+					<c:when test="${chalDtoRecruited.getDDay() == 0}">
 				<span class="label label-ing" >진행중</span>
 			</c:when>
 			<c:otherwise>
 				<span class="label label-wait" >모집중</span>
 			</c:otherwise>
 		</c:choose>
+		<span class="label label-category" >진행중</span>
 	</div>
 	
 	 <%-- 버튼 --%>
@@ -318,7 +260,7 @@
      </div>
      
 	<div>
-		<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
+		<img src = "/user/profile/download?userId=${chalDto.userId}" width="50" height="50" class="user-img"> ${chalDto.getUserNick()}
 	</div>
 	
 	 <%-- 구분선 --%>
@@ -329,7 +271,7 @@
      </div>
      
 	<div> 
-		<pre>${chalDto.getChalContent()}</pre>
+		${chalDto.getChalContent()}
 	</div>
 	
 	 <div>
@@ -337,12 +279,12 @@
      </div>
 	
 	<div> 
-		<pre>${chalDto.getHowConfirm()}</pre>
+		${chalDto.getHowConfirm()}
 	</div>
 		
 </div>
- 
 </form>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 

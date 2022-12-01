@@ -16,7 +16,7 @@
     .row-2{
     margin-bottom: 30px;
     }
-    .row-3{
+    .row-3{ 
     margin-bottom: 50px;
     }
     .row-9{
@@ -122,21 +122,21 @@ position: absolute;
 bottom: 60px;
 left: 350px;
 }
-	.c1-hover:active,
-	.c1-hover:hover{
+
+.c1-hover:focus{
 	font-weight: 700;
 	color:  #6c7aef;
 	}
-	.c2-hover:active,
-	.c2-hover:hover{
+.c2-hover:focus,
+.c2-hover:hover{
 	font-weight: 700;
 	color:  #6c7aef;
-	}
-	.c3-hover:active,
-	.c3-hover:hover{
+}
+.c3-hover:focus,
+.c3-hover:hover{
 	font-weight: 700;
 	color:  #6c7aef;
-	}
+}
 
 .btn1{
 font-size:16px;
@@ -388,7 +388,7 @@ header.header-fixed {
 	
 <div class="row row-11">
 <ul class="ul-1 tabs">
-	<li  class="li-1 c1 c1-hover active" rel="tab1">${chalDto.size()}<p>참가중</p></li>
+	<li  class="li-1 c1 c1-hover " rel="tab1">${chalDto.size()}<p>참가중</p></li>
 	<li  class="li-1 c2 c2-hover" rel="tab2">${chalEndDto.size()}<p>완료</p></li>
 	<li  class="li-1 c3 c3-hover" rel="tab3">${createDto.size()}<p>개설</p></li>
 </ul>	

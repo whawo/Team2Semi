@@ -82,10 +82,6 @@ font-size: 24px;
 font-weight: 700;
 color: #3f3f3f;
 }
-
-.user-img{
-margin-left: 55px;
-}
 .img-input{
 display:none;
 }
@@ -170,6 +166,104 @@ display:none;
     .input.fail ~ .fail-message{
         display: block;
     }
+    
+        	/* header */
+header {
+	width: 100%;
+    height: 92px;
+    background-color: white;
+    display: flex;
+   	justify-content: center;
+    align-items: center;
+}
+header > a {
+	width: 15%;
+}
+header > nav {
+	width:100%;
+	height:100%;
+}
+.dropdown-nav {
+	display:flex;
+	width:100%;
+	height: 100%;
+}
+.dropdown-nav,
+.dropdown-nav ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #6C7AEF;
+    font-size:16px;
+    text-align: center;
+}
+.dropdown-nav li {
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+    align-items: center;	
+}
+.dropdown-nav > li {
+	position: relative;
+	width: 120px;
+	height: 100%;
+}
+.dropdown-nav > li.right-menu {
+	justify-content: flex-end;
+	padding: 0.5em 0;
+	width: auto;
+	height: 100%;
+	min-width: 120px;
+}
+.dropdown-nav ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+.dropdown-nav ul {
+    display: none;
+}
+.dropdown-nav li:hover > ul {
+    display: block;
+}
+.dropdown-nav a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;;
+    text-align: center;
+}
+.dropdown-nav ul {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #A8B0E9;
+    padding: 0.5em;
+}
+.dropdown-nav li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
+}
+
+/* 9) */
+.dropdown-nav {
+    position: relative;
+}
+.dropdown-nav > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+header.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.copyright{
+margin-left: 830px;
+}
         
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -270,8 +364,6 @@ display:none;
 	</div>
 	
 	<div class="row  row-img">
-			<!-- <input type="file" name="attachment" accept="jpg, png" class="img-input"> -->
-			<!--  선택한 파일 취소하기(js) -->
 		<input id="input-file" type="file" name="attachment" class="img-input">
 	</div>
 	<div class=" row-2">
@@ -293,7 +385,6 @@ display:none;
 </div>
 <div class="row row-4">
 		<span class="sp-1">비밀번호</span><a href="edit/pw" class="change-btn a-btn1">비밀번호 변경</a>
-			<!-- 탈퇴 버튼 클릭 시, 확인 팝업 노출(jQuery) -->
 </div>
 
 <div class="row  row-leave">

@@ -289,7 +289,7 @@
 		
 		//챌린지 썸네일이 없으면 기본 이미지로 대체
 		$(".chal-img").on("error", function(){
-			$(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
+			$(this).attr("src", "/images/bg_default.png");
 		});
 	  
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
@@ -304,7 +304,7 @@
 		
 		$.ajax({
 			//내 인증글 작성 일차를 리스트로 가져오기
-			url : "${pageContext.request.contextPath}/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
+			url : "http://localhost:8888/rest/chal/confirm_days?chalNo=${param.chalNo}&userId=${loginId}",
 			method : "get",
 			dataType : "json",
 			//async : false,
@@ -356,9 +356,10 @@
 	<%-- 이미지 --%>
 	<div class="detail-top" style="margin-top: 20px">
 		<img src="detail/download?chalNo=${chalDto.getChalNo()}"
-			class="chal-img detail-top-img" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
+			class="chal-img detail-top-img">
 		<div class="chal-timer">
-			<span class="chal-timer-font">종료</span>
+			<span class="chal-timer-font">${chalVO.getDDay()}일뒤 시작 / 타이머로
+				변경하기 </span>
 		</div>
 	</div>
 
@@ -370,11 +371,11 @@
 
 	<%-- 시작일 --%>
 	<div>
-		<span><img src="${pageContext.request.contextPath}/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
+		<span><img src="/images/calendar_icon.png" class="img-margin">${chalDto.getStartDate()}~${chalVO.endDate}</span>
 	</div>
 
 	<div>
-		<a href="${pageContext.request.contextPath}/chal/detail?chalNo=${chalDto.getChalNo()}"><button
+		<a href="/chal/detail?chalNo=${chalDto.getChalNo()}"><button
 				class="largebtn" type="submit" id="largebutton3">챌린지 바로가기</button></a>
 	</div>
 
@@ -466,8 +467,8 @@
 				<h2>챌린지 성공 (${allProgressDto.size()}명)</h2>
 				<c:forEach var="allProgressDto" items="${allProgressDto}">
 					<!-- 프로필사진추가 필요 -->
-					<img src="${pageContext.request.contextPath}/user/profile/download?userId=${list.userId}" class="user-img"
-						style="vertical-align: middle;" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
+					<img src="/user/profile/download?userId=${list.userId}" class="user-img"
+						style="vertical-align: middle;">
 						${allProgressDto.userNick}&nbsp;&nbsp; 달성률 : ${allProgressDto.average} %
 					</c:forEach>
 
@@ -478,7 +479,7 @@
 			</div>
 			
 			<div class="row div-align float-right">
-				<a href="${pageContext.request.contextPath}/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
+				<a href="/confirm/all?chalNo=${chalDto.chalNo}" style="color:#6c7aef">전체보기(${listCnt}) <i class="fa-solid fa-circle-chevron-right"></i></a>
 			</div>
 			<br><br>
 			
@@ -487,18 +488,16 @@
 		     <div class="notice-border">
 			       <span class="label label-notice" >공지</span>
 			       <c:forEach var="noticeList" items="${noticeList}">
-			       <a href="${pageContext.request.contextPath}/confirm/notice/detail?noticeNo=${noticeList.noticeNo}">
 				       	<span>공지</span><br>
 				       	<span>${noticeList.noticeTitle}</span><br>
 				       	<span>${noticeList.noticeTime}</span>
-				    </a>
 			       </c:forEach>
 		     </div>    
 	     	  
 	    	<!-- confirm_mylist와 동일 -->
 			<!-- 인증글 목록 -->
 				<c:forEach var="list" items="${confirmList}">
-				<a href="${pageContext.request.contextPath}/confirm/detail?confirmNo=${list.confirmNo}">
+				<a href="/confirm/detail?confirmNo=${list.confirmNo}">
 				
 					<div class="confirm-border" >
 		          	<!-- 챌린지 제목 -->
@@ -523,7 +522,7 @@
 		
 						</div>
 							<!-- 인증샷이 없으면 img 태그 가리기(jquery) -->
-							<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align" onerror="this.style.display='none'">
+							<img src="detail/download?confirmNo=${list.confirmNo}" class="confirm-img float-right div-align">
 				</div>
 			</a>
 			</c:forEach>

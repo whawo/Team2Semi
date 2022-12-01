@@ -40,7 +40,7 @@
 	<div class="container-500 mt-50">
 		<div class="row left">
 			<h3>[no.${detailDto.noticeNo}]</h3> 
-			<h2>${detailDto.noticeTitle}</h2>
+			<h2>${detailDto.noticeContent}</h2>
 			<span class="notice-time">${detailDto.noticeTime}</span>
 			<c:if test="${detailDto.noticeModified != null}">
 				<span class="notice-time">&nbsp; [수정됨] ${detailDto.noticeModified}</span>
