@@ -2,233 +2,251 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="챌린지 인증" name="title"/>
+   <jsp:param value="챌린지 인증" name="title"/>
 </jsp:include>
 
-    <style>
-    body{
-    font-size:12px;
-    }
-        div{
-            display: block;
-        }
-        .row-0{
-        margin-left: 120px;
-        }
-        .row-1{
-        margin-top: 60px;
-        }
-        .row-2{
-        margin-bottom: 50px;
-        }
-        .row-3{
-       	padding-top: 20px;
-        }
-        .row-4{
-        padding-top: 40px;
-        }
-        .row-5{
-        padding-top: 50px;
-        }
-        .row-7{
-        margin-top: 50px;
-        }
+<style>
 
-        input::placeholder,
-        textarea::placeholder{
-            font-size: 14px;
-            color: #AAAAAA;
-        }
-       select{
-       outline:none;
-       }
-       select:hover{
-       border: 2px solid #6c7aef;
-       }
-        textarea{
-            width: 600px;
-            height: 200px;
-            padding: 10px;
-            box-sizing: border-box;
-            border: solid 2px #DDDDDD;
-			border-radius: 0.5em;
-			font-size: 16px;
-			resize: none;
-        }
+body{
+   font-size:12px;
+}
+div{
+   display: block;
+}
+.row-0{
+   margin-left: 120px;
+}
+.row-1{
+   margin-top: 60px;
+}
+.row-2{
+   margin-bottom: 50px;
+}
+.row-3{
+   padding-top: 20px;
+}
+.row-4{
+   padding-top: 40px;
+}
+.row-5{
+   padding-top: 50px;
+}
+.row-7{
+   margin-top: 50px;
+}
 
-        label{
-            margin: 0 10px 10px;
-            padding: 0 0 5px;
-        }
-        .p1{
-            font-size: 20px;
-            color: #3f3f3f;
-            font-weight: bold;
-            margin-top: 46px;
-             margin-bottom:16px;
-        }
-        .p2{
-            font-size: 12px;
-            color: #3f3f3f;
-            margin-bottom:30px;
-        }
+input::placeholder,
+textarea::placeholder{
+   font-size: 14px;
+   color: #AAAAAA;
+}
+select{
+   outline:none;
+}
+select:hover{
+   border: 2px solid #6c7aef;
+}
+textarea{
+   width: 600px;
+   height: 200px;
+   padding: 10px;
+   box-sizing: border-box;
+   border: solid 2px #DDDDDD;
+   border-radius: 0.5em;
+   font-size: 16px;
+   resize: none;
+}
 
-        .short-text-underlinebox{
-            width: 600px;
-        }
-        .calendar{
-            width: 600px;
-        }
+label{
+   margin: 0 10px 10px;
+   padding: 0 0 5px;
+}
+.p1{
+   font-size: 20px;
+   color: #3f3f3f;
+   font-weight: bold;
+   margin-top: 46px;
+   margin-bottom:16px;
+}
+.p2{
+   font-size: 12px;
+   color: #3f3f3f;
+   margin-bottom:30px;
+}
 
-        #short-text-box{
-            border: 1px solid #AAAAAA;
-            border-radius: 0.25em;
-            width: 200px;
-            height: 40px;
-        }
-        .cancel-btn{
-            width: 150px;
-            margin-right: 20px;
-            margin-top: 75px; 
-        }
-        .create-btn{
-            width: 320px;
-        }
-        .confirm-check{
-            width: 600px;
-        }
-        .blind{
-            position:absolute;
-            clip: rect(0 0 0 0);
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-        }
-        h2{
-            font-size: inherit;
-            line-height: inherit;
-            padding: 0;
+.short-text-underlinebox{
+   width: 600px;
+}
+.calendar{
+   width: 600px;
+}
 
-            display: block;
-            margin-block-start: 0.73em;
-            margin-block-end: 0.73em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            font-weight: bold;
-        }
-        .sp-1{
-            display: block;
-            padding: 15px 0;
-            margin-top: 11px;
-            background-color: #e5e6f9;
-            border: 1px solid #e5e6f9;
-            border-radius: 1em;
-            font-size: 14px;
-            color: #6c7aef;
-            font-weight: 700;
-            text-align: center;
-            text-decoration: none;
-        }
-        .sp-2{
-        font-size: 12px;
-        }
-        i{
-            font-size:normal;
-        }
-        .c-end{
-            display: inline-block;
-            width: 60px;
-            height: 12px;
-            background-position: -139px -300px;
-            background-repeat: no-repeat;
-            vertical-align: top;
-            margin: 2px 5px 0 0;
-        }
-    .thumbnail{
-            display: none;
-        }
-        img{
-            float: left;
-        }
-      .input-file-upload{
-            padding: 10px 30px; 
-            background-color: #e5e6f9;
-            border-radius: 0.5em;
-            color: #6c7aef;
-            cursor: pointer;
-            	font-size: 14px;
-        }
-        .input-file-blind{
-            display: none;
-        }
-        .preview{
-            border-radius: 0.5em;
-            margin-top: 10px;
-        }
-        	.img-lab{
-        		margin-left:30px;
-        	}
-		.img-btn{ 
-			margin-left:6px;
-			border: 2px solid #AAAAAA;
-			border-radius: 0.5em;
-			background-color: transparent;
-			padding: 10px 30px; 
-			color: #AAAAAA;
-			font-size: 14px;
-		}
-		.img-btns{
-			padding-top: 172px; 
-		}
-
-    .confirm-check:focus
-    .confirm-check:hover{
-        color: #6c7aef;
-        font-weight: bold;
-    }
-    .row-7{
-            padding-top: 20px;
-        }
+#short-text-box{
+   border: 1px solid #AAAAAA;
+   border-radius: 0.25em;
+   width: 200px;
+   height: 40px;
+}
+.cancel-btn{
+   width: 150px;
+   margin-right: 20px;
+   margin-top: 75px; 
+}
+.create-btn{
+   width: 320px;
+}
+.confirm-check{
+   width: 600px;
+}
+.blind{
+   position:absolute;
+   clip: rect(0 0 0 0);
+   width: 1px;
+   height: 1px;
+   margin: -1px;
+   overflow: hidden;
+}
+h2{
+   font-size: inherit;
+   line-height: inherit;
+   padding: 0;
+   display: block;
+   margin-block-start: 0.73em;
+   margin-block-end: 0.73em;
+   margin-inline-start: 0px;
+   margin-inline-end: 0px;
+   font-weight: bold;
+}
+.sp-1{
+   display: block;
+   padding: 15px 0;
+   margin-top: 11px;
+   background-color: #e5e6f9;
+   border: 1px solid #e5e6f9;
+   border-radius: 1em;
+   font-size: 14px;
+   color: #6c7aef;
+   font-weight: 700;
+   text-align: center;
+   text-decoration: none;
+}
+.sp-2{
+   font-size: 12px;
+}
+i{
+   font-size:normal;
+}
+.c-end{
+   display: inline-block;
+   width: 60px;
+   height: 12px;
+   background-position: -139px -300px;
+   background-repeat: no-repeat;
+   vertical-align: top;
+   margin: 2px 5px 0 0;
+}
+.thumbnail{
+   display: none;
+}
+img{
+   float: left;
+}
+.input-file-upload{
+   padding: 10px 30px; 
+   background-color: #e5e6f9;
+   border-radius: 0.5em;
+   color: #6c7aef;
+   cursor: pointer;
+   font-size: 14px;
+}
+   .input-file-blind{
+   display: none;
+}
+.preview{
+   border-radius: 0.5em;
+   margin-top: 10px;
+}
+.img-lab{
+   margin-left:30px;
+}
+.img-btn{ 
+   margin-left:6px;
+   border: 2px solid #AAAAAA;
+   border-radius: 0.5em;
+   background-color: transparent;
+   padding: 10px 30px; 
+   color: #AAAAAA;
+   font-size: 14px;
+}
+.img-btns{
+   padding-top: 172px; 
+}
+.confirm-check:focus
+.confirm-check:hover{
+   color: #6c7aef;
+   font-weight: bold;
+}
+.row-7{
+   padding-top: 20px;
+}
         
- 		.fail-message {
-		display: none;
-	}
-	.input.fail ~ .fail-message {
-		display: block;
-		font-size:12px;
-	    color: #eb6f7f;
-	}
-	
-	.input ~ .find-error {
-		font-size:12px;
-	    color: #eb6f7f;
-	}
+.fail-message {
+   display: none;
+}
+.input.fail ~ .fail-message {
+   display: block;
+   font-size:12px;
+   color: #eb6f7f;
+}
+   
+.input ~ .find-error {
+   font-size:12px;
+   color: #eb6f7f;
+}
 
-	
+.not-chal{
+   margin-top:300px;
+   margin-bottom:60px;
+   font-size:24px;
+   font-weight:700;
+   color: #3f3f3f;
+   text-align:center;
+}   
+.not-chal2{
+   margin-left:445px;
+   font-size:24px;
+   font-weight:700;
+   color: #FFF;
+   cursor:pointer;
+   
+   border:2px solid #6c7aef;
+   border-radius:0.5em;
+   background-color: #6c7aef;
+   padding:10px 80px 10px 80px;
+}   
     
     </style>
-	<script defer src="https://code.jquery.com/jquery-3.6.1.js"></script>
+   <script defer src="https://code.jquery.com/jquery-3.6.1.js"></script>
      <script type="text/javascript">
      
 
      $(function() {
- 		$("select[name=chalTitle]").on("change", function(){
- 			//선택된 챌린지 번호를 input type=hidden에 추가
- 			var chalNo = parseInt($(this).find("option:selected").attr("value"));
- 			$("input[name=chalNo]").val(chalNo);
- 			
- 			//선택된 챌린지 인증방법을 .how-confirm에 추가
- 			var howConfirm = $("select[name=chalTitle]").find("option:selected").attr("data-howConfirm");
- 			$(".how-confirm").val(howConfirm);
- 		});
- 		//파라미터에 chalNo가 있을 때만 해당 챌린지를 자동으로 선택
- 		var urlParams = new URL(location.href).searchParams;
- 		var chalNo = urlParams.get('chalNo');
- 		if(chalNo){			
- 			$("select[name=chalTitle]").val(chalNo).attr("selected", "selected").trigger("change");
- 		}
- 	});
+       $("select[name=chalTitle]").on("change", function(){
+          //선택된 챌린지 번호를 input type=hidden에 추가
+          var chalNo = parseInt($(this).find("option:selected").attr("value"));
+          $("input[name=chalNo]").val(chalNo);
+          
+          //선택된 챌린지 인증방법을 .how-confirm에 추가
+          var howConfirm = $("select[name=chalTitle]").find("option:selected").attr("data-howConfirm");
+          $(".how-confirm").val(howConfirm);
+       });
+       //파라미터에 chalNo가 있을 때만 해당 챌린지를 자동으로 선택
+       var urlParams = new URL(location.href).searchParams;
+       var chalNo = urlParams.get('chalNo');
+       if(chalNo){         
+          $("select[name=chalTitle]").val(chalNo).attr("selected", "selected").trigger("change");
+       }
+    });
 
   // 이미지 
      $(function(){
@@ -251,9 +269,7 @@
                 $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
             });
         });
-  
     
-    // help-text
      $(function(){
             $(".helper-text1").on("input", function(){
                 var text = $(this).val();
@@ -280,23 +296,25 @@
      });
      
      $(function(){
-    		$(".btn-edit-cancel").click(function(){
-				history.back();
-	        });
+          $(".btn-edit-cancel").click(function(){
+            history.back();
+           });
      });
 
      </script>
      <body>
         <div class=" container-1200">
 <c:choose>
-	<c:when test="${chalList.size() == 0}">
-		참가 중인 챌린지가 없습니다.
-		<a href="${pageContext.request.contextPath}/chal/list">챌린지 둘러보기</a>
-	</c:when>
-	<c:otherwise>
+
+   <c:when test="${chalList.size() == 0}">
+      <p class="not-chal">참가 중인 챌린지가 없습니다.</p>
+      <a href="${pageContext.request.contextPath}/chal/list" class="not-chal2">챌린지 둘러보기</a>
+   </c:when>
+   
+   <c:otherwise>
 <form action="write" method="post" enctype="multipart/form-data" class="con-form">
             <div class=" row-1 mt-92">
-            	<input type="hidden" name="userId" value="${loginId}">
+               <input type="hidden" name="userId" value="${loginId}">
                 <p class="p1"> 1. 인증할 챌린지를 선택해주세요.</p>
                 <select class="dropdown dropdown-check confirm-check"  name="chalTitle">
                     <option id="select" selected="selected" value="" >선택</option>
@@ -342,12 +360,12 @@
             </div>
 
             <div class="row-7 center">
-            <a type="button"  class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3" >취소</a>
+               <button type="button" onclick="location.href='${pageContext.request.contextPath}/';" class="smallbtn cancel-btn btn-edit-cancel" id="smallbutton3" >취소</button>
                 <button class="smallbtn create-btn" type="submit" id="smallbutton1">인증글 저장하기</button>
             </div>
- 		</form>
-		</c:otherwise>
-	</c:choose>
+       </form>
+      </c:otherwise>
+   </c:choose>
 </div>
 </body>
 

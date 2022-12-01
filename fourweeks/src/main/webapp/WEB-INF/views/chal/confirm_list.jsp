@@ -17,113 +17,103 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
 
-	div {
-		/* border : 1px dotted gray;  */
-		border : 1px solid transparent;
-	}
-   .user-img {
-		border-radius: 50%;
-		width: 30px;
-		height: 30px;
+div {
+   border : 1px solid transparent;
+}
 
-	}
-   .user-img {
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-   }
-   .confirm-img {
-        border-radius: 10px;
-      width: 90px;
-        height: 90px;
-   }
-   .div-align {
-      display : inline-block;
-   }
-   ul.pagenation {
-        list-style:none;
-
-      margin: 0;
-        padding: 0;
-    }
-    ul.pagenation > li {
-       display: inline-block;
-       text-align:center;
-    }
-    ul.pagenation > li > a {
-		float:left;
-		margin:3px;
-		width:30px;
-	    height: 30px;
-		color:#6c7aef;
-		font-weight:bold;
-	    font-size: 12px;
-		border:1px solid transparent;
-	    border-radius: 30%;
-		text-decoration:none;
-	    line-height : 2.3em;
-	}
-	.on {
-		color: white !important;
-		border:1px solid#6c7aef;
-		background-color:#6c7aef;
-	}
-   	ul.pagenation > li > a:hover, 
-   	ul.pagenation > li > a:focus {
-		color: white;
-		border:1px solid#6c7aef;
-		background-color:#6c7aef;
-	}
-	.p1{
-	font-size: 24px;
-	font-weight: 700;
-	color: #3f3f3f;
-	}
-	.p2{
-	font-size: 16px;
-	color: #3f3f3f;
-	padding-top: 10px;
-	}
-	.row-9{
-	margin-top:10px;
-	}
-		.sp4, .sp5{
-	font-size: 16px;
-	font-weight: 700;
-	color:#3f3f3f;
-	}
-	.sp4{
-	position:relative;
-	}
-	.sp5{
-	 float: right;
-	}
-	.p-1{
-	font-size: 20px;
-	font-weight: 700;
-	color: #3f3f3f;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	position:relative;
-	}
-	.p-2{
-	font-size: 16px;
-	color: #3f3f3f;
-	padding-bottom: 20px;
-	}
-	.p-3{
-	font-size: 12px;
-	color: #3f3f3f;
-	padding-bottom: 20px;
-	top: 100px;
-	}
-	.p-4{
-	font-size: 12px;
-	color: #3f3f3f;
-	padding-bottom: 20px;
-	}
-	.confirm-border{
-	}
+.confirm-img {
+   border-radius: 10px;
+   width: 30px;
+   height: 30px;
+}
+.div-align {
+   display : inline-block;
+}
+ul.pagenation {
+   list-style:none;
+   margin: 0;
+   padding: 0;
+}
+ul.pagenation > li {
+   display: inline-block;
+   text-align:center;
+}
+ul.pagenation > li > a {
+   float:left;
+   margin:3px;
+   width:30px;
+   height: 30px;
+   color:#6c7aef;
+   font-weight:bold;
+   font-size: 12px;
+   border:1px solid transparent;
+   border-radius: 30%;
+   text-decoration:none;
+   line-height : 2.3em;
+}
+.on {
+   color: white !important;
+   border:1px solid#6c7aef;
+   background-color:#6c7aef;
+}
+ul.pagenation > li > a:hover, 
+ul.pagenation > li > a:focus {
+   color: white;
+   border:1px solid#6c7aef;
+   background-color:#6c7aef;
+}
+.p1{
+   font-size: 24px;
+   font-weight: 700;
+   color: #3f3f3f;
+}
+.p2{
+   font-size: 16px;
+   color: #3f3f3f;
+   padding-top: 10px;
+}
+.p6{
+   font-size: 20px;
+   color: #3f3f3f;
+   padding-top:10px;
+}
+.p7{
+   font-size: 16px;
+   color: #3f3f3f;
+   padding-top: 10px;
+}
+.p8{
+   font-size: 14px;
+   color: #3f3f3f;
+   padding-top: 10px;
+}
+.sp1, .sp2, .sp3{
+   font-size: 14px;
+   color:#3f3f3f;
+}
+.row-9{
+   margin-top:10px;
+}
+.row-11, .row-12, .row-13{
+   position: absoulute;
+   margin-left: 50px;
+}
+.row-14{
+   position: relative;
+   bottom: 35;
+   left: 12;
+}
+.sp4, .sp5{
+   font-size: 16px;
+   font-weight: 700;
+   color:#3f3f3f;
+}
+.sp4{
+   position:relative;
+}
+.sp5{
+    float: right;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
@@ -169,36 +159,39 @@
    <c:forEach var="list" items="${confirmList}">
    <a href="${pageContext.request.contextPath}/confirm/detail?confirmNo=${list.confirmNo}">
           <div class="row-11">
-           <p class="p6">${list.confirmTitle}</p> 
+             <p class="p6">${list.confirmTitle}</p> 
           </div>
 
-               <div class="row-12">
-               <p class="p7">${list.confirmContent}</p>
-            </div>
+           <div class="row-12">
+         <p class="p7">${list.confirmContent}</p>
+           </div>
+           
             <div class="row-13">      
                <span class="p8">${list.confirmDate}</span> 
                <span class="sp1"><i class="fa-regular fa-eye"></i> ${list.confirmRead}</span> 
                <span class="sp2"><i class="fa-regular fa-heart"></i> ${list.confirmLike}</span>
                <span class="sp3"><i class="fa-regular fa-comment"></i> ${list.replyCount}</span>
             </div>
+            
             <div class="row-14">
-                    <img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align"  >
+            <img src = "detail/download?confirmNo=${list.confirmNo}" class="confirm-img  div-align"  onerror=" this.onerror=null; this.src='${pageContext.request.contextPath}/images/avatar.png';">
             </div>
        </a>
       </c:forEach>
         </div>               
 
 
-       <c:if test="${listCnt == 0}">
-   <div  class="row-last2 confirm-empty">
-               <span class="sp6">작성한 인증글이 없습니다</span>
-    </div>
-         </c:if>
+   <c:if test="${listCnt == 0}">
+      <div class="row-last2 confirm-empty">
+         <span class="sp6">작성한 인증글이 없습니다</span>
+      </div>
+   </c:if>
+   
 <!-- 인증글, 사진 목록 끝 -->         
    
    <c:if test="${listCnt != 0}">
    <!-- 페이지 내비게이터 -->
-   <div class="row row-last center mt-60 mb-60">
+   <div class="row-last center mt-60 mb-60">
       <!-- 이전 -->
    <ul class=" pagenation">
       <c:choose>
@@ -253,7 +246,6 @@
       </c:choose>
      </ul>
         </div>    
-   </div>
    </c:if>
 </div> <!-- container끝 -->
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
