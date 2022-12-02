@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/headerNo.jsp">
-	<jsp:param value="아이디 찾기" name="title"/>
+   <jsp:param value="아이디 찾기" name="title"/>
 </jsp:include>
-<link rel="stylesheet" type="text/css" href="/css/basic.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -100,31 +100,31 @@ margin-left: 33px;
 </script>
 <div class="container-794">
     <div class="row-1 center mt-92">
-		<p class="p1">아이디 찾기</p>
-	</div>
+      <p class="p1">아이디 찾기</p>
+   </div>
     
-	<form action="/login" method="get">
-		<div class="row-2 center">
-			<p class="p2">고객님의 정보와 일치하는 아이디 목록입니다.</p>
-		</div>	
-		<div class="row row-3 center">
+   <form action="${pageContext.request.contextPath}/login" method="get">
+      <div class="row-2 center">
+         <p class="p2">고객님의 정보와 일치하는 아이디 목록입니다.</p>
+      </div>   
+      <div class="row row-3 center">
                              <c:forEach var="userDto" items="${idList}">
                              <label class="custom-rad">
-                             		<input class="rab1" id="radio-id" name="userId" type="radio" value="${userDto.userId}">
-                             		<label class="help-el"></label>
-                             		<label for="radio-id" class="lab1">${userDto.userId}</label>
-                  			         <input type="hidden"   name="userId"   value="${userDto.userId}">
-                  			 </label>
+                                   <input class="rab1" id="radio-id" name="userId" type="radio" value="${userDto.userId}">
+                                   <label class="help-el"></label>
+                                   <label for="radio-id" class="lab1">${userDto.userId}</label>
+                                    <input type="hidden"   name="userId"   value="${userDto.userId}">
+                            </label>
                              </c:forEach>
             </div>
             <div class="row-4 center">
-				<button class="btn1" type="submit">로그인</button>
+            <button class="btn1" type="submit">로그인</button>
             </div>
-	</form>
-	
-	<section class="row-5 center">
-		<a class="find" href="/find_pw">비밀번호 찾기</a>
-		<em class="divi">|</em>
-		<a class="find" href="/join">회원가입</a>
-	</section>
+   </form>
+   
+   <section class="row-5 center">
+      <a class="find" href="${pageContext.request.contextPath}/find_pw">비밀번호 찾기</a>
+      <em class="divi">|</em>
+      <a class="find" href="${pageContext.request.contextPath}/join">회원가입</a>
+   </section>
  </div>
