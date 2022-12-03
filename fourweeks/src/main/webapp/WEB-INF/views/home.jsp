@@ -253,7 +253,7 @@
 			 	<div class="row chal-item thumbnail">
 					<%-- 이미지 --%>
 					
-						<img class="main-img" src="chal/detail/download?chalNo=${chalDto.getChalNo()}">
+						<img class="main-img" src="detail/download?chalNo=${chalDto.getChalNo()}" onerror=" this.onerror=null; this.src='/images/bg_default.png';" >
 					
 		         </div>
 		         <div class="row chal-item">
@@ -273,7 +273,14 @@
 			     </div>
 		         </c:if>
 		         <%-- 시작일 조건 --%>
-		         <c:if test="${chalDto.getDDay() > 0}">
+		         <c:if test="${chalDto.getDDay() == 1}">
+		         <div class="row chal-item">
+			        <img src="/images/chal_start_date.png" class="img-margin">
+			                 내일 시작
+			     </div>
+		         </c:if>
+		         <%-- 시작일 조건 --%>
+		         <c:if test="${chalDto.getDDay() > 1}">
 		         <div class="row chal-item">
 			        <img src="/images/chal_start_date.png" class="img-margin">
 			                 ${chalDto.getDDay()}일 뒤 시작
