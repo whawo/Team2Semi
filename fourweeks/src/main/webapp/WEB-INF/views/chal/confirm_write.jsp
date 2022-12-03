@@ -5,9 +5,7 @@
    <jsp:param value="챌린지 인증" name="title"/>
 </jsp:include>
 
-<<<<<<< HEAD
 <style>
-=======
     <style>
     body{
     font-size:12px;
@@ -38,7 +36,6 @@
         .row-7{
         margin-top: 50px;
         }
->>>>>>> refs/heads/jeeweon
 
 body{
    font-size:12px;
@@ -340,7 +337,7 @@ img{
 <c:choose>
 
    <c:when test="${chalList.size() == 0}">
-      <p class="not-chal">참가 중인 챌린지가 없습니다.</p>
+      <p class="not-chal">진행 중인 챌린지가 없습니다.</p>
       <a href="${pageContext.request.contextPath}/chal/list" class="not-chal2">챌린지 둘러보기</a>
    </c:when>
    

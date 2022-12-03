@@ -6,6 +6,7 @@ import com.kh.fourweeks.entity.ChalCreateMyDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.LeaveCountDto;
+import com.kh.fourweeks.vo.HasUserImgVO;
 
 public interface ChalUserDao {
 	void join(ChalUserDto chalUserDto); // 회원가입 메소드
@@ -32,4 +33,6 @@ public interface ChalUserDao {
 	//내가 개설한 모든 챌린지 조회 메소드
 	List<ChalCreateMyDto> selectCreateAllMyDetail(String userId);
 	
+	//프로필 이미지 설정 여부 조회
+	HasUserImgVO findAttach(String userId);
 }

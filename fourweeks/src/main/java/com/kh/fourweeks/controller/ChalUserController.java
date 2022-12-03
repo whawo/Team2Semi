@@ -31,6 +31,7 @@ import com.kh.fourweeks.repository.ChalDao;
 import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.service.AttachmentService;
 import com.kh.fourweeks.service.ChalUserService;
+import com.kh.fourweeks.vo.HasUserImgVO;
 
 @Controller
 @RequestMapping("/user")
@@ -121,6 +122,9 @@ public class ChalUserController {
 		
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
+		
+		model.addAttribute("userImgVO", chalUserDao.findAttach(userId));
+	
 		return "chalUser/mypage";
 	}
 	

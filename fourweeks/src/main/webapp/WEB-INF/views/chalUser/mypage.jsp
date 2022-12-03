@@ -351,9 +351,9 @@ header.header-fixed {
        });
        
       //프로필 이미지가 없으면 기본 이미지로 대체
-      $(".user-img").on("error", function(){
+      /* $(".user-img").on("error", function(){
          $(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
-      });
+      }); */
      
       //챌린지 썸네일이 없으면 기본 이미지로 대체
       $(".chal-img").on("error", function() {
@@ -376,7 +376,14 @@ header.header-fixed {
 
 	<p class="p1">마이페이지</p>
 	<div class="row  row-1 center">
-	<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='${pageContext.request.contextPath}/images/avatar.png';" >
+	<c:choose>
+		<c:when test="${userImgVO.attachmentNo == null}">
+			<img src="${pageContext.request.contextPath}/images/avatar.png" class="img0 user-img">
+		</c:when>
+		<c:otherwise>
+			<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img">
+		</c:otherwise>
+	</c:choose>
 
    <p class="p2">${myDto.getUserNick()}</p>
    <p class="p3">${myDto.userEmail}</p>
