@@ -41,7 +41,7 @@
 	<header class="container-1200 header-fixed">
 		<div class="vcenter">
 		<div>
-		<a href="/${pageContext.request.contextPath}" class="logo"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
+		<a href="${pageContext.request.contextPath}" class="logo"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
 		</div>
 		</div>
 	</header>

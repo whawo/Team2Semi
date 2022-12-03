@@ -129,6 +129,7 @@ td {
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
+<<<<<<< HEAD
    $(function(){
       //프로필 이미지가 없으면 기본 아이콘으로 대체
       $(".user-img").on("error", function(){
@@ -151,6 +152,30 @@ td {
       //3. 처음에는 댓글 내용만 노출
       $(".editor").hide();
    });
+=======
+	$(function(){
+		//프로필 이미지가 없으면 기본 아이콘으로 대체
+		$(".user-img").on("error", function(){
+			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
+		});
+	});
+	
+	$(function(){
+		//댓글 수정 화면 노출여부 설정
+		//1. 댓글 수정 버튼 클릭 시, 댓글 내용 숨기고 수정 화면 노출
+		$(".btn-reply-edit").click(function(){
+			$(this).parents(".view").hide();
+			$(this).parents(".view").next(".editor").show();
+		});
+		//2. 수정 취소 버튼 클릭 시, 수정 화면 숨기고 다시 댓글 내용 노출
+		$(".btn-cancel").click(function(){
+			$(this).parents(".editor").hide();
+			$(this).parents(".editor").prev(".view").show();
+		});
+		//3. 처음에는 댓글 내용만 노출
+		$(".editor").hide();
+	});
+>>>>>>> refs/heads/jeeweon
 </script>
 <div class="container-794 container-margin">
    <div class="row">

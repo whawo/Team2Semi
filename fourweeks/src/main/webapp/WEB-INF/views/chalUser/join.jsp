@@ -340,13 +340,15 @@ select {
                <span class="fail-message">이메일을 다시 입력해주세요.</span></li>
          </div>
 
-         <div class="rows">
-            <p class="join-p4">위 내용의 개인정보를 제공함에 동의합니다.</p>
-            <button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
-         </div>
-         <p class="join-p5">
-            이미 4weeks 계정이 있으신가요? <a href="${pageContext.request.contextPath}/user/login" class="a-join a-hover">로그인</a>
-         </p>
-      </form>
-   </div>
+
+			<div class="rows">
+				<p class="join-p4">위 내용의 개인정보를 제공함에 동의합니다.</p>
+				<button type="submit" class="largebtn join-btn" id="largebutton1">회원가입</button>
+			</div>
+			<p class="join-p5">
+				이미 4weeks 계정이 있으신가요? <a href="${pageContext.request.contextPath}/user/login" class="a-join a-hover">로그인</a>
+			</p>
+		</form>
+	</div>
+
 </body>

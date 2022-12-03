@@ -118,11 +118,12 @@ input[name="userId"]:disabled{
             </div>
             
             <div class=" row-3 center">
-               <button type="button" onclick="location.href='/user/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
-            <button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
-          </div>
-          
-      </form>
-      </div>
+            	<button type="button" onclick="location.href='${pageContext.request.contextPath}/user/mypage';" class="smallbtn cancel-btn"   id="smallbutton3">취소</button>
+				<button  class=" smallbtn save-btn" type="submit" id="smallbutton1">확인하기</button>
+			 </div>
+			 
+		</form>
+		</div>
+
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

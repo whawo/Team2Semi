@@ -31,7 +31,8 @@ public class ChalServiceImpl implements ChalService {
 	@Autowired
 	private AdminDao adminDao;
 
-	private final File dir = new File(System.getProperty("user.home") + "/upload");
+	//private final File dir = new File(System.getProperty("user.home") + "/upload");
+	private final File dir = new File("D:/upload/fourweeks");
 	
 	
 	@Override

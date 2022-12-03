@@ -363,9 +363,10 @@ header.header-fixed {
 </head>
 <body>
 <div class="container-794">
-   <p class="p1 mt-92">마이페이지</p>
-   <div class="row  row-1 center">
-   <img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='${pageContext.request.contextPath}/images/avatar.png';" >
+
+	<p class="p1">마이페이지</p>
+	<div class="row  row-1 center">
+	<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="img0 user-img" onerror=" this.onerror=null; this.src='${pageContext.request.contextPath}/images/avatar.png';" >
 
    <p class="p2">${myDto.getUserNick()}</p>
    <p class="p3">${myDto.userEmail}</p>
@@ -391,16 +392,18 @@ header.header-fixed {
 <div class="row">
 <div  id="tab1"  class="row tab_content">
 <c:choose>
-         <c:when test="${chalDto.size() == 0}">
-         <div class="row row-9">
-            <button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
-                <button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
-            <p class="p5">참가한 <br> 챌린지가 없습니다.</p>
-            </div>
-            <div class="row row-10">
-            <button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
-         </div>
-         </c:when>
+
+			<c:when test="${chalDto.size() == 0}">
+			<div class="row row-9">
+				<button class="btn1" onclick="location.href='${pageContext.request.contextPath}/confirm/write';" disabled>챌린지 인증</button>
+   			 	<button class="btn2" onclick="location.href='${pageContext.request.contextPath}/chal/create';">챌린지 개설</button>
+				<p class="p5">참가한 <br> 챌린지가 없습니다.</p>
+				</div>
+				<div class="row row-10">
+				<button class="btn5" onclick="location.href='${pageContext.request.contextPath}/chal/list';" >챌린지 둘러보기</button>
+			</div>
+			</c:when>
+
 
 <c:otherwise>
  <div class="row row-3"> 
@@ -437,23 +440,24 @@ header.header-fixed {
       <input class="label-close" placeholder="${chalDto.getDDay()}일 뒤 시작" disabled>
       </c:otherwise>
 </c:choose>
-   
-   <div class="row row-6">
-      <a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
-   </div>
-   <div class="row row-7">${chalDto.getStartDate()}~${chalDto.getEndDate()}</div>
-      <input class="label-category" placeholder="${chalDto.getChalTopic()}" disabled>
-      <input class="label-success" placeholder="현재 달성률 : <fmt:formatNumber type="number" pattern="0" value="${chalDto.cnt*100/28}"/>%" disabled>
-      
-<div class="row row-8">      
-             <c:choose>
-               <c:when test="${chalDto.getDDay()>0}">
-                <button class="btn3"  disabled>내 인증글</button>
-             </c:when>
-             <c:otherwise>
-                <button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalDto.chalNo}';">내 인증글</button>
-             </c:otherwise>
-             </c:choose>
+
+	
+	<div class="row row-6">
+		<a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${chalDto.chalNo}">${chalDto.chalTitle}</a>
+	</div>
+	<div class="row row-7">${chalDto.getStartDate()}~${chalDto.getEndDate()}</div>
+		<input class="label-category" placeholder="${chalDto.getChalTopic()}" disabled>
+		<input class="label-success" placeholder="현재 달성률 : <fmt:formatNumber type="number" pattern="0" value="${chalDto.cnt*100/28}"/>%" disabled>
+		
+<div class="row row-8">		
+				 <c:choose>
+					<c:when test="${chalDto.getDDay()>0}">
+					 <button class="btn3"  disabled>내 인증글</button>
+				 </c:when>
+				 <c:otherwise>
+				 	<button class="btn4" onclick="location.href='${pageContext.request.contextPath}/confirm/mylist?chalNo=${chalDto.chalNo}';">내 인증글</button>
+				 </c:otherwise>
+				 </c:choose>
 </div>
              </div>
 
@@ -470,12 +474,12 @@ header.header-fixed {
 <c:choose>
       <c:when test="${chalEndDto.size() == 0}">
 <div class="row row-9 ">
-         <button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
-                <button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
+         <button class="btn1" onclick="location.href='${pageContext.request.contextPath}/confirm/write';" disabled>챌린지 인증</button>
+                <button class="btn2" onclick="location.href='${pageContext.request.contextPath}/chal/create';">챌린지 개설</button>
          <p class="p5">완료한 <br> 챌린지가 없습니다.</p>
 </div>      
 <div class="row row-10">
-   <button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
+   <button class="btn5" onclick="location.href='${pageContext.request.contextPath}/chal/list';" >챌린지 둘러보기</button>
 </div>
       </c:when>
       
@@ -527,7 +531,7 @@ header.header-fixed {
                 <button class="btn3"  disabled>내 인증글</button>
              </c:when>
              <c:otherwise>
-                 <button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${chalEndDto.chalNo}';">내 인증글</button>
+                 <button class="btn4" onclick="location.href='${pageContext.request.contextPath}/confirm/mylist?chalNo=${chalEndDto.chalNo}';">내 인증글</button>
              </c:otherwise>
              </c:choose>
 </div>
@@ -542,17 +546,18 @@ header.header-fixed {
 
 <div id="tab3" class=" row row-9 tab_content">
 
-   <c:choose>
-      <c:when test="${createDto.size() == 0}">
-      <div class="row row-9">
-         <button class="btn1" onclick="location.href='/confirm/write';" disabled>챌린지 인증</button>
-                <button class="btn2" onclick="location.href='/chal/create';">챌린지 개설</button>
-         <p class="p5">개설한 <br> 챌린지가 없습니다.</p>
-         </div>
-         <div class="row row-10">
-            <button class="btn5" onclick="location.href='/chal/list';" >챌린지 둘러보기</button>
-         </div>
-      </c:when>
+
+	<c:choose>
+		<c:when test="${createDto.size() == 0}">
+		<div class="row row-9">
+			<button class="btn1" onclick="location.href='${pageContext.request.contextPath}/confirm/write';" disabled>챌린지 인증</button>
+   			 	<button class="btn2" onclick="location.href='${pageContext.request.contextPath}/chal/create';">챌린지 개설</button>
+			<p class="p5">개설한 <br> 챌린지가 없습니다.</p>
+			</div>
+			<div class="row row-10">
+				<button class="btn5" onclick="location.href='${pageContext.request.contextPath}/chal/list';" >챌린지 둘러보기</button>
+			</div>
+		</c:when>
 
 <c:otherwise>
  <div class="row row-3"> 
@@ -588,26 +593,26 @@ header.header-fixed {
       <input class="label-close" placeholder="${createDto.getDDay()}일 뒤 시작" disabled>
       </c:otherwise>
 </c:choose>
-   
-   <div class="row row-6">
-      <a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
-   </div>
-   <div class="row row-7">${createDto.getStartDate()}~${createDto.getEndDate()}</div>
-      <input class="label-category" placeholder="${createDto.getChalTopic()}" disabled>
-      <input class="label-success" placeholder="현재 달성률 : <fmt:formatNumber type="number" pattern="0" value="${createDto.cnt*100/28}"/>%" disabled>
-      
-<div class="row row-8">      
-             <c:choose>
-               <c:when test="${createDto.getDDay()>0}">
-                <button class="btn3"  disabled>내 인증글</button>
-             </c:when>
-             <c:otherwise>
-                <button class="btn4" onclick="location.href='/confirm/mylist?chalNo=${createDto.chalNo}';">내 인증글</button>
-             </c:otherwise>
-             </c:choose>
-            </div>
-             </div>
 
+	
+	<div class="row row-6">
+		<a class="a2" href="${pageContext.request.contextPath}/chal/mychal?userId=${loginId}&chalNo=${createDto.chalNo}" maxlength="40"> ${createDto.chalTitle}</a>
+	</div>
+	<div class="row row-7">${createDto.getStartDate()}~${createDto.getEndDate()}</div>
+		<input class="label-category" placeholder="${createDto.getChalTopic()}" disabled>
+		<input class="label-success" placeholder="현재 달성률 : <fmt:formatNumber type="number" pattern="0" value="${createDto.cnt*100/28}"/>%" disabled>
+		
+<div class="row row-8">		
+				 <c:choose>
+					<c:when test="${createDto.getDDay()>0}">
+					 <button class="btn3"  disabled>내 인증글</button>
+				 </c:when>
+				 <c:otherwise>
+				 	<button class="btn4" onclick="location.href='${pageContext.request.contextPath}/confirm/mylist?chalNo=${createDto.chalNo}';">내 인증글</button>
+				 </c:otherwise>
+				 </c:choose>
+				</div>
+				 </div>
 </c:forEach> 
 </c:otherwise>
 </c:choose>
