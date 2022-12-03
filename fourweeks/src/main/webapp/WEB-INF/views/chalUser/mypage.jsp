@@ -142,6 +142,16 @@ padding: 14px 138px;
 margin-left: 10px;
 cursor:pointer;
 }
+.btn1no{
+font-size:16px;
+font-weight: 700;
+border: 2px solid  #DDDDDD;
+border-radius: 0.5em;
+background-color: #DDDDDD;
+color:  #AAAAAA;
+padding: 14px 138px;
+pointer-events: none;
+}
 .btn1:disabled{
 font-size:16px;
 font-weight: 700;
@@ -485,7 +495,7 @@ header.header-fixed {
       
 <c:otherwise>
  <div class="row row-3"> 
-   <a class="btn1" href ="${pageContext.request.contextPath}/confirm/write">챌린지 인증</a>
+   <a class="btn1no" href ="${pageContext.request.contextPath}/confirm/write" >챌린지 인증</a>
    <a class="btn2" href ="${pageContext.request.contextPath}/chal/create"> 챌린지 개설</a>
 </div>
    <c:forEach var="chalEndDto" items="${chalEndDto}">
