@@ -244,7 +244,7 @@ public class ChalUserDaoImpl implements ChalUserDao{
    
 	@Override
 	public HasUserImgVO findAttach(String userId) {
-		String sql = "select U.user_id, I.attachment_no from chal_user U left outer join user_img I on U.user_id = I.user_id";
+		String sql = "select U.user_id, I.attachment_no from chal_user U left outer join user_img I on U.user_id = I.user_id where U.user_id = ?";
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, userImgExtractor, param);
 	};
