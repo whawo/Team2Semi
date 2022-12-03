@@ -156,28 +156,122 @@ input[name="userId"]:disabled{
    margin-left:45px;
 }
         
-.fail-message,
-.NNNNN-message{
-   display: none;
+
+      .fail-message,
+    .NNNNN-message{
+        display: none;
+    }
+    .fail-message,
+    .NNNNN-message{
+        color: #eb6f7f;
+    }
+    .input.success {
+        border-color: #6c7aef;
+    }
+    .input.success ~ .success-message{
+        display: block;
+    }
+    .input.fail ~ .fail-message{
+        display: block;
+    }
+   	/* header */
+header {
+	width: 100%;
+    height: 92px;
+    background-color: white;
+    display: flex;
+   	justify-content: center;
+    align-items: center;
 }
-.fail-message,
-.NNNNN-message{
-   color: #eb6f7f;
+header > a {
+	width: 15%;
 }
-.input.success {
-   border-color: #6c7aef;
+header > nav {
+	width:100%;
+	height:100%;
 }
-.input.success ~ .success-message{
-   display: block;
+.dropdown-nav {
+	display:flex;
+	width:100%;
+	height: 100%;
 }
-.input.fail ~ .fail-message{
-   display: block;
+.dropdown-nav,
+.dropdown-nav ul {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #6C7AEF;
+    font-size:16px;
+    text-align: center;
+}
+.dropdown-nav li {
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+    align-items: center;	
+}
+.dropdown-nav > li {
+	position: relative;
+	width: 120px;
+	height: 100%;
+}
+.dropdown-nav > li.right-menu {
+	justify-content: flex-end;
+	padding: 0.5em 0;
+	width: auto;
+	height: 100%;
+	min-width: 120px;
+}
+.dropdown-nav ul {
+    position: absolute;
+    top:100%;
+    left:0;
+}
+.dropdown-nav ul {
+    display: none;
+}
+.dropdown-nav li:hover > ul {
+    display: block;
+}
+.dropdown-nav a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #6C7AEF;;
+    text-align: center;
+}
+.dropdown-nav ul {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #A8B0E9;
+    padding: 0.5em;
+}
+.dropdown-nav li:hover > a {
+    color: #6C7AEF;
+    font-weight: bold;
 }
 
-input::placeholder{
-   font-size: 14px;
+/* 9) */
+.dropdown-nav {
+    position: relative;
 }
-        
+.dropdown-nav > .right-menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+header.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.copyright{
+margin-left: 830px;
+}        
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>

@@ -5,7 +5,40 @@
    <jsp:param value="챌린지 인증" name="title"/>
 </jsp:include>
 
+<<<<<<< HEAD
 <style>
+=======
+    <style>
+    body{
+    font-size:12px;
+    }
+
+        div{
+            display: block;
+        }
+
+        .row-0{
+        margin-left: 120px;
+        }
+        .row-1{
+        margin-top: 60px;
+        }
+        .row-2{
+        margin-bottom: 50px;
+        }
+        .row-3{
+       	padding-top: 20px;
+        }
+        .row-4{
+        padding-top: 40px;
+        }
+        .row-5{
+        padding-top: 50px;
+        }
+        .row-7{
+        margin-top: 50px;
+        }
+>>>>>>> refs/heads/jeeweon
 
 body{
    font-size:12px;

@@ -44,7 +44,7 @@
 	(function(){
 	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 	s1.async=true;
-	s1.src='wss://embed.tawk.to/6358bb84daff0e1306d4011a/1gg99p084';
+	s1.src='https://embed.tawk.to/6358bb84daff0e1306d4011a/1gg99p084';
 	s1.charset='UTF-8';
 	s1.setAttribute('crossorigin','*');
 	s0.parentNode.insertBefore(s1,s0);
@@ -71,7 +71,7 @@
 
 <body>
 	<header class="container-1200 header-fixed">
-		<a href="/${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
+		<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/images/top_logo.png" width="100"></a>
 		<nav>
 			<ul class="dropdown-nav">
 				<c:choose>
