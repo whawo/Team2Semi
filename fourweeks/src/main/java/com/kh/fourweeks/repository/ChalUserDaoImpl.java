@@ -15,6 +15,8 @@ import com.kh.fourweeks.entity.ChalCreateMyDto;
 import com.kh.fourweeks.entity.ChalMyDetailDto;
 import com.kh.fourweeks.entity.ChalUserDto;
 import com.kh.fourweeks.entity.LeaveCountDto;
+import com.kh.fourweeks.entity.ReplyDto;
+import com.kh.fourweeks.vo.HasUserImgVO;
 
 @Repository
 public class ChalUserDaoImpl implements ChalUserDao{
@@ -228,4 +230,22 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		String sql = "insert into leave_count values(leave_seq.nextval, sysdate, 1)";
 		jdbcTemplate.update(sql);
 	}
+   
+   private ResultSetExtractor<HasUserImgVO> userImgExtractor = (rs) -> {
+	   if(rs.next()) {
+		   return HasUserImgVO.builder()
+				   .userId(rs.getString("user_id"))
+				   .attachmentNo(rs.getInt("attachment_no"))
+				   .build();
+	   } else {
+		   return null;
+	   }
+   };
+   
+	@Override
+	public HasUserImgVO findAttach(String userId) {
+		String sql = "select U.user_id, I.attachment_no from chal_user U left outer join user_img I on U.user_id = I.user_id";
+		Object[] param = {userId};
+		return jdbcTemplate.query(sql, userImgExtractor, param);
+	};
 }
