@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.fourweeks.constant.SessionConstant;
-import com.kh.fourweeks.entity.AttachmentDto;
 import com.kh.fourweeks.entity.ChalConfirmDto;
 import com.kh.fourweeks.entity.ReplyDto;
 import com.kh.fourweeks.entity.UserConfirmLikeDto;
@@ -33,6 +32,7 @@ import com.kh.fourweeks.repository.AdminDao;
 import com.kh.fourweeks.repository.AttachmentDao;
 import com.kh.fourweeks.repository.ChalConfirmDao;
 import com.kh.fourweeks.repository.ChalDao;
+import com.kh.fourweeks.repository.ChalUserDao;
 import com.kh.fourweeks.repository.ReplyDao;
 import com.kh.fourweeks.repository.UserConfirmLikeDao;
 import com.kh.fourweeks.service.AttachmentService;
@@ -66,6 +66,9 @@ public class ChalConfirmController {
 	
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private ChalUserDao chalUserDao;
 	
 	@GetMapping("/write") //인증글 등록
 	public String confirm(Model model,

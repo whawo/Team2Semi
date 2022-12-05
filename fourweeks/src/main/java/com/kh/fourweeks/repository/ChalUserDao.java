@@ -33,6 +33,6 @@ public interface ChalUserDao {
 	//내가 개설한 모든 챌린지 조회 메소드
 	List<ChalCreateMyDto> selectCreateAllMyDetail(String userId);
 	
-	//프로필 이미지 설정 여부 조회
+	//프로필 이미지 설정 여부 조회(로그인 한 유저)
 	HasUserImgVO findAttach(String userId);
 }

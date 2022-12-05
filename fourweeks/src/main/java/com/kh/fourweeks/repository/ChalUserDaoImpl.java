@@ -248,4 +248,5 @@ public class ChalUserDaoImpl implements ChalUserDao{
 		Object[] param = {userId};
 		return jdbcTemplate.query(sql, userImgExtractor, param);
 	};
+
 }

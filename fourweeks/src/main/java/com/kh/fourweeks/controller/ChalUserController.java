@@ -122,7 +122,7 @@ public class ChalUserController {
 		
 		model.addAttribute("progressDto",
 				confirmDao.myConfirmCnt(chalMyDetailDto.getChalNo(), userId));
-		
+		//유저 프로필 설정 여부 조회 
 		model.addAttribute("userImgVO", chalUserDao.findAttach(userId));
 	
 		return "chalUser/mypage";

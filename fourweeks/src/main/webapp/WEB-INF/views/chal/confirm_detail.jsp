@@ -129,36 +129,13 @@ td {
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-<<<<<<< HEAD
-   $(function(){
-      //프로필 이미지가 없으면 기본 아이콘으로 대체
-      $(".user-img").on("error", function(){
-         $(this).replaceWith("<i class='fa-solid fa-circle-user'></i>");
-      });
-   });
-   
-   $(function(){
-      //댓글 수정 화면 노출여부 설정
-      //1. 댓글 수정 버튼 클릭 시, 댓글 내용 숨기고 수정 화면 노출
-      $(".btn-reply-edit").click(function(){
-         $(this).parents(".view").hide();
-         $(this).parents(".view").next(".editor").show();
-      });
-      //2. 수정 취소 버튼 클릭 시, 수정 화면 숨기고 다시 댓글 내용 노출
-      $(".btn-cancel").click(function(){
-         $(this).parents(".editor").hide();
-         $(this).parents(".editor").prev(".view").show();
-      });
-      //3. 처음에는 댓글 내용만 노출
-      $(".editor").hide();
-   });
-=======
-	$(function(){
+
+	/* $(function(){
 		//프로필 이미지가 없으면 기본 아이콘으로 대체
 		$(".user-img").on("error", function(){
 			$(this).attr("src", "${pageContext.request.contextPath}/images/avatar.png");
 		});
-	});
+	}); */
 	
 	$(function(){
 		//댓글 수정 화면 노출여부 설정
@@ -175,7 +152,6 @@ td {
 		//3. 처음에는 댓글 내용만 노출
 		$(".editor").hide();
 	});
->>>>>>> refs/heads/jeeweon
 </script>
 <div class="container-794 container-margin">
    <div class="row">
@@ -183,10 +159,17 @@ td {
    <%--인증 제목 --%>
       <p class="title-p">${confirmVO.confirmTitle}</p>
 
-   <!--프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
+   <!--프로필 이미지 다운로드해서 화면에 출력-->
    <div>
          <div class="div-align" >
-            <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${confirmVO.userId}" class="user-img">
+         	<c:choose>
+		<c:when test="${userImgVO.attachmentNo == null}">
+			<img src="${pageContext.request.contextPath}/images/avatar.png" class="user-img">
+		</c:when>
+		<c:otherwise>
+			<img src="${pageContext.request.contextPath}/user/profile/download?userId=${myDto.userId}"  class="user-img">
+		</c:otherwise>
+	</c:choose>
          </div>
          <div class="div-align">
             <ul style="list-style:none; font-size:15px;">
@@ -233,7 +216,7 @@ td {
    <!-- 기본 이벤트 차단 -->
    <!-- 로그인한 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요   -->
    
-   <!-- 댓글 CRUD 비동기 처리 예정 -->
+   <!-- 댓글 CRUD 비동기 처리 예정 x-->
    <!-- 댓글 입력 -->
       <div class="div-align" >
           <img src = "${pageContext.request.contextPath}/images/avatar.png" width="50" height="50" class="user-img  reply-user-img">
@@ -251,7 +234,7 @@ td {
       </form>   
    
    
-   <!-- 등록된 댓글 리스트 (jQuery에서 비동기로 목록 업데이트)-->
+   <!-- 등록된 댓글 리스트 (jQuery에서 비동기로 목록 업데이트x)-->
    <h2>댓글 <span style="color:#6c7aef">${replyList.size()}</span></h2>
                
    <table class="table-reply-list" style="width:100%">
@@ -259,12 +242,21 @@ td {
          <c:forEach var="replyDto" items="${replyList}">
             <tr class="view">
                <td>
-                  <!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력 : 경로 변경 필요-->
-                  <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
+                  <!-- 댓글 작성 유저의 프로필 이미지 다운로드해서 화면에 출력-->
+                 <c:choose>
+					<c:when test="${replyDto.attachmentNo == null}">
+						<img src="${pageContext.request.contextPath}/images/avatar.png" class="img0 user-img">
+					</c:when>
+					<c:otherwise>
+						<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${replyDto.userId}" width="50" height="50" class="user-img reply-user-img">
+					</c:otherwise>
+				</c:choose>
+          
                   ${replyDto.userNick}
                   <c:if test="${replyDto.userId == confirmVO.userId}">
                      &nbsp; [작성자]
                   </c:if>
+                  
                   <br><br>
             
                   <!-- 블라인드 여부에 따라 댓글 내용 다르게 표시 -->

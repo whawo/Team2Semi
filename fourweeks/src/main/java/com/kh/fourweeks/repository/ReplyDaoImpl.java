@@ -26,6 +26,7 @@ public class ReplyDaoImpl implements ReplyDao{
 				.replyUpdate(rs.getDate("reply_update"))
 				.replyBlind(rs.getString("reply_blind") != null)
 				.userNick(rs.getString("user_nick"))
+				.attachmentNo(rs.getInt("attachment_no"))
 				.build();
 	};
 	
@@ -58,8 +59,8 @@ public class ReplyDaoImpl implements ReplyDao{
 
 	@Override
 	public List<ReplyListVO> selectList(int confirmNo) {
-		String sql = "select R.*, U.user_nick from reply R left outer join chal_user U on R.user_id = U.user_id where confirm_no = ? order by reply_no asc";
-		Object[] param = {confirmNo};
+		String sql = "select P.*, I.attachment_no, U.user_nick from chal_user U left outer join user_img I on U.user_id = I.user_id left outer join (select * from reply where confirm_no = ?) P on P.user_id = I.user_id where confirm_no = ? order by reply_no asc";
+		Object[] param = {confirmNo, confirmNo};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}
 

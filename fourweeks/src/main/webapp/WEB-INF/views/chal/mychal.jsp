@@ -535,8 +535,15 @@ $(window).bind("pageshow", function(event) {
         <h2>인증 현황</h2> <!-- 추가 예정 -->
         
          <c:forEach var="allProgressDto" items="${allProgressDto}">
-
-                        <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${allProgressDto.userId}" class="user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" >
+			<c:choose>
+					<c:when test="${allProgressDto.attachmentNo == null}">
+						<img src="${pageContext.request.contextPath}/images/avatar.png" class="img0 user-img">
+					</c:when>
+					<c:otherwise>
+						<img src = "${pageContext.request.contextPath}/user/profile/download?userId=${allProgressDto.userId}" width="50" height="50" class="user-img reply-user-img">
+					</c:otherwise>
+				</c:choose>
+                        <%-- <img src = "${pageContext.request.contextPath}/user/profile/download?userId=${allProgressDto.userId}" class="user-img" onerror=" this.onerror=null; this.src='/images/avatar.png';" > --%>
                         ${allProgressDto.userNick}: &nbsp; 달성률 : <fmt:formatNumber type="number" 
                       pattern="0" value="${allProgressDto.cnt*100/28}"/>%<br><br>
                       <br>

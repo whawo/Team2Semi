@@ -10,6 +10,7 @@ import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
 import com.kh.fourweeks.vo.ChalProgressSuccessVO;
 import com.kh.fourweeks.vo.ChalProgressVO;
+import com.kh.fourweeks.vo.ParticipantVO;
 
 public interface ChalDao {
 	int chalSeq(); //챌린지 개설 시퀀스
@@ -71,7 +72,7 @@ public interface ChalDao {
   	
     // 참가자 인원수 증가
     public boolean updateChalPerson(int chalNo);
-    List<ParticipantDto> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
+    List<ParticipantVO> selectParticipant(int chalNo);//참가여부 확인 추가(민재)
     ParticipantDto selectParticipantOne(int chalNo, String userId);//참가여부 확인 테스트용 추가(민재)
 	int noticeSeq();
 	void noticeAttachment(int noticeNo, int attachmentNo);

@@ -19,6 +19,7 @@ import com.kh.fourweeks.vo.ChalListSearchVO;
 import com.kh.fourweeks.vo.ChalListVO;
 import com.kh.fourweeks.vo.ChalProgressSuccessVO;
 import com.kh.fourweeks.vo.ChalProgressVO;
+import com.kh.fourweeks.vo.ParticipantVO;
 @Repository
 
 public class ChalDaoImpl implements ChalDao {
@@ -588,24 +589,26 @@ public class ChalDaoImpl implements ChalDao {
 	}
 	
 	
-	private RowMapper<ParticipantDto> participantMapper = new RowMapper<ParticipantDto>() {
+	private RowMapper<ParticipantVO> participantMapper = new RowMapper<ParticipantVO>() {
 		@Override
-		public ParticipantDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+		public ParticipantVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
-			return ParticipantDto.builder()
+			return ParticipantVO.builder()
 					.participantNo(rs.getInt("participant_no"))
 					.chalNo(rs.getInt("chal_no"))
 					.userId(rs.getString("user_id"))
 					.participantJoin(rs.getDate("participant_join"))
+					.attachmentNo(rs.getInt("attachment_no"))
 				.build();
 		}
 	};
 	@Override
-	public List<ParticipantDto> selectParticipant(int chalNo) {//참가자 조회
+	public List<ParticipantVO> selectParticipant(int chalNo) {//참가자 조회
 		
-		String sql ="select * from participant where chal_no=?";
+		//String sql ="select * from participant where chal_no=?";
+		String sql = "select P.*, I.attachment_no from participant P left outer join user_img I on P.user_id = I.user_id where chal_no=?";
 		Object[] param = {chalNo};
-		return jdbcTemplate.query(sql, participantMapper,param);
+		return jdbcTemplate.query(sql, participantMapper, param);
 	}
 	@Override
 	public ParticipantDto selectParticipantOne(int chalNo, String userId) {//참가자 한 명 조회
@@ -715,6 +718,7 @@ public class ChalDaoImpl implements ChalDao {
 					.userNick(rs.getString("user_nick"))
 					.cnt(rs.getInt("cnt"))
 					.userId(rs.getString("user_id"))
+					.attachmentNo(rs.getInt("attachment_no"))
 					.build();
 		}
 	};
@@ -733,12 +737,13 @@ public class ChalDaoImpl implements ChalDao {
 	public List<ChalProgressVO> selectAllProgress(int chalNo) {
 		
 		String sql = "select count(C.confirm_no) cnt,"
-				+ " U.user_nick, U.user_id from participant P"
+				+ " U.user_nick, U.user_id, I.attachment_no from participant P"
 				+ " left outer join (select * from chal_confirm where chal_no = ?) C "
 				+ "on P.user_id = C.user_id left outer join"
 				+ " chal_user U on P.user_id = U.user_id"
+				+ " left outer join user_img I on P.user_id = I.user_id"
 				+ " where P.chal_no = ?"
-				+ " group by U.user_nick, U.user_id";
+				+ " group by U.user_nick, U.user_id, I.attachment_no";
 		Object[] param = {chalNo, chalNo};
 		return jdbcTemplate.query(sql, allProgressMapper,param);
 	}
