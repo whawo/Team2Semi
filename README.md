@@ -19,8 +19,7 @@
 
 #### :calendar: 개발 일정   
 * 기간 : 2022년 10월 19일 ~ 2022년 11월 01일 (2주)
-![image07](https://user-images.githubusercontent.com/99001224/215045884-ab428915-97f4-4645-adc7-2e86ffe3ca5d.png)
-![image08](https://user-images.githubusercontent.com/99001224/215045893-7ebd5631-d60d-4f6f-88e4-e22737fe21b4.png)
+
 
 #### :computer: 개발 환경   
 * Windows 10, 11
