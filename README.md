@@ -1,8 +1,8 @@
-# CarePet
+# 4Weeks
 
 <img src="fourweeks/src/main/resources/static/images/top_logo.png" width="40%"/>
 
-:information_desk_person: CarePet 소개
+:information_desk_person: 4Weeks 소개
 ------------------------------
 #### :bulb: 개발 목적   
 * 건강한 습관 만들기
